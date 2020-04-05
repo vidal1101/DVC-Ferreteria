@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  *
- * @author Dixiana Maria , Carlos Miguel y Vidal Canales
+ * @author Dixiana Maria, Carlos Miguel y Vidal Canales
  */
 public class ClassFactura implements Serializable {
 

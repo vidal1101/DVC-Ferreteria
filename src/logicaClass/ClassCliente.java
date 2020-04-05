@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Dixiana Maria , Carlos Miguel y Vidal Canales
+ * @author Dixiana Maria, Carlos Miguel y Vidal Canales
  */
 public class ClassCliente implements Serializable {
 
