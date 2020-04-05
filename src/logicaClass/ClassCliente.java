@@ -1,27 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package logicaClass;
 
 import java.io.Serializable;
 
 /**
  *
- * @author Dixiana Maria ,  Carlos Miguel y Vidal Canales 
+ * @author Dixiana Maria , Carlos Miguel y Vidal Canales
  */
-public class ClassCliente implements Serializable{
-    
+public class ClassCliente implements Serializable {
+
     //Atributos 
+    
     private int cedulaCli;
     private String nombreCli;
     private int telefonoCli;
     private String emailCli;
     private String direccionCli;
-    
-    //Setter and Getter
 
+    //Setter and Getter
     public int getCedulaCli() {
         return cedulaCli;
     }
@@ -61,8 +57,37 @@ public class ClassCliente implements Serializable{
     public void setDireccionCli(String direccionCli) {
         this.direccionCli = direccionCli;
     }
+
+    //Contructores
+    /**
+     * 
+     * contruct con todso los parametros de la clase
+     *
+     * @param cedulaCli
+     * @param nombreCli
+     * @param telefonoCli
+     * @param emailCli
+     * @param direccionCli
+     */
+    public ClassCliente(int cedulaCli, String nombreCli, int telefonoCli, String emailCli, String direccionCli) {
+        this.cedulaCli = cedulaCli;
+        this.nombreCli = nombreCli;
+        this.telefonoCli = telefonoCli;
+        this.emailCli = emailCli;
+        this.direccionCli = direccionCli;
+    }
+
     
-    
-    
-    
+    /**
+     * **
+     * contructor inicializado con los atributos por valores predeterminados
+     */
+    public ClassCliente() {
+        this.cedulaCli = 0;
+        this.nombreCli = "";
+        this.telefonoCli = 0;
+        this.emailCli = "";
+        this.direccionCli = "";
+    }
+
 }
