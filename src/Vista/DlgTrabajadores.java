@@ -260,6 +260,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField txtTelefonoT;
     // End of variables declaration//GEN-END:variables
 
+    
     public javax.swing.JButton getBtnCancelarT() {
         return btnCancelarT;
     }
@@ -387,7 +388,4 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     public void setTblTrabajadores(javax.swing.JTable tblTrabajadores) {
         this.tblTrabajadores = tblTrabajadores;
     }
-
-  
-    
 }

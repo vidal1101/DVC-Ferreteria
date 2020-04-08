@@ -24,7 +24,7 @@ public class trabajadorModelo {
         try {
             System.out.println("Abrriendo conexión");
             con.conectar();
-            CallableStatement cst = con.getCon().prepareCall("{call pa_insertarTrabajador(?,?,?,?,?,?,?)}");
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarTrabajador(?,?,?,?,?,?,?)}");
 
             cst.setInt(1, trab.getCedulaTrab());
             cst.setString(2, trab.getNombreTrab());
@@ -44,7 +44,6 @@ public class trabajadorModelo {
             return false;
         } finally {
             con.desconectar();
-            System.out.println("Conexión cerrada");
         }
 
     }
@@ -68,6 +67,33 @@ public class trabajadorModelo {
         } catch (SQLException e) {
             System.out.println("Error del mensaje: " + e.getMessage());
             return rs;
+        }
+    }
+
+    /**
+     * Se le envía la cédula del trabajador a eliminar
+     *
+     * @param cedula
+     * @return
+     */
+    public boolean eliminarTrabajadores(int cedula) {
+        Conexion con = new Conexion();
+
+        try {
+            con.conectar();
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_eliminarTrabajador(?,?)}");
+            ps.setInt(1, cedula);
+            ps.registerOutParameter(2, java.sql.Types.BOOLEAN);
+            ps.executeUpdate();
+
+            System.out.println("Usuario eliminado");
+            return ps.getBoolean(2);
+
+        } catch (SQLException e) {
+            System.out.println("Error del mensaje: " + e.getMessage());
+            return false;
+        } finally {
+            con.desconectar();
         }
     }
 

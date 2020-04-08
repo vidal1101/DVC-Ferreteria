@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassTrabajador;
@@ -27,13 +28,15 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     DefaultTableModel modeloTrab;
     private int opc;
 
-    public TrabajadorControlador(dlgPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador, int opc, trabajadorModelo trabModelo) {
+    public TrabajadorControlador(dlgPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador,
+            trabajadorModelo trabModelo) {
+
         this.modeloTrab = new DefaultTableModel();
         this.principal = principal;
         this.dlgtrab = dlgtrab;
         this.trabajador = trabajador;
         this.trabModelo = trabModelo;
-        this.opc = opc;
+        this.opc = 0;
         this.principal.getBtnTrabajadores().addActionListener(this);
         this.dlgtrab.getBtnGuardarT().addActionListener(this);
         this.dlgtrab.getBtnInsertarT().addActionListener(this);
@@ -55,29 +58,32 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
 
     }
 
+    /**
+     * INICIA el dialog
+     * @param title 
+     */
     public void inciarVista(String title) {
         dlgtrab.setTitle(title);
         dlgtrab.setLocationRelativeTo(null);
         dlgtrab.getPantrabajador().setSelectedIndex(0);
+        System.out.println("Abriendo registros de trabajadores");
+        this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+        this.dlgtrab.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == principal.getBtnTrabajadores()) {
-            this.inciarVista("Trabajadores");
-            this.dlgtrab.setVisible(true);
-        }
 
+        // Aquí solamente comparamos el evento con los componentes del dialog y NO DEL PRINCIPAL
         if (e.getSource() == dlgtrab.getBtnInsertarT()) {
+
             this.opc = 1;
             this.dlgtrab.getPantrabajador().setSelectedIndex(1);
-        }
 
-        if (e.getSource() == dlgtrab.getBtnLimpiarT()) {
+        } else if (e.getSource() == dlgtrab.getBtnLimpiarT()) {
+
             this.clear();
-        }
-
-        if (e.getSource() == dlgtrab.getBtnGuardarT()) {
+        } else if (e.getSource() == dlgtrab.getBtnGuardarT()) {
 
             trabajador.setCedulaTrab(Integer.parseInt(dlgtrab.getTxtCedulaT().getText()));
             trabajador.setNombreTrab(dlgtrab.getTxtNombreT().getText());
@@ -86,6 +92,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             trabajador.setEmailTrab(dlgtrab.getTxtEmailT().getText());
             trabajador.setAbministrador(abministrador(dlgtrab.getCmbPuestoT().getSelectedIndex()));
 
+            // Revisa si va a editar o guardar
             if (opc == 1) {
                 if (trabModelo.insertarTrabajador(trabajador)) {
                     JOptionPane.showMessageDialog(dlgtrab, "Se inserto con Exito");
@@ -98,10 +105,36 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                     JOptionPane.showMessageDialog(dlgtrab, "Usuario ya existente");
                     this.clear();
                 }
+                
             } else {
                 //el metodo de modificar
             }
+        } //Si ha pulsado eliminar
+        else if (e.getSource() == dlgtrab.getBtnEliminarT()) {
+
+            // Obtenemos la cédula del registro a eliminar
+            int fila = dlgtrab.getTblTrabajadores().getSelectedRow();
+
+            if (fila > -1) {
+
+                int cedula = Integer.parseInt(dlgtrab.getTblTrabajadores().getValueAt(fila, 0) + "");
+                int opcion = JOptionPane.showConfirmDialog(dlgtrab, "Desea eliminar al trabajador con cédula "
+                        + cedula + "?", "Eliminar", JOptionPane.YES_NO_OPTION);
+
+                // Si la opción de eliminar fue SI, eliminamos
+                if (opcion == JOptionPane.YES_OPTION) {
+                    trabModelo.eliminarTrabajadores(cedula);
+                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                    JOptionPane.showMessageDialog(dlgtrab, "Eliminado");
+                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(dlgtrab, "Selecciones un trabajador para eliminar");
+            }
+
         }
+
     }
 
     /**
@@ -140,9 +173,11 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                 modeloTrab.addRow(objeto);
             }
 
+            System.out.println("Cerrando ResultSet");
+            rs.close();
             dlgtrab.getTblTrabajadores().setModel(modeloTrab);
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------");
         }

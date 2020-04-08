@@ -49,10 +49,10 @@ public class Conexion {
         try {
             this.con = (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             this.sql = this.con.createStatement();
-            System.out.println("conexion exitosa");
+            System.out.println("conexion exitosa: "+sql.toString());
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error...No hay conexión con la Base de Datos " + ex.getCause());
+            System.out.println("Error al intentar conectarse a la base de datos: "+ex.getMessage());
             return false;
         }
     }
@@ -62,7 +62,9 @@ public class Conexion {
 
             this.sql.close();
             this.con.close();
-        } catch (Exception e) {
+            System.out.println("Conexión cerrada");
+        } catch (SQLException e) {
+            System.out.println("Error al desconectar: " + e.getMessage());
         }
     }
 
