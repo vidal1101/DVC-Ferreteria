@@ -13,7 +13,7 @@ public class trabajadorModelo {
 
     /**
      * *
-     * metodo que inserta un daton en la base de dato (tabla d trabajadores)
+     * metodo que inserta un dato en la base de dato (tabla d trabajadores)
      *
      * @param trab objeto tipó trabajador
      * @return true si logra insertar con exito y false sino inserta
@@ -22,10 +22,10 @@ public class trabajadorModelo {
         Conexion con = new Conexion();
 
         try {
+            System.out.println("Abrriendo conexión");
             con.conectar();
-            CallableStatement cst
-                    = (CallableStatement) con.getCon().prepareCall("{call pa_insertarTrabajador(?,?,?,?,?,?,?)}");
-            System.out.println("inserccion ....");
+            CallableStatement cst = con.getCon().prepareCall("{call pa_insertarTrabajador(?,?,?,?,?,?,?)}");
+
             cst.setInt(1, trab.getCedulaTrab());
             cst.setString(2, trab.getNombreTrab());
             cst.setString(3, trab.getPuesto());
@@ -34,19 +34,26 @@ public class trabajadorModelo {
             cst.setBoolean(6, trab.getAbministrador());
 
             cst.registerOutParameter(7, java.sql.Types.BOOLEAN);
+            System.out.println("Insertando datos");
             cst.executeUpdate();
 
             return cst.getBoolean(7);
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error al intentar enviar los datos: " + e.getMessage());
             return false;
         } finally {
-//            con.desconectar();
+            con.desconectar();
+            System.out.println("Conexión cerrada");
         }
 
     }
 
+    /**
+     * Llama al método que contiene el select para obtener los datos de la tabla
+     *
+     * @return
+     */
     public ResultSet mostrarTrabajadores() {
         Conexion con = new Conexion();
         ResultSet rs = null;
@@ -59,7 +66,7 @@ public class trabajadorModelo {
             return rs;
 
         } catch (SQLException e) {
-            System.out.println("Error humano ");
+            System.out.println("Error del mensaje: " + e.getMessage());
             return rs;
         }
     }

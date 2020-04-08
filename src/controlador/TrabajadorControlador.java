@@ -1,7 +1,6 @@
 package controlador;
 
 import Vista.DlgTrabajadores;
-import Vista.FrmVentas;
 import Vista.dlgPrincipal;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
@@ -13,7 +12,6 @@ import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassTrabajador;
-import modelo.Conexion;
 import modelo.trabajadorModelo;
 
 /**
@@ -45,6 +43,9 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         this.dlgtrab.getBtnCancelarT().addActionListener(this);
     }
 
+    /**
+     * Limpia los datos del registro
+     */
     public void clear() {
         dlgtrab.getTxtCedulaT().setText("");
         dlgtrab.getTxtEmailT().setText("");
@@ -89,7 +90,8 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                 if (trabModelo.insertarTrabajador(trabajador)) {
                     JOptionPane.showMessageDialog(dlgtrab, "Se inserto con Exito");
                     this.clear();
-                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());//prueba...,, aqui se va a caer
+                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());
                     this.dlgtrab.getPantrabajador().setSelectedIndex(0);
 
                 } else {
@@ -99,11 +101,15 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             } else {
                 //el metodo de modificar
             }
-
         }
-
     }
 
+    /**
+     * Verifica si es administrador
+     *
+     * @param indice
+     * @return
+     */
     public boolean abministrador(int indice) {
         if (indice == 1) {
             return true;
@@ -111,18 +117,22 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         return false;
     }
 
+    /**
+     * Recibe los datos desde la tabla y los imprime en la tabla
+     *
+     * @param rs
+     */
     public void mostrartabla(ResultSet rs) {
-        String[] title = {"Cedula", "Nombre", "Telefono", "Email", "Puesto"};
+        // Títulos
+        String[] title = {"Cedula", "Nombre", "Puesto", "Email", "Telefono"};
         modeloTrab = new DefaultTableModel(null, title);
-        Conexion con = new Conexion();
 
         try {
 
-            while (rs.next()){
+            while (rs.next()) {
                 this.trabajador = new ClassTrabajador(rs.getInt(1),
                         rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5),
-                        rs.getBoolean(6));
+                        rs.getString(5), rs.getBoolean(6));
 
                 Object[] objeto = {trabajador.getCedulaTrab(), trabajador.getNombreTrab(),
                     trabajador.getEmailTrab(), trabajador.getPuesto(), trabajador.getTelefonoTrab(),
@@ -133,58 +143,59 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             dlgtrab.getTblTrabajadores().setModel(modeloTrab);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage()); e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("--------------------------------------");
         }
     }
 
     @Override
     public void windowOpened(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void windowClosed(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void windowIconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void windowDeiconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void windowActivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void windowDeactivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
 }
