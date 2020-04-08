@@ -15,7 +15,7 @@ public class ClassTrabajador implements Serializable{
     private String nombreTrab;
     private String emailTrab;
     private String puesto;
-    private int telefonoTrab;
+    private String telefonoTrab;
     private boolean abministrador;
     
     //Setter and Getter
@@ -52,11 +52,11 @@ public class ClassTrabajador implements Serializable{
         this.puesto = puesto;
     }
 
-    public int getTelefonoTrab() {
+    public String getTelefonoTrab() {
         return telefonoTrab;
     }
 
-    public void setTelefonoTrab(int telefonoTrab) {
+    public void setTelefonoTrab(String telefonoTrab) {
         this.telefonoTrab = telefonoTrab;
     }
 
@@ -79,7 +79,7 @@ public class ClassTrabajador implements Serializable{
      * @param telefonoTrab
      * @param abministrador 
      */
-    public ClassTrabajador(int cedulaTrab, String nombreTrab, String emailTrab, String puesto, int telefonoTrab, boolean abministrador) {
+    public ClassTrabajador(int cedulaTrab, String nombreTrab, String emailTrab, String puesto, String telefonoTrab, boolean abministrador) {
         this.cedulaTrab = cedulaTrab;
         this.nombreTrab = nombreTrab;
         this.emailTrab = emailTrab;
@@ -96,7 +96,7 @@ public class ClassTrabajador implements Serializable{
         this.nombreTrab = "";
         this.emailTrab = "";
         this.puesto = "";
-        this.telefonoTrab = 0;
+        this.telefonoTrab = "";
         this.abministrador = false;
     }
      
