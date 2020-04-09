@@ -95,7 +95,7 @@ public class trabajadorModelo {
 
         try {
             con.conectar();
-            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTrabajador()}");
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(1)}");
             rs = ps.executeQuery();
             rs.first();
             return rs;
