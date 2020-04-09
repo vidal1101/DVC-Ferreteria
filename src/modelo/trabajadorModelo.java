@@ -95,9 +95,10 @@ public class trabajadorModelo {
 
         try {
             con.conectar();
-            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(1)}");
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(?)}");
+            ps.setInt(1,1);
             rs = ps.executeQuery();
-            rs.first();
+            //rs.first();
             return rs;
 
         } catch (SQLException e) {
