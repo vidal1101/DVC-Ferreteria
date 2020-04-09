@@ -48,6 +48,42 @@ public class trabajadorModelo {
 
     }
 
+    /***
+     * metodo para modificar un trabajador 
+     * @param trab
+     * @return 
+     */
+     public boolean modificarTrabajador(ClassTrabajador trab) {
+        Conexion con = new Conexion();
+
+        try {
+            System.out.println("Abrriendo conexión");
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_editarTrabajador(?,?,?,?,?,?,?)}");
+
+            cst.setInt(1, trab.getCedulaTrab());
+            cst.setString(2, trab.getNombreTrab());
+            cst.setString(3, trab.getPuesto());
+            cst.setString(4, trab.getTelefonoTrab());
+            cst.setString(5, trab.getEmailTrab());
+            cst.setBoolean(6, trab.getAbministrador());
+
+            cst.registerOutParameter(7, java.sql.Types.BOOLEAN);
+            System.out.println("Modificando datos");
+            
+            cst.execute();
+
+            return cst.getBoolean(7);
+
+        } catch (SQLException e) {
+            System.out.println("Error al intentar enviar los datos: " + e.getMessage());
+            return false;
+        } finally {
+            con.desconectar();
+        }
+
+    }
+    
     /**
      * Llama al método que contiene el select para obtener los datos de la tabla
      *
@@ -59,7 +95,7 @@ public class trabajadorModelo {
 
         try {
             con.conectar();
-            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTrabajador()}");
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(1)}");
             rs = ps.executeQuery();
             rs.first();
             return rs;

@@ -60,7 +60,8 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
 
     /**
      * INICIA el dialog
-     * @param title 
+     *
+     * @param title
      */
     public void inciarVista(String title) {
         dlgtrab.setTitle(title);
@@ -68,6 +69,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         dlgtrab.getPantrabajador().setSelectedIndex(0);
         System.out.println("Abriendo registros de trabajadores");
         this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+        this.dlgtrab.getPantrabajador().setEnabledAt(1, false);
         this.dlgtrab.setVisible(true);
     }
 
@@ -76,8 +78,11 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
 
         // Aquí solamente comparamos el evento con los componentes del dialog y NO DEL PRINCIPAL
         if (e.getSource() == dlgtrab.getBtnInsertarT()) {
-
+            this.clear();
+            this.dlgtrab.getPantrabajador().setEnabledAt(1, true);
+            this.dlgtrab.getPantrabajador().setEnabledAt(0, false);
             this.opc = 1;
+            this.dlgtrab.getTxtCedulaT().setEnabled(true);
             this.dlgtrab.getPantrabajador().setSelectedIndex(1);
 
         } else if (e.getSource() == dlgtrab.getBtnLimpiarT()) {
@@ -105,9 +110,18 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                     JOptionPane.showMessageDialog(dlgtrab, "Usuario ya existente");
                     this.clear();
                 }
-                
+
             } else {
                 //el metodo de modificar
+                if (this.trabModelo.modificarTrabajador(trabajador)) {
+                    JOptionPane.showMessageDialog(dlgtrab, "Se Modifico el trabajador");
+                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                    this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+                    this.dlgtrab.getPantrabajador().setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(dlgtrab, "Error al Modificar ");
+                }
+
             }
         } //Si ha pulsado eliminar
         else if (e.getSource() == dlgtrab.getBtnEliminarT()) {
@@ -133,6 +147,35 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                 JOptionPane.showMessageDialog(dlgtrab, "Selecciones un trabajador para eliminar");
             }
 
+        } else if (e.getSource() == dlgtrab.getBtnModificarT()) {
+
+            if (dlgtrab.getTblTrabajadores().getSelectedRow() != -1) {
+
+                this.dlgtrab.getPantrabajador().setSelectedIndex(1);
+                this.dlgtrab.getPantrabajador().setEnabledAt(0, false);
+                int file = dlgtrab.getTblTrabajadores().getSelectedRow();
+
+                this.dlgtrab.getTxtCedulaT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 0).toString());
+                this.dlgtrab.getTxtCedulaT().setEditable(false);
+                this.dlgtrab.getTxtNombreT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 1).toString());
+                this.dlgtrab.getCmbPuestoT().setSelectedItem(dlgtrab.getTblTrabajadores().getValueAt(file, 2).toString());
+                this.dlgtrab.getTxtEmailT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 3).toString());
+                this.dlgtrab.getTxtTelefonoT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 4).toString());
+
+                this.opc = 2;
+                this.dlgtrab.getPantrabajador().setSelectedIndex(1);
+                this.dlgtrab.getPantrabajador().setEnabled(true);
+
+            } else {
+                JOptionPane.showMessageDialog(dlgtrab, "Debe Seleccionar Fila");
+            }
+
+        } else if (e.getSource() == dlgtrab.getBtnCancelarT()) {
+            this.clear();
+            this.dlgtrab.getPantrabajador().setEnabledAt(1, false);
+            this.dlgtrab.getPantrabajador().setEnabledAt(0, true);
+            this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+            this.dlgtrab.getPantrabajador().setEnabled(true);
         }
 
     }
