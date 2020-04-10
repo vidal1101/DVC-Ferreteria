@@ -13,7 +13,7 @@ public class ClassProveedor implements Serializable {
     
     private int idProvedor;
     private String nombreProv;
-    private int telefonoProv;
+    private String telefonoProv;
     private String emailProv;
     private String direccionProv;
 
@@ -36,11 +36,11 @@ public class ClassProveedor implements Serializable {
         this.nombreProv = nombreProv;
     }
 
-    public int getTelefonoProv() {
+    public String getTelefonoProv() {
         return telefonoProv;
     }
 
-    public void setTelefonoProv(int telefonoProv) {
+    public void setTelefonoProv(String telefonoProv) {
         this.telefonoProv = telefonoProv;
     }
 
@@ -72,7 +72,7 @@ public class ClassProveedor implements Serializable {
      * @param emailProv
      * @param direccionProv
      */
-    public ClassProveedor(int idProvedor, String nombreProv, int telefonoProv, String emailProv, String direccionProv) {
+    public ClassProveedor(int idProvedor, String nombreProv, String telefonoProv, String emailProv, String direccionProv) {
         this.idProvedor = idProvedor;
         this.nombreProv = nombreProv;
         this.telefonoProv = telefonoProv;
@@ -86,7 +86,7 @@ public class ClassProveedor implements Serializable {
     public ClassProveedor() {
         this.idProvedor = 0;
         this.nombreProv = "";
-        this.telefonoProv = 0;
+        this.telefonoProv = "";
         this.emailProv = "";
         this.direccionProv = "";
     }
