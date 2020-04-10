@@ -5,8 +5,11 @@
  */
 package Vista;
 
+import controlador.ClienteControlador;
 import controlador.TrabajadorControlador;
+import logicaClass.ClassCliente;
 import logicaClass.ClassTrabajador;
+import modelo.ClienteModelo;
 import modelo.trabajadorModelo;
 
 /**
@@ -20,6 +23,10 @@ public class dlgPrincipal extends javax.swing.JDialog {
     private trabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
     
+    private ClassCliente cliente;
+    private ClienteModelo cliModelo;
+    private DlgCliente dlgCli;
+    
     public dlgPrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,6 +35,10 @@ public class dlgPrincipal extends javax.swing.JDialog {
         this.trabModelo = new trabajadorModelo();
         this.breteador = new ClassTrabajador();
         this.dlgTrab = new DlgTrabajadores(null, true);
+        
+        this.cliModelo = new ClienteModelo();
+        this.cliente = new ClassCliente();
+        this.dlgCli = new DlgCliente(null, true);
     }
 
     /**
@@ -49,6 +60,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         btnTrabajadores = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -164,6 +176,14 @@ public class dlgPrincipal extends javax.swing.JDialog {
         });
         jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 300, 70));
 
+        btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 100, 40));
+
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel3.setOpaque(true);
@@ -249,6 +269,11 @@ public class dlgPrincipal extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
 
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        ClienteControlador cliControl = new ClienteControlador(this, dlgCli, cliente, cliModelo);
+        cliControl.inciarVista("Clientes");
+    }//GEN-LAST:event_btnClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,6 +319,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCalender;
+    private javax.swing.JButton btnClientes;
     public javax.swing.JButton btnTrabajadores;
     public javax.swing.JButton btnVender;
     private javax.swing.JLabel fondoPrincipal;
@@ -330,4 +356,16 @@ public class dlgPrincipal extends javax.swing.JDialog {
     public void setBtnTrabajadores(javax.swing.JButton btnTrabajadores) {
         this.btnTrabajadores = btnTrabajadores;
     }
+
+    public javax.swing.JButton getBtnClientes() {
+        return btnClientes;
+    }
+
+    public void setBtnClientes(javax.swing.JButton btnClientes) {
+        this.btnClientes = btnClientes;
+    }
+    
+    
+    
+    
 }
