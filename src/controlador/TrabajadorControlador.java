@@ -1,7 +1,7 @@
 package controlador;
 
 import Vista.DlgTrabajadores;
-import Vista.dlgPrincipal;
+import Vista.DlgPrincipal;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassTrabajador;
-import modelo.trabajadorModelo;
+import modelo.TrabajadorModelo;
 
 /**
  *
@@ -21,15 +21,15 @@ import modelo.trabajadorModelo;
  */
 public class TrabajadorControlador implements ActionListener, WindowListener, KeyListener {
 
-    private dlgPrincipal principal;
+    private DlgPrincipal principal;
     private DlgTrabajadores dlgtrab;
     private ClassTrabajador trabajador;
-    private trabajadorModelo trabModelo;
+    private TrabajadorModelo trabModelo;
     DefaultTableModel modeloTrab;
     private int opc;
 
-    public TrabajadorControlador(dlgPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador,
-            trabajadorModelo trabModelo) {
+    public TrabajadorControlador(DlgPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador,
+            TrabajadorModelo trabModelo) {
 
         this.modeloTrab = new DefaultTableModel();
         this.principal = principal;
@@ -201,7 +201,13 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     public void mostrartabla(ResultSet rs) {
         // Títulos
         String[] title = {"Cedula", "Nombre", "Puesto", "Email", "Telefono"};
-        modeloTrab = new DefaultTableModel(null, title);
+        modeloTrab = new DefaultTableModel(null, title) {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
 
         try {
 

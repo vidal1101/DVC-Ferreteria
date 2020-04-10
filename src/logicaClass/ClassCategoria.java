@@ -41,7 +41,7 @@ public class ClassCategoria implements Serializable {
 
     //contructores
     
-    /***¡
+    /***
      * contruct con todos los atributos 
      * @param idCategoria
      * @param nombreCateg
