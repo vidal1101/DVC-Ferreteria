@@ -5,11 +5,11 @@
  */
 package Vista;
 
-import controlador.ProveedoresControlador;
+import controlador.ClienteControlador;
 import controlador.TrabajadorControlador;
-import logicaClass.ClassProveedor;
+import logicaClass.ClassCliente;
 import logicaClass.ClassTrabajador;
-import modelo.proveedorModelo;
+import modelo.ClienteModelo;
 import modelo.trabajadorModelo;
 
 /**
@@ -23,9 +23,9 @@ public class dlgPrincipal extends javax.swing.JDialog {
     private trabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
     
-    private ClassProveedor proveedor;
-    private proveedorModelo proveModelo;
-    private dlgProveedores dlgprov;
+    private ClassCliente cliente;
+    private ClienteModelo cliModelo;
+    private DlgCliente dlgCli;
     
     public dlgPrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -36,11 +36,9 @@ public class dlgPrincipal extends javax.swing.JDialog {
         this.breteador = new ClassTrabajador();
         this.dlgTrab = new DlgTrabajadores(null, true);
         
-        this.proveModelo= new proveedorModelo();
-        this.proveedor = new ClassProveedor();
-        this.dlgprov = new dlgProveedores(null,true);
-        
-        
+        this.cliModelo = new ClienteModelo();
+        this.cliente = new ClassCliente();
+        this.dlgCli = new DlgCliente(null, true);
     }
 
     /**
@@ -63,6 +61,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
         jButton4 = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnTrabajadores = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -187,6 +186,14 @@ public class dlgPrincipal extends javax.swing.JDialog {
         });
         jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, 70));
 
+        btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 100, 40));
+
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel3.setOpaque(true);
@@ -272,11 +279,13 @@ public class dlgPrincipal extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
 
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        ClienteControlador cliControl = new ClienteControlador(this, dlgCli, cliente, cliModelo);
+        cliControl.inciarVista("Clientes");
+    }//GEN-LAST:event_btnClientesActionPerformed
+
     private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
         // TODO add your handling code here:
-        ProveedoresControlador proControl = new ProveedoresControlador(this, dlgprov, 
-                proveedor, proveModelo);
-        proControl.inciarVista("Proveedores");
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     /**
@@ -324,6 +333,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCalender;
+    private javax.swing.JButton btnClientes;
     private javax.swing.JButton btnProveedores;
     public javax.swing.JButton btnTrabajadores;
     public javax.swing.JButton btnVender;
@@ -362,11 +372,16 @@ public class dlgPrincipal extends javax.swing.JDialog {
         this.btnTrabajadores = btnTrabajadores;
     }
 
+    public javax.swing.JButton getBtnClientes() {
+        return btnClientes;
+    }
+
+    public void setBtnClientes(javax.swing.JButton btnClientes) {
+        this.btnClientes = btnClientes;
+    }
+
     public javax.swing.JButton getBtnProveedores() {
         return btnProveedores;
     }
-
-    public void setBtnProveedores(javax.swing.JButton btnProveedores) {
-        this.btnProveedores = btnProveedores;
-    }
+    
 }
