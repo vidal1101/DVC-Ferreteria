@@ -59,6 +59,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        btnProveedores = new javax.swing.JButton();
         btnTrabajadores = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -134,12 +135,12 @@ public class dlgPrincipal extends javax.swing.JDialog {
         btnVender.setContentAreaFilled(false);
         btnVender.setDefaultCapable(false);
         btnVender.setFocusPainted(false);
-        jPanel2.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 270, 70));
+        jPanel2.add(btnVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 270, 70));
 
         jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.setOpaque(true);
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 270, 70));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 270, 70));
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/categoria.png"))); // NOI18N
@@ -148,7 +149,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
         jButton3.setContentAreaFilled(false);
         jButton3.setDefaultCapable(false);
         jButton3.setFocusPainted(false);
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 270, 70));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 270, 70));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoDvcdieño1.jpeg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 80));
@@ -160,7 +161,16 @@ public class dlgPrincipal extends javax.swing.JDialog {
         jButton4.setContentAreaFilled(false);
         jButton4.setDefaultCapable(false);
         jButton4.setFocusPainted(false);
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 320, 70));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 320, 70));
+
+        btnProveedores.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        btnProveedores.setText("Proveedores");
+        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedoresActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 270, 70));
 
         btnTrabajadores.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuenta.png"))); // NOI18N
@@ -174,7 +184,15 @@ public class dlgPrincipal extends javax.swing.JDialog {
                 btnTrabajadoresActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 300, 70));
+        jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, 70));
+
+        btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 100, 40));
 
         btnClientes.setText("Clientes");
         btnClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -187,20 +205,20 @@ public class dlgPrincipal extends javax.swing.JDialog {
         jLabel3.setBackground(new java.awt.Color(204, 204, 204));
         jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel3.setOpaque(true);
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 290, 70));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 290, 70));
 
         jLabel4.setBackground(new java.awt.Color(204, 204, 204));
         jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel4.setOpaque(true);
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 300, 70));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 300, 70));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel5.setOpaque(true);
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 270, 70));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 270, 70));
 
         fondoPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/123456.jpg"))); // NOI18N
-        jPanel2.add(fondoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 400));
+        jPanel2.add(fondoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 710, 400));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 360));
 
@@ -274,6 +292,10 @@ public class dlgPrincipal extends javax.swing.JDialog {
         cliControl.inciarVista("Clientes");
     }//GEN-LAST:event_btnClientesActionPerformed
 
+    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProveedoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -320,6 +342,7 @@ public class dlgPrincipal extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCalender;
     private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnProveedores;
     public javax.swing.JButton btnTrabajadores;
     public javax.swing.JButton btnVender;
     private javax.swing.JLabel fondoPrincipal;
@@ -364,8 +387,9 @@ public class dlgPrincipal extends javax.swing.JDialog {
     public void setBtnClientes(javax.swing.JButton btnClientes) {
         this.btnClientes = btnClientes;
     }
-    
-    
-    
+
+    public javax.swing.JButton getBtnProveedores() {
+        return btnProveedores;
+    }
     
 }
