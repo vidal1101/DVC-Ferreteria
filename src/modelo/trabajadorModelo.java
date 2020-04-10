@@ -98,7 +98,8 @@ public class trabajadorModelo {
             CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(?)}");
             ps.setInt(1, 1);
             rs = ps.executeQuery();
-//            rs.first();
+            //rs.first();
+//            rs.first(); de la Dixiana
             return rs;
 
         } catch (SQLException e) {
