@@ -27,6 +27,8 @@ public class dlgInventario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        panInventario = new javax.swing.JTabbedPane();
         pnlBase = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -36,12 +38,39 @@ public class dlgInventario extends javax.swing.JDialog {
         lstCategorias = new javax.swing.JList<>();
         lblCategoria = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblInventario = new javax.swing.JTable();
         lblProductos = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        lblProveedor = new javax.swing.JLabel();
+        lblCateg = new javax.swing.JLabel();
+        lblPrecProd = new javax.swing.JLabel();
+        lblIdProduct = new javax.swing.JLabel();
+        lblnomProd = new javax.swing.JLabel();
+        txtNombProductoP = new javax.swing.JTextField();
+        txtPrecProductoP = new javax.swing.JTextField();
+        txtDescuentoProductoP = new javax.swing.JTextField();
+        txtCantidadStockP = new javax.swing.JTextField();
+        txtIdProductoP = new javax.swing.JTextField();
+        lblDecuent = new javax.swing.JLabel();
+        lblProdFragil = new javax.swing.JLabel();
+        lblUnidVenta = new javax.swing.JLabel();
+        cmbIdCategoria = new javax.swing.JComboBox<>();
+        lblCantStock = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripProductoP = new javax.swing.JTextArea();
+        rbdNOfragil = new javax.swing.JRadioButton();
+        rbdSIfragil = new javax.swing.JRadioButton();
+        lblDescrip = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        btnGuardarProd = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        cmbUnidadVenta = new javax.swing.JComboBox<>();
+        cmbIdProveedor = new javax.swing.JComboBox<>();
         mnbBarraPrinc = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -62,6 +91,7 @@ public class dlgInventario extends javax.swing.JDialog {
         setPreferredSize(new java.awt.Dimension(800, 491));
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBase.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(131, 182, 231));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -107,8 +137,9 @@ public class dlgInventario extends javax.swing.JDialog {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCalender, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,16 +152,21 @@ public class dlgInventario extends javax.swing.JDialog {
                 .addGap(3, 3, 3))
         );
 
+        pnlBase.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 402, 890, -1));
+
         lstCategorias.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 0, 14)); // NOI18N
         lstCategorias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(lstCategorias);
 
+        pnlBase.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 170, 130));
+
         lblCategoria.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
         lblCategoria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCategoria.setText("Seleccione una Categoría");
+        pnlBase.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 199, 36));
 
-        jTable1.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblInventario.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
+        tblInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -138,16 +174,19 @@ public class dlgInventario extends javax.swing.JDialog {
                 "ID", "Nombre", "Precio", "Descuento max", "Stock", "Proveedor"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(102, 102, 102));
-        jTable1.setRowHeight(20);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowGrid(true);
-        jScrollPane3.setViewportView(jTable1);
+        tblInventario.setGridColor(new java.awt.Color(102, 102, 102));
+        tblInventario.setRowHeight(20);
+        tblInventario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblInventario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblInventario.setShowGrid(true);
+        jScrollPane3.setViewportView(tblInventario);
+
+        pnlBase.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 195, 850, 180));
 
         lblProductos.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
         lblProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProductos.setText("Productos");
+        pnlBase.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 199, 36));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
@@ -171,61 +210,119 @@ public class dlgInventario extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
-        pnlBase.setLayout(pnlBaseLayout);
-        pnlBaseLayout.setHorizontalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnlBaseLayout.createSequentialGroup()
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3))))
-                .addContainerGap())
-        );
-        pnlBaseLayout.setVerticalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addGap(27, 27, 27)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        pnlBase.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 530, 80));
+
+        panInventario.addTab("Inventario", pnlBase);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblProveedor.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblProveedor.setText("Id Proveedor   :");
+        jPanel3.add(lblProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 220, 30));
+
+        lblCateg.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblCateg.setText("Id Categoria  :");
+        jPanel3.add(lblCateg, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 220, 30));
+
+        lblPrecProd.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblPrecProd.setText(" Precio Producto  :");
+        jPanel3.add(lblPrecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 220, 30));
+
+        lblIdProduct.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblIdProduct.setText(" Id Producto :");
+        jPanel3.add(lblIdProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 30));
+
+        lblnomProd.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblnomProd.setText(" Nombre del Producto :");
+        jPanel3.add(lblnomProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 220, 30));
+        jPanel3.add(txtNombProductoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 190, 30));
+        jPanel3.add(txtPrecProductoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 190, 30));
+        jPanel3.add(txtDescuentoProductoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 190, 30));
+        jPanel3.add(txtCantidadStockP, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 190, 30));
+
+        txtIdProductoP.setEditable(false);
+        jPanel3.add(txtIdProductoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, 30));
+
+        lblDecuent.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDecuent.setText("Descuento de Producto :");
+        jPanel3.add(lblDecuent, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 190, 30));
+
+        lblProdFragil.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblProdFragil.setText("Producto Fragil :");
+        jPanel3.add(lblProdFragil, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 180, 30));
+
+        lblUnidVenta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblUnidVenta.setText("Unidad de Venta ");
+        jPanel3.add(lblUnidVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 180, 30));
+
+        cmbIdCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        jPanel3.add(cmbIdCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 190, 30));
+
+        lblCantStock.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblCantStock.setText("Cantida de Stock :");
+        jPanel3.add(lblCantStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 180, 30));
+
+        txtDescripProductoP.setColumns(20);
+        txtDescripProductoP.setRows(5);
+        jScrollPane2.setViewportView(txtDescripProductoP);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 190, 200));
+
+        buttonGroup1.add(rbdNOfragil);
+        rbdNOfragil.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        rbdNOfragil.setText("NO");
+        rbdNOfragil.setOpaque(false);
+        jPanel3.add(rbdNOfragil, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 50, -1));
+
+        buttonGroup1.add(rbdSIfragil);
+        rbdSIfragil.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        rbdSIfragil.setText("Si");
+        rbdSIfragil.setOpaque(false);
+        jPanel3.add(rbdSIfragil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 50, -1));
+
+        lblDescrip.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDescrip.setText("Descrip de Producto :");
+        jPanel3.add(lblDescrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 200, 30));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnGuardarProd.setText("Guardar");
+        jPanel4.add(btnGuardarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 220, 50));
+
+        btnCancelar.setText("Cancelar");
+        jPanel4.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 220, 50));
+
+        btnLimpiar.setText("Limpiar");
+        jPanel4.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, 50));
+
+        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 810, 100));
+
+        cmbUnidadVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Unidad", "Kilogramos", "Litros", "Metros ", "Docena" }));
+        jPanel3.add(cmbUnidadVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 190, 30));
+
+        cmbIdProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        jPanel3.add(cmbIdProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 190, 30));
+
+        panInventario.addTab("Registro ", jPanel3);
 
         mnbBarraPrinc.setBackground(new java.awt.Color(131, 182, 231));
 
@@ -277,11 +374,13 @@ public class dlgInventario extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panInventario)
         );
 
         pack();
@@ -344,9 +443,16 @@ public class dlgInventario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCalender;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardarProd;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cmbIdCategoria;
+    private javax.swing.JComboBox<String> cmbIdProveedor;
+    private javax.swing.JComboBox<String> cmbUnidadVenta;
     private javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
     public javax.swing.JMenu jMenu1;
@@ -363,13 +469,219 @@ public class dlgInventario extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblCantStock;
+    private javax.swing.JLabel lblCateg;
     private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblDecuent;
+    private javax.swing.JLabel lblDescrip;
+    private javax.swing.JLabel lblIdProduct;
+    private javax.swing.JLabel lblPrecProd;
+    private javax.swing.JLabel lblProdFragil;
     private javax.swing.JLabel lblProductos;
+    private javax.swing.JLabel lblProveedor;
+    private javax.swing.JLabel lblUnidVenta;
+    private javax.swing.JLabel lblnomProd;
     private javax.swing.JList<String> lstCategorias;
     private javax.swing.JMenuBar mnbBarraPrinc;
+    private javax.swing.JTabbedPane panInventario;
     private javax.swing.JPanel pnlBase;
+    private javax.swing.JRadioButton rbdNOfragil;
+    private javax.swing.JRadioButton rbdSIfragil;
+    private javax.swing.JTable tblInventario;
+    private javax.swing.JTextField txtCantidadStockP;
+    private javax.swing.JTextArea txtDescripProductoP;
+    private javax.swing.JTextField txtDescuentoProductoP;
+    private javax.swing.JTextField txtIdProductoP;
+    private javax.swing.JTextField txtNombProductoP;
+    private javax.swing.JTextField txtPrecProductoP;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnCalender() {
+        return btnCalender;
+    }
+
+    public void setBtnCalender(javax.swing.JButton btnCalender) {
+        this.btnCalender = btnCalender;
+    }
+
+    public javax.swing.JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(javax.swing.JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public javax.swing.JButton getBtnEditar() {
+        return btnEditar;
+    }
+
+    public void setBtnEditar(javax.swing.JButton btnEditar) {
+        this.btnEditar = btnEditar;
+    }
+
+    public javax.swing.JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public void setBtnEliminar(javax.swing.JButton btnEliminar) {
+        this.btnEliminar = btnEliminar;
+    }
+
+    public javax.swing.JButton getBtnGuardarProd() {
+        return btnGuardarProd;
+    }
+
+    public void setBtnGuardarProd(javax.swing.JButton btnGuardarProd) {
+        this.btnGuardarProd = btnGuardarProd;
+    }
+
+    public javax.swing.JButton getBtnLimpiar() {
+        return btnLimpiar;
+    }
+
+    public void setBtnLimpiar(javax.swing.JButton btnLimpiar) {
+        this.btnLimpiar = btnLimpiar;
+    }
+
+    public javax.swing.JButton getBtnNuevo() {
+        return btnNuevo;
+    }
+
+    public void setBtnNuevo(javax.swing.JButton btnNuevo) {
+        this.btnNuevo = btnNuevo;
+    }
+
+    public javax.swing.ButtonGroup getButtonGroup1() {
+        return buttonGroup1;
+    }
+
+    public void setButtonGroup1(javax.swing.ButtonGroup buttonGroup1) {
+        this.buttonGroup1 = buttonGroup1;
+    }
+
+    public javax.swing.JComboBox<String> getCmbIdCategoria() {
+        return cmbIdCategoria;
+    }
+
+    public void setCmbIdCategoria(javax.swing.JComboBox<String> cmbIdCategoria) {
+        this.cmbIdCategoria = cmbIdCategoria;
+    }
+
+    public javax.swing.JComboBox<String> getCmbIdProveedor() {
+        return cmbIdProveedor;
+    }
+
+    public void setCmbIdProveedor(javax.swing.JComboBox<String> cmbIdProveedor) {
+        this.cmbIdProveedor = cmbIdProveedor;
+    }
+
+    public javax.swing.JComboBox<String> getCmbUnidadVenta() {
+        return cmbUnidadVenta;
+    }
+
+    public void setCmbUnidadVenta(javax.swing.JComboBox<String> cmbUnidadVenta) {
+        this.cmbUnidadVenta = cmbUnidadVenta;
+    }
+
+    public javax.swing.JList<String> getLstCategorias() {
+        return lstCategorias;
+    }
+
+    public void setLstCategorias(javax.swing.JList<String> lstCategorias) {
+        this.lstCategorias = lstCategorias;
+    }
+
+    public javax.swing.JMenuBar getMnbBarraPrinc() {
+        return mnbBarraPrinc;
+    }
+
+    public void setMnbBarraPrinc(javax.swing.JMenuBar mnbBarraPrinc) {
+        this.mnbBarraPrinc = mnbBarraPrinc;
+    }
+
+    public javax.swing.JTabbedPane getPanInventario() {
+        return panInventario;
+    }
+
+    public void setPanInventario(javax.swing.JTabbedPane panInventario) {
+        this.panInventario = panInventario;
+    }
+
+    public javax.swing.JRadioButton getRbdNOfragil() {
+        return rbdNOfragil;
+    }
+
+    public void setRbdNOfragil(javax.swing.JRadioButton rbdNOfragil) {
+        this.rbdNOfragil = rbdNOfragil;
+    }
+
+    public javax.swing.JRadioButton getRbdSIfragil() {
+        return rbdSIfragil;
+    }
+
+    public void setRbdSIfragil(javax.swing.JRadioButton rbdSIfragil) {
+        this.rbdSIfragil = rbdSIfragil;
+    }
+
+    public javax.swing.JTable getTblInventario() {
+        return tblInventario;
+    }
+
+    public void setTblInventario(javax.swing.JTable tblInventario) {
+        this.tblInventario = tblInventario;
+    }
+
+    public javax.swing.JTextField getTxtCantidadStockP() {
+        return txtCantidadStockP;
+    }
+
+    public void setTxtCantidadStockP(javax.swing.JTextField txtCantidadStockP) {
+        this.txtCantidadStockP = txtCantidadStockP;
+    }
+
+    public javax.swing.JTextArea getTxtDescripProductoP() {
+        return txtDescripProductoP;
+    }
+
+    public void setTxtDescripProductoP(javax.swing.JTextArea txtDescripProductoP) {
+        this.txtDescripProductoP = txtDescripProductoP;
+    }
+
+    public javax.swing.JTextField getTxtDescuentoProductoP() {
+        return txtDescuentoProductoP;
+    }
+
+    public void setTxtDescuentoProductoP(javax.swing.JTextField txtDescuentoProductoP) {
+        this.txtDescuentoProductoP = txtDescuentoProductoP;
+    }
+
+    public javax.swing.JTextField getTxtIdProductoP() {
+        return txtIdProductoP;
+    }
+
+    public void setTxtIdProductoP(javax.swing.JTextField txtIdProductoP) {
+        this.txtIdProductoP = txtIdProductoP;
+    }
+
+    public javax.swing.JTextField getTxtNombProductoP() {
+        return txtNombProductoP;
+    }
+
+    public void setTxtNombProductoP(javax.swing.JTextField txtNombProductoP) {
+        this.txtNombProductoP = txtNombProductoP;
+    }
+
+    public javax.swing.JTextField getTxtPrecProductoP() {
+        return txtPrecProductoP;
+    }
+
+    public void setTxtPrecProductoP(javax.swing.JTextField txtPrecProductoP) {
+        this.txtPrecProductoP = txtPrecProductoP;
+    }
 }

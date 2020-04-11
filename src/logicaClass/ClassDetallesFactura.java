@@ -74,7 +74,8 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
      */
     public ClassDetallesFactura(int idProducto, String nombreProd, String descriProd, int cantidadProd, double precioProd, boolean prodfragil, double descunetProd, ClassCategoria categoria, ClassProveedor provedor) {
         super(idProducto, nombreProd, descriProd, cantidadProd, precioProd,
-                prodfragil, descunetProd, categoria, provedor);
+                prodfragil, descunetProd, cantidadProd, 
+                idProducto, nombreProd);
         this.idDetalleFact = idDetalleFact;
         this.cantidadProd = cantidadProd;
         this.subtotal = subtotal;
