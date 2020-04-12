@@ -336,7 +336,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
 
                 Object[] objeto = {producto.getIdProducto(), producto.getNombreProd(), producto.getIdProveedor(),
                     categoria, producto.getPrecioProd(), producto.getDescuentProd(), producto.getUnidadVenta(),
-                    producto.getCantidadStock(), producto.isProdFragil(), producto.getDescriProd()};
+                    producto.getCantidadStock(), producto.getProdFragil(), producto.getDescriProd()};
 
                 tablaModelo.addRow(objeto);
             }

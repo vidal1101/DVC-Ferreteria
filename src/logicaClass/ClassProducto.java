@@ -16,7 +16,7 @@ public class ClassProducto implements Serializable {
     private int cantidadStock;
     private double precioProd;
     private boolean prodFragil;
-    private double descuentProd;
+    private int descuentProd;
     private String unidadVenta;
     private int idCategoria;
     private int idProveedor;
@@ -54,7 +54,7 @@ public class ClassProducto implements Serializable {
         this.precioProd = precioProd;
     }
 
-    public boolean isProdFragil() {
+    public boolean getProdFragil() {
         return prodFragil;
     }
 
@@ -78,11 +78,11 @@ public class ClassProducto implements Serializable {
         this.idProveedor = idProveedor;
     }
 
-    public double getDescuentProd() {
+    public int getDescuentProd() {
         return descuentProd;
     }
 
-    public void setDescuentProd(double descuentProd) {
+    public void setDescuentProd(int descuentProd) {
         this.descuentProd = descuentProd;
     }
 
@@ -141,7 +141,7 @@ public class ClassProducto implements Serializable {
         this.cantidadStock = 0;
         this.precioProd = 0.0;
         this.prodFragil = false;
-        this.descuentProd = 0.0;
+        this.descuentProd = 0;
         this.idCategoria = 0;
         this.idProveedor = 0;
     }
