@@ -73,13 +73,15 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
      * @param provedor 
      */
     public ClassDetallesFactura(int idProducto, String nombreProd, String descriProd, int cantidadProd, double precioProd, boolean prodfragil, double descunetProd, ClassCategoria categoria, ClassProveedor provedor) {
-        super(idProducto, nombreProd, descriProd, cantidadProd, precioProd,
-                prodfragil, descunetProd, categoria, provedor);
+        super(idProducto, nombreProd, descriProd, cantidadProd, 
+                precioProd, prodfragil, cantidadProd, cantidadProd,
+                idProducto, nombreProd);
         this.idDetalleFact = idDetalleFact;
         this.cantidadProd = cantidadProd;
         this.subtotal = subtotal;
         this.factura = factura;
         this.descuanto = descuanto;
+        
 
     }
 

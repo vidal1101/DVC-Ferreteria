@@ -13,9 +13,8 @@ public class ClassCliente implements Serializable {
     
     private int cedulaCli;
     private String nombreCli;
-    private int telefonoCli;
+    private String telefonoCli;
     private String emailCli;
-    private String direccionCli;
 
     //Setter and Getter
     public int getCedulaCli() {
@@ -34,11 +33,11 @@ public class ClassCliente implements Serializable {
         this.nombreCli = nombreCli;
     }
 
-    public int getTelefonoCli() {
+    public String getTelefonoCli() {
         return telefonoCli;
     }
 
-    public void setTelefonoCli(int telefonoCli) {
+    public void setTelefonoCli(String telefonoCli) {
         this.telefonoCli = telefonoCli;
     }
 
@@ -50,13 +49,6 @@ public class ClassCliente implements Serializable {
         this.emailCli = emailCli;
     }
 
-    public String getDireccionCli() {
-        return direccionCli;
-    }
-
-    public void setDireccionCli(String direccionCli) {
-        this.direccionCli = direccionCli;
-    }
 
     //Contructores
     /**
@@ -67,14 +59,12 @@ public class ClassCliente implements Serializable {
      * @param nombreCli
      * @param telefonoCli
      * @param emailCli
-     * @param direccionCli
      */
-    public ClassCliente(int cedulaCli, String nombreCli, int telefonoCli, String emailCli, String direccionCli) {
+    public ClassCliente(int cedulaCli, String nombreCli, String telefonoCli, String emailCli) {
         this.cedulaCli = cedulaCli;
         this.nombreCli = nombreCli;
         this.telefonoCli = telefonoCli;
         this.emailCli = emailCli;
-        this.direccionCli = direccionCli;
     }
 
     
@@ -85,9 +75,8 @@ public class ClassCliente implements Serializable {
     public ClassCliente() {
         this.cedulaCli = 0;
         this.nombreCli = "";
-        this.telefonoCli = 0;
+        this.telefonoCli = "";
         this.emailCli = "";
-        this.direccionCli = "";
     }
 
 }
