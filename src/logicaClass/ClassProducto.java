@@ -5,24 +5,23 @@ import java.io.Serializable;
 
 /**
  *
- * @author Dixiana Maria,  Carlos Miguel y Vidal Canales
+ * @author Dixiana Maria, Carlos Miguel y Vidal Canales
  */
 public class ClassProducto implements Serializable {
-    
-    //Atributos 
-    
+
+    // Atributos
     private int idProducto;
     private String nombreProd;
-    private String descriProd;
-    private int cantidadProd;
+    private String descripcion;
+    private int cantidadStock;
     private double precioProd;
-    private boolean prodfragil;
-    private double descuentProd;
-    private ClassCategoria categoria;
-    private ClassProveedor provedor;
-    
-    //Setter and Getter 
+    private boolean prodFragil;
+    private int descuentProd;
+    private String unidadVenta;
+    private int idCategoria;
+    private int idProveedor;
 
+    //Setter and Getter 
     public int getIdProducto() {
         return idProducto;
     }
@@ -40,19 +39,11 @@ public class ClassProducto implements Serializable {
     }
 
     public String getDescriProd() {
-        return descriProd;
+        return descripcion;
     }
 
-    public void setDescriProd(String descriProd) {
-        this.descriProd = descriProd;
-    }
-
-    public int getCantidadProd() {
-        return cantidadProd;
-    }
-
-    public void setCantidadProd(int cantidadProd) {
-        this.cantidadProd = cantidadProd;
+    public void setDescriProd(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public double getPrecioProd() {
@@ -63,80 +54,96 @@ public class ClassProducto implements Serializable {
         this.precioProd = precioProd;
     }
 
-    public boolean isProdfragil() {
-        return prodfragil;
+    public boolean getProdFragil() {
+        return prodFragil;
     }
 
-    public void setProdfragil(boolean prodfragil) {
-        this.prodfragil = prodfragil;
+    public void setProdFragil(boolean prodFragil) {
+        this.prodFragil = prodFragil;
     }
 
-    public double getDescunetProd() {
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public int getDescuentProd() {
         return descuentProd;
     }
 
-    public void setDescunetProd(double descunetProd) {
-        this.descuentProd = descunetProd;
+    public void setDescuentProd(int descuentProd) {
+        this.descuentProd = descuentProd;
     }
 
-    public ClassCategoria getCategoria() {
-        return categoria;
+    public String getUnidadVenta() {
+        return unidadVenta;
     }
 
-    public void setCategoria(ClassCategoria categoria) {
-        this.categoria = categoria;
+    public void setUnidadVenta(String unidadVenta) {
+        this.unidadVenta = unidadVenta;
     }
 
-    public ClassProveedor getProvedor() {
-        return provedor;
+    public int getCantidadStock() {
+        return cantidadStock;
     }
 
-    public void setProvedor(ClassProveedor provedor) {
-        this.provedor = provedor;
+    public void setCantidadStock(int cantidadStock) {
+        this.cantidadStock = cantidadStock;
     }
-    
-    
-    //contructores 
 
-    
     /**
-     * contructor con todos los atributos 
+     * contructor con todos los atributos
+     * 
      * @param idProducto
+     * @param idProveedor
+     * @param idCategoria
      * @param nombreProd
-     * @param descriProd
-     * @param cantidadProd
      * @param precioProd
-     * @param prodfragil
-     * @param descunetProd
-     * @param categoria
-     * @param provedor 
+     * @param descuentProd
+     * @param unidadVenta
+     * @param cantidadStock
+     * @param prodFragil
+     * @param descripcion
      */
-    public ClassProducto(int idProducto, String nombreProd, String descriProd, int cantidadProd, double precioProd, boolean prodfragil, double descunetProd, ClassCategoria categoria, ClassProveedor provedor) {
+    public ClassProducto(int idProducto, int idProveedor, int idCategoria, String nombreProd, double precioProd,
+            int descuentProd, String unidadVenta, int cantidadStock, boolean prodFragil, String descripcion) {
         this.idProducto = idProducto;
         this.nombreProd = nombreProd;
-        this.descriProd = descriProd;
-        this.cantidadProd = cantidadProd;
+        this.descripcion = descripcion;
+        this.cantidadStock = cantidadStock;
         this.precioProd = precioProd;
-        this.prodfragil = prodfragil;
-        this.descuentProd = descunetProd;
-        this.categoria = categoria;
-        this.provedor = provedor;
+        this.prodFragil = prodFragil;
+        this.descuentProd = descuentProd;
+        this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
+        this.unidadVenta = unidadVenta;
     }
 
-    
-    /***
-     * contructor inicializado 
+    /**
+     * *
+     * contructor inicializado
      */
     public ClassProducto() {
-         this.idProducto = 0;
-        this.nombreProd = "";
-        this.descriProd = "";
-        this.cantidadProd = 0;
+        this.idProducto = 0;
+        this.nombreProd = "sin nombre";
+        this.descripcion = "sin descripción";
+        this.cantidadStock = 0;
         this.precioProd = 0.0;
-        this.prodfragil = false;
-        this.descuentProd = 0.0;
-        this.categoria = categoria;
-        this.provedor = provedor;
+        this.prodFragil = false;
+        this.descuentProd = 0;
+        this.idCategoria = 0;
+        this.idProveedor = 0;
     }
-    
+
 }
