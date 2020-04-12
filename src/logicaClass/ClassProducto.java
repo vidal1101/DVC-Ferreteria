@@ -17,7 +17,7 @@ public class ClassProducto implements Serializable {
     private int cantidadProd;
     private double precioProd;
     private boolean prodfragil;
-    private double descuentProd;
+    private int descuentProd;
     private int categoria;
     private int provedor;
     private String unidadVenta;
@@ -72,11 +72,11 @@ public class ClassProducto implements Serializable {
         this.prodfragil = prodfragil;
     }
 
-      public double getDescuentProd() {
+      public int getDescuentProd() {
         return descuentProd;
     }
 
-    public void setDescuentProd(double descuentProd) {
+    public void setDescuentProd(int descuentProd) {
         this.descuentProd = descuentProd;
     }
 
@@ -121,7 +121,7 @@ public class ClassProducto implements Serializable {
      * @param provedor 
      */
     public ClassProducto(int idProducto, String nombreProd, String descriProd, 
-            int cantidadProd, double precioProd, boolean prodfragil, double descunetProd, 
+            int cantidadProd, double precioProd, boolean prodfragil, int descunetProd, 
             int categoria, int provedor, String unidadVenta) {
         this.idProducto = idProducto;
         this.nombreProd = nombreProd;
@@ -146,7 +146,7 @@ public class ClassProducto implements Serializable {
         this.cantidadProd = 0;
         this.precioProd = 0.0;
         this.prodfragil = false;
-        this.descuentProd = 0.0;
+        this.descuentProd =0;
         this.categoria = 0;
         this.provedor = 0;
         this.unidadVenta="";
