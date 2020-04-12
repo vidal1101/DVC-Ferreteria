@@ -66,6 +66,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
                     modeloCat.eliminarCategoria(ID);
                     JOptionPane.showMessageDialog(dlgCate, "Categoria eliminada exitosamente.");
                     mostrarTablaCat(modeloCat.mostrarCategorias());
+
                 }
 
             } else {
@@ -83,6 +84,8 @@ public class CategoriaControlador implements ActionListener, WindowListener {
                 dlgCate.getTbpnCategorias().setTitleAt(2, "Modificar");
                 dlgCate.getTbpnCategorias().setSelectedIndex(2);
                 dlgCate.getTbpnCategorias().setEnabledAt(2, true);
+                dlgCate.getTbpnCategorias().setEnabledAt(0, false);
+
                 // Obtenemos los datos de la tabla
                 dlgCate.getTxtidCatReg().setText(dlgCate.getTblCategorias().getValueAt(fila, 0).toString());
                 dlgCate.getTxtidCatReg().setEnabled(false);
@@ -110,20 +113,40 @@ public class CategoriaControlador implements ActionListener, WindowListener {
                         if (modeloCat.insertarCategoria(categoria)) {
                             JOptionPane.showMessageDialog(dlgCate, "Categoría insertada exitosamente");
                             mostrarTablaCat(modeloCat.mostrarCategorias());
+
+                            dlgCate.getTbpnCategorias().setSelectedIndex(0);
+                            dlgCate.getTbpnCategorias().setEnabledAt(0, true);
+                            dlgCate.getTbpnCategorias().setEnabledAt(2, false);
+                            clearReg();
+
                         } else {
                             JOptionPane.showMessageDialog(dlgCate, "La categoría no ha sido insertada");
                         }
 
                     } else if (dlgCate.getTbpnCategorias().getTitleAt(2).equals("Modificar")) {
+                        
+                        categoria.setIdCategoria(Integer.parseInt(dlgCate.getTxtidCatReg().getText()));
+                        
                         modeloCat.modificarCategoria(categoria);
+                        mostrarTablaCat(modeloCat.mostrarCategorias());
+
+                        dlgCate.getTbpnCategorias().setSelectedIndex(0);
+                        dlgCate.getTbpnCategorias().setEnabledAt(0, true);
+                        dlgCate.getTbpnCategorias().setEnabledAt(2, false);
+                        clearReg();
                     }
                 }
             }
         } else if (e.getSource().equals(dlgCate.getBtnCancelar())) {
             // Cancelar
+            dlgCate.getTbpnCategorias().setSelectedIndex(0);
+            dlgCate.getTbpnCategorias().setEnabledAt(0, true);
+            dlgCate.getTbpnCategorias().setEnabledAt(2, false);
+            clearReg();
 
         } else if (e.getSource().equals(dlgCate.getBtnLimpiar())) {
             // Limpiar
+            clearReg();
 
         } else if (e.getSource().equals(dlgCate.getBtnMasDetalles())) {
             // Más detalles
@@ -207,9 +230,10 @@ public class CategoriaControlador implements ActionListener, WindowListener {
      */
     private boolean datosListos() {
 
-        if (dlgCate.getTxtidCatReg().getText().isEmpty()) {
-            return false;
-        } else if (dlgCate.getTxtNombreCatReg().getText().isEmpty()) {
+//        if (dlgCate.getTxtidCatReg().getText().isEmpty()) {
+//            return false;
+//        } else 
+        if (dlgCate.getTxtNombreCatReg().getText().isEmpty()) {
             return false;
         } else if (dlgCate.getTxtDescripReg().getText().isEmpty()) {
             return false;

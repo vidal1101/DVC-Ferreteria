@@ -39,7 +39,6 @@ public class ClassCategoria implements Serializable {
         this.descripcionCateg = descripcionCateg;
     }
 
-    //contructores
     
     /***
      * contruct con todos los atributos 
@@ -52,14 +51,10 @@ public class ClassCategoria implements Serializable {
         this.nombreCateg = nombreCateg;
         this.descripcionCateg = descripcionCateg;
     }
-
-    /***
-     * contruct inicializado
-     */
+    
     public ClassCategoria() {
         this.idCategoria = 0;
         this.nombreCateg = "";
         this.descripcionCateg = "";
     }
-
 }

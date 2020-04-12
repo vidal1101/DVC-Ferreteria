@@ -14,25 +14,25 @@ import modelo.TrabajadorModelo;
  *
  * @author User
  */
-public class DlgPrincipal extends javax.swing.JDialog {
+public class FrmPrincipal extends javax.swing.JFrame {
 
     //Instancias
     private ClassTrabajador breteador;
     private TrabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
     private DlgCategorias dlgCateg;
-    
-    public DlgPrincipal(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+
+    public FrmPrincipal() {
+        //super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         this.trabModelo = new TrabajadorModelo();
         this.breteador = new ClassTrabajador();
-        
+
         this.dlgTrab = new DlgTrabajadores(null, true);
-        this.dlgCateg =  new DlgCategorias(null, true);
-        
+        this.dlgCateg = new DlgCategorias(null, true);
+
     }
 
     /**
@@ -68,7 +68,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
 
         jPanel1.setBackground(new java.awt.Color(131, 182, 231));
@@ -80,6 +80,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnAyuda.setText("Ayuda");
         btnAyuda.setBorderPainted(false);
         btnAyuda.setContentAreaFilled(false);
+        btnAyuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAyuda.setDefaultCapable(false);
         btnAyuda.setFocusPainted(false);
         btnAyuda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
@@ -89,6 +90,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnConfiguracion.setText("Configuracion");
         btnConfiguracion.setBorderPainted(false);
         btnConfiguracion.setContentAreaFilled(false);
+        btnConfiguracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfiguracion.setDefaultCapable(false);
         btnConfiguracion.setFocusPainted(false);
         btnConfiguracion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
@@ -98,6 +100,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnCalendario.setText("Calendario");
         btnCalendario.setBorderPainted(false);
         btnCalendario.setContentAreaFilled(false);
+        btnCalendario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCalendario.setDefaultCapable(false);
         btnCalendario.setFocusPainted(false);
         btnCalendario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario (1).png"))); // NOI18N
@@ -129,10 +132,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnCaja.setText("Caja ");
         btnCaja.setBorderPainted(false);
         btnCaja.setContentAreaFilled(false);
+        btnCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
         btnCaja.setOpaque(true);
-        jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 310, 70));
+        jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 310, 80));
 
         btnCategorias.setBackground(new java.awt.Color(255, 255, 255));
         btnCategorias.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -140,6 +144,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnCategorias.setText("Categorias");
         btnCategorias.setBorderPainted(false);
         btnCategorias.setContentAreaFilled(false);
+        btnCategorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategorias.setDefaultCapable(false);
         btnCategorias.setFocusPainted(false);
         btnCategorias.setOpaque(true);
@@ -148,7 +153,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
                 btnCategoriasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 310, 70));
+        jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 310, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoDvcdieño1.jpeg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 80));
@@ -159,10 +164,11 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnInventario.setText("Inventario ");
         btnInventario.setBorderPainted(false);
         btnInventario.setContentAreaFilled(false);
+        btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInventario.setDefaultCapable(false);
         btnInventario.setFocusPainted(false);
         btnInventario.setOpaque(true);
-        jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 320, 70));
+        jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 320, 80));
 
         btnTrabajadores.setBackground(new java.awt.Color(255, 255, 255));
         btnTrabajadores.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -170,6 +176,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         btnTrabajadores.setText("Trabajadores");
         btnTrabajadores.setBorderPainted(false);
         btnTrabajadores.setContentAreaFilled(false);
+        btnTrabajadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrabajadores.setDefaultCapable(false);
         btnTrabajadores.setFocusPainted(false);
         btnTrabajadores.setOpaque(true);
@@ -178,10 +185,10 @@ public class DlgPrincipal extends javax.swing.JDialog {
                 btnTrabajadoresActionPerformed(evt);
             }
         });
-        jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 320, 70));
+        jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 320, -1));
 
         fondoPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/123456.jpg"))); // NOI18N
-        jPanel2.add(fondoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 360));
+        jPanel2.add(fondoPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 360));
 
         jMenuBar1.setBackground(new java.awt.Color(131, 182, 231));
 
@@ -234,7 +241,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,20 +256,21 @@ public class DlgPrincipal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
-        
+
         TrabajadorControlador trabControl = new TrabajadorControlador(this, dlgTrab,
                 breteador, trabModelo);
         trabControl.inciarVista("Trabajadores");
+        
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        
-        CategoriaControlador categControl = new CategoriaControlador(dlgCateg);
-        categControl.inciarVista("Categorias");
+
+            CategoriaControlador categControl = new CategoriaControlador(dlgCateg);
+            categControl.inciarVista("Categorias");
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     /**
@@ -281,15 +289,14 @@ public class DlgPrincipal extends javax.swing.JDialog {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DlgPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DlgPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DlgPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DlgPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
         //</editor-fold>
         //</editor-fold>
 
@@ -297,7 +304,7 @@ public class DlgPrincipal extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                DlgPrincipal dialog = new DlgPrincipal(new javax.swing.JFrame(), true);
+                FrmPrincipal dialog = new FrmPrincipal();
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -340,7 +347,5 @@ public class DlgPrincipal extends javax.swing.JDialog {
         return btnTrabajadores;
     }
     
-    public void setBtnTrabajadores(javax.swing.JButton btnTrabajadores) {
-        this.btnTrabajadores = btnTrabajadores;
-    }
+    
 }

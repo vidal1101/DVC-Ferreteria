@@ -12,6 +12,40 @@ import logicaClass.ClassTrabajador;
 public class TrabajadorModelo {
 
     /**
+     * Este permite hacer el login usuario
+     *
+     * @param usuario
+     * @param contrasenia
+     * @return true Si los datos son correctos
+     */
+    public boolean iniciarSesion(int usuario, String contrasenia) {
+
+        Conexion con = new Conexion();
+
+        try {
+
+            System.out.println("Abrriendo conexión");
+            con.conectar();
+
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_sesionTrabajador(?,?,?)}");
+            cst.setInt(1, usuario);
+            cst.setString(2, contrasenia);
+            cst.registerOutParameter(3, java.sql.Types.BOOLEAN);
+            cst.execute();
+            
+            return cst.getBoolean(3);
+        } catch (SQLException e) {
+
+            System.out.println("Error al intentar enviar los datos: " + e.getMessage());
+            return false;
+
+        } finally {
+            con.desconectar();
+        }
+
+    }
+
+    /**
      * *
      * metodo que inserta un dato en la base de dato (tabla d trabajadores)
      *
@@ -22,18 +56,20 @@ public class TrabajadorModelo {
         Conexion con = new Conexion();
 
         try {
+            
             System.out.println("Abrriendo conexión");
             con.conectar();
-            CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarTrabajador(?,?,?,?,?,?,?)}");
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarTrabajador(?,?,?,?,?,?,?,?)}");
 
             cst.setInt(1, trab.getCedulaTrab());
             cst.setString(2, trab.getNombreTrab());
             cst.setString(3, trab.getPuesto());
             cst.setString(4, trab.getTelefonoTrab());
             cst.setString(5, trab.getEmailTrab());
-            cst.setBoolean(6, trab.getAbministrador());
+            cst.setString(6, trab.getContrasenia());
+            cst.setBoolean(7, trab.getAbministrador());
 
-            cst.registerOutParameter(7, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(8, java.sql.Types.BOOLEAN);
             System.out.println("Insertando datos");
             cst.executeUpdate();
 
@@ -48,12 +84,14 @@ public class TrabajadorModelo {
 
     }
 
-    /***
-     * metodo para modificar un trabajador 
+    /**
+     * *
+     * metodo para modificar un trabajador
+     *
      * @param trab
-     * @return 
+     * @return
      */
-     public boolean modificarTrabajador(ClassTrabajador trab) {
+    public boolean modificarTrabajador(ClassTrabajador trab) {
         Conexion con = new Conexion();
 
         try {
@@ -70,7 +108,7 @@ public class TrabajadorModelo {
 
             cst.registerOutParameter(7, java.sql.Types.BOOLEAN);
             System.out.println("Modificando datos");
-            
+
             cst.execute();
 
             return cst.getBoolean(7);
@@ -83,7 +121,7 @@ public class TrabajadorModelo {
         }
 
     }
-    
+
     /**
      * Llama al método que contiene el select para obtener los datos de la tabla
      *

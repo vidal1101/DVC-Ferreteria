@@ -56,7 +56,7 @@ public class CategoriaModelo {
             System.out.println("Insertando datos");
             cst.executeUpdate();
 
-            return cst.getBoolean(4);
+            return cst.getBoolean(3);
 
         } catch (SQLException e) {
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
@@ -89,8 +89,7 @@ public class CategoriaModelo {
             System.out.println("Modificando datos");
 
             cst.executeUpdate();
-
-            return cst.getBoolean(7);
+            return cst.getBoolean(4);
 
         } catch (SQLException e) {
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
@@ -110,6 +109,7 @@ public class CategoriaModelo {
         Conexion con = new Conexion();
 
         try {
+            
             con.conectar();
             CallableStatement ps = con.getCon().prepareCall("{CALL pa_eliminarCategoria(?,?)}");
             ps.setInt(1, id);
