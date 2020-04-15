@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import Vista.dlgPrincipal;
+import Vista.FrmPrincipal;
 import Vista.dlgProveedores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,14 +26,15 @@ import modelo.proveedorModelo;
  */
 public class ProveedoresControlador implements ActionListener, WindowListener, KeyListener {
 
-    private dlgPrincipal principal;
+
+    private FrmPrincipal principal;
     private dlgProveedores dlgprov;
     private ClassProveedor proveedor;
     private proveedorModelo provModelo;
     DefaultTableModel modeloProv;
     private int opc;
 
-    public ProveedoresControlador(dlgPrincipal principal, dlgProveedores dlgprov, ClassProveedor proveedor,
+    public ProveedoresControlador(FrmPrincipal principal, dlgProveedores dlgprov, ClassProveedor proveedor,
             proveedorModelo provModelo) {
 
         this.modeloProv = new DefaultTableModel();
@@ -42,7 +43,7 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
         this.proveedor = proveedor;
         this.provModelo = provModelo;
         this.opc = 0;
-        this.principal.getBtnProveedores().addActionListener(this);
+       // this.principal.getBtnProveedores().addActionListener(this);
         this.dlgprov.getBtnGuardar().addActionListener(this);
         this.dlgprov.getBtnInsertar().addActionListener(this);
         this.dlgprov.getBtnEditar().addActionListener(this);

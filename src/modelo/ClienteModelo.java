@@ -41,6 +41,7 @@ public class ClienteModelo {
             System.out.println("Insertando datos");
             cst.executeUpdate();
 
+
             return cst.getBoolean(5);
 
         } catch (SQLException e) {
