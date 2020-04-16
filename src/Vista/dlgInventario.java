@@ -58,7 +58,6 @@ public class dlgInventario extends javax.swing.JDialog {
         lblDecuent = new javax.swing.JLabel();
         lblProdFragil = new javax.swing.JLabel();
         lblUnidVenta = new javax.swing.JLabel();
-        cmbIdCategoria = new javax.swing.JComboBox<>();
         lblCantStock = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripProductoP = new javax.swing.JTextArea();
@@ -70,7 +69,10 @@ public class dlgInventario extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         cmbUnidadVenta = new javax.swing.JComboBox<>();
-        cmbIdProveedor = new javax.swing.JComboBox<>();
+        txtIdProveedor = new javax.swing.JTextField();
+        txtIdCategoria = new javax.swing.JTextField();
+        btnProveedor = new javax.swing.JButton();
+        btnCategoria = new javax.swing.JButton();
         mnbBarraPrinc = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -87,8 +89,7 @@ public class dlgInventario extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inventario");
-        setMinimumSize(new java.awt.Dimension(800, 491));
-        setPreferredSize(new java.awt.Dimension(800, 491));
+        setMinimumSize(new java.awt.Dimension(925, 513));
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -254,7 +255,7 @@ public class dlgInventario extends javax.swing.JDialog {
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                        .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane1)
                         .addGap(6, 6, 6))
@@ -264,18 +265,18 @@ public class dlgInventario extends javax.swing.JDialog {
                         .addGap(34, 34, 34)
                         .addComponent(lblProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                .addGap(34, 34, 34)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panInventario.addTab("Inventario", pnlBase);
 
         lblProveedor.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblProveedor.setText("Id Proveedor   :");
+        lblProveedor.setText("ID Proveedor:");
 
         lblCateg.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblCateg.setText("Id Categoria  :");
+        lblCateg.setText("ID Categoria:");
 
         lblPrecProd.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblPrecProd.setText(" Precio Producto  :");
@@ -296,8 +297,6 @@ public class dlgInventario extends javax.swing.JDialog {
 
         lblUnidVenta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblUnidVenta.setText("Unidad de Venta ");
-
-        cmbIdCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "1", "2", "3", "4" }));
 
         lblCantStock.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblCantStock.setText("Cantida de Stock :");
@@ -333,57 +332,74 @@ public class dlgInventario extends javax.swing.JDialog {
 
         cmbUnidadVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Unidad", "Kilogramos", "Litros", "Metros ", "Docena" }));
 
-        cmbIdProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "123456", "555555" }));
+        txtIdProveedor.setText("Seleccione");
+
+        txtIdCategoria.setText("Seleccione");
+
+        btnProveedor.setText("ID");
+        btnProveedor.setToolTipText("");
+
+        btnCategoria.setText("ID");
+        btnCategoria.setToolTipText("");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150)
-                .addComponent(lblProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
-                .addComponent(lblCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtIdProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140)
-                .addComponent(cmbIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addComponent(cmbIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblnomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
-                .addComponent(lblDecuent, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addComponent(lblDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPrecProd, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrecProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblProdFragil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblnomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(lblDecuent, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(lblDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPrecProd, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProdFragil, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(rbdSIfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(rbdNOfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDescuentoProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUnidVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbUnidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCantStock, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidadStockP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(130, 130, 130)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(rbdSIfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(rbdNOfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(110, 110, 110)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDescuentoProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUnidVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbUnidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCantStock, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantidadStockP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(130, 130, 130)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIdProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(130, 130, 130)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)))
+                        .addGap(100, 100, 100)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(3, 3, 3))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,9 +411,16 @@ public class dlgInventario extends javax.swing.JDialog {
                     .addComponent(lblCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIdProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtIdCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCategoria))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnProveedor)))))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblnomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDecuent, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -550,14 +573,14 @@ public class dlgInventario extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCategoria;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardarProd;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnProveedor;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cmbIdCategoria;
-    private javax.swing.JComboBox<String> cmbIdProveedor;
     private javax.swing.JComboBox<String> cmbUnidadVenta;
     private javax.swing.JButton jButton1;
     public javax.swing.JButton jButton2;
@@ -602,7 +625,9 @@ public class dlgInventario extends javax.swing.JDialog {
     private javax.swing.JTextField txtCantidadStockP;
     private javax.swing.JTextArea txtDescripProductoP;
     private javax.swing.JTextField txtDescuentoProductoP;
+    private javax.swing.JTextField txtIdCategoria;
     private javax.swing.JTextField txtIdProductoP;
+    private javax.swing.JTextField txtIdProveedor;
     private javax.swing.JTextField txtNombProductoP;
     private javax.swing.JTextField txtPrecProductoP;
     // End of variables declaration//GEN-END:variables
@@ -661,30 +686,6 @@ public class dlgInventario extends javax.swing.JDialog {
 
     public void setBtnNuevo(javax.swing.JButton btnNuevo) {
         this.btnNuevo = btnNuevo;
-    }
-
-    public javax.swing.ButtonGroup getButtonGroup1() {
-        return buttonGroup1;
-    }
-
-    public void setButtonGroup1(javax.swing.ButtonGroup buttonGroup1) {
-        this.buttonGroup1 = buttonGroup1;
-    }
-
-    public javax.swing.JComboBox<String> getCmbIdCategoria() {
-        return cmbIdCategoria;
-    }
-
-    public void setCmbIdCategoria(javax.swing.JComboBox<String> cmbIdCategoria) {
-        this.cmbIdCategoria = cmbIdCategoria;
-    }
-
-    public javax.swing.JComboBox<String> getCmbIdProveedor() {
-        return cmbIdProveedor;
-    }
-
-    public void setCmbIdProveedor(javax.swing.JComboBox<String> cmbIdProveedor) {
-        this.cmbIdProveedor = cmbIdProveedor;
     }
 
     public javax.swing.JComboBox<String> getCmbUnidadVenta() {
@@ -789,5 +790,21 @@ public class dlgInventario extends javax.swing.JDialog {
 
     public void setTxtPrecProductoP(javax.swing.JTextField txtPrecProductoP) {
         this.txtPrecProductoP = txtPrecProductoP;
+    }
+
+    public javax.swing.JButton getBtnCategoria() {
+        return btnCategoria;
+    }
+
+    public javax.swing.JButton getBtnProveedor() {
+        return btnProveedor;
+    }
+
+    public javax.swing.JTextField getTxtIdCategoria() {
+        return txtIdCategoria;
+    }
+
+    public javax.swing.JTextField getTxtIdProveedor() {
+        return txtIdProveedor;
     }
 }

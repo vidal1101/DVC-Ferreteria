@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import Vista.DlgMostrador;
 import Vista.dlgInventario;
 import Vista.FrmPrincipal;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassProducto;
+import modelo.CategoriaModelo;
 import modelo.inventarioModelo;
+import modelo.proveedorModelo;
 
 /**
  *
@@ -30,16 +33,18 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
     private dlgInventario dlgivent;
     private ClassProducto producto;
     private inventarioModelo prodModelo;
+    DlgMostrador mostrador;
     DefaultTableModel modeloInvent;
     private int opc;
 
     public inventarioControlador(FrmPrincipal principal, dlgInventario dlginvent, ClassProducto producto,
             inventarioModelo prodModelo) {
         this.modeloInvent = new DefaultTableModel();
+        this.mostrador = new DlgMostrador(principal, true);
         this.principal = principal;
         this.dlgivent = dlginvent;
         this.prodModelo = prodModelo;
-        this.opc = opc;
+        this.opc = 0;
         this.producto = producto;
 ///        this.principal.getBtnInventario().addActionListener(this);
         this.dlgivent.getBtnNuevo().addActionListener(this);
@@ -51,6 +56,10 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
         this.dlgivent.getBtnLimpiar().addActionListener(this);
         this.dlgivent.getRbdNOfragil().addActionListener(this);
         this.dlgivent.getRbdSIfragil().addActionListener(this);
+        this.dlgivent.getBtnProveedor().addActionListener(this);
+        this.dlgivent.getBtnCategoria().addActionListener(this);
+        this.mostrador.getBtnSeleccionar().addActionListener(this);
+        this.mostrador.getBtnCancelar().addActionListener(this);
 
     }
 
@@ -63,8 +72,8 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
         dlgivent.getTxtDescuentoProductoP().setText("");
         dlgivent.getTxtNombProductoP().setText("");
         dlgivent.getTxtPrecProductoP().setText("");
-        dlgivent.getCmbIdCategoria().setSelectedIndex(0);
-        dlgivent.getCmbIdProveedor().setSelectedIndex(0);
+        dlgivent.getTxtIdCategoria().setText("");
+        dlgivent.getTxtIdProveedor().setText("");
         dlgivent.getCmbUnidadVenta().setSelectedIndex(0);
         dlgivent.getRbdNOfragil().setSelected(true);
     }
@@ -95,14 +104,14 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
         } else if (e.getSource() == dlgivent.getBtnGuardarProd()) {
 
             producto.setCantidadStock(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
-            producto.setIdCategoria(Integer.parseInt(dlgivent.getCmbIdCategoria().getSelectedItem().toString()));
+            producto.setIdCategoria(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
             producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
             producto.setDescuentProd(Integer.parseInt(dlgivent.getTxtDescuentoProductoP().getText()));
             producto.setNombreProd(dlgivent.getTxtNombProductoP().getText());
             producto.setPrecioProd(Double.valueOf(dlgivent.getTxtPrecProductoP().getText()));
             producto.setProdFragil(dlgivent.getRbdNOfragil().isSelected()
                     || dlgivent.getRbdSIfragil().isSelected());
-            producto.setIdProveedor(Integer.parseInt(dlgivent.getCmbIdProveedor().getSelectedItem().toString()));
+            producto.setIdProveedor(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
             producto.setUnidadVenta(String.valueOf(dlgivent.getCmbUnidadVenta().getSelectedItem()));
 
             if (opc == 1) {
@@ -120,16 +129,16 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
                     this.clear();
                 }
 
-            }  else if (this.prodModelo.modificarProducto(producto)) {
-                    JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
-                    this.mostrartabla(this.prodModelo.mostrarProductos());
-                    this.dlgivent.getPanInventario().setSelectedIndex(0);
-                    this.dlgivent.getPanInventario().setEnabledAt(1, false);
-                    this.dlgivent.getPanInventario().setEnabledAt(0, true);
+            } else if (this.prodModelo.modificarProducto(producto)) {
+                JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
+                this.mostrartabla(this.prodModelo.mostrarProductos());
+                this.dlgivent.getPanInventario().setSelectedIndex(0);
+                this.dlgivent.getPanInventario().setEnabledAt(1, false);
+                this.dlgivent.getPanInventario().setEnabledAt(0, true);
 
-                } else {
-                    JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
-                }
+            } else {
+                JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
+            }
 
         } else if (e.getSource() == dlgivent.getBtnCancelar()) {
             this.clear();
@@ -139,32 +148,34 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
 
         } else if (e.getSource() == dlgivent.getBtnEditar()) { //modifcar
 
-                if (dlgivent.getTblInventario().getSelectedRow() != -1) {
-                    this.dlgivent.getPanInventario().setSelectedIndex(1);
-                    this.dlgivent.getPanInventario().setEnabledAt(0, false);
-                    int file = dlgivent.getTblInventario().getSelectedRow();
+            if (dlgivent.getTblInventario().getSelectedRow() != -1) {
 
-                    this.dlgivent.getTxtIdProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 0).toString());
-                    this.dlgivent.getCmbIdProveedor().setSelectedItem(dlgivent.getTblInventario().getValueAt(file, 1).toString());
-                    this.dlgivent.getCmbIdCategoria().setSelectedItem(dlgivent.getTblInventario().getValueAt(file, 2).toString());
-                    this.dlgivent.getTxtNombProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 3).toString());
-                    this.dlgivent.getTxtPrecProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 4).toString());
-                    this.dlgivent.getTxtDescuentoProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 5).toString());
-                    this.dlgivent.getCmbUnidadVenta().setSelectedItem(dlgivent.getTblInventario().getValueAt(file, 6).toString());
-                    this.dlgivent.getTxtCantidadStockP().setText(dlgivent.getTblInventario().getValueAt(file, 7).toString());
-                    this.dlgivent.getTxtDescripProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 9).toString());
-                    this.dlgivent.getRbdNOfragil().isSelected();
+                this.dlgivent.getPanInventario().setSelectedIndex(1);
+                this.dlgivent.getPanInventario().setEnabledAt(0, false);
+                int file = dlgivent.getTblInventario().getSelectedRow();
 
-                    this.opc = 2;
-                    this.dlgivent.getPanInventario().setSelectedIndex(1);
-                    this.dlgivent.getPanInventario().setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(dlgivent, "Debe Seleccionar Fila");
-                }
+                this.dlgivent.getTxtIdProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 0).toString());
+                this.dlgivent.getTxtIdCategoria().setText(dlgivent.getTblInventario().getValueAt(file, 1).toString());
+                this.dlgivent.getTxtIdProveedor().setText(dlgivent.getTblInventario().getValueAt(file, 2).toString());
+                this.dlgivent.getTxtNombProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 3).toString());
+                this.dlgivent.getTxtPrecProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 4).toString());
+                this.dlgivent.getTxtDescuentoProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 5).toString());
+                this.dlgivent.getCmbUnidadVenta().setSelectedItem(dlgivent.getTblInventario().getValueAt(file, 6).toString());
+                this.dlgivent.getTxtCantidadStockP().setText(dlgivent.getTblInventario().getValueAt(file, 7).toString());
+                this.dlgivent.getTxtDescripProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 9).toString());
+                this.dlgivent.getRbdNOfragil().isSelected();
 
-            }else if(e.getSource() == dlgivent.getBtnEliminar()){
-                
-                int fila = dlgivent.getTblInventario().getSelectedRow();
+                this.opc = 2;
+                this.dlgivent.getPanInventario().setSelectedIndex(1);
+                this.dlgivent.getPanInventario().setEnabled(true);
+
+            } else {
+                JOptionPane.showMessageDialog(dlgivent, "Debe Seleccionar Fila");
+            }
+
+        } else if (e.getSource() == dlgivent.getBtnEliminar()) {
+
+            int fila = dlgivent.getTblInventario().getSelectedRow();
 
             if (fila != -1) {
 
@@ -183,47 +194,47 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
             } else {
                 JOptionPane.showMessageDialog(dlgivent, "Selecciones un Proveedor para eliminar");
             }
-                
+
+        } else if (e.getSource() == dlgivent.getBtnCategoria()) {
+            // abrimos la ventana para seleccionar una categoria
+
+            mostrador.setTitle("Selecionar Categoría");
+            mostrarCategorias();
+            mostrador.setVisible(true);
+
+        } else if (e.getSource() == dlgivent.getBtnProveedor()) {
+            // abrimos la ventana para seleccionar un proveedor
+
+            mostrador.setTitle("Selecionar Proveedor");
+            mostrarProveedores();
+            mostrador.setVisible(true);
+
+        } else if (e.getSource() == mostrador.getBtnSeleccionar()) {
+            // Seleccionar al proveedor o categoría
+
+            int fila = mostrador.getTblMostrar().getSelectedRow();
+            if (fila > -1) {
+
+                if (mostrador.getTitle().equals("Selecionar Categoría")) {
+
+                    dlgivent.getTxtIdCategoria().setText(mostrador.getTblMostrar().
+                            getValueAt(fila, 0).toString());
+                    mostrador.dispose();
+
+                } else {
+                    dlgivent.getTxtIdProveedor().setText(mostrador.getTblMostrar().
+                            getValueAt(fila, 0).toString());
+                    mostrador.dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(mostrador, "Seleccione un registro");
             }
 
-    }
-
-    public void mostrartabla(ResultSet rs) {
-        // Títulos
-        String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
-                "Stock", "Frágil", "Descripción"};
-        modeloInvent = new DefaultTableModel(null, title){
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return false;
-            }
-        };
-
-        try {
-
-            while (rs.next()) {
-                producto = new ClassProducto();
-                
-                this.producto = new ClassProducto(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                        rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
-
-                Object[] objeto = {producto.getIdProducto(), producto.getIdProveedor(), producto.getIdCategoria(),
-                    producto.getNombreProd(), producto.getPrecioProd(), producto.getDescuentProd(),
-                    producto.getUnidadVenta(), producto.getCantidadStock(), producto.getProdFragil(),
-                    producto.getDescriProd()};
-
-                modeloInvent.addRow(objeto);
-            }
-
-            System.out.println("Cerrando ResultSet");
-            rs.close();
-            dlgivent.getTblInventario().setModel(modeloInvent);
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("--------------------------------------");
+        } else if (e.getSource() == mostrador.getBtnCancelar()) {
+            // Cancela la selección del proveedor o categoría
+            mostrador.dispose();
         }
+
     }
 
     @Override
@@ -276,4 +287,125 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Muestra las categorías en el mostrador
+     *
+     */
+    private void mostrarCategorias() {
+        String[] title = {"ID", "Nombre", "Descripción"};
+        DefaultTableModel tablaModelo = new DefaultTableModel(null, title) {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+
+        ResultSet rs = null;
+        CategoriaModelo modelo = new CategoriaModelo();
+
+        try {
+            rs = modelo.mostrarCategorias();
+
+            while (rs.next()) {
+
+                Object[] objeto = {rs.getInt(1),
+                    rs.getString(2), rs.getString(3)};
+                tablaModelo.addRow(objeto);
+            }
+
+            System.out.println("Cerrando ResultSet");
+            rs.close();
+            mostrador.getTblMostrar().setModel(tablaModelo);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Muestra la tabla los datos de los productos
+     *
+     * @param rs
+     */
+    private void mostrartabla(ResultSet rs) {
+        // Títulos
+        String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
+            "Stock", "Frágil", "Descripción"};
+        modeloInvent = new DefaultTableModel(null, title) {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+
+        try {
+
+            while (rs.next()) {
+                producto = new ClassProducto();
+
+                this.producto = new ClassProducto(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
+                        rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
+
+                Object[] objeto = {producto.getIdProducto(), producto.getIdProveedor(), producto.getIdCategoria(),
+                    producto.getNombreProd(), producto.getPrecioProd(), producto.getDescuentProd(),
+                    producto.getUnidadVenta(), producto.getCantidadStock(), producto.getProdFragil(),
+                    producto.getDescriProd()};
+
+                modeloInvent.addRow(objeto);
+            }
+
+            System.out.println("Cerrando ResultSet");
+            rs.close();
+            dlgivent.getTblInventario().setModel(modeloInvent);
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Muestra los proveedores en el mostrador
+     *
+     */
+    private void mostrarProveedores() {
+
+        // Títulos
+        String[] title = {"Cedula", "Nombre", "Telefono", "Email", "Direccion"};
+        DefaultTableModel modeloProv = new DefaultTableModel(null, title) {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+
+        proveedorModelo modelo = new proveedorModelo();
+        ResultSet rs = null;
+
+        try {
+
+            rs = modelo.mostrarProveedores();
+
+            while (rs.next()) {
+
+                Object[] objeto = {rs.getInt(1),
+                    rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getString(5)};
+
+                modeloProv.addRow(objeto);
+            }
+
+            System.out.println("Cerrando ResultSet");
+            rs.close();
+            mostrador.getTblMostrar().setModel(modeloProv);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("--------------------------------------");
+        }
+
+    }
 }

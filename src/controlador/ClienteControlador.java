@@ -7,7 +7,6 @@ package controlador;
 
 import Vista.DlgCliente;
 import Vista.FrmPrincipal;
-import Vista.dlgPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;

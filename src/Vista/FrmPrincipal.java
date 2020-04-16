@@ -170,6 +170,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
         btnCaja.setOpaque(true);
+        btnCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCajaActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 310, 80));
 
         btnCategorias.setBackground(new java.awt.Color(255, 255, 255));
@@ -350,6 +355,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         inventControl.inciarVista("Productos");
     }//GEN-LAST:event_btnInventarioActionPerformed
+
+    private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
+
+        FrmVentas caja = new FrmVentas(this, true);
+        caja.setVisible(true);
+
+    }//GEN-LAST:event_btnCajaActionPerformed
 
     /**
      * @param args the command line arguments
