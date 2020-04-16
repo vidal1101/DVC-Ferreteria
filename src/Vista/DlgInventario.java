@@ -9,12 +9,12 @@ package Vista;
  *
  * @author dreads
  */
-public class dlgInventario extends javax.swing.JDialog {
+public class DlgInventario extends javax.swing.JDialog {
 
     /**
      * Creates new form dlgInventario
      */
-    public dlgInventario(java.awt.Frame parent, boolean modal) {
+    public DlgInventario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -332,8 +332,10 @@ public class dlgInventario extends javax.swing.JDialog {
 
         cmbUnidadVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Unidad", "Kilogramos", "Litros", "Metros ", "Docena" }));
 
+        txtIdProveedor.setEditable(false);
         txtIdProveedor.setText("Seleccione");
 
+        txtIdCategoria.setEditable(false);
         txtIdCategoria.setText("Seleccione");
 
         btnProveedor.setText("ID");
@@ -545,20 +547,21 @@ public class dlgInventario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                dlgInventario dialog = new dlgInventario(new javax.swing.JFrame(), true);
+                DlgInventario dialog = new DlgInventario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -14,7 +14,7 @@ import logicaClass.ClassProveedor;
  *
  * @author User
  */
-public class proveedorModelo {
+public class ProveedorModelo {
 
     /**
      * metodo de inserccion de proveedores con un objeto tipo proveedor

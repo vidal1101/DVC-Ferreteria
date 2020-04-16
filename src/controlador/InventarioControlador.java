@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
 
 import Vista.DlgMostrador;
-import Vista.dlgInventario;
+import Vista.DlgInventario;
 import Vista.FrmPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,25 +16,25 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassProducto;
 import modelo.CategoriaModelo;
-import modelo.inventarioModelo;
-import modelo.proveedorModelo;
+import modelo.InventarioModelo;
+import modelo.ProveedorModelo;
 
 /**
  *
  * @author User
  */
-public class inventarioControlador implements ActionListener, WindowListener, KeyListener {
+public class InventarioControlador implements ActionListener, WindowListener, KeyListener {
 
     private FrmPrincipal principal;
-    private dlgInventario dlgivent;
+    private DlgInventario dlgivent;
     private ClassProducto producto;
-    private inventarioModelo prodModelo;
+    private InventarioModelo prodModelo;
     DlgMostrador mostrador;
     DefaultTableModel modeloInvent;
     private int opc;
 
-    public inventarioControlador(FrmPrincipal principal, dlgInventario dlginvent, ClassProducto producto,
-            inventarioModelo prodModelo) {
+    public InventarioControlador(FrmPrincipal principal, DlgInventario dlginvent, ClassProducto producto,
+            InventarioModelo prodModelo) {
         this.modeloInvent = new DefaultTableModel();
         this.mostrador = new DlgMostrador(principal, true);
         this.principal = principal;
@@ -46,7 +42,7 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
         this.prodModelo = prodModelo;
         this.opc = 0;
         this.producto = producto;
-///        this.principal.getBtnInventario().addActionListener(this);
+
         this.dlgivent.getBtnNuevo().addActionListener(this);
         this.dlgivent.getBtnCalender().addActionListener(this);
         this.dlgivent.getBtnCancelar().addActionListener(this);
@@ -56,6 +52,7 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
         this.dlgivent.getBtnLimpiar().addActionListener(this);
         this.dlgivent.getRbdNOfragil().addActionListener(this);
         this.dlgivent.getRbdSIfragil().addActionListener(this);
+        
         this.dlgivent.getBtnProveedor().addActionListener(this);
         this.dlgivent.getBtnCategoria().addActionListener(this);
         this.mostrador.getBtnSeleccionar().addActionListener(this);
@@ -98,6 +95,7 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
             this.opc = 1;
             this.dlgivent.getTxtIdProductoP().setText("NO EDITABLE");
             this.dlgivent.getPanInventario().setSelectedIndex(1);
+            
         } else if (e.getSource() == dlgivent.getBtnLimpiar()) {
             this.clear();
 
@@ -222,9 +220,11 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
                     mostrador.dispose();
 
                 } else {
+                    
                     dlgivent.getTxtIdProveedor().setText(mostrador.getTblMostrar().
                             getValueAt(fila, 0).toString());
                     mostrador.dispose();
+                    
                 }
             } else {
                 JOptionPane.showMessageDialog(mostrador, "Seleccione un registro");
@@ -382,7 +382,7 @@ public class inventarioControlador implements ActionListener, WindowListener, Ke
             }
         };
 
-        proveedorModelo modelo = new proveedorModelo();
+        ProveedorModelo modelo = new ProveedorModelo();
         ResultSet rs = null;
 
         try {

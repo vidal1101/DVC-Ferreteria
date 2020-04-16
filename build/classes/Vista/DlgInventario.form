@@ -859,11 +859,13 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtIdProveedor">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="Seleccione"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtIdCategoria">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="Seleccione"/>
               </Properties>
             </Component>
