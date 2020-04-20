@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassProveedor;
-import modelo.proveedorModelo;
+import modelo.ProveedorModelo;
 
 /**
  *
@@ -29,12 +29,12 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
     private FrmPrincipal principal;
     private DlgProveedores dlgprov;
     private ClassProveedor proveedor;
-    private proveedorModelo provModelo;
+    private ProveedorModelo provModelo;
     DefaultTableModel modeloProv;
     private int opc;
 
     public ProveedoresControlador(FrmPrincipal principal, DlgProveedores dlgprov, ClassProveedor proveedor,
-            proveedorModelo provModelo) {
+            ProveedorModelo provModelo) {
 
         this.modeloProv = new DefaultTableModel();
         this.principal = principal;

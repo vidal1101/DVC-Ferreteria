@@ -71,6 +71,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             int cedula = Integer.parseInt(entradaLogin.getTxtUsuario().getText());
             String cocinada = encriptarContrasenia(String.valueOf(entradaLogin.getTxtContrasenia().getPassword()));
 
+            System.out.println("cocinada "+cocinada);
             if (trabModelo.iniciarSesion(cedula, cocinada)) {
 
                 principal.setVisible(true);

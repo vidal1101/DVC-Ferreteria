@@ -14,7 +14,7 @@ import logicaClass.ClassProducto;
  *
  * @author Dixi Maria, Carlos y Vidal
  */
-public class inventarioModelo {
+public class InventarioModelo {
 
     public boolean insertarProducto(ClassProducto prod) {
         Conexion con = new Conexion();

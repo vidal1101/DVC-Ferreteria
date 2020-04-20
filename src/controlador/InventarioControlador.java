@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassProducto;
 import modelo.CategoriaModelo;
-import modelo.inventarioModelo;
-import modelo.proveedorModelo;
+import modelo.InventarioModelo;
+import modelo.ProveedorModelo;
 
 /**
  *
@@ -28,13 +28,13 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
     private FrmPrincipal principal;
     private DlgInventario dlgivent;
     private ClassProducto producto;
-    private inventarioModelo prodModelo;
+    private InventarioModelo prodModelo;
     DlgMostrador mostrador;
     DefaultTableModel modeloInvent;
     private int opc;
 
     public InventarioControlador(FrmPrincipal principal, DlgInventario dlginvent, ClassProducto producto,
-            inventarioModelo prodModelo) {
+            InventarioModelo prodModelo) {
         this.modeloInvent = new DefaultTableModel();
         this.mostrador = new DlgMostrador(principal, true);
         this.principal = principal;
@@ -382,7 +382,7 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
             }
         };
 
-        proveedorModelo modelo = new proveedorModelo();
+        ProveedorModelo modelo = new ProveedorModelo();
         ResultSet rs = null;
 
         try {

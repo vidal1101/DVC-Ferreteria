@@ -16,8 +16,8 @@ import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
 import modelo.ClienteModelo;
 import modelo.TrabajadorModelo;
-import modelo.inventarioModelo;
-import modelo.proveedorModelo;
+import modelo.InventarioModelo;
+import modelo.ProveedorModelo;
 
 /**
  *
@@ -36,11 +36,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private DlgCliente dlgCli;
 
     private ClassProveedor proveedor;
-    private proveedorModelo provModelo;
+    private ProveedorModelo provModelo;
     private DlgProveedores dlgprov;
 
     private ClassProducto producto;
-    private inventarioModelo invenModelo;
+    private InventarioModelo invenModelo;
     private DlgInventario dlginve;
 
     public FrmPrincipal() {
@@ -58,11 +58,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.cliente = new ClassCliente();
         this.dlgCli = new DlgCliente(null, true);
 
-        this.provModelo = new proveedorModelo();
+        this.provModelo = new ProveedorModelo();
         this.proveedor = new ClassProveedor();
         this.dlgprov = new DlgProveedores(null, true);
 
-        this.invenModelo = new inventarioModelo();
+        this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(null, true);
 
