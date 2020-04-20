@@ -1,7 +1,8 @@
 package controlador;
 
 import Vista.DlgTrabajadores;
-import Vista.dlgPrincipal;
+import Vista.FrmInicioSesion;
+import Vista.FrmPrincipal;
 import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassTrabajador;
-import modelo.trabajadorModelo;
+import org.apache.commons.codec.digest.DigestUtils;
+import modelo.TrabajadorModelo;
 
 /**
  *
@@ -21,15 +23,16 @@ import modelo.trabajadorModelo;
  */
 public class TrabajadorControlador implements ActionListener, WindowListener, KeyListener {
 
-    private dlgPrincipal principal;
+    private FrmPrincipal principal;
+    private FrmInicioSesion entradaLogin;
     private DlgTrabajadores dlgtrab;
     private ClassTrabajador trabajador;
-    private trabajadorModelo trabModelo;
-    DefaultTableModel modeloTrab;
+    private TrabajadorModelo trabModelo;
+    private DefaultTableModel modeloTrab;
     private int opc;
 
-    public TrabajadorControlador(dlgPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador,
-            trabajadorModelo trabModelo) {
+    public TrabajadorControlador(FrmPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador,
+            TrabajadorModelo trabModelo) {
 
         this.modeloTrab = new DefaultTableModel();
         this.principal = principal;
@@ -37,6 +40,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         this.trabajador = trabajador;
         this.trabModelo = trabModelo;
         this.opc = 0;
+
         this.principal.getBtnTrabajadores().addActionListener(this);
         this.dlgtrab.getBtnGuardarT().addActionListener(this);
         this.dlgtrab.getBtnInsertarT().addActionListener(this);
@@ -44,6 +48,53 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         this.dlgtrab.getBtnEliminarT().addActionListener(this);
         this.dlgtrab.getBtnLimpiarT().addActionListener(this);
         this.dlgtrab.getBtnCancelarT().addActionListener(this);
+    }
+
+    public TrabajadorControlador(FrmInicioSesion entradaLogin, FrmPrincipal principal) {
+
+        this.trabModelo = new TrabajadorModelo();
+        this.entradaLogin = entradaLogin;
+        this.principal = principal;
+    }
+
+    /**
+     * Inicia sesión
+     *
+     * @param cedula
+     * @param contrasenia
+     * @return
+     */
+    public boolean iniciarSesion() {
+
+        try {
+            
+            int cedula = Integer.parseInt(entradaLogin.getTxtUsuario().getText());
+            String cocinada = encriptarContrasenia(String.valueOf(entradaLogin.getTxtContrasenia().getPassword()));
+
+            if (trabModelo.iniciarSesion(cedula, cocinada)) {
+
+                principal.setVisible(true);
+                return true;
+
+            } else {
+                JOptionPane.showMessageDialog(entradaLogin, "Cédula y Contraseña incorrectas.\n"
+                        + "\tVuelva a ingresarlos.", "Datos incorrectos", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+        } catch (java.lang.NullPointerException e) {
+            JOptionPane.showMessageDialog(entradaLogin, "Ingrese su contraseña y cédula", "Campos vacíos.",
+                    JOptionPane.ERROR_MESSAGE);
+
+            System.out.println(e.getCause());
+            return false;
+
+        } catch (NumberFormatException es){
+            JOptionPane.showMessageDialog(entradaLogin, "Formato de cédula incorrecto", "Cédula incorrecta",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
     }
 
     /**
@@ -70,6 +121,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         System.out.println("Abriendo registros de trabajadores");
         this.mostrartabla(this.trabModelo.mostrarTrabajadores());
         this.dlgtrab.getPantrabajador().setEnabledAt(1, false);
+
         this.dlgtrab.setVisible(true);
     }
 
@@ -89,13 +141,17 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
 
             this.clear();
         } else if (e.getSource() == dlgtrab.getBtnGuardarT()) {
-
+            // GUARDAR TRABAJADOR
+            
             trabajador.setCedulaTrab(Integer.parseInt(dlgtrab.getTxtCedulaT().getText()));
             trabajador.setNombreTrab(dlgtrab.getTxtNombreT().getText());
             trabajador.setPuesto(String.valueOf(dlgtrab.getCmbPuestoT().getSelectedItem()));
             trabajador.setTelefonoTrab(dlgtrab.getTxtTelefonoT().getText());
             trabajador.setEmailTrab(dlgtrab.getTxtEmailT().getText());
             trabajador.setAbministrador(abministrador(dlgtrab.getCmbPuestoT().getSelectedIndex()));
+
+            // Encriptamos la contraseña
+            trabajador.setContrasenia(encriptarContrasenia(String.valueOf(dlgtrab.getTxtContrsenia())));
 
             // Revisa si va a editar o guardar
             if (opc == 1) {
@@ -148,6 +204,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             }
 
         } else if (e.getSource() == dlgtrab.getBtnModificarT()) {
+            // Editar
 
             if (dlgtrab.getTblTrabajadores().getSelectedRow() != -1) {
 
@@ -181,6 +238,19 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     }
 
     /**
+     * Se llama para encriptar la contraseña
+     *
+     * @param contrasenia
+     */
+    private String encriptarContrasenia(String contrasenia) {
+
+        System.out.println("Encriptano contraseña");
+        String encript = DigestUtils.md5Hex(contrasenia);
+        System.out.println("Encriptada");
+        return encript;
+    }
+
+    /**
      * Verifica si es administrador
      *
      * @param indice
@@ -201,7 +271,13 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     public void mostrartabla(ResultSet rs) {
         // Títulos
         String[] title = {"Cedula", "Nombre", "Puesto", "Email", "Telefono"};
-        modeloTrab = new DefaultTableModel(null, title);
+        modeloTrab = new DefaultTableModel(null, title) {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
 
         try {
 

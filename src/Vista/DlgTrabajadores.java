@@ -54,8 +54,10 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         cmbPuestoT = new javax.swing.JComboBox<>();
         txtNombreT = new javax.swing.JTextField();
         txtCedulaT = new javax.swing.JTextField();
-        txtTelefonoT = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         txtEmailT = new javax.swing.JTextField();
+        lblEmailT1 = new javax.swing.JLabel();
+        txtContrsenia = new javax.swing.JPasswordField();
         btnLimpiarT = new javax.swing.JButton();
         btnGuardarT = new javax.swing.JButton();
         btnCancelarT = new javax.swing.JButton();
@@ -126,24 +128,33 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl5.setBorder(new javax.swing.border.MatteBorder(null));
         pnl5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblNombreT.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNombreT.setText("Nombre:");
-        pnl5.add(lblNombreT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+        pnl5.add(lblNombreT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, 30));
 
+        lblCedulaT.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCedulaT.setText("Cédula:");
-        pnl5.add(lblCedulaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        pnl5.add(lblCedulaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 65, 70, 30));
 
+        lblTelefonoT.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTelefonoT.setText("Teléfono:");
-        pnl5.add(lblTelefonoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        pnl5.add(lblTelefonoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 90, 30));
 
+        lblEmailT.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEmailT.setText("Email:");
-        pnl5.add(lblEmailT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        pnl5.add(lblEmailT, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 70, 30));
 
         cmbPuestoT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Puesto", "Administrador", "Cajero" }));
-        pnl5.add(cmbPuestoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 180, -1));
-        pnl5.add(txtNombreT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 310, -1));
-        pnl5.add(txtCedulaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 310, -1));
-        pnl5.add(txtTelefonoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 310, -1));
-        pnl5.add(txtEmailT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 310, -1));
+        pnl5.add(cmbPuestoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 180, -1));
+        pnl5.add(txtNombreT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 310, -1));
+        pnl5.add(txtCedulaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 310, -1));
+        pnl5.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 310, -1));
+        pnl5.add(txtEmailT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 109, 310, 30));
+
+        lblEmailT1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEmailT1.setText("Contraseña:");
+        pnl5.add(lblEmailT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 90, 30));
+        pnl5.add(txtContrsenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 201, 310, 30));
 
         pnl3.add(pnl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 750, 280));
 
@@ -192,7 +203,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(DlgTrabajadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
+        
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -222,6 +233,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCedulaT;
     private javax.swing.JLabel lblEmailT;
+    private javax.swing.JLabel lblEmailT1;
     private javax.swing.JLabel lblNombreT;
     private javax.swing.JLabel lblRegistrosT;
     private javax.swing.JLabel lblTelefonoT;
@@ -235,9 +247,10 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     private javax.swing.JPanel pnl5;
     private javax.swing.JTextField txtBuscarT;
     private javax.swing.JTextField txtCedulaT;
+    private javax.swing.JPasswordField txtContrsenia;
     private javax.swing.JTextField txtEmailT;
     private javax.swing.JTextField txtNombreT;
-    private javax.swing.JTextField txtTelefonoT;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
     
@@ -338,11 +351,11 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     }
 
     public javax.swing.JTextField getTxtTelefonoT() {
-        return txtTelefonoT;
+        return txtTelefono;
     }
 
     public void setTxtTelefonoT(javax.swing.JTextField txtTelefonoT) {
-        this.txtTelefonoT = (JFormattedTextField) txtTelefonoT;
+        this.txtTelefono = (JFormattedTextField) txtTelefonoT;
     }
 
     public javax.swing.JPanel getPnl1() {
@@ -367,5 +380,9 @@ public class DlgTrabajadores extends javax.swing.JDialog {
 
     public void setTblTrabajadores(javax.swing.JTable tblTrabajadores) {
         this.TblTrabajadores = tblTrabajadores;
+    }
+
+    public javax.swing.JPasswordField getTxtContrsenia() {
+        return txtContrsenia;
     }
 }

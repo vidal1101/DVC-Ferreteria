@@ -24,14 +24,14 @@ public class inventarioModelo {
             con.conectar();
             CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarProducto(?,?,?,?,?,?,?,?,?,?)}");
 
-            cst.setInt(1, prod.getProvedor());
-            cst.setInt(2, prod.getCategoria());
+            cst.setInt(1, prod.getIdProveedor());
+            cst.setInt(2, prod.getIdCategoria());
             cst.setString(3, prod.getNombreProd());
             cst.setDouble(4, prod.getPrecioProd());
-            cst.setInt(5,prod.getDescuentProd());
+            cst.setInt(5, prod.getDescuentProd());
             cst.setString(6, prod.getUnidadVenta());
-            cst.setInt(7, prod.getCantidadProd());
-            cst.setBoolean(8, prod.getProdfragil());
+            cst.setInt(7, prod.getCantidadStock());
+            cst.setBoolean(8, prod.getProdFragil());
             cst.setString(9, prod.getDescriProd());
 
             cst.registerOutParameter(10, java.sql.Types.BOOLEAN);
@@ -49,9 +49,11 @@ public class inventarioModelo {
 
     }
 
-    /***
-     * metodo que devuelve el resultado de la consulta al mostrar tabla de productos 
-     * @return 
+    /**
+     * *
+     * metodo que devuelve el resultado de la consulta al mostrar tabla de productos
+     *
+     * @return
      */
     public ResultSet mostrarProductos() {
         Conexion con = new Conexion();
@@ -62,7 +64,8 @@ public class inventarioModelo {
             CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(?)}");
             ps.setInt(1, 5);
             rs = ps.executeQuery();
-
+            
+            //rs.first();
             return rs;
 
         } catch (SQLException e) {
@@ -70,8 +73,8 @@ public class inventarioModelo {
             return rs;
         }
     }
-    
-     /**
+
+    /**
      * *
      * metodo para modificar un Proveedor
      *
@@ -87,14 +90,14 @@ public class inventarioModelo {
             CallableStatement cst = con.getCon().prepareCall("{CALL pa_editarProducto(?,?,?,?,?,?,?,?,?,?,?)}");
 
             cst.setInt(1, prod.getIdProducto());
-             cst.setInt(2, prod.getProvedor());
-            cst.setInt(3, prod.getCategoria());
+            cst.setInt(2, prod.getIdProveedor());
+            cst.setInt(3, prod.getIdCategoria());
             cst.setString(4, prod.getNombreProd());
             cst.setDouble(5, prod.getPrecioProd());
-            cst.setInt(6,prod.getDescuentProd());
+            cst.setInt(6, prod.getDescuentProd());
             cst.setString(7, prod.getUnidadVenta());
-            cst.setInt(8, prod.getCantidadProd());
-            cst.setBoolean(9, prod.getProdfragil());
+            cst.setInt(8, prod.getCantidadStock());
+            cst.setBoolean(9, prod.getProdFragil());
             cst.setString(10, prod.getDescriProd());
 
             cst.registerOutParameter(11, java.sql.Types.BOOLEAN);
@@ -112,10 +115,8 @@ public class inventarioModelo {
         }
 
     }
-    
-    
-    
-      /**
+
+    /**
      * Se le envía la cédula del trabajador a eliminar
      *
      * @param cedula
@@ -130,7 +131,7 @@ public class inventarioModelo {
             ps.setInt(1, idpro);
             ps.registerOutParameter(2, java.sql.Types.BOOLEAN);
             ps.executeUpdate();
-            
+
             System.out.println("product eliminado");
             return ps.getBoolean(2);
 
@@ -141,6 +142,5 @@ public class inventarioModelo {
             con.desconectar();
         }
     }
-    
 
 }

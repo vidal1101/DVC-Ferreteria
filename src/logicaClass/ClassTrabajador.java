@@ -9,16 +9,15 @@ import java.io.Serializable;
  */
 public class ClassTrabajador implements Serializable{
     
-    //atributos 
     
     private int cedulaTrab;
     private String nombreTrab;
     private String emailTrab;
     private String puesto;
     private String telefonoTrab;
+    private String contrasenia;
     private boolean abministrador;
     
-    //Setter and Getter
 
     public int getCedulaTrab() {
         return cedulaTrab;
@@ -68,8 +67,14 @@ public class ClassTrabajador implements Serializable{
         this.abministrador = abministrador;
     }
     
-    //Contructores
-
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    
+    public String getContrasenia() {
+        return contrasenia;
+    }
+    
     /**
      * contruct con todos los atributos de la clase
      * @param cedulaTrab
@@ -88,9 +93,7 @@ public class ClassTrabajador implements Serializable{
         this.abministrador = abministrador;
     }
 
-    /***
-     * contruct inicializado
-     */
+    
     public ClassTrabajador() {
          this.cedulaTrab = 0;
         this.nombreTrab = "";

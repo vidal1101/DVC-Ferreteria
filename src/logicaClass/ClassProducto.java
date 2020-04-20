@@ -5,25 +5,23 @@ import java.io.Serializable;
 
 /**
  *
- * @author Dixiana Maria,  Carlos Miguel y Vidal Canales
+ * @author Dixiana Maria, Carlos Miguel y Vidal Canales
  */
 public class ClassProducto implements Serializable {
-    
-    //Atributos 
-    
+
+    // Atributos
     private int idProducto;
     private String nombreProd;
-    private String descriProd;
-    private int cantidadProd;
+    private String descripcion;
+    private int cantidadStock;
     private double precioProd;
-    private boolean prodfragil;
+    private boolean prodFragil;
     private int descuentProd;
-    private int categoria;
-    private int provedor;
     private String unidadVenta;
-    
-    //Setter and Getter 
+    private int idCategoria;
+    private int idProveedor;
 
+    //Setter and Getter 
     public int getIdProducto() {
         return idProducto;
     }
@@ -41,19 +39,11 @@ public class ClassProducto implements Serializable {
     }
 
     public String getDescriProd() {
-        return descriProd;
+        return descripcion;
     }
 
-    public void setDescriProd(String descriProd) {
-        this.descriProd = descriProd;
-    }
-
-    public int getCantidadProd() {
-        return cantidadProd;
-    }
-
-    public void setCantidadProd(int cantidadProd) {
-        this.cantidadProd = cantidadProd;
+    public void setDescriProd(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public double getPrecioProd() {
@@ -64,15 +54,31 @@ public class ClassProducto implements Serializable {
         this.precioProd = precioProd;
     }
 
-    public boolean getProdfragil() {
-        return prodfragil;
+    public boolean getProdFragil() {
+        return prodFragil;
     }
 
-    public void setProdfragil(boolean prodfragil) {
-        this.prodfragil = prodfragil;
+    public void setProdFragil(boolean prodFragil) {
+        this.prodFragil = prodFragil;
     }
 
-      public int getDescuentProd() {
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
+
+    public int getDescuentProd() {
         return descuentProd;
     }
 
@@ -80,22 +86,6 @@ public class ClassProducto implements Serializable {
         this.descuentProd = descuentProd;
     }
 
-    public int getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(int categoria) {
-        this.categoria = categoria;
-    }
-
-    public int getProvedor() {
-        return provedor;
-    }
-
-    public void setProvedor(int provedor) {
-        this.provedor = provedor;
-    }
-    
     public String getUnidadVenta() {
         return unidadVenta;
     }
@@ -103,54 +93,57 @@ public class ClassProducto implements Serializable {
     public void setUnidadVenta(String unidadVenta) {
         this.unidadVenta = unidadVenta;
     }
-    
-    
-    //contructores 
 
-    
+    public int getCantidadStock() {
+        return cantidadStock;
+    }
+
+    public void setCantidadStock(int cantidadStock) {
+        this.cantidadStock = cantidadStock;
+    }
+
     /**
-     * contructor con todos los atributos 
+     * contructor con todos los atributos
+     * 
      * @param idProducto
+     * @param idProveedor
+     * @param idCategoria
      * @param nombreProd
-     * @param descriProd
-     * @param cantidadProd
      * @param precioProd
-     * @param prodfragil
-     * @param descunetProd
-     * @param categoria
-     * @param provedor 
+     * @param descuentProd
+     * @param unidadVenta
+     * @param cantidadStock
+     * @param prodFragil
+     * @param descripcion
      */
-    public ClassProducto(int idProducto, String nombreProd, String descriProd, 
-            int cantidadProd, double precioProd, boolean prodfragil, int descunetProd, 
-            int categoria, int provedor, String unidadVenta) {
+    public ClassProducto(int idProducto, int idProveedor, int idCategoria, String nombreProd, double precioProd,
+            int descuentProd, String unidadVenta, int cantidadStock, boolean prodFragil, String descripcion) {
         this.idProducto = idProducto;
         this.nombreProd = nombreProd;
-        this.descriProd = descriProd;
-        this.cantidadProd = cantidadProd;
+        this.descripcion = descripcion;
+        this.cantidadStock = cantidadStock;
         this.precioProd = precioProd;
-        this.prodfragil = prodfragil;
-        this.descuentProd = descunetProd;
-        this.categoria = categoria;
-        this.provedor = provedor;
-        this.unidadVenta=unidadVenta;
+        this.prodFragil = prodFragil;
+        this.descuentProd = descuentProd;
+        this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
+        this.unidadVenta = unidadVenta;
     }
 
-    
-    /***
-     * contructor inicializado 
+    /**
+     * *
+     * contructor inicializado
      */
     public ClassProducto() {
-         this.idProducto = 0;
-        this.nombreProd = "";
-        this.descriProd = "";
-        this.cantidadProd = 0;
+        this.idProducto = 0;
+        this.nombreProd = "sin nombre";
+        this.descripcion = "sin descripción";
+        this.cantidadStock = 0;
         this.precioProd = 0.0;
-        this.prodfragil = false;
-        this.descuentProd =0;
-        this.categoria = 0;
-        this.provedor = 0;
-        this.unidadVenta="";
+        this.prodFragil = false;
+        this.descuentProd = 0;
+        this.idCategoria = 0;
+        this.idProveedor = 0;
     }
 
-    
 }

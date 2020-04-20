@@ -49,7 +49,6 @@ public class ClassCliente implements Serializable {
         this.emailCli = emailCli;
     }
 
-
     //Contructores
     /**
      * 
@@ -60,7 +59,8 @@ public class ClassCliente implements Serializable {
      * @param telefonoCli
      * @param emailCli
      */
-    public ClassCliente(int cedulaCli, String nombreCli, String telefonoCli, String emailCli) {
+    public ClassCliente(int cedulaCli, String nombreCli, String telefonoCli, 
+            String emailCli) {
         this.cedulaCli = cedulaCli;
         this.nombreCli = nombreCli;
         this.telefonoCli = telefonoCli;

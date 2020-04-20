@@ -14,10 +14,9 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
     private int cantidadProd;
     private double subtotal;
     private ClassFactura factura;
-    private double descuanto;
+    private double descuento;
 
     //Setter and Getter  
-    
     public int getIdDetalleFact() {
         return idDetalleFact;
     }
@@ -50,41 +49,13 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
         this.factura = factura;
     }
 
-    public double getDescuanto() {
-        return descuanto;
+    public double getDescuento() {
+        return descuento;
     }
 
-    public void setDescuanto(double descuanto) {
-        this.descuanto = descuanto;
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
     }
-
-    //contructores 
-    
-    /**
-     * contrcutor con todos los parametros, el super y sus atrbutos
-     * @param idProducto
-     * @param nombreProd
-     * @param descriProd
-     * @param cantidadProd
-     * @param precioProd
-     * @param prodfragil
-     * @param descunetProd
-     * @param categoria
-     * @param provedor 
-     */
-    public ClassDetallesFactura(int idProducto, String nombreProd, String descriProd, int cantidadProd, double precioProd, boolean prodfragil, double descunetProd, ClassCategoria categoria, ClassProveedor provedor) {
-        super(idProducto, nombreProd, descriProd, cantidadProd, 
-                precioProd, prodfragil, cantidadProd, cantidadProd,
-                idProducto, nombreProd);
-        this.idDetalleFact = idDetalleFact;
-        this.cantidadProd = cantidadProd;
-        this.subtotal = subtotal;
-        this.factura = factura;
-        this.descuanto = descuanto;
-        
-
-    }
-
     
     /**
      * contruc inicializado con el metod super del padre 
@@ -92,16 +63,15 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
      * @param cantidadProd
      * @param subtotal
      * @param factura
-     * @param descuanto 
+     * @param descuento 
      */
-    public ClassDetallesFactura(int idDetalleFact, int cantidadProd, double subtotal, ClassFactura factura, double descuanto) {
+    public ClassDetallesFactura(int idDetalleFact, int cantidadProd, double subtotal, ClassFactura factura, int descuento) {
         super();
         this.idDetalleFact = idDetalleFact;
         this.cantidadProd = cantidadProd;
         this.subtotal = subtotal;
         this.factura = factura;
-        this.descuanto = descuanto;
+        this.descuento = descuento;
     }
-
     
 }
