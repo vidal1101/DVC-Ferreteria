@@ -39,7 +39,7 @@ public class ClienteModelo {
             cst.registerOutParameter(5, java.sql.Types.BOOLEAN);
             
             System.out.println("Insertando datos");
-            cst.executeUpdate();
+            cst.execute();
 
 
             return cst.getBoolean(5);

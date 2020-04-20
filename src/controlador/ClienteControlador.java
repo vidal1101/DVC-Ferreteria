@@ -24,7 +24,6 @@ import java.sql.SQLException;
  *
  * @author Dixiana, Carlos, Vidal
  */
-
 public class ClienteControlador implements ActionListener, WindowListener, KeyListener {
 
     private FrmPrincipal principal;
@@ -33,7 +32,6 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     private ClienteModelo cliModelo;
     DefaultTableModel modelCli;
     private int opc;
-
 
     public ClienteControlador(FrmPrincipal principal, DlgCliente dlgCli, ClassCliente cliente,
             ClienteModelo cliModelo) {
@@ -44,7 +42,6 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         this.cliente = cliente;
         this.cliModelo = cliModelo;
         this.opc = 0;
-
 //        this.principal.getBtnClientes().addActionListener(this);
         this.dlgCli.getBtnGuardarCli().addActionListener(this);
         this.dlgCli.getBtnInsertarCli().addActionListener(this);
@@ -53,7 +50,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         this.dlgCli.getBtnLimpiarCli().addActionListener(this);
         this.dlgCli.getBtnCancelarCli().addActionListener(this);
     }
-    
+
     /**
      * Limpia los datos del registro
      */
@@ -63,7 +60,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         dlgCli.getTxtTelefonoCli().setText("");
         dlgCli.getTxtEmailCli().setText("");
     }
-    
+
     /**
      * INICIA el dialog
      *
@@ -165,7 +162,6 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
                 this.dlgCli.getTxtTelefonoCli().setText(dlgCli.getTblCliente().getValueAt(file, 2).toString());
                 this.dlgCli.getTxtEmailCli().setText(dlgCli.getTblCliente().getValueAt(file, 3).toString());
 
-
                 this.opc = 2;
                 this.dlgCli.getPanCliente().setSelectedIndex(1);
                 this.dlgCli.getPanCliente().setEnabled(true);
@@ -180,7 +176,6 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             this.dlgCli.getPanCliente().setEnabledAt(0, true);
             this.dlgCli.getPanCliente().setSelectedIndex(0);
             this.dlgCli.getPanCliente().setEnabled(true);
-
         }
     }
 
@@ -199,17 +194,16 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
                 return false;
             }
         };
+
         
         try {
 
             while (rs.next()) {
-
                 this.cliente = new ClassCliente(rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getString(4));
 
                 Object[] objeto = {cliente.getCedulaCli(), cliente.getNombreCli(),
                     cliente.getTelefonoCli(), cliente.getEmailCli()};
-
                 modelCli.addRow(objeto);
             }
 
@@ -221,8 +215,8 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------");
         }
+
     }
-    
 
     @Override
     public void windowOpened(WindowEvent e) {
@@ -241,11 +235,12 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
 
     @Override
     public void windowIconified(WindowEvent e) {
-        
+
     }
 
     @Override
     public void windowDeiconified(WindowEvent e) {
+
     }
 
     @Override
@@ -270,7 +265,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
 
     @Override
     public void keyReleased(KeyEvent e) {
-        
+
     }
 
 }

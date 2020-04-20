@@ -6,7 +6,7 @@
 package controlador;
 
 import Vista.FrmPrincipal;
-import Vista.dlgProveedores;
+import Vista.DlgProveedores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,15 +26,14 @@ import modelo.proveedorModelo;
  */
 public class ProveedoresControlador implements ActionListener, WindowListener, KeyListener {
 
-
     private FrmPrincipal principal;
-    private dlgProveedores dlgprov;
+    private DlgProveedores dlgprov;
     private ClassProveedor proveedor;
     private proveedorModelo provModelo;
     DefaultTableModel modeloProv;
     private int opc;
 
-    public ProveedoresControlador(FrmPrincipal principal, dlgProveedores dlgprov, ClassProveedor proveedor,
+    public ProveedoresControlador(FrmPrincipal principal, DlgProveedores dlgprov, ClassProveedor proveedor,
             proveedorModelo provModelo) {
 
         this.modeloProv = new DefaultTableModel();

@@ -9,7 +9,7 @@ import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
-import controlador.inventarioControlador;
+import controlador.InventarioControlador;
 import logicaClass.ClassCliente;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
@@ -37,11 +37,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private ClassProveedor proveedor;
     private proveedorModelo provModelo;
-    private dlgProveedores dlgprov;
+    private DlgProveedores dlgprov;
 
     private ClassProducto producto;
     private inventarioModelo invenModelo;
-    private dlgInventario dlginve;
+    private DlgInventario dlginve;
 
     public FrmPrincipal() {
         //super(parent, modal);
@@ -60,11 +60,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         this.provModelo = new proveedorModelo();
         this.proveedor = new ClassProveedor();
-        this.dlgprov = new dlgProveedores(null, true);
+        this.dlgprov = new DlgProveedores(null, true);
 
         this.invenModelo = new inventarioModelo();
         this.producto = new ClassProducto();
-        this.dlginve = new dlgInventario(null, true);
+        this.dlginve = new DlgInventario(null, true);
 
     }
 
@@ -88,6 +88,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnTrabajadores = new javax.swing.JButton();
         btnProveedores = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
+        btnFacturas = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -147,7 +148,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
                 .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,6 +171,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
         btnCaja.setOpaque(true);
+        btnCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCajaActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 310, 80));
 
         btnCategorias.setBackground(new java.awt.Color(255, 255, 255));
@@ -187,7 +193,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnCategoriasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 310, 80));
+        jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 310, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoDvcdieño1.jpeg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 80));
@@ -207,7 +213,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnInventarioActionPerformed(evt);
             }
         });
-        jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 320, 80));
+        jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 320, 80));
 
         btnTrabajadores.setBackground(new java.awt.Color(255, 255, 255));
         btnTrabajadores.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -235,7 +241,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnProveedoresActionPerformed(evt);
             }
         });
-        jPanel2.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 300, 70));
+        jPanel2.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 310, 70));
 
         btnClientes.setBackground(new java.awt.Color(255, 255, 255));
         btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -246,7 +252,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnClientesActionPerformed(evt);
             }
         });
-        jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 320, 70));
+        jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 320, 70));
+
+        btnFacturas.setBackground(new java.awt.Color(255, 255, 255));
+        btnFacturas.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnFacturas.setText("Facturas");
+        btnFacturas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 300, 70));
 
         jMenuBar1.setBackground(new java.awt.Color(131, 182, 231));
 
@@ -304,7 +321,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -345,11 +362,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
 
-        inventarioControlador inventControl = new inventarioControlador(this, dlginve,
+        InventarioControlador inventControl = new InventarioControlador(this, dlginve,
                 producto, invenModelo);
 
         inventControl.inciarVista("Productos");
     }//GEN-LAST:event_btnInventarioActionPerformed
+
+    private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
+
+        FrmVentas caja = new FrmVentas(this, true);
+        caja.setVisible(true);
+
+    }//GEN-LAST:event_btnCajaActionPerformed
+
+    private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btnFacturasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,6 +431,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnClientes;
     public javax.swing.JButton btnConfiguracion;
+    private javax.swing.JButton btnFacturas;
     public javax.swing.JButton btnInventario;
     private javax.swing.JButton btnProveedores;
     public javax.swing.JButton btnTrabajadores;
