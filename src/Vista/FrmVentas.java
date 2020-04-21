@@ -195,11 +195,6 @@ public class FrmVentas extends javax.swing.JDialog {
         jButton7.setDefaultCapable(false);
         jButton7.setFocusPainted(false);
         jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 150, 40));
 
         jButton8.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -292,10 +287,6 @@ public class FrmVentas extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
