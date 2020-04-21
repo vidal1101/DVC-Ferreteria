@@ -85,7 +85,7 @@ public class FrmVentas extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID de producto", "Producto", "Cantidad", "Precio", "Descuento"
+
             }
         ));
         jScrollPane2.setViewportView(tblProductosAgr);
@@ -100,6 +100,7 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 120, 20));
 
         txtSubTotal.setEditable(false);
+        txtSubTotal.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel3.add(txtSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 160, 30));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -107,6 +108,7 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 30));
 
         txtDescuento.setEditable(false);
+        txtDescuento.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel3.add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, 30));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -114,6 +116,7 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 120, 30));
 
         txtTotalPagar.setEditable(false);
+        txtTotalPagar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jPanel3.add(txtTotalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 160, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, 350, 170));
@@ -239,11 +242,6 @@ public class FrmVentas extends javax.swing.JDialog {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Hogar ");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Jardin");
@@ -270,11 +268,6 @@ public class FrmVentas extends javax.swing.JDialog {
         menVentas.add(jMenuItem7);
 
         jMenuItem8.setText("Ventas por Semana");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
         menVentas.add(jMenuItem8);
 
         jMenuBar1.add(menVentas);
@@ -282,11 +275,6 @@ public class FrmVentas extends javax.swing.JDialog {
         menHistorial.setText("Historial");
 
         jMenuItem9.setText("Facturas Anuladas");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
         menHistorial.add(jMenuItem9);
 
         jMenuBar1.add(menHistorial);
@@ -304,18 +292,6 @@ public class FrmVentas extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
@@ -480,6 +456,10 @@ public class FrmVentas extends javax.swing.JDialog {
 
     public javax.swing.JTextField getTxtTotalPagar() {
         return txtTotalPagar;
+    }
+
+    public javax.swing.JTable getTblProductosAgr() {
+        return tblProductosAgr;
     }
     
 }

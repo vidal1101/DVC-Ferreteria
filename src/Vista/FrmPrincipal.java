@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import controlador.CajaControladorMontos;
 import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
@@ -371,14 +372,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
         FrmVentas caja = new FrmVentas(this, true);
-        caja.setVisible(true);
-
+        CajaControladorMontos controlador = new CajaControladorMontos(caja);
+        controlador.iniciarVista();
     }//GEN-LAST:event_btnCajaActionPerformed
 
     private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
-        
-        
-        
+
+
     }//GEN-LAST:event_btnFacturasActionPerformed
 
     /**
