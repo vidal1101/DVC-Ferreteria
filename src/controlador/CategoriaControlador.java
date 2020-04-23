@@ -392,7 +392,4 @@ public class CategoriaControlador implements ActionListener, WindowListener {
             System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
         }
     }
-
-    
-    
 }

@@ -71,7 +71,7 @@ public class DlgCliente extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cédula", "Nombre", "Puesto", "Teléfono", "Email"
+
             }
         ));
         jScrollPane1.setViewportView(tblCliente);

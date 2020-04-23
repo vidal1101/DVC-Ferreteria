@@ -36,7 +36,7 @@ public class FrmVentas extends javax.swing.JDialog {
         txtTotalPagar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtIdFactura = new javax.swing.JTextField();
+        txtIdCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDireccionEnt = new javax.swing.JTextArea();
@@ -58,6 +58,7 @@ public class FrmVentas extends javax.swing.JDialog {
         btnImprimir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
+        lblRegistrosDetalles = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -76,10 +77,11 @@ public class FrmVentas extends javax.swing.JDialog {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Caja");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblProductosAgr.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tblProductosAgr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -90,7 +92,7 @@ public class FrmVentas extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(tblProductosAgr);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 810, 230));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 810, 190));
 
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,11 +124,12 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("ID de Factura:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 110, 30));
+        jLabel5.setText("Cedula Cliente :");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, 30));
 
-        txtIdFactura.setEditable(false);
-        jPanel2.add(txtIdFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 90, 30));
+        txtIdCliente.setEditable(false);
+        txtIdCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel2.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 110, 30));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Dirección de entrega:");
@@ -143,6 +146,7 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 60, 30));
 
         txtNombreCliente.setEditable(false);
+        txtNombreCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel2.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 130, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 440, 180));
@@ -177,6 +181,7 @@ public class FrmVentas extends javax.swing.JDialog {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 45, 50, 20));
 
         txtFecha.setEditable(false);
+        txtFecha.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, 120, 30));
 
         jPanel1.setBackground(new java.awt.Color(131, 182, 231));
@@ -192,11 +197,6 @@ public class FrmVentas extends javax.swing.JDialog {
         jButton7.setDefaultCapable(false);
         jButton7.setFocusPainted(false);
         jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 150, 40));
 
         jButton8.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -231,7 +231,12 @@ public class FrmVentas extends javax.swing.JDialog {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 85, 40, 20));
 
         txtHora.setEditable(false);
+        txtHora.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 120, 30));
+
+        lblRegistrosDetalles.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        lblRegistrosDetalles.setText("Registros");
+        getContentPane().add(lblRegistrosDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 320, 30));
 
         jMenu1.setText("Categorias");
 
@@ -239,11 +244,6 @@ public class FrmVentas extends javax.swing.JDialog {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Hogar ");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Jardin");
@@ -270,11 +270,6 @@ public class FrmVentas extends javax.swing.JDialog {
         menVentas.add(jMenuItem7);
 
         jMenuItem8.setText("Ventas por Semana");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
         menVentas.add(jMenuItem8);
 
         jMenuBar1.add(menVentas);
@@ -282,11 +277,6 @@ public class FrmVentas extends javax.swing.JDialog {
         menHistorial.setText("Historial");
 
         jMenuItem9.setText("Facturas Anuladas");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
         menHistorial.add(jMenuItem9);
 
         jMenuBar1.add(menHistorial);
@@ -304,22 +294,6 @@ public class FrmVentas extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,7 +344,7 @@ public class FrmVentas extends javax.swing.JDialog {
     public javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFacturar;
-    private javax.swing.JButton btnImprimir;
+    public javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnQuitarPro;
     private javax.swing.JButton btnQuitarTodo;
     private javax.swing.JButton btnSalir;
@@ -404,6 +378,7 @@ public class FrmVentas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblRegistrosDetalles;
     private javax.swing.JMenu menHistorial;
     private javax.swing.JMenu menTrabajadores;
     private javax.swing.JMenu menVentas;
@@ -412,7 +387,7 @@ public class FrmVentas extends javax.swing.JDialog {
     private javax.swing.JTextArea txtDireccionEnt;
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
-    private javax.swing.JTextField txtIdFactura;
+    private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtSubTotal;
     private javax.swing.JTextField txtTotalPagar;
@@ -466,8 +441,8 @@ public class FrmVentas extends javax.swing.JDialog {
         return txtHora;
     }
 
-    public javax.swing.JTextField getTxtIdFactura() {
-        return txtIdFactura;
+    public javax.swing.JTextField getTxtIdCliente() {
+        return txtIdCliente;
     }
 
     public javax.swing.JTextField getTxtNombreCliente() {
@@ -486,8 +461,9 @@ public class FrmVentas extends javax.swing.JDialog {
         return tblProductosAgr;
     }
 
-    public void setTblProductosAgr(javax.swing.JTable tblProductosAgr) {
-        this.tblProductosAgr = tblProductosAgr;
+    public javax.swing.JLabel getLblRegistrosDetalles() {
+        return lblRegistrosDetalles;
     }
+    
     
 }

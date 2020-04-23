@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import controlador.CajaControlador;
 import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
@@ -16,8 +17,8 @@ import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
 import modelo.ClienteModelo;
 import modelo.TrabajadorModelo;
-import modelo.inventarioModelo;
-import modelo.proveedorModelo;
+import modelo.InventarioModelo;
+import modelo.ProveedorModelo;
 
 /**
  *
@@ -26,7 +27,7 @@ import modelo.proveedorModelo;
 public class FrmPrincipal extends javax.swing.JFrame {
 
     //Instancias
-    private ClassTrabajador breteador;
+    private ClassTrabajador trabajador;
     private TrabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
     private DlgCategorias dlgCateg;
@@ -36,11 +37,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private DlgCliente dlgCli;
 
     private ClassProveedor proveedor;
-    private proveedorModelo provModelo;
+    private ProveedorModelo provModelo;
     private DlgProveedores dlgprov;
 
     private ClassProducto producto;
-    private inventarioModelo invenModelo;
+    private InventarioModelo invenModelo;
     private DlgInventario dlginve;
 
     public FrmPrincipal() {
@@ -49,7 +50,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         this.trabModelo = new TrabajadorModelo();
-        this.breteador = new ClassTrabajador();
+        this.trabajador = new ClassTrabajador();
 
         this.dlgTrab = new DlgTrabajadores(null, true);
         this.dlgCateg = new DlgCategorias(null, true);
@@ -58,14 +59,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.cliente = new ClassCliente();
         this.dlgCli = new DlgCliente(null, true);
 
-        this.provModelo = new proveedorModelo();
+        this.provModelo = new ProveedorModelo();
         this.proveedor = new ClassProveedor();
         this.dlgprov = new DlgProveedores(null, true);
 
-        this.invenModelo = new inventarioModelo();
+        this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(null, true);
-
     }
 
     /**
@@ -337,7 +337,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
 
         TrabajadorControlador trabControl = new TrabajadorControlador(this, dlgTrab,
-                breteador, trabModelo);
+                trabajador, trabModelo);
         trabControl.inciarVista("Trabajadores");
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
@@ -371,14 +371,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
         FrmVentas caja = new FrmVentas(this, true);
-        caja.setVisible(true);
-
+        CajaControlador controlador = new CajaControlador(caja);
+        controlador.iniciarVista();
     }//GEN-LAST:event_btnCajaActionPerformed
 
     private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
-        
-        
-        
+
+
     }//GEN-LAST:event_btnFacturasActionPerformed
 
     /**
