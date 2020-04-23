@@ -5,13 +5,14 @@
  */
 package Vista;
 
-import controlador.CajaControladorMontos;
+import controlador.CajaControlador;
 import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
 import controlador.InventarioControlador;
 import logicaClass.ClassCliente;
+import logicaClass.ClassDetallesFactura;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
@@ -27,7 +28,7 @@ import modelo.ProveedorModelo;
 public class FrmPrincipal extends javax.swing.JFrame {
 
     //Instancias
-    private ClassTrabajador breteador;
+    private ClassTrabajador trabajador;
     private TrabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
     private DlgCategorias dlgCateg;
@@ -50,7 +51,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         this.trabModelo = new TrabajadorModelo();
-        this.breteador = new ClassTrabajador();
+        this.trabajador = new ClassTrabajador();
 
         this.dlgTrab = new DlgTrabajadores(null, true);
         this.dlgCateg = new DlgCategorias(null, true);
@@ -66,7 +67,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(null, true);
-
     }
 
     /**
@@ -338,7 +338,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
 
         TrabajadorControlador trabControl = new TrabajadorControlador(this, dlgTrab,
-                breteador, trabModelo);
+                trabajador, trabModelo);
         trabControl.inciarVista("Trabajadores");
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
@@ -372,7 +372,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
         FrmVentas caja = new FrmVentas(this, true);
-        CajaControladorMontos controlador = new CajaControladorMontos(caja);
+        CajaControlador controlador = new CajaControlador(caja);
         controlador.iniciarVista();
     }//GEN-LAST:event_btnCajaActionPerformed
 

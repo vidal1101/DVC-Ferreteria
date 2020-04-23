@@ -58,7 +58,6 @@ public class ClassCliente implements Serializable {
      * @param nombreCli
      * @param telefonoCli
      * @param emailCli
-     * @param direccionCli
      */
     public ClassCliente(int cedulaCli, String nombreCli, String telefonoCli, 
             String emailCli) {

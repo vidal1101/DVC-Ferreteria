@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
 import java.sql.CallableStatement;
@@ -5,20 +10,21 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Carlos Mairena
+ * @author Dixiana, Carlos y Vidal
  */
-public class CajaModelo {
+public class CajaModeloVidal {
 
-    /**
-     * metodo para modificar el stock
-     *
-     * @param id el id del producto seleccionado
-     * @param operacion la 1 suma , 2 resta
+    
+    
+    /***
+     * metodo para modificar el stock 
+     * @param id el id del producto seleccionado 
+     * @param operacion la 1 suma , 2 resta 
      * @param valor lo que usuario toma del stock
-     * @return la funcion hecha en la base de datos
+     * @return la funcion hecha en la base de datos 
      */
     public boolean modificarStock(int id, int operacion, int valor) {
-        System.out.println("id " + id + " operacion " + operacion + " valor " + valor);
+        System.out.println("id "+id+" operacion "+operacion+" valor "+valor);
         Conexion con = new Conexion();
         try {
             System.out.println("Abrriendo conexión");
@@ -41,6 +47,7 @@ public class CajaModelo {
         } finally {
             con.desconectar();
         }
+
     }
 
 }
