@@ -197,11 +197,6 @@ public class FrmVentas extends javax.swing.JDialog {
         jButton7.setDefaultCapable(false);
         jButton7.setFocusPainted(false);
         jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 150, 40));
 
         jButton8.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -249,11 +244,6 @@ public class FrmVentas extends javax.swing.JDialog {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Hogar ");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Jardin");
@@ -280,11 +270,6 @@ public class FrmVentas extends javax.swing.JDialog {
         menVentas.add(jMenuItem7);
 
         jMenuItem8.setText("Ventas por Semana");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
         menVentas.add(jMenuItem8);
 
         jMenuBar1.add(menVentas);
@@ -292,11 +277,6 @@ public class FrmVentas extends javax.swing.JDialog {
         menHistorial.setText("Historial");
 
         jMenuItem9.setText("Facturas Anuladas");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
         menHistorial.add(jMenuItem9);
 
         jMenuBar1.add(menHistorial);
@@ -314,22 +294,6 @@ public class FrmVentas extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -380,7 +344,7 @@ public class FrmVentas extends javax.swing.JDialog {
     public javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFacturar;
-    private javax.swing.JButton btnImprimir;
+    public javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnQuitarPro;
     private javax.swing.JButton btnQuitarTodo;
     private javax.swing.JButton btnSalir;
@@ -497,16 +461,8 @@ public class FrmVentas extends javax.swing.JDialog {
         return tblProductosAgr;
     }
 
-    public void setTblProductosAgr(javax.swing.JTable tblProductosAgr) {
-        this.tblProductosAgr = tblProductosAgr;
-    }
-
     public javax.swing.JLabel getLblRegistrosDetalles() {
         return lblRegistrosDetalles;
-    }
-
-    public void setLblRegistrosDetalles(javax.swing.JLabel lblRegistrosDetalles) {
-        this.lblRegistrosDetalles = lblRegistrosDetalles;
     }
     
     

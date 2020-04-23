@@ -1,4 +1,6 @@
-
+/**
+ * Arreglar los atributos de esta clase por su herencia
+ */
 package logicaClass;
 
 import java.io.Serializable;
@@ -97,7 +99,7 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
         this.factura = factura;
         this.descuento = descuento;
         this.NombProducto=nomProducto;
-        this.idProd=idProduto;
+        this.idProd = idProduto;
     }
 
     /**
@@ -107,7 +109,7 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
         this.idDetalleFact = 0;
         this.cantidadProd = 0;
         this.subtotal = 0.0;
-        this.factura = factura;
+        this.factura = null;
         this.descuento = 0;
         this.NombProducto="";
         this.idProd=0;
@@ -131,11 +133,5 @@ public class ClassDetallesFactura extends ClassProducto implements Serializable 
         this.descuento = descuento;
         this.idProd = idProd;
     }
-
-   
-    
-    
-    
-    
  
 }

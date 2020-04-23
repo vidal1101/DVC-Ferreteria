@@ -32,7 +32,7 @@ public class TrabajadorModelo {
             cst.setString(2, contrasenia);
             cst.registerOutParameter(3, java.sql.Types.BOOLEAN);
             cst.execute();
-            
+
             return cst.getBoolean(3);
         } catch (SQLException e) {
 
@@ -56,7 +56,7 @@ public class TrabajadorModelo {
         Conexion con = new Conexion();
 
         try {
-            
+
             System.out.println("Abrriendo conexión");
             con.conectar();
             CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarTrabajador(?,?,?,?,?,?,?,?)}");
@@ -169,6 +169,27 @@ public class TrabajadorModelo {
             return false;
         } finally {
             con.desconectar();
+        }
+    }
+
+    public ResultSet BuscarTrabajador(String dato) {
+
+        Conexion con = new Conexion();
+        ResultSet s = null;
+
+        try {
+
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{call pa_buscarTrabajador(?)}");
+            cst.setString(1, dato);
+            s = cst.executeQuery();
+
+            return s;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error al intentar llamar procedimiento");
+            return s;
         }
     }
 

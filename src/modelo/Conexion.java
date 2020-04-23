@@ -15,7 +15,7 @@ public class Conexion {
 
     private final String base = "Ferreteria-DVC";
     private final String user = "root";
-    private final String password = "Runo1101";
+    private final String password = "Lbrtr2m20!";
     private final String url = "jdbc:mysql://localhost/" + base + "?useSSL=false&serverTimezone=UTC";
 
     private Connection con;

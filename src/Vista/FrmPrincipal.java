@@ -5,14 +5,13 @@
  */
 package Vista;
 
-import controlador.CajaControladorVidal;
+import controlador.CajaControlador;
 import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
 import controlador.InventarioControlador;
 import logicaClass.ClassCliente;
-import logicaClass.ClassDetallesFactura;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
@@ -28,7 +27,7 @@ import modelo.ProveedorModelo;
 public class FrmPrincipal extends javax.swing.JFrame {
 
     //Instancias
-    private ClassTrabajador breteador;
+    private ClassTrabajador trabajador;
     private TrabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
     private DlgCategorias dlgCateg;
@@ -44,17 +43,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private ClassProducto producto;
     private InventarioModelo invenModelo;
     private DlgInventario dlginve;
-    
-    private FrmVentas ventas;
-    private ClassDetallesFactura detalleFact;
-    
+
     public FrmPrincipal() {
         //super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
 
         this.trabModelo = new TrabajadorModelo();
-        this.breteador = new ClassTrabajador();
+        this.trabajador = new ClassTrabajador();
 
         this.dlgTrab = new DlgTrabajadores(null, true);
         this.dlgCateg = new DlgCategorias(null, true);
@@ -70,10 +66,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(null, true);
-        
-        this.ventas = new FrmVentas(null, true);
-        this.detalleFact= new ClassDetallesFactura();
-
     }
 
     /**
@@ -345,7 +337,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
 
         TrabajadorControlador trabControl = new TrabajadorControlador(this, dlgTrab,
-                breteador, trabModelo);
+                trabajador, trabModelo);
         trabControl.inciarVista("Trabajadores");
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
@@ -378,15 +370,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
-     CajaControladorVidal controlCaja = new CajaControladorVidal(this, ventas, detalleFact);
-     controlCaja.iniciarVista("Caja");
-
+        FrmVentas caja = new FrmVentas(this, true);
+        CajaControlador controlador = new CajaControlador(caja);
+        controlador.iniciarVista();
     }//GEN-LAST:event_btnCajaActionPerformed
 
     private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
-        
-        
-        
+
+
     }//GEN-LAST:event_btnFacturasActionPerformed
 
     /**

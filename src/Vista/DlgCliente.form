@@ -156,6 +156,13 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnBuscar">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="400" y="10" width="50" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnlDos">
@@ -191,6 +198,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="lblNombreCli">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="Nombre:"/>
                   </Properties>
                   <Constraints>
@@ -201,6 +209,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblCedulaCli">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="C&#xe9;dula:"/>
                   </Properties>
                   <Constraints>
@@ -211,6 +220,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTelefonoCli">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
                   </Properties>
                   <Constraints>
@@ -221,6 +231,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblEmailCli">
                   <Properties>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="Email:"/>
                   </Properties>
                   <Constraints>
@@ -252,9 +263,8 @@
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="txtTelefonoCli">
                   <Properties>
-                    <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                      <Format format="+506-####-####" subtype="-1" type="5"/>
-                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
+                    <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
