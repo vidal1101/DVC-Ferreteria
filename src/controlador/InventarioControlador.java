@@ -330,7 +330,7 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
      */
     private void mostrartabla(ResultSet rs) {
         // Títulos
-        String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
+        String[] title = {"ID", "Proveedor", "Categoria", "Nombre Prod ", "Precio", "Descuento", "Venta por",
             "Stock", "Frágil", "Descripción"};
         modeloInvent = new DefaultTableModel(null, title) {
 

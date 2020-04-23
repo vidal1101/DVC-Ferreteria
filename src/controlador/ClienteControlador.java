@@ -84,6 +84,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             this.clear();
             this.dlgCli.getPanCliente().setEnabledAt(1, true);
             this.dlgCli.getPanCliente().setEnabledAt(0, false);
+            this.dlgCli.getTxtCedulaCli().setEditable(true);
             this.opc = 1;
             this.dlgCli.getTxtCedulaCli().setEnabled(true);
             this.dlgCli.getPanCliente().setSelectedIndex(1);

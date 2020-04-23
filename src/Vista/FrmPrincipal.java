@@ -5,12 +5,14 @@
  */
 package Vista;
 
+import controlador.CajaControladorVidal;
 import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
 import controlador.InventarioControlador;
 import logicaClass.ClassCliente;
+import logicaClass.ClassDetallesFactura;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
@@ -42,7 +44,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private ClassProducto producto;
     private InventarioModelo invenModelo;
     private DlgInventario dlginve;
-
+    
+    private FrmVentas ventas;
+    private ClassDetallesFactura detalleFact;
+    
     public FrmPrincipal() {
         //super(parent, modal);
         initComponents();
@@ -65,6 +70,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(null, true);
+        
+        this.ventas = new FrmVentas(null, true);
+        this.detalleFact= new ClassDetallesFactura();
 
     }
 
@@ -370,8 +378,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
-        FrmVentas caja = new FrmVentas(this, true);
-        caja.setVisible(true);
+     CajaControladorVidal controlCaja = new CajaControladorVidal(this, ventas, detalleFact);
+     controlCaja.iniciarVista("Caja");
 
     }//GEN-LAST:event_btnCajaActionPerformed
 
