@@ -77,7 +77,7 @@ public class FrmVentas extends javax.swing.JDialog {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Caja");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -344,7 +344,7 @@ public class FrmVentas extends javax.swing.JDialog {
     public javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFacturar;
-    private javax.swing.JButton btnImprimir;
+    public javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnQuitarPro;
     private javax.swing.JButton btnQuitarTodo;
     private javax.swing.JButton btnSalir;

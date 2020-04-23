@@ -43,6 +43,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         lblTrabajador = new javax.swing.JLabel();
         pnl2 = new javax.swing.JPanel();
         lblRegistrosT = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         pnl3 = new javax.swing.JPanel();
         lblTrabajador2 = new javax.swing.JLabel();
         pnl4 = new javax.swing.JPanel();
@@ -54,10 +55,10 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         cmbPuestoT = new javax.swing.JComboBox<>();
         txtNombreT = new javax.swing.JTextField();
         txtCedulaT = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         txtEmailT = new javax.swing.JTextField();
-        lblEmailT2 = new javax.swing.JLabel();
+        lblEmailT1 = new javax.swing.JLabel();
         txtContrsenia = new javax.swing.JPasswordField();
-        txtTelefonoT = new javax.swing.JTextField();
         btnLimpiarT = new javax.swing.JButton();
         btnGuardarT = new javax.swing.JButton();
         btnCancelarT = new javax.swing.JButton();
@@ -101,6 +102,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl2.add(lblRegistrosT, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 18, 302, -1));
 
         pnl1.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 820, 50));
+        pnl1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 60, 40));
 
         panTrabajador.addTab("Principal", pnl1);
 
@@ -148,13 +150,13 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl5.add(cmbPuestoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 180, -1));
         pnl5.add(txtNombreT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 310, -1));
         pnl5.add(txtCedulaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 310, -1));
-        pnl5.add(txtEmailT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 310, -1));
+        pnl5.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 310, -1));
+        pnl5.add(txtEmailT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 109, 310, 30));
 
-        lblEmailT2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblEmailT2.setText("Contraseña:");
-        pnl5.add(lblEmailT2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 90, 30));
+        lblEmailT1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblEmailT1.setText("Contraseña:");
+        pnl5.add(lblEmailT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 90, 30));
         pnl5.add(txtContrsenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 201, 310, 30));
-        pnl5.add(txtTelefonoT, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 113, 310, 30));
 
         pnl3.add(pnl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 750, 280));
 
@@ -222,6 +224,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblTrabajadores;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarT;
     private javax.swing.JButton btnEliminarT;
     private javax.swing.JButton btnGuardarT;
@@ -233,7 +236,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCedulaT;
     private javax.swing.JLabel lblEmailT;
-    private javax.swing.JLabel lblEmailT2;
+    private javax.swing.JLabel lblEmailT1;
     private javax.swing.JLabel lblNombreT;
     private javax.swing.JLabel lblRegistrosT;
     private javax.swing.JLabel lblTelefonoT;
@@ -250,7 +253,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtContrsenia;
     private javax.swing.JTextField txtEmailT;
     private javax.swing.JTextField txtNombreT;
-    private javax.swing.JTextField txtTelefonoT;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
     
@@ -350,6 +353,14 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         this.txtNombreT = txtNombreT;
     }
 
+    public javax.swing.JTextField getTxtTelefonoT() {
+        return txtTelefono;
+    }
+
+    public void setTxtTelefonoT(javax.swing.JTextField txtTelefonoT) {
+        this.txtTelefono = (JFormattedTextField) txtTelefonoT;
+    }
+
     public javax.swing.JPanel getPnl1() {
         return pnl1;
     }
@@ -378,8 +389,13 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         return txtContrsenia;
     }
 
-    public javax.swing.JTextField getTxtTelefonoT() {
-        return txtTelefonoT;
+    public javax.swing.JButton getBtnBuscar() {
+        return btnBuscar;
     }
 
+    public void setBtnBuscar(javax.swing.JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+    
+    
 }
