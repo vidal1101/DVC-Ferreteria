@@ -481,5 +481,13 @@ public class FrmVentas extends javax.swing.JDialog {
     public javax.swing.JTextField getTxtTotalPagar() {
         return txtTotalPagar;
     }
+
+    public javax.swing.JTable getTblProductosAgr() {
+        return tblProductosAgr;
+    }
+
+    public void setTblProductosAgr(javax.swing.JTable tblProductosAgr) {
+        this.tblProductosAgr = tblProductosAgr;
+    }
     
 }

@@ -139,4 +139,27 @@ public class ClienteModelo {
         }
     }
 
+    public ResultSet BuscarCliente(String dato) {
+
+        System.out.println("Intentando buscar cliente");
+        Conexion con = new Conexion();
+        ResultSet s = null;
+
+        try {
+
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{call pa_buscarCliente(?)}");
+            cst.setString(1, dato);
+            s = cst.executeQuery();
+
+            return s;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error al intentar llamar procedimiento");
+            return s;
+        }
+    }
+    
+    
 }

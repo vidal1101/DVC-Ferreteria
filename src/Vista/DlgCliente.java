@@ -32,6 +32,7 @@ public class DlgCliente extends javax.swing.JDialog {
         tblCliente = new javax.swing.JTable();
         pnlTres = new javax.swing.JPanel();
         lblRegistrosCli = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         pnlDos = new javax.swing.JPanel();
         pnlCuatro = new javax.swing.JPanel();
         lblNombreCli = new javax.swing.JLabel();
@@ -70,7 +71,7 @@ public class DlgCliente extends javax.swing.JDialog {
 
             },
             new String [] {
-
+                "Cédula", "Nombre", "Puesto", "Teléfono", "Email"
             }
         ));
         jScrollPane1.setViewportView(tblCliente);
@@ -82,6 +83,7 @@ public class DlgCliente extends javax.swing.JDialog {
         pnlTres.add(lblRegistrosCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, -1));
 
         pnlUno.add(pnlTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 60));
+        pnlUno.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 50, 40));
 
         panCliente.addTab("Principal", pnlUno);
 
@@ -198,6 +200,7 @@ public class DlgCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarCli;
     private javax.swing.JButton btnEliminarCli;
     private javax.swing.JButton btnGuardarCli;
@@ -343,6 +346,14 @@ public class DlgCliente extends javax.swing.JDialog {
 
     public void setTxtTelefonoCli(JFormattedTextField txtTelefonoCli) {
         this.txtTelefonoCli = txtTelefonoCli;
+    }
+
+    public javax.swing.JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(javax.swing.JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
     }
 
     

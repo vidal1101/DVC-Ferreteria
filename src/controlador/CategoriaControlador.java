@@ -38,6 +38,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
         this.dlgCate.getBtnMasDetalles().addActionListener(this);
         this.dlgCate.getBtnModificarCateg().addActionListener(this);
         this.dlgCate.getBtnRegresar().addActionListener(this);
+        this.dlgCate.getBtnBuscar().addActionListener(this);
     }
 
     @Override
@@ -137,7 +138,11 @@ public class CategoriaControlador implements ActionListener, WindowListener {
                     }
                 }
             }
-        } else if (e.getSource().equals(dlgCate.getBtnCancelar())) {
+        } else if(e.getSource() == dlgCate.getBtnBuscar()){
+            buscar();
+            dlgCate.getTxtFiltroCateg().setText("");
+            
+        }else if (e.getSource().equals(dlgCate.getBtnCancelar())) {
             // Cancelar
             dlgCate.getTbpnCategorias().setSelectedIndex(0);
             dlgCate.getTbpnCategorias().setEnabledAt(0, true);
@@ -351,4 +356,43 @@ public class CategoriaControlador implements ActionListener, WindowListener {
             e.printStackTrace();
         }
     }
+    
+    private void buscar() {
+
+        try {
+            
+            DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                    return false;
+                }
+            };
+
+            String titulos[] = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por", "Stock",
+            "Frágil", "Descripción"};
+            modeloTabla.setColumnIdentifiers(titulos);
+
+            ResultSet rs = modeloCat.BuscarCategorias(dlgCate.getTxtFiltroCateg().getText());
+
+            while (rs.next()) {
+
+                Object nextElement[] = {rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
+                        rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
+
+                modeloTabla.addRow(nextElement);
+            }
+
+            rs.close();
+            System.out.println("RS cerrado");
+            dlgCate.getTblCategorias().setModel(modeloTabla);
+            dlgCate.getLblRegistros().setText("Total de categorias " + modeloTabla.getRowCount());
+
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
+        }
+    }
+
+    
+    
 }

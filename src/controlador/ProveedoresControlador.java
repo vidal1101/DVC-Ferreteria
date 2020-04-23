@@ -49,6 +49,7 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
         this.dlgprov.getBtnEliminar().addActionListener(this);
         this.dlgprov.getBtnLimpiar().addActionListener(this);
         this.dlgprov.getBtnCancelar().addActionListener(this);
+        this.dlgprov.getBtnBuscar().addActionListener(this);
     }
 
     /**
@@ -181,6 +182,9 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
                 JOptionPane.showMessageDialog(dlgprov, "Debe Seleccionar Fila");
             }
 
+        }else{
+            buscar();
+            dlgprov.getTxtBuscar().setText("");
         }
 
     }
@@ -218,6 +222,43 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
         }
     }
 
+    private void buscar() {
+
+        try {
+            
+            DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                    return false;
+                }
+            };
+
+            String titulos[] = {"Cedula", "Nombre", "Telefono", "Email", "Direccion"};
+            modeloTabla.setColumnIdentifiers(titulos);
+
+            ResultSet rs = provModelo.BuscarProveedor(dlgprov.getTxtBuscar().getText());
+
+            while (rs.next()) {
+
+                Object nextElement[] = {rs.getInt(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5)};
+
+                modeloTabla.addRow(nextElement);
+            }
+
+            rs.close();
+            System.out.println("RS cerrado");
+            dlgprov.getTblProveedores().setModel(modeloTabla);
+            dlgprov.getLblRegistros().setText("Total de proveedores: " + modeloTabla.getRowCount());
+
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
+        }
+    }
+    
+    
     @Override
     public void windowOpened(WindowEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

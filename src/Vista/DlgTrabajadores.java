@@ -43,6 +43,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         lblTrabajador = new javax.swing.JLabel();
         pnl2 = new javax.swing.JPanel();
         lblRegistrosT = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
         pnl3 = new javax.swing.JPanel();
         lblTrabajador2 = new javax.swing.JLabel();
         pnl4 = new javax.swing.JPanel();
@@ -101,6 +102,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl2.add(lblRegistrosT, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 18, 302, -1));
 
         pnl1.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 820, 50));
+        pnl1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 60, 40));
 
         panTrabajador.addTab("Principal", pnl1);
 
@@ -222,6 +224,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblTrabajadores;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarT;
     private javax.swing.JButton btnEliminarT;
     private javax.swing.JButton btnGuardarT;
@@ -385,4 +388,14 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     public javax.swing.JPasswordField getTxtContrsenia() {
         return txtContrsenia;
     }
+
+    public javax.swing.JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(javax.swing.JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+    
+    
 }

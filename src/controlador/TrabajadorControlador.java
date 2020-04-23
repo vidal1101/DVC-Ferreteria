@@ -48,6 +48,7 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         this.dlgtrab.getBtnEliminarT().addActionListener(this);
         this.dlgtrab.getBtnLimpiarT().addActionListener(this);
         this.dlgtrab.getBtnCancelarT().addActionListener(this);
+        this.dlgtrab.getBtnBuscar().addActionListener(this);
     }
 
     public TrabajadorControlador(FrmInicioSesion entradaLogin, FrmPrincipal principal) {
@@ -233,6 +234,10 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             this.dlgtrab.getPantrabajador().setEnabledAt(0, true);
             this.dlgtrab.getPantrabajador().setSelectedIndex(0);
             this.dlgtrab.getPantrabajador().setEnabled(true);
+            
+        }else if(e.getSource() == dlgtrab.getBtnBuscar()){
+            buscar();
+            dlgtrab.getTxtBuscarT().setText("");
         }
 
     }
@@ -302,6 +307,44 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         }
     }
 
+    
+    private void buscar() {
+
+        try {
+            
+            DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                    return false;
+                }
+            };
+
+            String titulos[] = {"Cedula", "Nombre", "Puesto", "Email", "Telefono"};
+            modeloTabla.setColumnIdentifiers(titulos);
+
+            ResultSet rs = trabModelo.BuscarTrabajador(dlgtrab.getTxtBuscarT().getText());
+
+            while (rs.next()) {
+
+                Object nextElement[] = {rs.getInt(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getBoolean(6)};
+
+                modeloTabla.addRow(nextElement);
+            }
+
+            rs.close();
+            System.out.println("RS cerrado");
+            dlgtrab.getTblTrabajadores().setModel(modeloTabla);
+            dlgtrab.getLblRegistrosT().setText("Total de trabajadores: " + modeloTabla.getRowCount());
+
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
+        }
+    }
+
+    
     @Override
     public void windowOpened(WindowEvent e) {
 

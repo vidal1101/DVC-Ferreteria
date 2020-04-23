@@ -137,4 +137,27 @@ public class proveedorModelo {
         }
 
     }
+    
+    public ResultSet BuscarProveedor(String dato) {
+
+        System.out.println("Intentando buscar proveedor");
+        Conexion con = new Conexion();
+        ResultSet s = null;
+
+        try {
+
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{call pa_buscarProveedor(?)}");
+            cst.setString(1, dato);
+            s = cst.executeQuery();
+
+            return s;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error al intentar llamar procedimiento");
+            return s;
+        }
+    }
+    
 }

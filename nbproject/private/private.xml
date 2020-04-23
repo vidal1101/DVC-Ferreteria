@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-<<<<<<< HEAD
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/modelo/inventarioModelo.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>89</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/Vista/dlgCategorias.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/modelo/Conexion.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/Vista/DlgTrabajadores.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/Vista/dlgPrincipal.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/controlador/TrabajadorControlador.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/modelo/trabajadorModelo.java</file>
-=======
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/logicaClass/ClassProducto.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/Vista/dlgInventario.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/modelo/inventarioModelo.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/controlador/inventarioControlador.java</file>
->>>>>>> auxiliar
+            <file>file:/C:/Users/dixia/OneDrive%20-%20Universidad%20Técnica%20Nacional/Documentos/NetBeansProjects/DVC-Ferreteria/src/controlador/TrabajadorControlador.java</file>
         </group>
     </open-files>
-=======
->>>>>>> carlos
 </project-private>

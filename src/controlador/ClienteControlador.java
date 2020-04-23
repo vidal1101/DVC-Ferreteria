@@ -49,6 +49,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         this.dlgCli.getBtnEliminarCli().addActionListener(this);
         this.dlgCli.getBtnLimpiarCli().addActionListener(this);
         this.dlgCli.getBtnCancelarCli().addActionListener(this);
+        this.dlgCli.getBtnBuscar().addActionListener(this);
     }
 
     /**
@@ -176,6 +177,10 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             this.dlgCli.getPanCliente().setEnabledAt(0, true);
             this.dlgCli.getPanCliente().setSelectedIndex(0);
             this.dlgCli.getPanCliente().setEnabled(true);
+            
+        }else if(e.getSource() == dlgCli.getBtnBuscar()){
+            buscar();
+            dlgCli.getTxtBuscarCli().setText("");
         }
     }
 
@@ -218,6 +223,45 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
 
     }
 
+    private void buscar() {
+
+        try {
+            
+            DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                    return false;
+                }
+            };
+
+            String titulos[] = {"Cedula", "Nombre", "Telefono", "Email"};
+            modeloTabla.setColumnIdentifiers(titulos);
+
+            ResultSet rs = cliModelo.BuscarCliente(dlgCli.getTxtBuscarCli().getText());
+
+            while (rs.next()) {
+
+                Object nextElement[] = {rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4)};
+
+                modeloTabla.addRow(nextElement);
+            }
+
+            rs.close();
+            System.out.println("RS cerrado");
+            dlgCli.getTblCliente().setModel(modeloTabla);
+            dlgCli.getLblRegistrosCli().setText("Total de clientes: " + modeloTabla.getRowCount());
+
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
+        }
+    }
+    
+    
+    
+    
+    
     @Override
     public void windowOpened(WindowEvent e) {
 

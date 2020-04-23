@@ -45,6 +45,8 @@ public class DlgProveedores extends javax.swing.JDialog {
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnInsertar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
+        lblRegistros = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -95,6 +97,8 @@ public class DlgProveedores extends javax.swing.JDialog {
 
         btnInsertar.setText("Insertar");
         jPanel1.add(btnInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 150, 40));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 50, 30));
+        jPanel1.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 260, -1));
 
         panProveedores.addTab("Proveedores", jPanel1);
 
@@ -306,8 +310,10 @@ public class DlgProveedores extends javax.swing.JDialog {
     public void setBtnEditar(javax.swing.JButton btnEditar) {
         this.btnEditar = btnEditar;
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
@@ -326,6 +332,7 @@ public class DlgProveedores extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblRegistros;
     private javax.swing.JTabbedPane panProveedores;
     private javax.swing.JTable tblProveedores;
     private javax.swing.JTextField txtBuscar;
@@ -335,6 +342,22 @@ public class DlgProveedores extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JFormattedTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(javax.swing.JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
+    public javax.swing.JLabel getLblRegistros() {
+        return lblRegistros;
+    }
+
+    public void setLblRegistros(javax.swing.JLabel lblRegistros) {
+        this.lblRegistros = lblRegistros;
+    }
 
   
 }
