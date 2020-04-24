@@ -32,6 +32,8 @@ public class DlgCliente extends javax.swing.JDialog {
         tblCliente = new javax.swing.JTable();
         pnlTres = new javax.swing.JPanel();
         lblRegistrosCli = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        btnSleccinar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         pnlDos = new javax.swing.JPanel();
         pnlCuatro = new javax.swing.JPanel();
@@ -71,7 +73,7 @@ public class DlgCliente extends javax.swing.JDialog {
 
             },
             new String [] {
-
+                "Cédula", "Nombre", "Puesto", "Teléfono", "Email"
             }
         ));
         jScrollPane1.setViewportView(tblCliente);
@@ -81,6 +83,12 @@ public class DlgCliente extends javax.swing.JDialog {
         pnlTres.setBackground(new java.awt.Color(0, 102, 102));
         pnlTres.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnlTres.add(lblRegistrosCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, -1));
+
+        btnCancelar.setText("Cancelar");
+        pnlTres.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 160, 40));
+
+        btnSleccinar.setText("Seleccionar");
+        pnlTres.add(btnSleccinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 160, 40));
 
         pnlUno.add(pnlTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 60));
         pnlUno.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 50, 40));
@@ -201,12 +209,14 @@ public class DlgCliente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarCli;
     private javax.swing.JButton btnEliminarCli;
     private javax.swing.JButton btnGuardarCli;
     private javax.swing.JButton btnInsertarCli;
     private javax.swing.JButton btnLimpiarCli;
     private javax.swing.JButton btnModificarCli;
+    private javax.swing.JButton btnSleccinar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBuscarCli;
     private javax.swing.JLabel lblCedulaCli;
@@ -354,6 +364,14 @@ public class DlgCliente extends javax.swing.JDialog {
 
     public void setBtnBuscar(javax.swing.JButton btnBuscar) {
         this.btnBuscar = btnBuscar;
+    }
+
+    public javax.swing.JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public javax.swing.JButton getBtnSleccinar() {
+        return btnSleccinar;
     }
 
     

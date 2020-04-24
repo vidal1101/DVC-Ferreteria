@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author User
@@ -60,6 +62,7 @@ public class FrmVentas extends javax.swing.JDialog {
         txtHora = new javax.swing.JTextField();
         lblRegistrosDetalles = new javax.swing.JLabel();
         lblNomTrab = new javax.swing.JLabel();
+        btnModificarDatos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -246,6 +249,9 @@ public class FrmVentas extends javax.swing.JDialog {
         lblNomTrab.setText("Nombre del cajero");
         getContentPane().add(lblNomTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 540, 40));
 
+        btnModificarDatos.setText("Modificar");
+        getContentPane().add(btnModificarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, 190, 40));
+
         jMenu1.setText("Categorias");
 
         jMenuItem1.setText("herramientas ");
@@ -353,6 +359,7 @@ public class FrmVentas extends javax.swing.JDialog {
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFacturar;
     public javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnModificarDatos;
     private javax.swing.JButton btnQuitarPro;
     private javax.swing.JButton btnQuitarTodo;
     private javax.swing.JButton btnSalir;
@@ -478,5 +485,8 @@ public class FrmVentas extends javax.swing.JDialog {
         return lblNomTrab;
     }
     
+    public JButton getBtnModificarDatos() {
+        return btnModificarDatos;
+    }
     
 }

@@ -38,8 +38,8 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
 
         this.modelCli = new DefaultTableModel();
         this.principal = principal;
-        this.dlgCli = dlgCli;
-        this.cliente = cliente;
+        this.dlgCli = new DlgCliente(null, true);
+        this.cliente = new ClassCliente();
         this.cliModelo = cliModelo;
         this.opc = 0;
 //        this.principal.getBtnClientes().addActionListener(this);
@@ -50,6 +50,9 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         this.dlgCli.getBtnLimpiarCli().addActionListener(this);
         this.dlgCli.getBtnCancelarCli().addActionListener(this);
         this.dlgCli.getBtnBuscar().addActionListener(this);
+        
+        dlgCli.getBtnSleccinar().setVisible(false);
+        dlgCli.getBtnCancelar().setVisible(false);
     }
 
     /**
@@ -70,6 +73,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     public void inciarVista(String title) {
         dlgCli.setTitle(title);
         dlgCli.setLocationRelativeTo(null);
+        
         dlgCli.getPanCliente().setSelectedIndex(0);
         System.out.println("Abriendo registros de trabajadores");
         this.mostrartabla(this.cliModelo.mostrarClientes());
@@ -95,6 +99,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             this.clear();
         } else if (e.getSource() == dlgCli.getBtnGuardarCli()) {
 
+            //cliente = new ClassCliente();
             cliente.setCedulaCli(Integer.parseInt(dlgCli.getTxtCedulaCli().getText()));
             cliente.setNombreCli(dlgCli.getTxtNombreCli().getText());
             cliente.setTelefonoCli(dlgCli.getTxtTelefonoCli().getText());
@@ -258,9 +263,6 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
         }
     }
-    
-    
-    
     
     
     @Override

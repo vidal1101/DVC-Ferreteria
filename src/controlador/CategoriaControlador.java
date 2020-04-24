@@ -337,7 +337,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
 
                 //int proveedor = rs.getInt(2);
                 ClassProducto producto = new ClassProducto(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                        rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
+                        rs.getFloat(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
 
                 Object[] objeto = {producto.getIdProducto(), producto.getNombreProd(), producto.getIdProveedor(),
                     categoria, producto.getPrecioProd(), producto.getDescuentProd(), producto.getUnidadVenta(),

@@ -2,6 +2,10 @@ package modelo;
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import logicaClass.ClassFactura;
+import logicaClass.ClassProducto;
 
 /**
  *
@@ -43,4 +47,112 @@ public class CajaModelo {
         }
     }
 
+    /**
+     * Permite insertar una nueva factura, retorna en <br/> su execute el id de la nueva factura para ingresar sus
+     * detalles
+     *
+     * @param factura
+     * @return
+     */
+    public boolean insertarFactura(ClassFactura factura) {
+
+        Conexion con = new Conexion();
+
+        try {
+            System.out.println("Abrriendo conexión");
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarFactura(?,?,?,?,?,?,?,?)}");
+
+            // Inserta los datos principales de la factura
+            cst.setInt(1, factura.getCliente().getCedulaCli());
+            cst.setInt(2, factura.getTrabajador().getCedulaTrab());
+            cst.setString(3, factura.getDireccionEntrega());
+            cst.setDate(4, factura.getFecha());
+            cst.setFloat(5, factura.getTotalPagar());
+            cst.setFloat(6, factura.getSubTotal());
+            cst.setString(7, factura.getEstado());
+            cst.registerOutParameter(8, java.sql.Types.BOOLEAN);
+
+            System.out.println("Insertando datos");
+            ResultSet rs = cst.executeQuery();
+            rs.first();
+            
+            int idFac = rs.getInt(1);
+            System.out.println("Nueva factura N: "+idFac);
+
+            if (cst.getBoolean(8)) {
+
+                // Aquí podría ir un for que inserte los datos de los detalles
+                this.insertarDetalles(con, factura.getDetalleFactura(), idFac);
+            }
+            return cst.getBoolean(8);
+
+        } catch (SQLException e) {
+
+            System.out.println("Error al intentar registrar factura: " + e.getMessage());
+            return false;
+
+        } finally {
+            con.desconectar();
+
+        }
+    }
+
+    /**
+     * Inserta cada detalle de factura
+     *
+     * @param con
+     */
+    private void insertarDetalles(Conexion con, ArrayList<ClassProducto> productos, int idFac) {
+
+        try {
+
+            System.out.println("Intentando enviar los detalles");
+            //con.conectar();
+
+            // Llamamos al metodo que inserta el detalle
+            for (int i = 0; i < productos.size(); i++) {
+
+                CallableStatement inD = con.getCon().prepareCall("{CALL pa_insertarDetallesCompra(?,?,?,?,?,?)}");
+                // El ID de detalle se crea automáticamente
+                inD.setInt(1, idFac); // ID de Factura al que se relacionaran estos productos
+                inD.setInt(2, productos.get(i).getIdProducto());
+                inD.setInt(3, productos.get(i).getCantidad());
+                inD.setInt(4, productos.get(i).getDescuentProd());
+                inD.setFloat(5, productos.get(i).getSubtotal()); // El total calculado por la cantidad de este producto
+                inD.registerOutParameter(6, java.sql.Types.BOOLEAN);
+                
+                inD.execute();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al intentar insertar un detalle: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Llama al método que contiene el select para obtener los datos de la tabla
+     *
+     * @param idProd
+     * @return
+     */
+    public ResultSet mostrarDatos(int idProd) {
+        Conexion con = new Conexion();
+        ResultSet rs = null;
+
+        try {
+            con.conectar();
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarDatosProd(?)}");
+            ps.setInt(1, idProd);
+
+            rs = ps.executeQuery();
+            rs.first();
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Error del mensaje: " + e.getMessage());
+            return rs;
+        }
+    }
 }

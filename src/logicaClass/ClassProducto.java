@@ -1,4 +1,3 @@
-
 package logicaClass;
 
 import java.io.Serializable;
@@ -14,7 +13,8 @@ public class ClassProducto implements Serializable {
     private String nombreProd;
     private String descripcion;
     private int cantidad;
-    private double precioProd;
+    private float precioProd;
+    private float subtotal;
     private boolean prodFragil;
     private int descuentProd;
     private String unidadVenta;
@@ -46,11 +46,11 @@ public class ClassProducto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public double getPrecioProd() {
+    public float getPrecioProd() {
         return precioProd;
     }
 
-    public void setPrecioProd(double precioProd) {
+    public void setPrecioProd(float precioProd) {
         this.precioProd = precioProd;
     }
 
@@ -102,9 +102,25 @@ public class ClassProducto implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public float getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
+    }
+
     /**
      * contructor con todos los atributos
-     * 
+     *
      * @param idProducto
      * @param idProveedor
      * @param idCategoria
@@ -116,7 +132,7 @@ public class ClassProducto implements Serializable {
      * @param prodFragil
      * @param descripcion
      */
-    public ClassProducto(int idProducto, int idProveedor, int idCategoria, String nombreProd, double precioProd,
+    public ClassProducto(int idProducto, int idProveedor, int idCategoria, String nombreProd, float precioProd,
             int descuentProd, String unidadVenta, int cantidad, boolean prodFragil, String descripcion) {
         this.idProducto = idProducto;
         this.nombreProd = nombreProd;
@@ -139,7 +155,7 @@ public class ClassProducto implements Serializable {
         this.nombreProd = "sin nombre";
         this.descripcion = "sin descripción";
         this.cantidad = 0;
-        this.precioProd = 0.0;
+        this.precioProd = 0.0f;
         this.prodFragil = false;
         this.descuentProd = 0;
         this.idCategoria = 0;

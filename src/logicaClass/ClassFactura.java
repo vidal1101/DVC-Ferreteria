@@ -16,7 +16,8 @@ public class ClassFactura implements Serializable {
     private Date fecha;
     private ClassCliente cliente;
     private ClassTrabajador trabajador;
-    private double totalPagar;
+    private float totalPagar;
+    private float subTotal;
     private String direccionEntrega;
     private String Estado;
 
@@ -60,11 +61,11 @@ public class ClassFactura implements Serializable {
         this.trabajador = trabajador;
     }
 
-    public double getTotalPagar() {
+    public float getTotalPagar() {
         return totalPagar;
     }
 
-    public void setTotalPagar(double totalPagar) {
+    public void setTotalPagar(float totalPagar) {
         this.totalPagar = totalPagar;
     }
 
@@ -84,6 +85,28 @@ public class ClassFactura implements Serializable {
         this.Estado = Estado;
     }
 
+    public float getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(float subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public ClassFactura(ArrayList<ClassProducto> detalleFactura, Date fecha, ClassCliente cliente,
+            ClassTrabajador trabajador, float totalPagar, float subTotal, String direccionEntrega) {
+        this.detalleFactura = detalleFactura;
+        this.fecha = fecha;
+        this.cliente = cliente;
+        this.trabajador = trabajador;
+        this.totalPagar = totalPagar;
+        this.subTotal = subTotal;
+        this.direccionEntrega = direccionEntrega;
+        this.Estado = "Facturada";
+    }
+    
+    
+
     /**
      * *
      * contructor con todos los atributos
@@ -96,8 +119,8 @@ public class ClassFactura implements Serializable {
      * @param direccionEntrega
      */
     public ClassFactura(ArrayList<ClassProducto> detalleFactura, Date fecha, ClassCliente cliente,
-            ClassTrabajador trabajador, double totalPagar, String direccionEntrega) {
-        
+            ClassTrabajador trabajador, float totalPagar, String direccionEntrega) {
+
         this.detalleFactura = detalleFactura;
         this.idFactura = 0;
         this.fecha = fecha;
@@ -115,7 +138,7 @@ public class ClassFactura implements Serializable {
         this.fecha = new java.sql.Date(new java.util.Date().getTime());
         this.cliente = new ClassCliente();
         this.trabajador = new ClassTrabajador();
-        this.totalPagar = 0.0;
+        this.totalPagar = 0.0f;
         this.direccionEntrega = "Sin entrega express";
         this.Estado = "Facturada";
     }

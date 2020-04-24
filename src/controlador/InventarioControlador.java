@@ -105,7 +105,7 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
             producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
             producto.setDescuentProd(Integer.parseInt(dlgivent.getTxtDescuentoProductoP().getText()));
             producto.setNombreProd(dlgivent.getTxtNombProductoP().getText());
-            producto.setPrecioProd(Double.valueOf(dlgivent.getTxtPrecProductoP().getText()));
+            producto.setPrecioProd(Float.parseFloat(dlgivent.getTxtPrecProductoP().getText()));
             producto.setProdFragil(dlgivent.getRbdNOfragil().isSelected()
                     || dlgivent.getRbdSIfragil().isSelected());
             producto.setIdProveedor(Integer.parseInt(dlgivent.getTxtIdProveedor().getText()));
@@ -345,7 +345,7 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
                 producto = new ClassProducto();
 
                 this.producto = new ClassProducto(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                        rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
+                        rs.getFloat(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
 
                 Object[] objeto = {producto.getIdProducto(), producto.getIdProveedor(), producto.getIdCategoria(),
                     producto.getNombreProd(), producto.getPrecioProd(), producto.getDescuentProd(),
