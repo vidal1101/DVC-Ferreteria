@@ -11,12 +11,9 @@ import controlador.ClienteControlador;
 import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
 import controlador.InventarioControlador;
-import logicaClass.ClassCliente;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
-import modelo.ClienteModelo;
-import modelo.TrabajadorModelo;
 import modelo.InventarioModelo;
 import modelo.ProveedorModelo;
 
@@ -28,14 +25,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     //Instancias
     private ClassTrabajador trabajador;
-    private TrabajadorModelo trabModelo;
-    private DlgTrabajadores dlgTrab;
     private DlgCategorias dlgCateg;
-
-    private ClassCliente cliente;
-    private ClienteModelo cliModelo;
-    private DlgCliente dlgCli;
-
+    
     private ClassProveedor proveedor;
     private ProveedorModelo provModelo;
     private DlgProveedores dlgprov;
@@ -46,17 +37,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public FrmPrincipal() {
         initComponents();
-        //this.setExtendedState(MAXIMIZED_BOTH);
 
-        this.trabModelo = new TrabajadorModelo();
         this.trabajador = new ClassTrabajador();
 
-        this.dlgTrab = new DlgTrabajadores(null, true);
         this.dlgCateg = new DlgCategorias(null, true);
-
-        this.cliModelo = new ClienteModelo();
-        this.cliente = new ClassCliente();
-        this.dlgCli = new DlgCliente(null, true);
 
         this.provModelo = new ProveedorModelo();
         this.proveedor = new ClassProveedor();
@@ -336,8 +320,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
 
-        TrabajadorControlador trabControl = new TrabajadorControlador(this, dlgTrab,
-                trabajador, trabModelo);
+        TrabajadorControlador trabControl = new TrabajadorControlador(this);
         trabControl.inciarVista("Trabajadores");
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
@@ -356,7 +339,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProveedoresActionPerformed
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        ClienteControlador cliControl = new ClienteControlador(this, dlgCli, cliente, cliModelo);
+        ClienteControlador cliControl = new ClienteControlador(this);
         cliControl.inciarVista("Clientes");
     }//GEN-LAST:event_btnClientesActionPerformed
 
@@ -456,6 +439,4 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public void setTrabajador(ClassTrabajador trabajador) {
         this.trabajador = trabajador;
     }
-    
-
 }

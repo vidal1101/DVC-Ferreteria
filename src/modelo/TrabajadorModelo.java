@@ -66,14 +66,14 @@ public class TrabajadorModelo {
             cst.setString(3, trab.getPuesto());
             cst.setString(4, trab.getTelefonoTrab());
             cst.setString(5, trab.getEmailTrab());
-            cst.setString(6, trab.getContrasenia());
-            cst.setBoolean(7, trab.getAbministrador());
+            cst.setBoolean(6, trab.getAbministrador());
+            cst.setString(7, trab.getContrasenia());
 
             cst.registerOutParameter(8, java.sql.Types.BOOLEAN);
             System.out.println("Insertando datos");
             cst.executeUpdate();
 
-            return cst.getBoolean(7);
+            return cst.getBoolean(8);
 
         } catch (SQLException e) {
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
@@ -172,6 +172,12 @@ public class TrabajadorModelo {
         }
     }
 
+    /**
+     * Permite buscar al trabajador por medio del nombre o cédula
+     *
+     * @param dato
+     * @return
+     */
     public ResultSet BuscarTrabajador(String dato) {
 
         Conexion con = new Conexion();

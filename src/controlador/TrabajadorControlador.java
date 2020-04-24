@@ -11,8 +11,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassTrabajador;
@@ -33,14 +31,12 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     private DefaultTableModel modeloTrab;
     private int opc;
 
-    public TrabajadorControlador(FrmPrincipal principal, DlgTrabajadores dlgtrab, ClassTrabajador trabajador,
-            TrabajadorModelo trabModelo) {
+    public TrabajadorControlador(FrmPrincipal principal) {
 
         this.modeloTrab = new DefaultTableModel();
         this.principal = principal;
-        this.dlgtrab = dlgtrab;
-        this.trabajador = trabajador;
-        this.trabModelo = trabModelo;
+        this.dlgtrab = new DlgTrabajadores(principal, true);
+        this.trabModelo = new TrabajadorModelo();
         this.opc = 0;
 
         this.principal.getBtnTrabajadores().addActionListener(this);
@@ -99,7 +95,6 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                     JOptionPane.ERROR_MESSAGE);
 
             System.out.println(e.getCause());
-            e.printStackTrace();
             return false;
 
         } catch (NumberFormatException es) {
@@ -120,9 +115,9 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
      */
     public void clear() {
         dlgtrab.getTxtCedulaT().setText("");
-        dlgtrab.getTxtEmailT().setText("");
+        dlgtrab.getTxtEmail().setText("");
         dlgtrab.getTxtNombreT().setText("");
-        dlgtrab.getTxtTelefonoT().setText("");
+        dlgtrab.getTxtTelefono().setText("");
         dlgtrab.getCmbPuestoT().setSelectedIndex(0);
     }
 
@@ -151,51 +146,69 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             this.dlgtrab.getPantrabajador().setEnabledAt(1, true);
             this.dlgtrab.getPantrabajador().setEnabledAt(0, false);
             this.opc = 1;
-            this.dlgtrab.getTxtCedulaT().setEnabled(true);
+            this.dlgtrab.getTxtCedulaT().setEditable(true);
             this.dlgtrab.getPantrabajador().setSelectedIndex(1);
 
         } else if (e.getSource() == dlgtrab.getBtnLimpiarT()) {
 
             this.clear();
         } else if (e.getSource() == dlgtrab.getBtnGuardarT()) {
+
             // GUARDAR TRABAJADOR
-            if (!camposVacios()) {
+            if (camposVacios()) {
+
+                this.trabajador = new ClassTrabajador();
                 trabajador.setCedulaTrab(Integer.parseInt(dlgtrab.getTxtCedulaT().getText()));
                 trabajador.setNombreTrab(dlgtrab.getTxtNombreT().getText());
                 trabajador.setPuesto(String.valueOf(dlgtrab.getCmbPuestoT().getSelectedItem()));
-                trabajador.setTelefonoTrab(dlgtrab.getTxtTelefonoT().getText());
-                trabajador.setEmailTrab(dlgtrab.getTxtEmailT().getText());
+                trabajador.setTelefonoTrab(dlgtrab.getTxtTelefono().getText());
+                trabajador.setEmailTrab(dlgtrab.getTxtEmail().getText());
                 trabajador.setAbministrador(abministrador(dlgtrab.getCmbPuestoT().getSelectedIndex()));
 
-                // Encriptamos la contraseña
-                trabajador.setContrasenia(encriptarContrasenia(String.valueOf(dlgtrab.getTxtContrsenia())));
+                // Encriptamos la contraseña si ambas coinciden
+                if (String.valueOf(dlgtrab.getTxtContrsenia().getPassword()).equals(
+                        String.valueOf(dlgtrab.getTxtContrsenia2().getPassword())
+                )) {
 
-                // Revisa si va a editar o guardar
-                if (opc == 1) {
-                    if (trabModelo.insertarTrabajador(trabajador)) {
-                        JOptionPane.showMessageDialog(dlgtrab, "Se inserto con Exito");
-                        this.clear();
-                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                        this.mostrartabla(this.trabModelo.mostrarTrabajadores());
-                        this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+                    trabajador.setContrasenia(encriptarContrasenia(String.valueOf(dlgtrab.getTxtContrsenia())));
+
+                    // Revisa si va a editar o guardar
+                    if (opc == 1) {
+                        if (trabModelo.insertarTrabajador(trabajador)) {
+                            JOptionPane.showMessageDialog(dlgtrab, "Se inserto con Exito");
+                            this.clear();
+                            // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                            this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                            this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+
+                        } else {
+                            JOptionPane.showMessageDialog(dlgtrab, "Usuario ya existente");
+                            this.clear();
+                        }
 
                     } else {
-                        JOptionPane.showMessageDialog(dlgtrab, "Usuario ya existente");
-                        this.clear();
+                        //el metodo de modificar
+                        if (this.trabModelo.modificarTrabajador(trabajador)) {
+
+                            JOptionPane.showMessageDialog(dlgtrab, "Se Modifico el trabajador");
+                            this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                            this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+                            this.dlgtrab.getPantrabajador().setEnabled(true);
+
+                        } else {
+                            JOptionPane.showMessageDialog(dlgtrab, "Error al Modificar ");
+                        }
                     }
 
                 } else {
-                    //el metodo de modificar
-                    if (this.trabModelo.modificarTrabajador(trabajador)) {
-                        JOptionPane.showMessageDialog(dlgtrab, "Se Modifico el trabajador");
-                        this.mostrartabla(this.trabModelo.mostrarTrabajadores());
-                        this.dlgtrab.getPantrabajador().setSelectedIndex(0);
-                        this.dlgtrab.getPantrabajador().setEnabled(true);
-                    } else {
-                        JOptionPane.showMessageDialog(dlgtrab, "Error al Modificar ");
-                    }
 
+                    dlgtrab.getTxtContrsenia().setText("");
+                    dlgtrab.getTxtContrsenia2().setText("");
+                    JOptionPane.showMessageDialog(dlgtrab, "Las contraseñas no coinciden", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
+
+            } else {
+                JOptionPane.showMessageDialog(dlgtrab, "Rellene todos los campos para registrar");
             }
         } //Si ha pulsado eliminar
         else if (e.getSource() == dlgtrab.getBtnEliminarT()) {
@@ -234,8 +247,8 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                 this.dlgtrab.getTxtCedulaT().setEditable(false);
                 this.dlgtrab.getTxtNombreT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 1).toString());
                 this.dlgtrab.getCmbPuestoT().setSelectedItem(dlgtrab.getTblTrabajadores().getValueAt(file, 2).toString());
-                this.dlgtrab.getTxtEmailT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 3).toString());
-                this.dlgtrab.getTxtTelefonoT().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 4).toString());
+                this.dlgtrab.getTxtEmail().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 3).toString());
+                this.dlgtrab.getTxtTelefono().setText(dlgtrab.getTblTrabajadores().getValueAt(file, 4).toString());
 
                 this.opc = 2;
                 this.dlgtrab.getPantrabajador().setSelectedIndex(1);
@@ -329,17 +342,25 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
      *
      */
     private boolean camposVacios() {
-        boolean vacio = true;
 
         if (dlgtrab.getTxtCedulaT().getText().isEmpty()) {
-            vacio = false;
+            return false;
         } else if (dlgtrab.getTxtNombreT().getText().isEmpty()) {
-            vacio = false;
+            return false;
         } else if (dlgtrab.getTxtContrsenia().getPassword().toString().isEmpty()) {
-
+            return false;
+        } else if (dlgtrab.getTxtContrsenia2().getPassword().toString().isEmpty()) {
+            return false;
+        } else if (dlgtrab.getCmbPuestoT().getSelectedIndex() == 0) {
+            return false;
+        } else if (dlgtrab.getTxtEmail().getText().isEmpty()) {
+            return false;
+        } else if (dlgtrab.getTxtTelefono().getText().isEmpty()) {
+            return false;
+        } else {
+            return true;
         }
 
-        return vacio;
     }
 
     /**

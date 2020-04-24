@@ -30,7 +30,7 @@ public class DlgCliente extends javax.swing.JDialog {
         btnEliminarCli = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
-        pnlTres = new javax.swing.JPanel();
+        pnlOpciones = new javax.swing.JPanel();
         lblRegistrosCli = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnSleccinar = new javax.swing.JButton();
@@ -80,17 +80,17 @@ public class DlgCliente extends javax.swing.JDialog {
 
         pnlUno.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 760, 250));
 
-        pnlTres.setBackground(new java.awt.Color(0, 102, 102));
-        pnlTres.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlTres.add(lblRegistrosCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, -1));
+        pnlOpciones.setBackground(new java.awt.Color(0, 102, 102));
+        pnlOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlOpciones.add(lblRegistrosCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, -1));
 
         btnCancelar.setText("Cancelar");
-        pnlTres.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 160, 40));
+        pnlOpciones.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 160, 40));
 
         btnSleccinar.setText("Seleccionar");
-        pnlTres.add(btnSleccinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 160, 40));
+        pnlOpciones.add(btnSleccinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 160, 40));
 
-        pnlUno.add(pnlTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 60));
+        pnlUno.add(pnlOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 60));
         pnlUno.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 50, 40));
 
         panCliente.addTab("Principal", pnlUno);
@@ -228,7 +228,7 @@ public class DlgCliente extends javax.swing.JDialog {
     private javax.swing.JPanel pnlCinco;
     private javax.swing.JPanel pnlCuatro;
     private javax.swing.JPanel pnlDos;
-    private javax.swing.JPanel pnlTres;
+    private javax.swing.JPanel pnlOpciones;
     private javax.swing.JPanel pnlUno;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTextField txtBuscarCli;
@@ -374,8 +374,7 @@ public class DlgCliente extends javax.swing.JDialog {
         return btnSleccinar;
     }
 
-    
-
-
-
+    public javax.swing.JPanel getPnlOpciones() {
+        return pnlOpciones;
+    }
 }

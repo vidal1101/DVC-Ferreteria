@@ -41,8 +41,6 @@ public class CajaControlador implements PropertyChangeListener, ActionListener {
     private DlgCliente dlgCli;
     private java.util.Date fecha;
     private DlgModificarDatos dlgMofidicaCantidad;
-    private int ced;
-    private String name;
     private int cantidad;
 
     public CajaControlador(FrmVentas ventanaVentas, ClassTrabajador trabajador) {
@@ -61,9 +59,6 @@ public class CajaControlador implements PropertyChangeListener, ActionListener {
         this.fecha = new java.util.Date();
         this.dlgMofidicaCantidad = new DlgModificarDatos(null, true);
 
-        this.dlgCli.getBtnSleccinar().setVisible(true);
-        this.dlgCli.getBtnCancelar().setVisible(true);
-
         this.ventanaVentas.getBtnAnadirProd().addActionListener(this);
         this.ventanaVentas.getBtnCliente().addActionListener(this);
         this.ventanaVentas.getBtnQuitarPro().addActionListener(this);
@@ -73,8 +68,6 @@ public class CajaControlador implements PropertyChangeListener, ActionListener {
         this.ventanaVentas.getBtnModificarDatos().addActionListener(this);
         this.mostrador.getBtnSeleccionar().addActionListener(this);
         this.mostrador.getBtnCancelar().addActionListener(this);
-        this.dlgCli.getBtnSleccinar().addActionListener(this);
-        this.dlgCli.getBtnCancelar().addActionListener(this);
         this.dlgMofidicaCantidad.getBtnConfirmarCambios().addActionListener(this);
 
     }
@@ -139,38 +132,20 @@ public class CajaControlador implements PropertyChangeListener, ActionListener {
                 this.facturar();
             }
 
-        } else if (e.getSource() == dlgCli.getBtnSleccinar()) {
-            System.out.println("selecciona");
+        } else if (e.getSource() == ventanaVentas.getBtnCliente()) {
 
-            fila = dlgCli.getTblCliente().getSelectedRow();
+            dlgCli = new DlgCliente(null, true);
 
-            if (fila != -1) {
+            ClienteControlador cliControl = new ClienteControlador(null);
+            cliControl.inciarVista("Seleccionar Cliente");
+            // Selecciona al cliente
+            if (cliControl.isSelecciono()) {
 
-                cliente = new ClassCliente(Integer.parseInt(dlgCli.getTblCliente().getValueAt(fila, 0).toString()),
-                        dlgCli.getTblCliente().getValueAt(fila, 1).toString(),
-                        dlgCli.getTblCliente().getValueAt(fila, 2).toString(),
-                        dlgCli.getTblCliente().getValueAt(fila, 3).toString());
+                cliente = cliControl.getCliente();
 
                 ventanaVentas.getTxtNombreCliente().setText(cliente.getNombreCli());
                 ventanaVentas.getTxtIdCliente().setText(String.valueOf(cliente.getCedulaCli()));
-                dlgCli.dispose();
-                
-            } else {
-                JOptionPane.showMessageDialog(ventanaVentas, "Seleccione un cliente");
             }
-
-        } else if (e.getSource() == dlgCli.getBtnCancelar()) {
-
-            System.out.println("cancela");
-            dlgCli.dispose();
-
-        } else if (e.getSource() == ventanaVentas.getBtnCliente()) {
-
-            ClienteControlador cliControl = new ClienteControlador(null, null, cliente, cliModelo);
-            // Hacer un botón que seleccione o una alternativa
-//            this.dlgCli.getBtnSleccinar().setVisible(true);
-//            this.dlgCli.getBtnCancelar().setVisible(true);
-            cliControl.inciarVista("Seleccionar Cliente");
 
         } else if (e.getSource() == ventanaVentas.getBtnAnadirProd()) {
 
@@ -179,7 +154,7 @@ public class CajaControlador implements PropertyChangeListener, ActionListener {
             mostrador.setVisible(true);
 
         } else if (e.getSource() == mostrador.getBtnSeleccionar()) {
-            //a traer ese daot
+            //a traer ese dato
             int file = mostrador.getTblMostrar().getSelectedRow();
             if (file != -1) {
 

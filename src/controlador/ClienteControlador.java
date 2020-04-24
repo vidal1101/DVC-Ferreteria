@@ -30,19 +30,20 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     private DlgCliente dlgCli;
     private ClassCliente cliente;
     private ClienteModelo cliModelo;
-    DefaultTableModel modelCli;
+    private DefaultTableModel modelCli;
     private int opc;
+    private boolean selecciono;
 
-    public ClienteControlador(FrmPrincipal principal, DlgCliente dlgCli, ClassCliente cliente,
-            ClienteModelo cliModelo) {
+    public ClienteControlador(FrmPrincipal principal) {
 
         this.modelCli = new DefaultTableModel();
         this.principal = principal;
         this.dlgCli = new DlgCliente(null, true);
         this.cliente = new ClassCliente();
-        this.cliModelo = cliModelo;
+        this.cliModelo = new ClienteModelo();
+
         this.opc = 0;
-//        this.principal.getBtnClientes().addActionListener(this);
+        this.selecciono = false;
         this.dlgCli.getBtnGuardarCli().addActionListener(this);
         this.dlgCli.getBtnInsertarCli().addActionListener(this);
         this.dlgCli.getBtnModificarCli().addActionListener(this);
@@ -50,9 +51,8 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         this.dlgCli.getBtnLimpiarCli().addActionListener(this);
         this.dlgCli.getBtnCancelarCli().addActionListener(this);
         this.dlgCli.getBtnBuscar().addActionListener(this);
-        
-        dlgCli.getBtnSleccinar().setVisible(false);
-        dlgCli.getBtnCancelar().setVisible(false);
+        this.dlgCli.getBtnSleccinar().addActionListener(this);
+        this.dlgCli.getBtnCancelar().addActionListener(this);
     }
 
     /**
@@ -73,7 +73,13 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     public void inciarVista(String title) {
         dlgCli.setTitle(title);
         dlgCli.setLocationRelativeTo(null);
-        
+
+        if (!dlgCli.getTitle().equals("Seleccionar Cliente")) {
+
+            this.dlgCli.getPnlOpciones().remove(dlgCli.getBtnSleccinar());
+            this.dlgCli.getPnlOpciones().remove(dlgCli.getBtnCancelar());
+        }
+
         dlgCli.getPanCliente().setSelectedIndex(0);
         System.out.println("Abriendo registros de trabajadores");
         this.mostrartabla(this.cliModelo.mostrarClientes());
@@ -83,6 +89,30 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        // SELECCIONA AL CLIENTE
+        if (e.getSource() == dlgCli.getBtnSleccinar()) {
+            System.out.println("selecciona");
+
+            int fila = dlgCli.getTblCliente().getSelectedRow();
+            if (fila != -1) {
+
+                cliente = new ClassCliente(Integer.parseInt(dlgCli.getTblCliente().getValueAt(fila, 0).toString()),
+                        dlgCli.getTblCliente().getValueAt(fila, 1).toString(),
+                        dlgCli.getTblCliente().getValueAt(fila, 2).toString(),
+                        dlgCli.getTblCliente().getValueAt(fila, 3).toString());
+                this.selecciono = true;
+                dlgCli.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(dlgCli, "Seleccione un cliente");
+            }
+
+        } else if (e.getSource() == dlgCli.getBtnCancelar()) {
+
+            System.out.println("cancela");
+            dlgCli.dispose();
+        }
 
         // Aquí solamente comparamos el evento con los componentes del dialog y NO DEL PRINCIPAL
         if (e.getSource() == dlgCli.getBtnInsertarCli()) {
@@ -183,8 +213,8 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             this.dlgCli.getPanCliente().setEnabledAt(0, true);
             this.dlgCli.getPanCliente().setSelectedIndex(0);
             this.dlgCli.getPanCliente().setEnabled(true);
-            
-        }else if(e.getSource() == dlgCli.getBtnBuscar()){
+
+        } else if (e.getSource() == dlgCli.getBtnBuscar()) {
             buscar();
             dlgCli.getTxtBuscarCli().setText("");
         }
@@ -206,7 +236,6 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             }
         };
 
-        
         try {
 
             while (rs.next()) {
@@ -232,7 +261,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     private void buscar() {
 
         try {
-            
+
             DefaultTableModel modeloTabla = new DefaultTableModel() {
 
                 @Override
@@ -249,7 +278,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             while (rs.next()) {
 
                 Object nextElement[] = {rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4)};
+                    rs.getString(4)};
 
                 modeloTabla.addRow(nextElement);
             }
@@ -263,8 +292,7 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
         }
     }
-    
-    
+
     @Override
     public void windowOpened(WindowEvent e) {
 
@@ -313,6 +341,14 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public ClassCliente getCliente() {
+        return cliente;
+    }
+
+    public boolean isSelecciono() {
+        return selecciono;
     }
 
 }
