@@ -1,4 +1,3 @@
-
 package controlador;
 
 import Vista.DlgMostrador;
@@ -52,7 +51,7 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
         this.dlgivent.getBtnLimpiar().addActionListener(this);
         this.dlgivent.getRbdNOfragil().addActionListener(this);
         this.dlgivent.getRbdSIfragil().addActionListener(this);
-        
+
         this.dlgivent.getBtnProveedor().addActionListener(this);
         this.dlgivent.getBtnCategoria().addActionListener(this);
         this.mostrador.getBtnSeleccionar().addActionListener(this);
@@ -95,13 +94,13 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
             this.opc = 1;
             this.dlgivent.getTxtIdProductoP().setText("NO EDITABLE");
             this.dlgivent.getPanInventario().setSelectedIndex(1);
-            
+
         } else if (e.getSource() == dlgivent.getBtnLimpiar()) {
             this.clear();
 
         } else if (e.getSource() == dlgivent.getBtnGuardarProd()) {
 
-            producto.setCantidadStock(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
+            producto.setCantidad(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
             producto.setIdCategoria(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
             producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
             producto.setDescuentProd(Integer.parseInt(dlgivent.getTxtDescuentoProductoP().getText()));
@@ -220,11 +219,11 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
                     mostrador.dispose();
 
                 } else {
-                    
+
                     dlgivent.getTxtIdProveedor().setText(mostrador.getTblMostrar().
                             getValueAt(fila, 0).toString());
                     mostrador.dispose();
-                    
+
                 }
             } else {
                 JOptionPane.showMessageDialog(mostrador, "Seleccione un registro");
@@ -350,7 +349,7 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
 
                 Object[] objeto = {producto.getIdProducto(), producto.getIdProveedor(), producto.getIdCategoria(),
                     producto.getNombreProd(), producto.getPrecioProd(), producto.getDescuentProd(),
-                    producto.getUnidadVenta(), producto.getCantidadStock(), producto.getProdFragil(),
+                    producto.getUnidadVenta(), producto.getCantidad(), producto.getProdFragil(),
                     producto.getDescriProd()};
 
                 modeloInvent.addRow(objeto);

@@ -13,7 +13,7 @@ public class ClassProducto implements Serializable {
     private int idProducto;
     private String nombreProd;
     private String descripcion;
-    private int cantidadStock;
+    private int cantidad;
     private double precioProd;
     private boolean prodFragil;
     private int descuentProd;
@@ -94,12 +94,12 @@ public class ClassProducto implements Serializable {
         this.unidadVenta = unidadVenta;
     }
 
-    public int getCantidadStock() {
-        return cantidadStock;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setCantidadStock(int cantidadStock) {
-        this.cantidadStock = cantidadStock;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     /**
@@ -112,16 +112,16 @@ public class ClassProducto implements Serializable {
      * @param precioProd
      * @param descuentProd
      * @param unidadVenta
-     * @param cantidadStock
+     * @param cantidad
      * @param prodFragil
      * @param descripcion
      */
     public ClassProducto(int idProducto, int idProveedor, int idCategoria, String nombreProd, double precioProd,
-            int descuentProd, String unidadVenta, int cantidadStock, boolean prodFragil, String descripcion) {
+            int descuentProd, String unidadVenta, int cantidad, boolean prodFragil, String descripcion) {
         this.idProducto = idProducto;
         this.nombreProd = nombreProd;
         this.descripcion = descripcion;
-        this.cantidadStock = cantidadStock;
+        this.cantidad = cantidad;
         this.precioProd = precioProd;
         this.prodFragil = prodFragil;
         this.descuentProd = descuentProd;
@@ -138,7 +138,7 @@ public class ClassProducto implements Serializable {
         this.idProducto = 0;
         this.nombreProd = "sin nombre";
         this.descripcion = "sin descripción";
-        this.cantidadStock = 0;
+        this.cantidad = 0;
         this.precioProd = 0.0;
         this.prodFragil = false;
         this.descuentProd = 0;

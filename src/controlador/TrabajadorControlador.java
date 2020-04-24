@@ -11,6 +11,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassTrabajador;
@@ -19,7 +21,7 @@ import modelo.TrabajadorModelo;
 
 /**
  *
- * @author Maria, Carlos y Vidal
+ * @author Dixiana, Carlos y Vidal
  */
 public class TrabajadorControlador implements ActionListener, WindowListener, KeyListener {
 
@@ -61,20 +63,29 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     /**
      * Inicia sesión
      *
-     * @param cedula
-     * @param contrasenia
      * @return
      */
     public boolean iniciarSesion() {
 
         try {
-            
+
             int cedula = Integer.parseInt(entradaLogin.getTxtUsuario().getText());
             String cocinada = encriptarContrasenia(String.valueOf(entradaLogin.getTxtContrasenia().getPassword()));
 
-            if (trabModelo.iniciarSesion(cedula, cocinada)) {
+            // Traemos el usuario que se ubica en la BD
+            ResultSet rs = trabModelo.iniciarSesion(cedula, cocinada);
 
+            if (rs.getInt(1) != 0) {
+
+                this.trabajador = new ClassTrabajador(rs.getInt(1),
+                        rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getBoolean(6));
+
+                System.out.println("Sesion exitosa");
+                principal.setTrabajador(trabajador);
                 principal.setVisible(true);
+                rs.close();
+
                 return true;
 
             } else {
@@ -88,18 +99,24 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
                     JOptionPane.ERROR_MESSAGE);
 
             System.out.println(e.getCause());
+            e.printStackTrace();
             return false;
 
-        } catch (NumberFormatException es){
-            JOptionPane.showMessageDialog(entradaLogin, "Formato de cédula incorrecto", "Cédula incorrecta",
+        } catch (NumberFormatException es) {
+            JOptionPane.showMessageDialog(entradaLogin, "Formato de cédula incorrecto\n"
+                    + "No coloque guiones o espacios", "Cédula incorrecta",
                     JOptionPane.ERROR_MESSAGE);
+
+            return false;
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar extraer los datos del trabajador: " + ex.getMessage());
             return false;
         }
-
     }
 
     /**
      * Limpia los datos del registro
+     *
      */
     public void clear() {
         dlgtrab.getTxtCedulaT().setText("");
@@ -107,7 +124,6 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         dlgtrab.getTxtNombreT().setText("");
         dlgtrab.getTxtTelefonoT().setText("");
         dlgtrab.getCmbPuestoT().setSelectedIndex(0);
-
     }
 
     /**
@@ -143,42 +159,43 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             this.clear();
         } else if (e.getSource() == dlgtrab.getBtnGuardarT()) {
             // GUARDAR TRABAJADOR
-            
-            trabajador.setCedulaTrab(Integer.parseInt(dlgtrab.getTxtCedulaT().getText()));
-            trabajador.setNombreTrab(dlgtrab.getTxtNombreT().getText());
-            trabajador.setPuesto(String.valueOf(dlgtrab.getCmbPuestoT().getSelectedItem()));
-            trabajador.setTelefonoTrab(dlgtrab.getTxtTelefonoT().getText());
-            trabajador.setEmailTrab(dlgtrab.getTxtEmailT().getText());
-            trabajador.setAbministrador(abministrador(dlgtrab.getCmbPuestoT().getSelectedIndex()));
+            if (!camposVacios()) {
+                trabajador.setCedulaTrab(Integer.parseInt(dlgtrab.getTxtCedulaT().getText()));
+                trabajador.setNombreTrab(dlgtrab.getTxtNombreT().getText());
+                trabajador.setPuesto(String.valueOf(dlgtrab.getCmbPuestoT().getSelectedItem()));
+                trabajador.setTelefonoTrab(dlgtrab.getTxtTelefonoT().getText());
+                trabajador.setEmailTrab(dlgtrab.getTxtEmailT().getText());
+                trabajador.setAbministrador(abministrador(dlgtrab.getCmbPuestoT().getSelectedIndex()));
 
-            // Encriptamos la contraseña
-            trabajador.setContrasenia(encriptarContrasenia(String.valueOf(dlgtrab.getTxtContrsenia())));
+                // Encriptamos la contraseña
+                trabajador.setContrasenia(encriptarContrasenia(String.valueOf(dlgtrab.getTxtContrsenia())));
 
-            // Revisa si va a editar o guardar
-            if (opc == 1) {
-                if (trabModelo.insertarTrabajador(trabajador)) {
-                    JOptionPane.showMessageDialog(dlgtrab, "Se inserto con Exito");
-                    this.clear();
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());
-                    this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+                // Revisa si va a editar o guardar
+                if (opc == 1) {
+                    if (trabModelo.insertarTrabajador(trabajador)) {
+                        JOptionPane.showMessageDialog(dlgtrab, "Se inserto con Exito");
+                        this.clear();
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                        this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgtrab, "Usuario ya existente");
+                        this.clear();
+                    }
 
                 } else {
-                    JOptionPane.showMessageDialog(dlgtrab, "Usuario ya existente");
-                    this.clear();
-                }
+                    //el metodo de modificar
+                    if (this.trabModelo.modificarTrabajador(trabajador)) {
+                        JOptionPane.showMessageDialog(dlgtrab, "Se Modifico el trabajador");
+                        this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                        this.dlgtrab.getPantrabajador().setSelectedIndex(0);
+                        this.dlgtrab.getPantrabajador().setEnabled(true);
+                    } else {
+                        JOptionPane.showMessageDialog(dlgtrab, "Error al Modificar ");
+                    }
 
-            } else {
-                //el metodo de modificar
-                if (this.trabModelo.modificarTrabajador(trabajador)) {
-                    JOptionPane.showMessageDialog(dlgtrab, "Se Modifico el trabajador");
-                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());
-                    this.dlgtrab.getPantrabajador().setSelectedIndex(0);
-                    this.dlgtrab.getPantrabajador().setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(dlgtrab, "Error al Modificar ");
                 }
-
             }
         } //Si ha pulsado eliminar
         else if (e.getSource() == dlgtrab.getBtnEliminarT()) {
@@ -234,8 +251,8 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             this.dlgtrab.getPantrabajador().setEnabledAt(0, true);
             this.dlgtrab.getPantrabajador().setSelectedIndex(0);
             this.dlgtrab.getPantrabajador().setEnabled(true);
-            
-        }else if(e.getSource() == dlgtrab.getBtnBuscar()){
+
+        } else if (e.getSource() == dlgtrab.getBtnBuscar()) {
             buscar();
             dlgtrab.getTxtBuscarT().setText("");
         }
@@ -307,11 +324,31 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         }
     }
 
-    
+    /**
+     * Verifica si hay campos vacíos
+     *
+     */
+    private boolean camposVacios() {
+        boolean vacio = true;
+
+        if (dlgtrab.getTxtCedulaT().getText().isEmpty()) {
+            vacio = false;
+        } else if (dlgtrab.getTxtNombreT().getText().isEmpty()) {
+            vacio = false;
+        } else if (dlgtrab.getTxtContrsenia().getPassword().toString().isEmpty()) {
+
+        }
+
+        return vacio;
+    }
+
+    /**
+     * Método que permite buscar al trabajador por medio de su cédula y nombre
+     */
     private void buscar() {
 
         try {
-            
+
             DefaultTableModel modeloTabla = new DefaultTableModel() {
 
                 @Override
@@ -328,8 +365,8 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
             while (rs.next()) {
 
                 Object nextElement[] = {rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getBoolean(6)};
+                    rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getString(5), rs.getBoolean(6)};
 
                 modeloTabla.addRow(nextElement);
             }
@@ -344,7 +381,6 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         }
     }
 
-    
     @Override
     public void windowOpened(WindowEvent e) {
 

@@ -1,6 +1,7 @@
 package Vista;
 
 import controlador.TrabajadorControlador;
+import logicaClass.ClassTrabajador;
 
 /**
  *
@@ -8,7 +9,9 @@ import controlador.TrabajadorControlador;
  */
 public class FrmInicioSesion extends javax.swing.JFrame {
 
-    FrmPrincipal principal;
+    private FrmPrincipal principal;
+    private ClassTrabajador trabajador;
+    
     /**
      * Creates new form dlgInicio_Sesion
      */

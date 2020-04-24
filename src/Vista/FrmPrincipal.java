@@ -12,7 +12,6 @@ import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
 import controlador.InventarioControlador;
 import logicaClass.ClassCliente;
-import logicaClass.ClassDetallesFactura;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
@@ -46,9 +45,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private DlgInventario dlginve;
 
     public FrmPrincipal() {
-        //super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
+        //this.setExtendedState(MAXIMIZED_BOTH);
 
         this.trabModelo = new TrabajadorModelo();
         this.trabajador = new ClassTrabajador();
@@ -329,6 +327,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -372,7 +371,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
 
         FrmVentas caja = new FrmVentas(this, true);
-        CajaControlador controlador = new CajaControlador(caja);
+        System.out.println("Trabajador: " + trabajador.getNombreTrab());
+        CajaControlador controlador = new CajaControlador(caja, trabajador);
         controlador.iniciarVista();
     }//GEN-LAST:event_btnCajaActionPerformed
 
@@ -401,10 +401,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         //</editor-fold>
         //</editor-fold>
 
@@ -456,5 +452,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton getBtnTrabajadores() {
         return btnTrabajadores;
     }
+
+    public void setTrabajador(ClassTrabajador trabajador) {
+        this.trabajador = trabajador;
+    }
+    
 
 }

@@ -18,29 +18,29 @@ public class TrabajadorModelo {
      * @param contrasenia
      * @return true Si los datos son correctos
      */
-    public boolean iniciarSesion(int usuario, String contrasenia) {
+    public ResultSet iniciarSesion(int usuario, String contrasenia) {
 
         Conexion con = new Conexion();
+        ResultSet rs = null;
 
         try {
 
             System.out.println("Abrriendo conexión");
             con.conectar();
 
-            CallableStatement cst = con.getCon().prepareCall("{CALL pa_sesionTrabajador(?,?,?)}");
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_sesionTrabajador(?,?)}");
             cst.setInt(1, usuario);
             cst.setString(2, contrasenia);
-            cst.registerOutParameter(3, java.sql.Types.BOOLEAN);
-            cst.execute();
 
-            return cst.getBoolean(3);
+            rs = cst.executeQuery();
+            rs.first();
+
+            return rs;
+
         } catch (SQLException e) {
 
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
-            return false;
-
-        } finally {
-            con.desconectar();
+            return rs;
         }
 
     }

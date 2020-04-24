@@ -30,7 +30,7 @@ public class InventarioModelo {
             cst.setDouble(4, prod.getPrecioProd());
             cst.setInt(5, prod.getDescuentProd());
             cst.setString(6, prod.getUnidadVenta());
-            cst.setInt(7, prod.getCantidadStock());
+            cst.setInt(7, prod.getCantidad());
             cst.setBoolean(8, prod.getProdFragil());
             cst.setString(9, prod.getDescriProd());
 
@@ -96,7 +96,7 @@ public class InventarioModelo {
             cst.setDouble(5, prod.getPrecioProd());
             cst.setInt(6, prod.getDescuentProd());
             cst.setString(7, prod.getUnidadVenta());
-            cst.setInt(8, prod.getCantidadStock());
+            cst.setInt(8, prod.getCantidad());
             cst.setBoolean(9, prod.getProdFragil());
             cst.setString(10, prod.getDescriProd());
 

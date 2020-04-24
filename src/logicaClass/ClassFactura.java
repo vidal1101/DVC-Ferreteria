@@ -1,9 +1,8 @@
-
 package logicaClass;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -12,8 +11,7 @@ import java.util.Date;
 public class ClassFactura implements Serializable {
 
     //Atributos 
-    
-    private ArrayList<ClassDetallesFactura> detalleFactura;
+    private ArrayList<ClassProducto> detalleFactura;
     private int idFactura;
     private Date fecha;
     private ClassCliente cliente;
@@ -21,15 +19,12 @@ public class ClassFactura implements Serializable {
     private double totalPagar;
     private String direccionEntrega;
     private String Estado;
-   
-    
-    //Setter and Getter
 
-    public ArrayList<ClassDetallesFactura> getDetalleFactura() {
+    public ArrayList<ClassProducto> getDetalleFactura() {
         return detalleFactura;
     }
 
-    public void setDetalleFactura(ArrayList<ClassDetallesFactura> detalleFactura) {
+    public void setDetalleFactura(ArrayList<ClassProducto> detalleFactura) {
         this.detalleFactura = detalleFactura;
     }
 
@@ -88,45 +83,41 @@ public class ClassFactura implements Serializable {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
-    
-    //contructores
 
-    
-    /***
+    /**
+     * *
      * contructor con todos los atributos
+     *
      * @param detalleFactura
-     * @param idFactura
      * @param fecha
      * @param cliente
      * @param trabajador
      * @param totalPagar
      * @param direccionEntrega
-     * @param Estado 
      */
-    public ClassFactura(ArrayList<ClassDetallesFactura> detalleFactura, int idFactura, Date fecha, ClassCliente cliente, ClassTrabajador trabajador, double totalPagar, String direccionEntrega, String Estado) {
+    public ClassFactura(ArrayList<ClassProducto> detalleFactura, Date fecha, ClassCliente cliente,
+            ClassTrabajador trabajador, double totalPagar, String direccionEntrega) {
+        
         this.detalleFactura = detalleFactura;
-        this.idFactura = idFactura;
+        this.idFactura = 0;
         this.fecha = fecha;
         this.cliente = cliente;
         this.trabajador = trabajador;
         this.totalPagar = totalPagar;
         this.direccionEntrega = direccionEntrega;
-        this.Estado = Estado;
+        this.Estado = "Facturada";
     }
 
-    
-    /**
-     * contructor vacio ., inicializado 
-     */
     public ClassFactura() {
-         this.detalleFactura = detalleFactura;
+
+        this.detalleFactura = null;
         this.idFactura = 0;
-        this.fecha = null;
-        this.cliente = cliente;
-        this.trabajador = trabajador;
+        this.fecha = new java.sql.Date(new java.util.Date().getTime());
+        this.cliente = new ClassCliente();
+        this.trabajador = new ClassTrabajador();
         this.totalPagar = 0.0;
-        this.direccionEntrega = "";
-        this.Estado = "";
+        this.direccionEntrega = "Sin entrega express";
+        this.Estado = "Facturada";
     }
-         
+
 }

@@ -59,6 +59,7 @@ public class FrmVentas extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         lblRegistrosDetalles = new javax.swing.JLabel();
+        lblNomTrab = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -79,6 +80,8 @@ public class FrmVentas extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Caja");
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblProductosAgr.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -174,7 +177,7 @@ public class FrmVentas extends javax.swing.JDialog {
         btnAnadirProd.setToolTipText("");
         jPanel4.add(btnAnadirProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 140, 40));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 170, 330));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 130, 160, 330));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Fecha:");
@@ -182,7 +185,7 @@ public class FrmVentas extends javax.swing.JDialog {
 
         txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, 120, 30));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, 130, 30));
 
         jPanel1.setBackground(new java.awt.Color(131, 182, 231));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -224,7 +227,7 @@ public class FrmVentas extends javax.swing.JDialog {
         btnImprimir.setFocusable(false);
         jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 140, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 1030, 60));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 1050, 60));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Hora:");
@@ -232,11 +235,16 @@ public class FrmVentas extends javax.swing.JDialog {
 
         txtHora.setEditable(false);
         txtHora.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
-        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 120, 30));
+        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 130, 30));
 
         lblRegistrosDetalles.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         lblRegistrosDetalles.setText("Registros");
         getContentPane().add(lblRegistrosDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 320, 30));
+
+        lblNomTrab.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblNomTrab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNomTrab.setText("Nombre del cajero");
+        getContentPane().add(lblNomTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 540, 40));
 
         jMenu1.setText("Categorias");
 
@@ -378,6 +386,7 @@ public class FrmVentas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblNomTrab;
     private javax.swing.JLabel lblRegistrosDetalles;
     private javax.swing.JMenu menHistorial;
     private javax.swing.JMenu menTrabajadores;
@@ -463,6 +472,10 @@ public class FrmVentas extends javax.swing.JDialog {
 
     public javax.swing.JLabel getLblRegistrosDetalles() {
         return lblRegistrosDetalles;
+    }
+
+    public javax.swing.JLabel getLblNomTrab() {
+        return lblNomTrab;
     }
     
     

@@ -141,7 +141,7 @@ public class CategoriaModelo {
             CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarProdCategorias(?)}");
             ps.setInt(1, IDTabla);
             rs = ps.executeQuery();
-            rs.first();
+            //rs.first();
             return rs;
 
         } catch (SQLException e) {
