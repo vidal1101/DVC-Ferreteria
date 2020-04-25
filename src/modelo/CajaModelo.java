@@ -1,3 +1,6 @@
+/**
+ * FALTA COMPLETAR ESTA CLASE
+ */
 package modelo;
 
 import java.sql.CallableStatement;
@@ -9,7 +12,7 @@ import logicaClass.ClassProducto;
 
 /**
  *
- * @author Carlos Mairena
+ * @author Dixiana, Carlos y Vidal
  */
 public class CajaModelo {
 
@@ -24,6 +27,7 @@ public class CajaModelo {
     public boolean modificarStock(int id, int operacion, int valor) {
         System.out.println("id " + id + " operacion " + operacion + " valor " + valor);
         Conexion con = new Conexion();
+
         try {
             System.out.println("Abrriendo conexión");
             con.conectar();
@@ -48,7 +52,7 @@ public class CajaModelo {
     }
 
     /**
-     * Permite insertar una nueva factura, retorna en <br/> su execute el id de la nueva factura para ingresar sus
+     * Permite insertar una nueva factura, retorna en <br> su execute el id de la nueva factura para ingresar sus
      * detalles
      *
      * @param factura
@@ -76,16 +80,33 @@ public class CajaModelo {
             System.out.println("Insertando datos");
             ResultSet rs = cst.executeQuery();
             rs.first();
-            
+
             int idFac = rs.getInt(1);
-            System.out.println("Nueva factura N: "+idFac);
+            System.out.println("Nueva factura N: " + idFac);
 
             if (cst.getBoolean(8)) {
 
-                // Aquí podría ir un for que inserte los datos de los detalles
-                this.insertarDetalles(con, factura.getDetalleFactura(), idFac);
+                // Inserta detalles, si ocurrre un error entonces elimina la factura recién creada
+                if (!insertarDetalles(con, factura.getDetalleFactura(), idFac)) {
+
+                    System.out.println("Error al intentar insertar los detalles de factura");
+                    if (eliminarFactura(idFac, con)) {
+
+                        System.out.println("Factura eliminada de la base de datos");
+
+                    } else {
+                        System.out.println("ATENCIÓN: Factura no eliminada, debería ser ANULADA");
+                    }
+
+                    return false;
+
+                } else {
+                    return cst.getBoolean(8);
+                }
+            } else {
+                System.out.println("Error al intentar insertar la factura");
+                return cst.getBoolean(8);
             }
-            return cst.getBoolean(8);
 
         } catch (SQLException e) {
 
@@ -94,6 +115,34 @@ public class CajaModelo {
 
         } finally {
             con.desconectar();
+        }
+    }
+
+    /**
+     * Procedimiento que permite eliminar una factura. <br>
+     * Antes de eliminar la factura se eliminan los detalles y se regresan al stock los productos <br>
+     * que se intentaron comprar.
+     *
+     * @return
+     */
+    private boolean eliminarFactura(int idFactura, Conexion con) {
+
+        // Vamos primero a eliminar los detalles de factura
+        try {
+
+            System.out.println("Abrriendo conexión");
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_eliminarFactura(?,?)}");
+            cst.setInt(1, idFactura);
+            cst.registerOutParameter(2, java.sql.Types.BOOLEAN);
+
+            cst.execute();
+            return cst.getBoolean(1);
+
+        } catch (SQLException e) {
+
+            System.out.println("Error al intentar registrar factura: " + e.getMessage());
+            return false;
 
         }
     }
@@ -103,11 +152,12 @@ public class CajaModelo {
      *
      * @param con
      */
-    private void insertarDetalles(Conexion con, ArrayList<ClassProducto> productos, int idFac) {
+    private boolean insertarDetalles(Conexion con, ArrayList<ClassProducto> productos, int idFac) {
 
         try {
 
             System.out.println("Intentando enviar los detalles");
+            boolean insertados = true;
             //con.conectar();
 
             // Llamamos al metodo que inserta el detalle
@@ -121,12 +171,21 @@ public class CajaModelo {
                 inD.setInt(4, productos.get(i).getDescuentProd());
                 inD.setFloat(5, productos.get(i).getSubtotal()); // El total calculado por la cantidad de este producto
                 inD.registerOutParameter(6, java.sql.Types.BOOLEAN);
-                
+
                 inD.execute();
+
+                if (!inD.getBoolean(6)) {
+                    System.out.println("No se inserta un detalle de factura");
+                    insertados = false;
+                    break;
+                }
             }
+
+            return insertados;
 
         } catch (SQLException e) {
             System.out.println("Error al intentar insertar un detalle: " + e.getMessage());
+            return false;
         }
     }
 

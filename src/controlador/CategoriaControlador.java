@@ -1,10 +1,10 @@
 package controlador;
 
 import Vista.DlgCategorias;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -17,7 +17,7 @@ import modelo.CategoriaModelo;
  *
  * @author Dixiana Gómez, Rodrigo Vidal, Carlos Mairena
  */
-public class CategoriaControlador implements ActionListener, WindowListener {
+public class CategoriaControlador implements ActionListener {
 
     private DlgCategorias dlgCate;
     private ClassCategoria categoria;
@@ -125,9 +125,9 @@ public class CategoriaControlador implements ActionListener, WindowListener {
                         }
 
                     } else if (dlgCate.getTbpnCategorias().getTitleAt(2).equals("Modificar")) {
-                        
+
                         categoria.setIdCategoria(Integer.parseInt(dlgCate.getTxtidCatReg().getText()));
-                        
+
                         modeloCat.modificarCategoria(categoria);
                         mostrarTablaCat(modeloCat.mostrarCategorias());
 
@@ -138,11 +138,11 @@ public class CategoriaControlador implements ActionListener, WindowListener {
                     }
                 }
             }
-        } else if(e.getSource() == dlgCate.getBtnBuscar()){
+        } else if (e.getSource() == dlgCate.getBtnBuscar()) {
             buscar();
             dlgCate.getTxtFiltroCateg().setText("");
-            
-        }else if (e.getSource().equals(dlgCate.getBtnCancelar())) {
+
+        } else if (e.getSource().equals(dlgCate.getBtnCancelar())) {
             // Cancelar
             dlgCate.getTbpnCategorias().setSelectedIndex(0);
             dlgCate.getTbpnCategorias().setEnabledAt(0, true);
@@ -190,41 +190,6 @@ public class CategoriaControlador implements ActionListener, WindowListener {
             System.out.println("Nada seleccionado");
 
         }
-
-    }
-
-    @Override
-    public void windowOpened(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
 
     }
 
@@ -356,11 +321,11 @@ public class CategoriaControlador implements ActionListener, WindowListener {
             e.printStackTrace();
         }
     }
-    
+
     private void buscar() {
 
         try {
-            
+
             DefaultTableModel modeloTabla = new DefaultTableModel() {
 
                 @Override
@@ -370,7 +335,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
             };
 
             String titulos[] = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por", "Stock",
-            "Frágil", "Descripción"};
+                "Frágil", "Descripción"};
             modeloTabla.setColumnIdentifiers(titulos);
 
             ResultSet rs = modeloCat.BuscarCategorias(dlgCate.getTxtFiltroCateg().getText());
@@ -378,7 +343,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
             while (rs.next()) {
 
                 Object nextElement[] = {rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                        rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
+                    rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
 
                 modeloTabla.addRow(nextElement);
             }
@@ -391,5 +356,25 @@ public class CategoriaControlador implements ActionListener, WindowListener {
         } catch (SQLException ex) {
             System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
         }
+    }
+
+    /**
+     * Valida que los campos no estén vacíos
+     *
+     * @return
+     */
+    private boolean validacionCa() {
+        if (dlgCate.getTxtNombreCatReg().getText().isEmpty()) {
+
+            dlgCate.getTxtNombreCatReg().setBackground(Color.red);
+
+            return false;
+        } else if (dlgCate.getTxtDescripReg().getText().isEmpty()) {
+
+            dlgCate.getTxtDescripReg().setBackground(Color.red);
+
+            return false;
+        }
+        return true;
     }
 }

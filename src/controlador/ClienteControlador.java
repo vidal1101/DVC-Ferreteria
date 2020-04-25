@@ -7,6 +7,7 @@ package controlador;
 
 import Vista.DlgCliente;
 import Vista.FrmPrincipal;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -129,39 +130,42 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             this.clear();
         } else if (e.getSource() == dlgCli.getBtnGuardarCli()) {
 
-            //cliente = new ClassCliente();
-            cliente.setCedulaCli(Integer.parseInt(dlgCli.getTxtCedulaCli().getText()));
-            cliente.setNombreCli(dlgCli.getTxtNombreCli().getText());
-            cliente.setTelefonoCli(dlgCli.getTxtTelefonoCli().getText());
-            cliente.setEmailCli(dlgCli.getTxtEmailCli().getText());
+            if (validacionCli()) {
+                cliente = new ClassCliente();
+                cliente.setCedulaCli(Integer.parseInt(dlgCli.getTxtCedulaCli().getText()));
+                cliente.setNombreCli(dlgCli.getTxtNombreCli().getText());
+                cliente.setTelefonoCli(dlgCli.getTxtTelefonoCli().getText());
+                cliente.setEmailCli(dlgCli.getTxtEmailCli().getText());
 
-            // Revisa si va a editar o guardar
-            if (opc == 1) {
-                if (cliModelo.insertarCliente(cliente)) {
-                    JOptionPane.showMessageDialog(dlgCli, "Se inserto con Exito");
-                    this.clear();
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    this.mostrartabla(this.cliModelo.mostrarClientes());
-                    this.dlgCli.getPanCliente().setSelectedIndex(0);
+                // Revisa si va a editar o guardar
+                if (opc == 1) {
+                    if (cliModelo.insertarCliente(cliente)) {
+                        JOptionPane.showMessageDialog(dlgCli, "Se inserto con Exito");
+                        this.clear();
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        this.mostrartabla(this.cliModelo.mostrarClientes());
+                        this.dlgCli.getPanCliente().setSelectedIndex(0);
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgCli, "Usuario ya existente");
+                        this.clear();
+                    }
 
                 } else {
-                    JOptionPane.showMessageDialog(dlgCli, "Usuario ya existente");
-                    this.clear();
+                    //el metodo de modificar
+                    if (this.cliModelo.modificarCliente(cliente)) {
+                        
+                        JOptionPane.showMessageDialog(dlgCli, "Se Modifico el Cliente");
+                        this.mostrartabla(this.cliModelo.mostrarClientes());
+                        this.dlgCli.getPanCliente().setSelectedIndex(0);
+                        this.dlgCli.getPanCliente().setEnabled(true);
+                        
+                    } else {
+                        JOptionPane.showMessageDialog(dlgCli, "Error al Modificar ");
+                    }
                 }
-
-            } else {
-                //el metodo de modificar
-                if (this.cliModelo.modificarCliente(cliente)) {
-                    JOptionPane.showMessageDialog(dlgCli, "Se Modifico el Cliente");
-                    this.mostrartabla(this.cliModelo.mostrarClientes());
-                    this.dlgCli.getPanCliente().setSelectedIndex(0);
-                    this.dlgCli.getPanCliente().setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(dlgCli, "Error al Modificar ");
-                }
-
             }
-        } //Si ha pulsado eliminar
+        }
         else if (e.getSource() == dlgCli.getBtnEliminarCli()) {
 
             // Obtenemos la cédula del registro a eliminar
@@ -218,6 +222,35 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
             buscar();
             dlgCli.getTxtBuscarCli().setText("");
         }
+    }
+
+    /**
+     * Valida que los campos no estén vacíos
+     *
+     * @return
+     */
+    private boolean validacionCli() {
+        if (dlgCli.getTxtNombreCli().getText().isEmpty()) {
+
+            dlgCli.getTxtNombreCli().setBackground(Color.red);
+
+            return false;
+        } else if (dlgCli.getTxtCedulaCli().getText().isEmpty()) {
+
+            dlgCli.getTxtCedulaCli().setBackground(Color.red);
+
+            return false;
+        } else if (dlgCli.getTxtTelefonoCli().getText().isEmpty()) {
+            dlgCli.getTxtTelefonoCli().setBackground(Color.red);
+
+            return false;
+
+        } else if (dlgCli.getTxtEmailCli().getText().isEmpty()) {
+            dlgCli.getTxtEmailCli().setBackground(Color.red);
+
+            return false;
+        }
+        return true;
     }
 
     /**

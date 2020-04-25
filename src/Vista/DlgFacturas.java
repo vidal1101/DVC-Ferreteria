@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
  *
- * @author dreads
+ * @author Dixiana, Carlos y Vidal
  */
 public class DlgFacturas extends javax.swing.JDialog {
 
-    /**
-     * Creates new form DlgFacturas
-     */
+    
     public DlgFacturas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -27,33 +21,34 @@ public class DlgFacturas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtBuscar = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tbpnPestanas = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblFacturas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnMasDetalles = new javax.swing.JButton();
+        btnAnulaFac = new javax.swing.JButton();
+        txtBusqueda = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMasDeta = new javax.swing.JTable();
+        tblDetallesCompra = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDirecion = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtIdFactura = new javax.swing.JTextField();
         txtTrabajador = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Facturas");
 
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblFacturas.setModel(new javax.swing.table.DefaultTableModel(
@@ -66,24 +61,25 @@ public class DlgFacturas extends javax.swing.JDialog {
         ));
         jScrollPane2.setViewportView(tblFacturas);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 210));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 250));
 
-        jButton1.setText("Más detalles");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 160, -1));
+        btnMasDetalles.setText("Más detalles");
+        jPanel2.add(btnMasDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 160, -1));
 
-        jButton2.setText("Anular factura");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 360, 150, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 54, 290, 30));
+        btnAnulaFac.setText("Anular factura");
+        jPanel2.add(btnAnulaFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 150, -1));
+        jPanel2.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 54, 290, 30));
 
         jLabel1.setText("Buscar:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 50, 40));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 50, 40));
 
-        jTabbedPane1.addTab("Principal", jPanel2);
+        tbpnPestanas.addTab("Principal", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblMasDeta.setModel(new javax.swing.table.DefaultTableModel(
+        tblDetallesCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -91,52 +87,54 @@ public class DlgFacturas extends javax.swing.JDialog {
 
             }
         ));
-        jScrollPane1.setViewportView(tblMasDeta);
+        jScrollPane1.setViewportView(tblDetallesCompra);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 780, 180));
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Dirección de entrega:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 180, 20));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txtDirecion.setColumns(20);
+        txtDirecion.setRows(5);
+        jScrollPane3.setViewportView(txtDirecion);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 500, 50));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, 320, -1));
 
         jLabel3.setText("Cliente");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jLabel4.setText("Trabajador");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
 
         txtCliente.setEditable(false);
-        jPanel3.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 240, -1));
+        jPanel3.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 200, -1));
 
         jLabel5.setText("ID factura");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         txtIdFactura.setEditable(false);
-        jPanel3.add(txtIdFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 140, -1));
+        jPanel3.add(txtIdFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 140, -1));
 
         txtTrabajador.setEditable(false);
-        jPanel3.add(txtTrabajador, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 230, -1));
+        jPanel3.add(txtTrabajador, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 170, -1));
 
-        jTabbedPane1.addTab("Más detalles", jPanel3);
+        btnRegresar.setText("Regresar");
+        jPanel3.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 110, 40));
+
+        tbpnPestanas.addTab("Más detalles", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(tbpnPestanas, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tbpnPestanas, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,9 +145,7 @@ public class DlgFacturas extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -200,9 +196,10 @@ public class DlgFacturas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAnulaFac;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnMasDetalles;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -214,21 +211,57 @@ public class DlgFacturas extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblDetallesCompra;
     private javax.swing.JTable tblFacturas;
-    private javax.swing.JTable tblMasDeta;
-    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTabbedPane tbpnPestanas;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtCliente;
+    private javax.swing.JTextArea txtDirecion;
     private javax.swing.JTextField txtIdFactura;
     private javax.swing.JTextField txtTrabajador;
     // End of variables declaration//GEN-END:variables
 
-
-
-    public javax.swing.JTextField getTxtBuscar() {
-        return txtBuscar;
+    public javax.swing.JButton getBtnAnulaFac() {
+        return btnAnulaFac;
     }
 
+    public javax.swing.JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public javax.swing.JButton getBtnMasDetalles() {
+        return btnMasDetalles;
+    }
+
+    public javax.swing.JTable getTblDetallesCompra() {
+        return tblDetallesCompra;
+    }
+
+    public javax.swing.JTable getTblFacturas() {
+        return tblFacturas;
+    }
+
+    public javax.swing.JTextField getTxtBusqueda() {
+        return txtBusqueda;
+    }
+
+    public javax.swing.JTextField getTxtCliente() {
+        return txtCliente;
+    }
+
+    public javax.swing.JTextArea getTxtDirecion() {
+        return txtDirecion;
+    }
+
+    public javax.swing.JTextField getTxtIdFactura() {
+        return txtIdFactura;
+    }
+
+    public javax.swing.JTextField getTxtTrabajador() {
+        return txtTrabajador;
+    }
+
+    public javax.swing.JButton getBtnRegresar() {
+        return btnRegresar;
+    }
 }

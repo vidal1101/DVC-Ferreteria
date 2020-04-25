@@ -8,6 +8,7 @@ package Vista;
 import controlador.CajaControlador;
 import controlador.CategoriaControlador;
 import controlador.ClienteControlador;
+import controlador.FacturasControlador;
 import controlador.ProveedoresControlador;
 import controlador.TrabajadorControlador;
 import controlador.InventarioControlador;
@@ -19,7 +20,7 @@ import modelo.ProveedorModelo;
 
 /**
  *
- * @author User
+ * @author Dixiana, Carlos y Vidal
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -30,22 +31,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private ClassProveedor proveedor;
     private ProveedorModelo provModelo;
     private DlgProveedores dlgprov;
-
+    
     private ClassProducto producto;
     private InventarioModelo invenModelo;
     private DlgInventario dlginve;
-
+    
     public FrmPrincipal() {
         initComponents();
-
+        
         this.trabajador = new ClassTrabajador();
-
+        
         this.dlgCateg = new DlgCategorias(null, true);
-
+        
         this.provModelo = new ProveedorModelo();
         this.proveedor = new ClassProveedor();
         this.dlgprov = new DlgProveedores(null, true);
-
+        
         this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(null, true);
@@ -319,14 +320,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
-
+        
         TrabajadorControlador trabControl = new TrabajadorControlador(this);
         trabControl.inciarVista("Trabajadores");
 
     }//GEN-LAST:event_btnTrabajadoresActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-
+        
         CategoriaControlador categControl = new CategoriaControlador(dlgCateg);
         categControl.inciarVista("Categorias");
     }//GEN-LAST:event_btnCategoriasActionPerformed
@@ -344,15 +345,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClientesActionPerformed
 
     private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-
+        
         InventarioControlador inventControl = new InventarioControlador(this, dlginve,
                 producto, invenModelo);
-
+        
         inventControl.inciarVista("Productos");
     }//GEN-LAST:event_btnInventarioActionPerformed
 
     private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
-
+        
         FrmVentas caja = new FrmVentas(this, true);
         System.out.println("Trabajador: " + trabajador.getNombreTrab());
         CajaControlador controlador = new CajaControlador(caja, trabajador);
@@ -360,8 +361,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCajaActionPerformed
 
     private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
-
-
+        
+        FacturasControlador controlador = new FacturasControlador();
+        controlador.iniciarVista("Facturas");
     }//GEN-LAST:event_btnFacturasActionPerformed
 
     /**
@@ -435,7 +437,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public javax.swing.JButton getBtnTrabajadores() {
         return btnTrabajadores;
     }
-
+    
     public void setTrabajador(ClassTrabajador trabajador) {
         this.trabajador = trabajador;
     }

@@ -3,12 +3,9 @@ package controlador;
 import Vista.DlgMostrador;
 import Vista.DlgInventario;
 import Vista.FrmPrincipal;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -22,7 +19,7 @@ import modelo.ProveedorModelo;
  *
  * @author User
  */
-public class InventarioControlador implements ActionListener, WindowListener, KeyListener {
+public class InventarioControlador implements ActionListener {
 
     private FrmPrincipal principal;
     private DlgInventario dlgivent;
@@ -100,43 +97,44 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
 
         } else if (e.getSource() == dlgivent.getBtnGuardarProd()) {
 
-            producto.setCantidad(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
-            producto.setIdCategoria(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
-            producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
-            producto.setDescuentProd(Integer.parseInt(dlgivent.getTxtDescuentoProductoP().getText()));
-            producto.setNombreProd(dlgivent.getTxtNombProductoP().getText());
-            producto.setPrecioProd(Float.parseFloat(dlgivent.getTxtPrecProductoP().getText()));
-            producto.setProdFragil(dlgivent.getRbdNOfragil().isSelected()
-                    || dlgivent.getRbdSIfragil().isSelected());
-            producto.setIdProveedor(Integer.parseInt(dlgivent.getTxtIdProveedor().getText()));
-            producto.setUnidadVenta(String.valueOf(dlgivent.getCmbUnidadVenta().getSelectedItem()));
+            if (validacionIn()) {
+                producto.setCantidad(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
+                producto.setIdCategoria(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
+                producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
+                producto.setDescuentProd(Integer.parseInt(dlgivent.getTxtDescuentoProductoP().getText()));
+                producto.setNombreProd(dlgivent.getTxtNombProductoP().getText());
+                producto.setPrecioProd(Float.parseFloat(dlgivent.getTxtPrecProductoP().getText()));
+                producto.setProdFragil(dlgivent.getRbdNOfragil().isSelected()
+                        || dlgivent.getRbdSIfragil().isSelected());
+                producto.setIdProveedor(Integer.parseInt(dlgivent.getTxtIdProveedor().getText()));
+                producto.setUnidadVenta(String.valueOf(dlgivent.getCmbUnidadVenta().getSelectedItem()));
 
-            if (opc == 1) {
-                if (this.prodModelo.insertarProducto(producto)) {
+                if (opc == 1) {
+                    if (this.prodModelo.insertarProducto(producto)) {
 
-                    JOptionPane.showMessageDialog(dlgivent, "Se inserto con Exito");
-                    this.clear();
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        JOptionPane.showMessageDialog(dlgivent, "Se inserto con Exito");
+                        this.clear();
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        this.mostrartabla(this.prodModelo.mostrarProductos());
+                        this.dlgivent.getPanInventario().setSelectedIndex(0);
+                        this.dlgivent.getPanInventario().setEnabledAt(1, false);
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgivent, "Usuario ya existente");
+                        this.clear();
+                    }
+
+                } else if (this.prodModelo.modificarProducto(producto)) {
+                    JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
                     this.mostrartabla(this.prodModelo.mostrarProductos());
                     this.dlgivent.getPanInventario().setSelectedIndex(0);
                     this.dlgivent.getPanInventario().setEnabledAt(1, false);
+                    this.dlgivent.getPanInventario().setEnabledAt(0, true);
 
                 } else {
-                    JOptionPane.showMessageDialog(dlgivent, "Usuario ya existente");
-                    this.clear();
+                    JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
                 }
-
-            } else if (this.prodModelo.modificarProducto(producto)) {
-                JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
-                this.mostrartabla(this.prodModelo.mostrarProductos());
-                this.dlgivent.getPanInventario().setSelectedIndex(0);
-                this.dlgivent.getPanInventario().setEnabledAt(1, false);
-                this.dlgivent.getPanInventario().setEnabledAt(0, true);
-
-            } else {
-                JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
             }
-
         } else if (e.getSource() == dlgivent.getBtnCancelar()) {
             this.clear();
             this.dlgivent.getPanInventario().setEnabledAt(1, false);
@@ -236,54 +234,49 @@ public class InventarioControlador implements ActionListener, WindowListener, Ke
 
     }
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    /**
+     * Verifica que los campos estén rellenos
+     *
+     * @return
+     */
+    private boolean validacionIn() {
+        if (dlgivent.getTxtIdProveedor().getText().isEmpty()) {
 
-    @Override
-    public void windowClosing(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            dlgivent.getTxtIdProveedor().setBackground(Color.red);
 
-    @Override
-    public void windowClosed(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            return false;
+        } else if (dlgivent.getTxtIdCategoria().getText().isEmpty()) {
 
-    @Override
-    public void windowIconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            dlgivent.getTxtIdCategoria().setBackground(Color.red);
 
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            return false;
+        } else if (dlgivent.getTxtNombProductoP().getText().isEmpty()) {
+            dlgivent.getTxtNombProductoP().setBackground(Color.red);
 
-    @Override
-    public void windowActivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            return false;
 
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        } else if (dlgivent.getTxtDescuentoProductoP().getText().isEmpty()) {
+            dlgivent.getTxtDescuentoProductoP().setBackground(Color.red);
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            return false;
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        } else if (dlgivent.getTxtPrecProductoP().getText().isEmpty()) {
+            dlgivent.getTxtPrecProductoP().setBackground(Color.red);
+            return false;
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        } else if (dlgivent.getTxtCantidadStockP().getText().isEmpty()) {
+            dlgivent.getTxtCantidadStockP().setBackground(Color.red);
+            return false;
+
+        } else if (dlgivent.getTxtDescripProductoP().getText().isEmpty()) {
+            dlgivent.getTxtDescripProductoP().setBackground(Color.red);
+            return false;
+
+        } else if (dlgivent.getCmbUnidadVenta().getSelectedIndex() == 0) {
+            dlgivent.getTxtPrecProductoP().setBackground(Color.red);
+            return false;
+        }
+        return true;
     }
 
     /**

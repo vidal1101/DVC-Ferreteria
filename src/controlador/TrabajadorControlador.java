@@ -8,8 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +19,7 @@ import modelo.TrabajadorModelo;
  *
  * @author Dixiana, Carlos y Vidal
  */
-public class TrabajadorControlador implements ActionListener, WindowListener, KeyListener {
+public class TrabajadorControlador implements ActionListener, KeyListener {
 
     private FrmPrincipal principal;
     private FrmInicioSesion entradaLogin;
@@ -47,6 +45,9 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
         this.dlgtrab.getBtnLimpiarT().addActionListener(this);
         this.dlgtrab.getBtnCancelarT().addActionListener(this);
         this.dlgtrab.getBtnBuscar().addActionListener(this);
+
+        this.dlgtrab.getTxtCedulaT().addKeyListener(this);
+        this.dlgtrab.getTxtTelefono().addKeyListener(this);
     }
 
     public TrabajadorControlador(FrmInicioSesion entradaLogin, FrmPrincipal principal) {
@@ -403,43 +404,16 @@ public class TrabajadorControlador implements ActionListener, WindowListener, Ke
     }
 
     @Override
-    public void windowOpened(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
-
-    @Override
     public void keyTyped(KeyEvent e) {
 
+        if (e.getSource() == dlgtrab.getTxtCedulaT()) {
+            System.out.println("txt cédula");
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+        }
     }
 
     @Override
