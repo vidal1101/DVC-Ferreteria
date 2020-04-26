@@ -49,12 +49,12 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
         this.dlgtrab.getTxtCedulaT().addKeyListener(this);
         this.dlgtrab.getTxtTelefono().addKeyListener(this);
     }
-
-    public TrabajadorControlador(FrmInicioSesion entradaLogin, FrmPrincipal principal) {
-
-        this.trabModelo = new TrabajadorModelo();
-        this.entradaLogin = entradaLogin;
-        this.principal = principal;
+    
+    public TrabajadorControlador (FrmInicioSesion sesionVentana) {
+        
+        entradaLogin = sesionVentana;
+        trabModelo = new TrabajadorModelo();
+        trabajador = new ClassTrabajador();
     }
 
     /**
@@ -63,7 +63,7 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
      * @return
      */
     public boolean iniciarSesion() {
-
+        
         try {
 
             int cedula = Integer.parseInt(entradaLogin.getTxtUsuario().getText());
@@ -79,8 +79,8 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
                         rs.getString(5), rs.getBoolean(6));
 
                 System.out.println("Sesion exitosa");
-                principal.setTrabajador(trabajador);
-                principal.setVisible(true);
+                //principal.setTrabajador(trabajador);
+                //principal.setVisible(true);
                 rs.close();
 
                 return true;

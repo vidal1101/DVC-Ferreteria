@@ -103,6 +103,7 @@ public class CajaModelo {
                 } else {
                     return cst.getBoolean(8);
                 }
+                
             } else {
                 System.out.println("Error al intentar insertar la factura");
                 return cst.getBoolean(8);

@@ -1,28 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< HEAD
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/modelo/ClienteModelo.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/modelo/CajaModeloVidal.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/controlador/CajaControladorVidal.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/DVC-Ferreteria/src/Vista/FrmVentas.java</file>
-=======
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
         <file>
-            <url>src/modelo/inventarioModelo.java</url>
+            <url>src/controlador/TrabajadorControlador.java</url>
             <bookmark id="1">
                 <name/>
-                <line>89</line>
+                <line>248</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/dixia/OneDrive%20-%20Universidad%20Técnica%20Nacional/Documentos/NetBeansProjects/DVC-Ferreteria/src/controlador/TrabajadorControlador.java</file>
->>>>>>> dixiana
-        </group>
-    </open-files>
 </project-private>

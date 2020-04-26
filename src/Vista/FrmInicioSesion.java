@@ -46,11 +46,6 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         jLabel2.setText("Contraseña:");
 
         btnIngresar.setText("Ingresar");
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
-            }
-        });
 
         txtContrasenia.setToolTipText("");
 
@@ -94,17 +89,6 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-
-        principal = new FrmPrincipal();
-        TrabajadorControlador principalCon = new TrabajadorControlador(this, this.principal);
-
-        if (principalCon.iniciarSesion()) {
-            this.dispose();
-        }
-
-    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments

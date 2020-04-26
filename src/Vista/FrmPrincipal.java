@@ -1,55 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Vista;
 
-import controlador.CajaControlador;
-import controlador.CategoriaControlador;
-import controlador.ClienteControlador;
-import controlador.FacturasControlador;
-import controlador.ProveedoresControlador;
-import controlador.TrabajadorControlador;
-import controlador.InventarioControlador;
-import logicaClass.ClassProducto;
-import logicaClass.ClassProveedor;
-import logicaClass.ClassTrabajador;
-import modelo.InventarioModelo;
-import modelo.ProveedorModelo;
+package Vista;
 
 /**
  *
  * @author Dixiana, Carlos y Vidal
  */
 public class FrmPrincipal extends javax.swing.JFrame {
-
-    //Instancias
-    private ClassTrabajador trabajador;
-    private DlgCategorias dlgCateg;
-    
-    private ClassProveedor proveedor;
-    private ProveedorModelo provModelo;
-    private DlgProveedores dlgprov;
-    
-    private ClassProducto producto;
-    private InventarioModelo invenModelo;
-    private DlgInventario dlginve;
     
     public FrmPrincipal() {
         initComponents();
-        
-        this.trabajador = new ClassTrabajador();
-        
-        this.dlgCateg = new DlgCategorias(null, true);
-        
-        this.provModelo = new ProveedorModelo();
-        this.proveedor = new ClassProveedor();
-        this.dlgprov = new DlgProveedores(null, true);
-        
-        this.invenModelo = new InventarioModelo();
-        this.producto = new ClassProducto();
-        this.dlginve = new DlgInventario(null, true);
     }
 
     /**
@@ -73,17 +32,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnProveedores = new javax.swing.JButton();
         btnClientes = new javax.swing.JButton();
         btnFacturas = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        mnbBarraPrincipal = new javax.swing.JMenuBar();
+        mnTrabajadores = new javax.swing.JMenu();
+        mnCategorias = new javax.swing.JMenu();
+        mnInventario = new javax.swing.JMenu();
+        mnHistorial = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -155,11 +108,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
         btnCaja.setOpaque(true);
-        btnCaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCajaActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 310, 80));
 
         btnCategorias.setBackground(new java.awt.Color(255, 255, 255));
@@ -172,11 +120,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCategorias.setDefaultCapable(false);
         btnCategorias.setFocusPainted(false);
         btnCategorias.setOpaque(true);
-        btnCategorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCategoriasActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 310, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoDvcdieño1.jpeg"))); // NOI18N
@@ -192,11 +135,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnInventario.setDefaultCapable(false);
         btnInventario.setFocusPainted(false);
         btnInventario.setOpaque(true);
-        btnInventario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInventarioActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 320, 80));
 
         btnTrabajadores.setBackground(new java.awt.Color(255, 255, 255));
@@ -209,91 +147,46 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnTrabajadores.setDefaultCapable(false);
         btnTrabajadores.setFocusPainted(false);
         btnTrabajadores.setOpaque(true);
-        btnTrabajadores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTrabajadoresActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 320, -1));
 
         btnProveedores.setBackground(new java.awt.Color(255, 255, 255));
         btnProveedores.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnProveedores.setText("Proveedores");
         btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProveedoresActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 310, 70));
 
         btnClientes.setBackground(new java.awt.Color(255, 255, 255));
         btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 320, 70));
 
         btnFacturas.setBackground(new java.awt.Color(255, 255, 255));
         btnFacturas.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnFacturas.setText("Facturas");
         btnFacturas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnFacturas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFacturasActionPerformed(evt);
-            }
-        });
         jPanel2.add(btnFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 300, 70));
 
-        jMenuBar1.setBackground(new java.awt.Color(131, 182, 231));
+        mnbBarraPrincipal.setBackground(new java.awt.Color(131, 182, 231));
 
-        jMenu1.setText("Categorias");
+        mnTrabajadores.setText("Trabajadores");
+        mnbBarraPrincipal.add(mnTrabajadores);
 
-        jMenuItem1.setText("herramientas ");
-        jMenu1.add(jMenuItem1);
+        mnCategorias.setText("Categorias");
+        mnbBarraPrincipal.add(mnCategorias);
 
-        jMenuItem2.setText("Hogar ");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
+        mnInventario.setText("Inventario");
+        mnbBarraPrincipal.add(mnInventario);
 
-        jMenuItem3.setText("Jardin");
-        jMenu1.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("cajeros");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Inventario");
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Ventas");
-
-        jMenuItem5.setText("Ventas Diarias");
-        jMenu4.add(jMenuItem5);
-
-        jMenuItem6.setText("Ventas por Semana");
-        jMenu4.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("Historial");
-        jMenuBar1.add(jMenu5);
+        mnHistorial.setText("Historial");
+        mnbBarraPrincipal.add(mnHistorial);
 
         jMenuItem4.setText("jMenuItem4");
         jMenu6.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu6);
+        mnbBarraPrincipal.add(jMenu6);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mnbBarraPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,57 +207,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
-        
-        TrabajadorControlador trabControl = new TrabajadorControlador(this);
-        trabControl.inciarVista("Trabajadores");
-
-    }//GEN-LAST:event_btnTrabajadoresActionPerformed
-
-    private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
-        
-        CategoriaControlador categControl = new CategoriaControlador(dlgCateg);
-        categControl.inciarVista("Categorias");
-    }//GEN-LAST:event_btnCategoriasActionPerformed
-
-    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        // TODO add your handling code here:
-        ProveedoresControlador provCont = new ProveedoresControlador(this, dlgprov,
-                proveedor, provModelo);
-        provCont.inciarVista("Proveedores");
-    }//GEN-LAST:event_btnProveedoresActionPerformed
-
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        ClienteControlador cliControl = new ClienteControlador(this);
-        cliControl.inciarVista("Clientes");
-    }//GEN-LAST:event_btnClientesActionPerformed
-
-    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
-        
-        InventarioControlador inventControl = new InventarioControlador(this, dlginve,
-                producto, invenModelo);
-        
-        inventControl.inciarVista("Productos");
-    }//GEN-LAST:event_btnInventarioActionPerformed
-
-    private void btnCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCajaActionPerformed
-        
-        FrmVentas caja = new FrmVentas(this, true);
-        System.out.println("Trabajador: " + trabajador.getNombreTrab());
-        CajaControlador controlador = new CajaControlador(caja, trabajador);
-        controlador.iniciarVista();
-    }//GEN-LAST:event_btnCajaActionPerformed
-
-    private void btnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturasActionPerformed
-        
-        FacturasControlador controlador = new FacturasControlador();
-        controlador.iniciarVista("Facturas");
-    }//GEN-LAST:event_btnFacturasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,28 +259,70 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnProveedores;
     public javax.swing.JButton btnTrabajadores;
     private javax.swing.JLabel jLabel1;
-    public javax.swing.JMenu jMenu1;
-    public javax.swing.JMenu jMenu2;
-    public javax.swing.JMenu jMenu3;
-    public javax.swing.JMenu jMenu4;
-    public javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenu mnCategorias;
+    private javax.swing.JMenu mnHistorial;
+    private javax.swing.JMenu mnInventario;
+    private javax.swing.JMenu mnTrabajadores;
+    private javax.swing.JMenuBar mnbBarraPrincipal;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JButton getBtnTrabajadores() {
         return btnTrabajadores;
     }
-    
-    public void setTrabajador(ClassTrabajador trabajador) {
-        this.trabajador = trabajador;
+    public javax.swing.JButton getBtnAyuda() {
+        return btnAyuda;
     }
+
+    public javax.swing.JButton getBtnCaja() {
+        return btnCaja;
+    }
+
+    public javax.swing.JButton getBtnCalendario() {
+        return btnCalendario;
+    }
+
+    public javax.swing.JButton getBtnCategorias() {
+        return btnCategorias;
+    }
+
+    public javax.swing.JButton getBtnClientes() {
+        return btnClientes;
+    }
+
+    public javax.swing.JButton getBtnConfiguracion() {
+        return btnConfiguracion;
+    }
+
+    public javax.swing.JButton getBtnFacturas() {
+        return btnFacturas;
+    }
+
+    public javax.swing.JButton getBtnInventario() {
+        return btnInventario;
+    }
+
+    public javax.swing.JButton getBtnProveedores() {
+        return btnProveedores;
+    }
+
+    public javax.swing.JMenu getMnCategorias() {
+        return mnCategorias;
+    }
+
+    public javax.swing.JMenu getMnHistorial() {
+        return mnHistorial;
+    }
+
+    public javax.swing.JMenu getMnInventario() {
+        return mnInventario;
+    }
+
+    public javax.swing.JMenu getMnTrabajadores() {
+        return mnTrabajadores;
+    }    
 }
+
