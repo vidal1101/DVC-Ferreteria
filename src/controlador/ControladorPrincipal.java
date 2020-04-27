@@ -62,10 +62,8 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
 
         this.framePrincipal.getBtnAyuda().addActionListener(this);
         this.framePrincipal.getBtnCaja().addActionListener(this);
-        this.framePrincipal.getBtnCalendario().addActionListener(this);
         this.framePrincipal.getBtnCategorias().addActionListener(this);
         this.framePrincipal.getBtnClientes().addActionListener(this);
-        this.framePrincipal.getBtnConfiguracion().addActionListener(this);
         this.framePrincipal.getBtnFacturas().addActionListener(this);
         this.framePrincipal.getBtnInventario().addActionListener(this);
         this.framePrincipal.getBtnProveedores().addActionListener(this);
@@ -143,15 +141,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
              */
             FacturasControlador facturaControl = new FacturasControlador(this.framePrincipal, dlgFact);
             facturaControl.iniciarVista("Facturas");
-
-        } else if (e.getSource() == framePrincipal.getBtnCalendario()) {
             
-            // Codigo de Rodrigo
-
-        } else if (e.getSource() == framePrincipal.getBtnConfiguracion()) {
-            
-            // Codigo de Rodrigo
-
         } else if (e.getSource() == framePrincipal.getMnTrabajadores()) { //eventos de los menur bar
 
             TrabajadorControlador trabControl = new TrabajadorControlador(this.framePrincipal, trabajador);

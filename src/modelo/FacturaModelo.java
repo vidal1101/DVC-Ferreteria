@@ -59,4 +59,28 @@ public class FacturaModelo {
         }
     }
 
+    /**
+     * Muestra todos los detalles de la <br>
+     * factura que la persona ha seleccionado
+     *
+     * @param idFactura
+     * @return
+     */
+    public ResultSet mostrarDetallesxFacturas(int idFactura) {
+        Conexion con = new Conexion();
+        ResultSet rs = null;
+
+        try {
+            con.conectar();
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarDetallesFactura(?)}");
+            ps.setInt(1, idFactura);
+            rs = ps.executeQuery();
+            //rs.first();
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println("Error del mensaje: " + e.getMessage());
+            return rs;
+        }
+    }
 }

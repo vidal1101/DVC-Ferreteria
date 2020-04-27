@@ -1,3 +1,7 @@
+-- Integrantes: Dixiana Gomez
+-- Carlos Mairena
+-- Rodrigo Vidal
+-- 
 -- DATOS USUARIO INICIAL PARA ACCEDER AL PROGRAMA
 -- cedula: 12345  contraseña: user123
 -- --------------------------------------------------------------------------
@@ -11,6 +15,22 @@
 -- #7 -> DetallesCompra 
 -- --------------------------------------------------------------------------
 USE `Ferreteria-DVC`;
+
+DELIMITER //
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_mostrarDetallesFactura`
+($id INT)
+BEGIN 
+    IF EXISTS(SELECT idFactura FROM Factura WHERE idFactura = $id )THEN
+       
+       SELECT f.idFactura, f.cedulaCliente, f.cedulaTrabajador , f.direccionEntrega,
+       dc.idDetallesCompra, dc.idProducto, dc.cantidadProducto, dc.descuento , dc.subTotal
+       FROM Factura AS f INNER JOIN DetallesCompra AS dc ON f.idFactura = dc.idFactura
+       WHERE f.idFactura = $id;
+       
+	ELSE
+		SELECT 0;
+    END IF;
+END//
 
 COMMENT 'Procedimiento para buscar un producto por nombre o precio o descuento o id producto
 		 nombre de categoria o nombre del proveedor'
@@ -180,12 +200,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-CALL pa_insertarFactura(504024584,1122,"Sin dirección",'2020-02-12',
-23000,30000,"Facturada",@editado);
-
-CALL pa_insertarFactura(504024584,1122,"Liberia Centro",'2020-02-12',
-23000,30000,"Facturada",@editado);
-
 COMMENT 'Procedimiento que modifica el estado de la factura'
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_modificarEstadoFactura`
@@ -261,9 +275,6 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
-
-INSERT INTO Trabajador VALUES (1233, "Profe Jonathan", "Administrador", 
-"prof12@gmail.com", "98765", 1, "6ad14ba9986e3615423dfca256d04e3f");
 
 COMMENT 'Procedimiento para modificar un trabajador'
 DELIMITER $$
@@ -512,12 +523,8 @@ IN $descripcion TEXT,
 OUT $insertado BOOLEAN
 )
 BEGIN
-	-- IF  () THEN -- hacer que valide si se guarda
 		INSERT INTO Categoria (nombre,descripcion) VALUES ($nombre,$descripcion);
 		SET $insertado = 1;
--- 	ELSE
---        SET $insertado = 0;
--- 	END IF;
 END $$
 DELIMITER ;
 
@@ -704,3 +711,17 @@ begin
     end if;
 end $$
 DELIMITER ;
+
+INSERT INTO Trabajador VALUES (12345, "Profe Jonathan", "Administrador", 
+"prof12@gmail.com", "98765", 1, "6ad14ba9986e3615423dfca256d04e3f");
+
+INSERT INTO Trabajador VALUES (1122, "Profe Jonathan", "Administrador", 
+"prof12@gmail.com", "98765", 1, "6ad14ba9986e3615423dfca256d04e3f");
+
+INSERT INTO Cliente VALUES(504024584,"Cliente 1","+506-9988-9087","ass@me.com");
+
+CALL pa_insertarFactura(504024584,1122,"Sin dirección",'2020-02-12',
+23000,30000,"Facturada",@editado);
+
+CALL pa_insertarFactura(504024584,12345,"Liberia Centro",'2020-02-12',
+23000,30000,"Facturada",@editado);

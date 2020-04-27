@@ -33,6 +33,7 @@ public class FacturasControlador implements ActionListener {
         this.ventanaFacturas.getBtnBuscar().addActionListener(this);
         this.ventanaFacturas.getBtnMasDetalles().addActionListener(this);
         this.ventanaFacturas.getBtnRegresar().addActionListener(this);
+        ventanaFacturas.getTbpnPestanas().setEnabledAt(1, false);
     }
 
     @Override
@@ -78,11 +79,9 @@ public class FacturasControlador implements ActionListener {
      * @param fila
      */
     private void verDetalles(int fila) {
-
-        /* Aquí aplicamos una consulta con join entre varias tablas para leer sus datos,
-            así podemos obtener los datos de una sola vez al realizar la consulta.
-         */
-        ventanaFacturas.getTbpnPestanas().setSelectedIndex(1);
+        
+        this.muestraDetalles(fila);
+        this.ventanaFacturas.getTbpnPestanas().setSelectedIndex(1);
         ventanaFacturas.getTbpnPestanas().setEnabledAt(1, true);
         ventanaFacturas.getTbpnPestanas().setEnabledAt(0, false);
 
@@ -164,6 +163,48 @@ public class FacturasControlador implements ActionListener {
             ventanaFacturas.getTblFacturas().setModel(modeloTabla);
         } catch (SQLException ex) {
 
+        }
+
+    }
+
+    /**
+     * Muestra los detalles de la factura seleccionada
+     */
+    private void muestraDetalles(int id) {
+
+        // Tal vez podríamos mostrar el subtotal
+        String titulos[] = {"ID Detalle", "ID Producto", "Cant. Prod", "Descuento", "Subtotal"};
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        modeloTabla.setColumnIdentifiers(titulos);
+
+        try {
+            ResultSet rs = null;
+
+            rs = modeloFactura.mostrarDetallesxFacturas(id);
+
+            while (rs.next()) {
+
+                this.ventanaFacturas.getTxtIdFactura().setText(rs.getInt(1) + "");
+                this.ventanaFacturas.getTxtCliente().setText(rs.getInt(2) + "");
+                this.ventanaFacturas.getTxtTrabajador().setText(rs.getInt(3) + "");
+                this.ventanaFacturas.getTxtDirecion().setText(rs.getString(4));
+
+                Object elementos[] = {rs.getInt(5), rs.getInt(6), rs.getInt(7),
+                    rs.getInt(8), rs.getFloat(9)};
+
+                modeloTabla.addRow(elementos);
+            }
+
+            ventanaFacturas.getTblDetallesCompra().setModel(modeloTabla);
+        } catch (SQLException ex) {
+            ventanaFacturas.getTblDetallesCompra().setModel(modeloTabla);
+            System.out.println("Esta factura parece que no tenía productos: " + ex.getMessage());
         }
     }
 }

@@ -23,8 +23,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnAyuda = new javax.swing.JButton();
-        btnConfiguracion = new javax.swing.JButton();
-        btnCalendario = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnCaja = new javax.swing.JButton();
         btnCategorias = new javax.swing.JButton();
@@ -62,37 +60,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnAyuda.setFocusPainted(false);
         btnAyuda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
 
-        btnConfiguracion.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        btnConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
-        btnConfiguracion.setText("Configuracion");
-        btnConfiguracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfiguracion.setDefaultCapable(false);
-        btnConfiguracion.setFocusPainted(false);
-        btnConfiguracion.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
-
-        btnCalendario.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        btnCalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario.png"))); // NOI18N
-        btnCalendario.setText("Calendario");
-        btnCalendario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCalendario.setDefaultCapable(false);
-        btnCalendario.setFocusPainted(false);
-        btnCalendario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario (1).png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -335,10 +312,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda;
     public javax.swing.JButton btnCaja;
-    public javax.swing.JButton btnCalendario;
     public javax.swing.JButton btnCategorias;
     private javax.swing.JButton btnClientes;
-    public javax.swing.JButton btnConfiguracion;
     private javax.swing.JButton btnFacturas;
     public javax.swing.JButton btnInventario;
     private javax.swing.JButton btnProveedores;
@@ -372,20 +347,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         return btnCaja;
     }
 
-    public javax.swing.JButton getBtnCalendario() {
-        return btnCalendario;
-    }
-
     public javax.swing.JButton getBtnCategorias() {
         return btnCategorias;
     }
 
     public javax.swing.JButton getBtnClientes() {
         return btnClientes;
-    }
-
-    public javax.swing.JButton getBtnConfiguracion() {
-        return btnConfiguracion;
     }
 
     public javax.swing.JButton getBtnFacturas() {
