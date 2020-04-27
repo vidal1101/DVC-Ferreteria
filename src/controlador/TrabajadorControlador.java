@@ -31,12 +31,13 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
     private DefaultTableModel modeloTrab;
     private int opc;
 
-    public TrabajadorControlador(FrmPrincipal principal) {
+    public TrabajadorControlador(FrmPrincipal principal, ClassTrabajador trabajadores) {
 
         this.modeloTrab = new DefaultTableModel();
         this.principal = principal;
         this.dlgtrab = new DlgTrabajadores(principal, true);
         this.trabModelo = new TrabajadorModelo();
+        this.trabajador = trabajadores;
         this.opc = 0;
 
         this.principal.getBtnTrabajadores().addActionListener(this);
@@ -55,9 +56,9 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
 
     public TrabajadorControlador(FrmInicioSesion sesionVentana) {
 
-        entradaLogin = sesionVentana;
-        trabModelo = new TrabajadorModelo();
-        trabajador = new ClassTrabajador();
+        this.entradaLogin = sesionVentana;
+        this.trabModelo = new TrabajadorModelo();
+        this.trabajador = new ClassTrabajador();
     }
 
     /**
@@ -226,10 +227,21 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
 
                 // Si la opción de eliminar fue SI, eliminamos
                 if (opcion == JOptionPane.YES_OPTION) {
-                    trabModelo.eliminarTrabajadores(cedula);
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    JOptionPane.showMessageDialog(dlgtrab, "Eliminado");
-                    this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+                    String respuesta = trabModelo.eliminarTrabajador(1, cedula);
+
+                    if (respuesta.equals("ELIMINADO")) {
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        JOptionPane.showMessageDialog(dlgtrab, "Eliminado");
+                        this.mostrartabla(this.trabModelo.mostrarTrabajadores());
+
+                    } else if (respuesta.equals("CON REGISTROS")) {
+
+                        JOptionPane.showMessageDialog(dlgtrab, "No se puede eliminar este trabajador. \n"
+                                + "Hay facturas enlazadas a este trabajador");
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgtrab, "Ha habido un error al intentar eliminarse.");
+                    }
                 }
 
             } else {
@@ -321,8 +333,8 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
             while (rs.next()) {
 
                 Object[] objeto = {rs.getInt(1), rs.getString(2),
-                                   rs.getString(3), rs.getString(4),
-                                   rs.getString(5), rs.getBoolean(6)};
+                    rs.getString(3), rs.getString(4),
+                    rs.getString(5), rs.getBoolean(6)};
 
                 modeloTrab.addRow(objeto);
             }

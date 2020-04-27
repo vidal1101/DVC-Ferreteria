@@ -1,9 +1,12 @@
 package controlador;
 
 import Vista.DlgCategorias;
+import Vista.FrmPrincipal;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -17,14 +20,16 @@ import modelo.CategoriaModelo;
  * @author Rodrigo Vidal
  * @author Carlos Mairena
  */
-public class CategoriaControlador implements ActionListener {
+public class CategoriaControlador implements ActionListener, KeyListener {
 
     private DlgCategorias dlgCate;
     private ClassCategoria categoria;
     private CategoriaModelo modeloCat;
     private DefaultTableModel tablaModelo;
+    private FrmPrincipal principal;
 
-    public CategoriaControlador(DlgCategorias dlgCate) {
+    public CategoriaControlador(FrmPrincipal principal, DlgCategorias dlgCate) {
+        this.principal = principal;
         this.dlgCate = dlgCate;
         this.categoria = new ClassCategoria();
         this.modeloCat = new CategoriaModelo();
@@ -40,6 +45,7 @@ public class CategoriaControlador implements ActionListener {
         this.dlgCate.getBtnRegresar().addActionListener(this);
         this.dlgCate.getBtnBuscar().addActionListener(this);
         this.dlgCate.getTxtidCatReg().setEditable(false);
+        this.dlgCate.getTxtNombreCatReg().addKeyListener(this);
 
     }
 
@@ -65,10 +71,20 @@ public class CategoriaControlador implements ActionListener {
                 if ((JOptionPane.showConfirmDialog(dlgCate, "¿Desea eliminar esta categoría?", "Eliminar",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
                     int ID = (int) dlgCate.getTblCategorias().getValueAt(fila, 0);
-                    modeloCat.eliminarCategoria(ID);
-                    JOptionPane.showMessageDialog(dlgCate, "Categoria eliminada exitosamente.");
-                    mostrarTablaCat(modeloCat.mostrarCategorias());
+                    //modeloCat.eliminarCategoria(ID);
+                    String respuesta = modeloCat.eliminarCategoria(2, ID);
 
+                    if (respuesta.equals("ELIMINADO")) {
+
+                        JOptionPane.showMessageDialog(dlgCate, "Categoria eliminada exitosamente.");
+                        mostrarTablaCat(modeloCat.mostrarCategorias());
+
+                    } else if (respuesta.equals("CON REGISTROS")) {
+                        JOptionPane.showMessageDialog(dlgCate, "No se puede eliminar esta categoría. \n"
+                                + "Hay productos enlazados a esta Categoría");
+                    } else {
+                        JOptionPane.showMessageDialog(dlgCate, "Ha habido un error al intentar eliminarse.");
+                    }
                 }
 
             } else {
@@ -100,7 +116,7 @@ public class CategoriaControlador implements ActionListener {
         } else if (e.getSource().equals(dlgCate.getBtnGuardar())) {
             // Guardar
 
-            if (datosListos()) {
+            if (validacionCa()) {
 
                 if ((JOptionPane.showConfirmDialog(dlgCate, "¿Desea guardar los datos?", "Eliminar",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)) {
@@ -192,25 +208,6 @@ public class CategoriaControlador implements ActionListener {
 
         }
 
-    }
-
-    /**
-     * Verifica que los campos del registro no estén vacíos
-     *
-     * @return
-     */
-    private boolean datosListos() {
-
-//        if (dlgCate.getTxtidCatReg().getText().isEmpty()) {
-//            return false;
-//        } else 
-        if (dlgCate.getTxtNombreCatReg().getText().isEmpty()) {
-            return false;
-        } else if (dlgCate.getTxtDescripReg().getText().isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     /**
@@ -318,6 +315,10 @@ public class CategoriaControlador implements ActionListener {
         }
     }
 
+    /**
+     * Permtie realizar la búsqueda de categorías <br>
+     * por medio del nombre o ID
+     */
     private void buscar() {
 
         try {
@@ -356,6 +357,7 @@ public class CategoriaControlador implements ActionListener {
      * @return
      */
     private boolean validacionCa() {
+
         if (dlgCate.getTxtNombreCatReg().getText().isEmpty()) {
 
             dlgCate.getTxtNombreCatReg().setBackground(Color.red);
@@ -368,5 +370,29 @@ public class CategoriaControlador implements ActionListener {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+        if (e.getSource() == dlgCate.getTxtNombreCatReg()) {
+
+            char letra = e.getKeyChar();
+
+            if (Character.isDigit(letra)) {
+                e.consume();
+            }
+        }
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

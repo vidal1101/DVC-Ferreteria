@@ -34,14 +34,13 @@ public class ProveedoresControlador implements ActionListener, KeyListener {
     DefaultTableModel modeloProv;
     private int opc;
 
-    public ProveedoresControlador(FrmPrincipal principal, DlgProveedores dlgprov, ClassProveedor proveedor,
-            ProveedorModelo provModelo) {
+    public ProveedoresControlador(FrmPrincipal principal, DlgProveedores dlgprov) {
 
         this.modeloProv = new DefaultTableModel();
         this.principal = principal;
         this.dlgprov = dlgprov;
-        this.proveedor = proveedor;
-        this.provModelo = provModelo;
+        this.proveedor = new ClassProveedor();
+        this.provModelo = new ProveedorModelo();
         this.opc = 0;
         // this.principal.getBtnProveedores().addActionListener(this);
         this.dlgprov.getBtnGuardar().addActionListener(this);
@@ -157,10 +156,23 @@ public class ProveedoresControlador implements ActionListener, KeyListener {
 
                 // Si la opción de eliminar fue SI, eliminamos
                 if (opcion == JOptionPane.YES_OPTION) {
-                    provModelo.eliminarProveedores(idProv);
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    JOptionPane.showMessageDialog(dlgprov, "Eliminado");
-                    this.mostrartabla(this.provModelo.mostrarProveedores());
+                    //provModelo.eliminarProveedores(idProv);
+
+                    String respuesta = provModelo.eliminarProveedor(3, idProv);
+
+                    if (respuesta.equals("ELIMINADO")) {
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        JOptionPane.showMessageDialog(dlgprov, "Eliminado");
+                        this.mostrartabla(this.provModelo.mostrarProveedores());
+                    } else if (respuesta.equals("CON REGISTROS")) {
+
+                        JOptionPane.showMessageDialog(dlgprov, "No se puede eliminar este proveedor. \n"
+                                + "Hay produtos enlazados a este proveedor");
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgprov, "Ha habido un error al intentar eliminarse.");
+                    }
+
                 }
 
             } else {
@@ -299,7 +311,7 @@ public class ProveedoresControlador implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-            
+
         if (e.getSource() == dlgprov.getTxtNombre()) {
 
             char letra = e.getKeyChar();
@@ -307,14 +319,14 @@ public class ProveedoresControlador implements ActionListener, KeyListener {
             if (Character.isDigit(letra)) {
                 e.consume();
             }
-            
+
         } else if (e.getSource() == dlgprov.getTxtCedula()) {
             char letra = e.getKeyChar();
 
             if (!Character.isDigit(letra)) {
                 e.consume();
             }
-            
+
             if (dlgprov.getTxtCedula().getText().length() >= 9) {
                 e.consume();
             }

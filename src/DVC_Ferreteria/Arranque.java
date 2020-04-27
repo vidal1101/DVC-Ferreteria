@@ -13,7 +13,6 @@ public class Arranque {
     public static void main(String[] args) {
 
         ControladorPrincipal controlframe = new ControladorPrincipal();
-
         controlframe.muestraVentanaPrincipal();
     }
 

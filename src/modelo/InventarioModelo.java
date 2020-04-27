@@ -1,4 +1,3 @@
-
 package modelo;
 
 import java.sql.CallableStatement;
@@ -116,28 +115,49 @@ public class InventarioModelo {
 
     }
 
+    
     /**
-     * Se le envía la cédula del trabajador a eliminar
+     * NOTA: Revisar el número de tablas para referirse a cada tabla de la BD <br>
+     * ******** <br>
+     * Se envia el numero de la caso a evaluar para ELIMINAR <br>
+     * 1 = relacion entre Trabajador y Factura <br>
+     * 2 = relacion entre Categoria y Producto <br>
+     * 3 = relacion entre Proveedor y Producto <br>
+     * 4 = relacion entre Cliente y Factura <br>
+     * 5 = relacion entre Producto y DetallesCompra
      *
-     * @param idpro
-     * @return
+     * @param casoEvaluar 1 , 2 , 3, 4, 5
+     * @param id id del caso a evaluar
+     * @return verdadero si existe relacion , false si se elimino
      */
-    public boolean eliminarProducto(int idpro) {
+    public String eliminarProducto(int casoEvaluar, int id) {
+
         Conexion con = new Conexion();
 
         try {
+
             con.conectar();
-            CallableStatement ps = con.getCon().prepareCall("{CALL pa_eliminarProducto(?,?)}");
-            ps.setInt(1, idpro);
-            ps.registerOutParameter(2, java.sql.Types.BOOLEAN);
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_verificarEliminar(?,?,?,?)}");
+            ps.setInt(1, casoEvaluar);
+            ps.setInt(2, id);
+
+            ps.registerOutParameter(3, java.sql.Types.VARCHAR);
+            ps.registerOutParameter(4, java.sql.Types.BOOLEAN);
+            System.out.println("comprobando eliminacion categoría");
             ps.executeUpdate();
 
-            System.out.println("product eliminado");
-            return ps.getBoolean(2);
-
+            if (ps.getBoolean(4)) {
+                System.out.println("Resultado: " + ps.getString(3));
+                return ps.getString(3);
+            } else {
+                return "SIN EJECUTAR";
+            }
+            //return ps.getBoolean(3);
         } catch (SQLException e) {
+
             System.out.println("Error del mensaje: " + e.getMessage());
-            return false;
+            return "Sin conexión";
+
         } finally {
             con.desconectar();
         }

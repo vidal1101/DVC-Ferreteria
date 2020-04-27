@@ -107,7 +107,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="190" y="380" width="160" height="-1"/>
+                      <AbsoluteConstraints x="210" y="380" width="160" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -117,7 +117,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="460" y="380" width="150" height="-1"/>
+                      <AbsoluteConstraints x="430" y="380" width="150" height="50"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -217,6 +217,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JTextArea" name="txtDirecion">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
                       </Properties>

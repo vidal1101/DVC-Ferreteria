@@ -13,27 +13,67 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Trabajadores"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnIrTraba">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ir a la Ventana"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnCategorias">
           <Properties>
             <Property name="text" type="java.lang.String" value="Categorias"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnIrCate">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ir a la ventana"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnInventario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Inventario"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnIrInven">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ir a la ventana"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnHistorial">
           <Properties>
             <Property name="text" type="java.lang.String" value="Historial"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnIrHisto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ir a la ventana"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu6">
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jMenuItem4"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mnSalir">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Salir"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mniSalir">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Salir por completo"/>
               </Properties>
             </MenuItem>
           </SubComponents>

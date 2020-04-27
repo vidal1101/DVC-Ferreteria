@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import Vista.DlgCategorias;
+import Vista.DlgCliente;
+import Vista.DlgFacturas;
 import Vista.DlgInventario;
 import Vista.DlgProveedores;
-import Vista.DlgTrabajadores;
 import Vista.FrmInicioSesion;
 import Vista.FrmPrincipal;
 import Vista.FrmVentas;
@@ -18,14 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import logicaClass.ClassCliente;
-import logicaClass.ClassProducto;
-import logicaClass.ClassProveedor;
 import logicaClass.ClassTrabajador;
-import modelo.ClienteModelo;
-import modelo.InventarioModelo;
-import modelo.ProveedorModelo;
-import modelo.TrabajadorModelo;
 
 /**
  *
@@ -35,60 +24,35 @@ import modelo.TrabajadorModelo;
  */
 public class ControladorPrincipal implements ActionListener, KeyListener {
 
-    //Instancias
     AudioClip sonido = Applet.newAudioClip(ClassLoader.getSystemResource("DVC_Ferreteria/prueba.wav"));
     private FrmInicioSesion frameSesion;
     private FrmPrincipal framePrincipal;
 
+    // Este objeto se utiliza en todo el programa, ya que identifica al trabajador que hizo login
     private ClassTrabajador trabajador;
-    private TrabajadorModelo trabModelo;
-    private DlgTrabajadores dlgTrab;
 
     private DlgCategorias dlgCateg;
-
-    private ClassCliente cliente;
-    private ClienteModelo cliModelo;
-
-    private ClassProveedor proveedor;
-    private ProveedorModelo provModelo;
     private DlgProveedores dlgprov;
-
-    private ClassProducto producto;
-    private InventarioModelo invenModelo;
     private DlgInventario dlginve;
+    private DlgCliente dlgcli;
+    private DlgFacturas dlgFact;
+    private FrmVentas dlgVentas;
 
-    private FrmVentas ventas;
-    private CajaControlador caja;
-
-    /**
-     * estos botones son los menu bar, aqui les dejo los nombres de variables solo copian y pegan y crean los getter
-     * especificos de cada uno menTrajadores menHistorial menInventario menCategorias
-     */
     public ControladorPrincipal() {
 
+        // GUI principales del programa
         this.framePrincipal = new FrmPrincipal();
-
         this.frameSesion = new FrmInicioSesion();
 
-        this.trabModelo = new TrabajadorModelo();
+        // Este objeto se utiliza en todo el programa, ya que se obtiene después del login
         this.trabajador = new ClassTrabajador();
 
-        this.dlgTrab = new DlgTrabajadores(framePrincipal, true);
         this.dlgCateg = new DlgCategorias(framePrincipal, true);
-
-        this.cliModelo = new ClienteModelo();
-        this.cliente = new ClassCliente();
-
-        this.provModelo = new ProveedorModelo();
-        this.proveedor = new ClassProveedor();
         this.dlgprov = new DlgProveedores(framePrincipal, true);
-
-        this.invenModelo = new InventarioModelo();
-        this.producto = new ClassProducto();
         this.dlginve = new DlgInventario(framePrincipal, true);
-
-        this.ventas = new FrmVentas(framePrincipal, true);
-        this.caja = new CajaControlador(ventas, trabajador);
+        this.dlgcli = new DlgCliente(frameSesion, true);
+        this.dlgVentas = new FrmVentas(framePrincipal, true);
+        this.dlgFact = new DlgFacturas(frameSesion, true);
 
         this.framePrincipal.getBtnAyuda().addActionListener(this);
         this.framePrincipal.getBtnCaja().addActionListener(this);
@@ -104,13 +68,19 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
         this.framePrincipal.getMnHistorial().addActionListener(this);
         this.framePrincipal.getMnInventario().addActionListener(this);
         this.framePrincipal.getMnCategorias().addActionListener(this);
-        
+
+        this.framePrincipal.getMnIrTraba().addActionListener(this);
+        this.framePrincipal.getMnIrCate().addActionListener(this);
+        this.framePrincipal.getMnIrHisto().addActionListener(this);
+        this.framePrincipal.getMnIrInven().addActionListener(this);
+        this.framePrincipal.getMniSalir().addActionListener(this);
+
         this.frameSesion.getBtnIngresar().addActionListener(this);
         this.frameSesion.getTxtUsuario().addKeyListener(this);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) { // eventosa de todos los botones 
+    public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == frameSesion.getBtnIngresar()) { //el inicio de sesion 
             TrabajadorControlador principalCon = new TrabajadorControlador(frameSesion);
@@ -121,63 +91,90 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
                 this.frameSesion.dispose();
                 this.framePrincipal.setVisible(true);
                 //this.sonidoInicio();
-
             }
         }
 
-        if (e.getSource() == framePrincipal.getBtnCaja()) { //breteo la caja 
+        if (e.getSource() == framePrincipal.getBtnCaja()) { // La cajaControlador 
 
-            System.out.println("Trabajador: " + trabajador.getNombreTrab());
-            caja.setTrabajador(trabajador);
-            caja.iniciarVista();
+            CajaControlador cajaControl = new CajaControlador(this.framePrincipal, dlgVentas, trabajador, dlgcli);
+            System.out.println("Trabajador actual: " + trabajador.getNombreTrab());
+            cajaControl.setTrabajador(trabajador);
+            cajaControl.iniciarVista();
 
         } else if (e.getSource() == framePrincipal.getBtnCategorias()) { //las categorias
 
-            CategoriaControlador categControl = new CategoriaControlador(dlgCateg);
+            CategoriaControlador categControl = new CategoriaControlador(this.framePrincipal, dlgCateg);
             categControl.inciarVista("Categorias");
 
         } else if (e.getSource() == framePrincipal.getBtnClientes()) {//los clientes 
 
-            ClienteControlador cliControl = new ClienteControlador(this.framePrincipal);
+            ClienteControlador cliControl = new ClienteControlador(this.framePrincipal, dlgcli);
             cliControl.inciarVista("Clientes");
 
         } else if (e.getSource() == framePrincipal.getBtnProveedores()) { //los proveedores
 
-            ProveedoresControlador provCont = new ProveedoresControlador(this.framePrincipal, dlgprov,
-                    proveedor, provModelo);
+            ProveedoresControlador provCont = new ProveedoresControlador(this.framePrincipal, dlgprov);
             provCont.inciarVista("Proveedores");
 
         } else if (e.getSource() == framePrincipal.getBtnTrabajadores()) {//los trabajadores
 
-            TrabajadorControlador trabControl = new TrabajadorControlador(framePrincipal);
+            TrabajadorControlador trabControl = new TrabajadorControlador(this.framePrincipal, trabajador);
             trabControl.inciarVista("Trabajadores");
 
         } else if (e.getSource() == framePrincipal.getBtnInventario()) {
 
-            InventarioControlador inventControl = new InventarioControlador(this.framePrincipal, dlginve,
-                    producto, invenModelo);
+            InventarioControlador inventControl = new InventarioControlador(this.framePrincipal, dlginve);
             inventControl.inciarVista("Productos");
 
         } else if (e.getSource() == framePrincipal.getBtnFacturas()) {
             /**
              * aun falta aqui las facturas
              */
-            FacturasControlador facturaControl = new FacturasControlador(framePrincipal);
+            FacturasControlador facturaControl = new FacturasControlador(this.framePrincipal, dlgFact);
             facturaControl.iniciarVista("Facturas");
 
         } else if (e.getSource() == framePrincipal.getBtnCalendario()) {
+            
+            // Codigo de Rodrigo
 
         } else if (e.getSource() == framePrincipal.getBtnConfiguracion()) {
+            
+            // Codigo de Rodrigo
 
-        } else if (e.getSource() == framePrincipal.getMnTrabajadores()) {//eventos de los menur bar 
-            TrabajadorControlador trabControl = new TrabajadorControlador(framePrincipal);
+        } else if (e.getSource() == framePrincipal.getMnTrabajadores()) { //eventos de los menur bar
+
+            TrabajadorControlador trabControl = new TrabajadorControlador(this.framePrincipal, trabajador);
             trabControl.inciarVista("Trabajadores");
+        } /**
+         * Escuchan las opciones de la barra principal
+         */
+        else if (e.getSource() == framePrincipal.getMnIrTraba()) {
+
+            TrabajadorControlador trabControl = new TrabajadorControlador(this.framePrincipal, trabajador);
+            trabControl.inciarVista("Trabajadores");
+
+        } else if (e.getSource() == framePrincipal.getMnIrCate()) {
+            CategoriaControlador cateCon = new CategoriaControlador(this.framePrincipal, dlgCateg);
+            cateCon.inciarVista("Categorias");
+
+        } else if (e.getSource() == framePrincipal.getMnIrInven()) {
+            InventarioControlador inveCon = new InventarioControlador(this.framePrincipal, dlginve);
+            inveCon.inciarVista("Productos");
+
+        } else if (e.getSource() == framePrincipal.getMnIrHisto()) {
+            FacturasControlador factuCon = new FacturasControlador(this.framePrincipal, dlgFact);
+            factuCon.iniciarVista("Facturas");
+
+        } else if (e.getSource() == framePrincipal.getMniSalir()) {
+            System.exit(0);
+        } else {
+            System.out.println("Ningún botón parecido");
         }
 
     }
 
     /**
-     * metodo llamado desde el arranque para iniciar la vista
+     * Llamado desde el arranque para iniciar la vista
      */
     public void muestraVentanaPrincipal() {
 
@@ -194,7 +191,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
         if (e.getSource() == frameSesion.getTxtUsuario()) {
             char letra = e.getKeyChar();
 

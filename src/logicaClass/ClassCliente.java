@@ -76,9 +76,9 @@ public class ClassCliente implements Serializable {
      */
     public ClassCliente() {
         this.cedulaCli = 0;
-        this.nombreCli = "";
-        this.telefonoCli = "";
-        this.emailCli = "";
+        this.nombreCli = "Sin nombre";
+        this.telefonoCli = "+506-000'-0000";
+        this.emailCli = "Sin email";
     }
 
 }

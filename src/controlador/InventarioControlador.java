@@ -6,6 +6,8 @@ import Vista.FrmPrincipal;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -21,7 +23,7 @@ import modelo.ProveedorModelo;
  * @author Rodrigo Vidal
  * @author Carlos Mairena
  */
-public class InventarioControlador implements ActionListener {
+public class InventarioControlador implements ActionListener, KeyListener {
 
     private FrmPrincipal principal;
     private DlgInventario dlgivent;
@@ -31,15 +33,14 @@ public class InventarioControlador implements ActionListener {
     DefaultTableModel modeloInvent;
     private int opc;
 
-    public InventarioControlador(FrmPrincipal principal, DlgInventario dlginvent, ClassProducto producto,
-            InventarioModelo prodModelo) {
+    public InventarioControlador(FrmPrincipal principal, DlgInventario dlginvent) {
         this.modeloInvent = new DefaultTableModel();
         this.mostrador = new DlgMostrador(principal, true);
         this.principal = principal;
         this.dlgivent = dlginvent;
-        this.prodModelo = prodModelo;
+        this.prodModelo = new InventarioModelo();
+        this.producto = new ClassProducto();
         this.opc = 0;
-        this.producto = producto;
 
         this.dlgivent.getBtnNuevo().addActionListener(this);
         this.dlgivent.getBtnCalender().addActionListener(this);
@@ -50,7 +51,10 @@ public class InventarioControlador implements ActionListener {
         this.dlgivent.getBtnLimpiar().addActionListener(this);
         this.dlgivent.getRbdNOfragil().addActionListener(this);
         this.dlgivent.getRbdSIfragil().addActionListener(this);
-
+        this.dlgivent.getTxtNombProductoP().addKeyListener(this);
+        this.dlgivent.getTxtPrecProductoP().addKeyListener(this);
+        this.dlgivent.getSpnDescProd().addKeyListener(this);
+        this.dlgivent.getTxtCantidadStockP().addKeyListener(this);
         this.dlgivent.getBtnProveedor().addActionListener(this);
         this.dlgivent.getBtnCategoria().addActionListener(this);
         this.mostrador.getBtnSeleccionar().addActionListener(this);
@@ -64,7 +68,7 @@ public class InventarioControlador implements ActionListener {
     public void clear() {
         dlgivent.getTxtCantidadStockP().setText("");
         dlgivent.getTxtDescripProductoP().setText("");
-        dlgivent.getTxtDescuentoProductoP().setText("");
+        dlgivent.getSpnDescProd().setValue(0);
         dlgivent.getTxtNombProductoP().setText("");
         dlgivent.getTxtPrecProductoP().setText("");
         dlgivent.getTxtIdCategoria().setText("");
@@ -105,7 +109,7 @@ public class InventarioControlador implements ActionListener {
                 producto.setCantidad(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
                 producto.setIdCategoria(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
                 producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
-                producto.setDescuentProd(Integer.parseInt(dlgivent.getTxtDescuentoProductoP().getText()));
+                producto.setDescuentProd(Integer.parseInt(String.valueOf(dlgivent.getSpnDescProd().getValue())));
                 producto.setNombreProd(dlgivent.getTxtNombProductoP().getText());
                 producto.setPrecioProd(Float.parseFloat(dlgivent.getTxtPrecProductoP().getText()));
                 producto.setProdFragil(dlgivent.getRbdNOfragil().isSelected()
@@ -130,8 +134,9 @@ public class InventarioControlador implements ActionListener {
                     }
 
                 } else {
-                    
+
                     producto.setIdProducto(Integer.parseInt(dlgivent.getTxtIdProductoP().getText()));
+
                     if (prodModelo.modificarProducto(producto)) {
                         JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
                         this.mostrartabla(this.prodModelo.mostrarProductos());
@@ -145,12 +150,13 @@ public class InventarioControlador implements ActionListener {
                 }
             }
         } else if (e.getSource() == dlgivent.getBtnCancelar()) {
+            
             this.clear();
             this.dlgivent.getPanInventario().setEnabledAt(1, false);
             this.dlgivent.getPanInventario().setEnabledAt(0, true);
             this.dlgivent.getPanInventario().setSelectedIndex(0);
 
-        } else if (e.getSource() == dlgivent.getBtnEditar()) { //modifcar
+        } else if (e.getSource() == dlgivent.getBtnEditar()) { //modificar
 
             if (dlgivent.getTblInventario().getSelectedRow() != -1) {
 
@@ -164,7 +170,7 @@ public class InventarioControlador implements ActionListener {
 
                 this.dlgivent.getTxtNombProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 1).toString());
                 this.dlgivent.getTxtPrecProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 4).toString());
-                this.dlgivent.getTxtDescuentoProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 5).toString());
+                this.dlgivent.getSpnDescProd().setValue(dlgivent.getTblInventario().getValueAt(file, 5));
                 this.dlgivent.getCmbUnidadVenta().setSelectedItem(dlgivent.getTblInventario().getValueAt(file, 6).toString());
                 this.dlgivent.getTxtCantidadStockP().setText(dlgivent.getTblInventario().getValueAt(file, 7).toString());
                 this.dlgivent.getTxtDescripProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 9).toString());
@@ -190,10 +196,20 @@ public class InventarioControlador implements ActionListener {
 
                 // Si la opción de eliminar fue SI, eliminamos
                 if (opcion == JOptionPane.YES_OPTION) {
-                    prodModelo.eliminarProducto(idProv);
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    JOptionPane.showMessageDialog(dlgivent, "Eliminado");
-                    this.mostrartabla(this.prodModelo.mostrarProductos());
+                    String respuesta = prodModelo.eliminarProducto(5, idProv);
+
+                    if (respuesta.equals("ELIMINADO")) {
+
+                        JOptionPane.showMessageDialog(dlgivent, "Eliminado");
+                        this.mostrartabla(this.prodModelo.mostrarProductos());
+                    } else if (respuesta.equals("CON REGISTROS")) {
+
+                        JOptionPane.showMessageDialog(dlgivent, "No se puede eliminar este producto. \n"
+                                + "Hay facturas enlazadas a este producto");
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgivent, "Ha habido un error al intentar eliminarse.");
+                    }
                 }
 
             } else {
@@ -265,8 +281,8 @@ public class InventarioControlador implements ActionListener {
 
             return false;
 
-        } else if (dlgivent.getTxtDescuentoProductoP().getText().isEmpty()) {
-            dlgivent.getTxtDescuentoProductoP().setBackground(Color.red);
+        } else if (dlgivent.getSpnDescProd().getValue().toString().isEmpty()) {
+            dlgivent.getSpnDescProd().setBackground(Color.red);
 
             return false;
 
@@ -347,7 +363,6 @@ public class InventarioControlador implements ActionListener {
             while (rs.next()) {
                 producto = new ClassProducto();
 
-
                 Object[] objeto = {rs.getInt(1), rs.getString(4), rs.getInt(2), rs.getInt(3),
                     rs.getFloat(5), rs.getInt(6), rs.getString(7),
                     rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
@@ -405,6 +420,52 @@ public class InventarioControlador implements ActionListener {
             System.out.println(e.getMessage());
             System.out.println("--------------------------------------");
         }
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+        if (e.getSource() == dlgivent.getTxtNombProductoP()) {
+
+            char letra = e.getKeyChar();
+
+            if (Character.isDigit(letra)) {
+                e.consume();
+            }
+        } else if (e.getSource() == dlgivent.getTxtPrecProductoP()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+            if (dlgivent.getTxtPrecProductoP().getText().length() >= 8) {
+                e.consume();
+            }
+        } else if (e.getSource() == dlgivent.getSpnDescProd()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+
+        } else if (e.getSource() == dlgivent.getTxtCantidadStockP()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }

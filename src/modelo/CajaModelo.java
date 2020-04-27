@@ -38,7 +38,7 @@ public class CajaModelo {
 
             cst.registerOutParameter(4, java.sql.Types.BOOLEAN);
             System.out.println("Insertando datos");
-            cst.execute();
+            cst.executeUpdate();
 
             return cst.getBoolean(4);
 
@@ -51,8 +51,8 @@ public class CajaModelo {
     }
 
     /**
-     * Permite insertar una nueva factura, retorna en <br> su execute el id de la nueva factura para ingresar sus
-     * detalles
+     * Permite insertar una nueva factura, retorna en <br>
+     * su execute el id de la nueva factura para ingresar sus detalles
      *
      * @param factura
      * @return
@@ -161,7 +161,6 @@ public class CajaModelo {
 
             System.out.println("Intentando enviar los detalles");
             boolean insertados = true;
-            //con.conectar();
 
             // Llamamos al metodo que inserta el detalle
             for (int i = 0; i < productos.size(); i++) {
@@ -193,7 +192,8 @@ public class CajaModelo {
     }
 
     /**
-     * Llama al método que contiene el select para obtener los datos de la tabla
+     * Llama al método que contiene la consulta <br>
+     * para obtener los datos del producto, enviando su ID
      *
      * @param idProd
      * @return

@@ -3,6 +3,7 @@ package controlador;
 import Vista.DlgCliente;
 import Vista.DlgModificarDatos;
 import Vista.DlgMostrador;
+import Vista.FrmPrincipal;
 import Vista.FrmVentas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ import logicaClass.ClassFactura;
 import logicaClass.ClassProducto;
 import logicaClass.ClassTrabajador;
 import modelo.CajaModelo;
-import modelo.ClienteModelo;
 import modelo.InventarioModelo;
 
 /**
@@ -31,30 +31,33 @@ import modelo.InventarioModelo;
 public class CajaControlador implements ActionListener {
 
     private FrmVentas ventanaVentas;
-    private ArrayList<ClassProducto> arraysDetalles;
-    private CajaModelo cajaModelo;
-    private ClassProducto producto;
+    private FrmPrincipal principal;
     private DlgMostrador mostrador;
+    private DlgModificarDatos dlgMofidicaCantidad;
+    private DlgCliente dlgCli;
+    
+    private CajaModelo cajaModelo;
     private ClassCliente cliente;
     private ClassTrabajador trabajador;
-    private ClienteModelo cliModelo;
-    private DlgCliente dlgCli;
+    private ClassProducto producto;
+    
     private java.util.Date fecha;
-    private DlgModificarDatos dlgMofidicaCantidad;
+    private ArrayList<ClassProducto> arraysDetalles;
     private int cantidad;
 
-    public CajaControlador(FrmVentas ventanaVentas, ClassTrabajador trabajador) {
-
+    public CajaControlador(FrmPrincipal principal, FrmVentas ventanaVentas,
+            ClassTrabajador trabajador, DlgCliente dlgCli) {
+        
+        this.dlgCli = dlgCli;
+        this.principal = principal;
         this.producto = new ClassProducto();
         this.arraysDetalles = new ArrayList<>();
-        this.mostrador = new DlgMostrador(null, true);
+        this.mostrador = new DlgMostrador(this.principal, true);
         this.ventanaVentas = ventanaVentas;
         this.cajaModelo = new CajaModelo();
         this.cantidad = 0;
-        this.cliModelo = new ClienteModelo();
         this.cliente = new ClassCliente();
         this.trabajador = trabajador;
-        this.dlgCli = new DlgCliente(null, true);
         this.fecha = new java.util.Date();
         this.dlgMofidicaCantidad = new DlgModificarDatos(null, true);
 
@@ -87,6 +90,7 @@ public class CajaControlador implements ActionListener {
                 dlgMofidicaCantidad.setTitle("Modificar Cantidad y Descuento de Produicto  " + this.arraysDetalles.get(fila).getIdProducto());
 
                 try {
+
                     dlgMofidicaCantidad.getTxtCantiStock().setText("" + rs.getInt(2));
                     dlgMofidicaCantidad.getTxtDesc().setText("" + rs.getInt(3));
 
@@ -99,8 +103,7 @@ public class CajaControlador implements ActionListener {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Debe Seleccione un producto");
-
-            }  
+            }
 
         } else if (e.getSource() == dlgMofidicaCantidad.getBtnConfirmarCambios()) {
             try {
@@ -118,16 +121,12 @@ public class CajaControlador implements ActionListener {
         } else if (e.getSource() == ventanaVentas.getBtnFacturar()) {
 
             System.out.println("Facturar");
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea factura?", "FACTURAR", JOptionPane.YES_NO_OPTION)) {
-                System.out.println("Acepta facturar");
-                this.facturar();
-            }
+
+            this.facturar();
 
         } else if (e.getSource() == ventanaVentas.getBtnCliente()) {
 
-            dlgCli = new DlgCliente(null, true);
-
-            ClienteControlador cliControl = new ClienteControlador(null);
+            ClienteControlador cliControl = new ClienteControlador(this.principal, dlgCli);
             cliControl.inciarVista("Seleccionar Cliente");
 
             // Selecciona al cliente
@@ -213,6 +212,7 @@ public class CajaControlador implements ActionListener {
 
             System.out.println("Salir");
             this.sumarAlStocks();
+            this.limpiartodo();
             ventanaVentas.dispose();
 
         } else if (e.getSource() == ventanaVentas.getBtnQuitarTodo()) {
@@ -256,17 +256,16 @@ public class CajaControlador implements ActionListener {
 
         this.rellenarTabla();
         this.calcularMontos();
-        ventanaVentas.setTitle("Caja");
-        ventanaVentas.getLblNomTrab().setText("Nombre del cajero: " + trabajador.getNombreTrab());
-        ventanaVentas.getTxtDireccionEnt().setText("Sin dirección");
+        this.ventanaVentas.setTitle("Caja");
+        this.ventanaVentas.getLblNomTrab().setText("Nombre del cajero: " + trabajador.getNombreTrab());
+        this.limpiartodo();
 
-        //FECHA DEL SISTEMA.
+        //FECHA DEL SISTEMA
         SimpleDateFormat formato = new SimpleDateFormat("dd MMMMM YYYY");
         ventanaVentas.getTxtFecha().setText(formato.format(fecha));
-
+        // HORA DEL SISTEMA
         Timer tiempo = new Timer(100, CajaControlador.this);
         tiempo.start();
-
         ventanaVentas.setVisible(true);
     }
 
@@ -337,8 +336,15 @@ public class CajaControlador implements ActionListener {
         }
     }
 
-    /*
-    ------------------------------------------------------------------
+    /**
+     *
+     * Permite calcular el total a pagar, el total descuento y el subtotal <br>
+     * con los productos agregados.
+     */
+    private void calcularMontos() {
+
+        /*
+        -----------------------------------------------------------------------
                                       IMPORTANTE
         La manera en que calcula el descuento es por individual, osea, si el producto vale 1000 y el
     descuento es del 50%, entonces calcula el valor con el descuento, luego ese valor lo multiplica para
@@ -346,14 +352,8 @@ public class CajaControlador implements ActionListener {
                              3 productos a 1000 colones
                              50 % de descuento equivale a 500 colones
                              en total se cobran 1500 porque cada producto con descuento son 500
-    -----------------------------------------------------------------------
-     */
-    /**
-     * Permite calcular el total a pagar, el total descuento y el subtotal
-     *
-     */
-    private void calcularMontos() {
-
+        -----------------------------------------------------------------------
+         */
         ventanaVentas.getTxtDescuento().setText("0");
         ventanaVentas.getTxtSubTotal().setText("0");
         ventanaVentas.getTxtTotalPagar().setText("0");
@@ -410,20 +410,23 @@ public class CajaControlador implements ActionListener {
      * Permite limpiar los campos de la gráfica
      */
     public void limpiartodo() {
-        this.arraysDetalles = new ArrayList<>();
+
+        this.arraysDetalles.clear();
         this.cantidad = 0;
-        this.ventanaVentas.getTxtNombreCliente().setText("");
-        this.ventanaVentas.getTxtIdCliente().setText("");
-        this.ventanaVentas.getTxtDireccionEnt().setText("");
-        this.ventanaVentas.getTxtSubTotal().setText("");
-        this.ventanaVentas.getTxtTotalPagar().setText("");
-        this.ventanaVentas.getTxtDescuento().setText("");
+        this.ventanaVentas.getTxtNombreCliente().setText("Sin Cliente");
+        this.ventanaVentas.getTxtIdCliente().setText("-----");
+        this.ventanaVentas.getTxtDireccionEnt().setText("Sin dirección");
+        this.ventanaVentas.getTxtSubTotal().setText("0");
+        this.ventanaVentas.getTxtTotalPagar().setText("0");
+        this.ventanaVentas.getTxtDescuento().setText("0");
+        this.cliente = new ClassCliente();
         this.rellenarTabla();
     }
 
     /**
      *
-     * regresa todos las cantidades a sus stock de la base de datos con el switch de suma o restar
+     * Regresa todos las cantidades a sus stock <br>
+     * de la base de datos con el switch de suma o restar
      */
     public void sumarAlStocks() {
 
@@ -445,8 +448,8 @@ public class CajaControlador implements ActionListener {
 
     /**
      *
-     * Método para visualizar la hora, trabajada con un hilo de timer y a traves de un metodo del event para correr
-     * mientras la ventana este en uso
+     * Método para mostrar la hora, trabajada con la clase Timer <br>
+     * y a traves de un metodo de ActionEvent recorre los segundos.
      */
     private void hora() {
 
@@ -458,7 +461,8 @@ public class CajaControlador implements ActionListener {
     }
 
     /**
-     * Revisa si el Id de los productos insertados ya exite de ser asi solo suma los dato al stock
+     * Revisa si el Id de los productos insertados ya existe, <br>
+     * de ser así, solo suma los dato al stock.
      *
      * @param id el id del producto de la tbal de frmVentas
      * @return false is existe y si es true es que no existe
@@ -485,7 +489,8 @@ public class CajaControlador implements ActionListener {
 
     /**
      *
-     * metodo para mostrar los prodcutos
+     * Muestra los productos obteniendo sus <br>
+     * datos desde la base de datos
      */
     private void mostrarProductos() {
         String[] title = {"ID", "Proveedor", "Categoria", "Nombre Prod ", "Precio", "Descuento", "Venta por",
@@ -527,23 +532,33 @@ public class CajaControlador implements ActionListener {
      */
     private void facturar() {
 
-        java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
+        if (this.cliente.getCedulaCli() != 0 && !arraysDetalles.isEmpty()) {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea factura?", "FACTURAR", JOptionPane.YES_NO_OPTION)) {
+                System.out.println("Acepta facturar");
+                java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
 
-        ClassFactura facturaNueva = new ClassFactura(arraysDetalles, fechaSQL, cliente, trabajador,
-                Float.parseFloat(ventanaVentas.getTxtTotalPagar().getText()),
-                Float.parseFloat(ventanaVentas.getTxtSubTotal().getText()),
-                ventanaVentas.getTxtDireccionEnt().getText());
+                // Creamos el objeto de tipo Factura
+                ClassFactura facturaNueva = new ClassFactura(arraysDetalles, fechaSQL, cliente, trabajador,
+                        Float.parseFloat(ventanaVentas.getTxtTotalPagar().getText()),
+                        Float.parseFloat(ventanaVentas.getTxtSubTotal().getText()),
+                        ventanaVentas.getTxtDireccionEnt().getText());
 
-        // Aquí enviamos el objeto de tipo factura para que sea facturada
-        if (cajaModelo.insertarFactura(facturaNueva)) {
-            JOptionPane.showMessageDialog(ventanaVentas, "Facturado exitosamente");
-            //this.limpiartodo();
+                // Aquí enviamos el objeto de tipo factura para que sea facturada
+                if (cajaModelo.insertarFactura(facturaNueva)) {
+                    JOptionPane.showMessageDialog(ventanaVentas, "Facturado exitosamente");
+                    this.limpiartodo();
 
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(ventanaVentas, "Seleccione un cliente para poder facturar \n"
+                    + "y asegúrese de tener al menos 1 producto para facturar.",
+                    "Seleccion un cliente", JOptionPane.WARNING_MESSAGE);
         }
     }
 
     /**
-     * metodo para cambiar las cambiar las cantidades y descuentos de los productos
+     * Cambia las cantidades y descuentos de los productos
      *
      * @param fila la fila seleccionado
      * @return false si falla en las operaciones, true true

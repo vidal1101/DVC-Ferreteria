@@ -64,10 +64,10 @@ public class DlgFacturas extends javax.swing.JDialog {
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 250));
 
         btnMasDetalles.setText("Más detalles");
-        jPanel2.add(btnMasDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 160, -1));
+        jPanel2.add(btnMasDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 160, 50));
 
         btnAnulaFac.setText("Anular factura");
-        jPanel2.add(btnAnulaFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 150, -1));
+        jPanel2.add(btnAnulaFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 150, 50));
         jPanel2.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 54, 290, 30));
 
         jLabel1.setText("Buscar:");
@@ -95,6 +95,7 @@ public class DlgFacturas extends javax.swing.JDialog {
         jLabel2.setText("Dirección de entrega:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 180, 20));
 
+        txtDirecion.setEditable(false);
         txtDirecion.setColumns(20);
         txtDirecion.setRows(5);
         jScrollPane3.setViewportView(txtDirecion);
@@ -263,5 +264,9 @@ public class DlgFacturas extends javax.swing.JDialog {
 
     public javax.swing.JButton getBtnRegresar() {
         return btnRegresar;
+    }
+
+    public javax.swing.JTabbedPane getTbpnPestanas() {
+        return tbpnPestanas;
     }
 }

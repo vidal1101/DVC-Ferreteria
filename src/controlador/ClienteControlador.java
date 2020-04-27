@@ -35,11 +35,11 @@ public class ClienteControlador implements ActionListener, KeyListener {
     private int opc;
     private boolean selecciono;
 
-    public ClienteControlador(FrmPrincipal principal) {
+    public ClienteControlador(FrmPrincipal principal, DlgCliente dlgCli) {
 
         this.modelCli = new DefaultTableModel();
         this.principal = principal;
-        this.dlgCli = new DlgCliente(null, true);
+        this.dlgCli = dlgCli;
         this.cliente = new ClassCliente();
         this.cliModelo = new ClienteModelo();
 
@@ -182,10 +182,22 @@ public class ClienteControlador implements ActionListener, KeyListener {
 
                 // Si la opción de eliminar fue SI, eliminamos
                 if (opcion == JOptionPane.YES_OPTION) {
-                    cliModelo.eliminarCliente(cedula);
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    JOptionPane.showMessageDialog(dlgCli, "Eliminado");
-                    this.mostrartabla(this.cliModelo.mostrarClientes());
+
+                    String respuesta = cliModelo.eliminarCliente(4, cedula);
+
+                    if (respuesta.equals("ELIMINADO")) {
+
+                        JOptionPane.showMessageDialog(dlgCli, "Cliente eliminada exitosamente.");
+                        this.mostrartabla(this.cliModelo.mostrarClientes());
+
+                    } else if (respuesta.equals("CON REGISTROS")) {
+
+                        JOptionPane.showMessageDialog(dlgCli, "No se puede eliminar este cliente. \n"
+                                + "Hay facturas enlazadas a este cliente");
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgCli, "Ha habido un error al intentar eliminarse.");
+                    }
                 }
 
             } else {
@@ -331,7 +343,7 @@ public class ClienteControlador implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
         if (e.getSource() == dlgCli.getTxtNombreCli()) {
 
             char letra = e.getKeyChar();
@@ -345,7 +357,7 @@ public class ClienteControlador implements ActionListener, KeyListener {
             if (!Character.isDigit(letra)) {
                 e.consume();
             }
-            
+
             if (dlgCli.getTxtCedulaCli().getText().length() >= 9) {
                 e.consume();
             }

@@ -36,11 +36,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnFacturas = new javax.swing.JButton();
         mnbBarraPrincipal = new javax.swing.JMenuBar();
         mnTrabajadores = new javax.swing.JMenu();
+        mnIrTraba = new javax.swing.JMenuItem();
         mnCategorias = new javax.swing.JMenu();
+        mnIrCate = new javax.swing.JMenuItem();
         mnInventario = new javax.swing.JMenu();
+        mnIrInven = new javax.swing.JMenuItem();
         mnHistorial = new javax.swing.JMenu();
+        mnIrHisto = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        mnSalir = new javax.swing.JMenu();
+        mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
@@ -101,7 +107,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
-        btnCaja.setOpaque(true);
         jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 310, 80));
 
         btnCategorias.setBackground(new java.awt.Color(255, 255, 255));
@@ -111,7 +116,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCategorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategorias.setDefaultCapable(false);
         btnCategorias.setFocusPainted(false);
-        btnCategorias.setOpaque(true);
         jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 310, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoDvcdieño1.jpeg"))); // NOI18N
@@ -124,7 +128,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInventario.setDefaultCapable(false);
         btnInventario.setFocusPainted(false);
-        btnInventario.setOpaque(true);
         jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 320, 80));
 
         btnTrabajadores.setBackground(new java.awt.Color(255, 255, 255));
@@ -157,21 +160,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnbBarraPrincipal.setBackground(new java.awt.Color(131, 182, 231));
 
         mnTrabajadores.setText("Trabajadores");
+
+        mnIrTraba.setText("Ir a la Ventana");
+        mnTrabajadores.add(mnIrTraba);
+
         mnbBarraPrincipal.add(mnTrabajadores);
 
         mnCategorias.setText("Categorias");
+
+        mnIrCate.setText("Ir a la ventana");
+        mnCategorias.add(mnIrCate);
+
         mnbBarraPrincipal.add(mnCategorias);
 
         mnInventario.setText("Inventario");
+
+        mnIrInven.setText("Ir a la ventana");
+        mnInventario.add(mnIrInven);
+
         mnbBarraPrincipal.add(mnInventario);
 
         mnHistorial.setText("Historial");
+
+        mnIrHisto.setText("Ir a la ventana");
+        mnHistorial.add(mnIrHisto);
+
         mnbBarraPrincipal.add(mnHistorial);
 
         jMenuItem4.setText("jMenuItem4");
         jMenu6.add(jMenuItem4);
 
         mnbBarraPrincipal.add(jMenu6);
+
+        mnSalir.setText("Salir");
+
+        mniSalir.setText("Salir por completo");
+        mnSalir.add(mniSalir);
+
+        mnbBarraPrincipal.add(mnSalir);
 
         setJMenuBar(mnbBarraPrincipal);
 
@@ -253,8 +279,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnCategorias;
     private javax.swing.JMenu mnHistorial;
     private javax.swing.JMenu mnInventario;
+    private javax.swing.JMenuItem mnIrCate;
+    private javax.swing.JMenuItem mnIrHisto;
+    private javax.swing.JMenuItem mnIrInven;
+    private javax.swing.JMenuItem mnIrTraba;
+    private javax.swing.JMenu mnSalir;
     private javax.swing.JMenu mnTrabajadores;
     private javax.swing.JMenuBar mnbBarraPrincipal;
+    private javax.swing.JMenuItem mniSalir;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JButton getBtnTrabajadores() {
@@ -310,6 +342,31 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     public javax.swing.JMenu getMnTrabajadores() {
         return mnTrabajadores;
-    }    
+    }
+
+    public javax.swing.JMenuItem getMnIrCate() {
+        return mnIrCate;
+    }
+
+    public javax.swing.JMenuItem getMnIrHisto() {
+        return mnIrHisto;
+    }
+
+    public javax.swing.JMenuItem getMnIrInven() {
+        return mnIrInven;
+    }
+
+    public javax.swing.JMenuItem getMnIrTraba() {
+        return mnIrTraba;
+    }
+
+    public javax.swing.JMenu getMnSalir() {
+        return mnSalir;
+    }
+
+    public javax.swing.JMenuItem getMniSalir() {
+        return mniSalir;
+    }
+
 }
 

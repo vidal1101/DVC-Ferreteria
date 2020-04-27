@@ -29,8 +29,8 @@ public class DlgInventario extends javax.swing.JDialog {
         panInventario = new javax.swing.JTabbedPane();
         pnlBase = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAyuda = new javax.swing.JButton();
+        btnConfig = new javax.swing.JButton();
         btnCalender = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstCategorias = new javax.swing.JList<>();
@@ -50,7 +50,6 @@ public class DlgInventario extends javax.swing.JDialog {
         lblnomProd = new javax.swing.JLabel();
         txtNombProductoP = new javax.swing.JTextField();
         txtPrecProductoP = new javax.swing.JTextField();
-        txtDescuentoProductoP = new javax.swing.JTextField();
         txtCantidadStockP = new javax.swing.JTextField();
         txtIdProductoP = new javax.swing.JTextField();
         lblDecuent = new javax.swing.JLabel();
@@ -71,6 +70,7 @@ public class DlgInventario extends javax.swing.JDialog {
         txtIdCategoria = new javax.swing.JTextField();
         btnProveedor = new javax.swing.JButton();
         btnCategoria = new javax.swing.JButton();
+        spnDescProd = new javax.swing.JSpinner();
         mnbBarraPrinc = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -95,28 +95,28 @@ public class DlgInventario extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setToolTipText("");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (2).png"))); // NOI18N
-        jButton1.setText("Ayuda");
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setDefaultCapable(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAyuda.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        btnAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (2).png"))); // NOI18N
+        btnAyuda.setText("Ayuda");
+        btnAyuda.setBorderPainted(false);
+        btnAyuda.setContentAreaFilled(false);
+        btnAyuda.setDefaultCapable(false);
+        btnAyuda.setFocusPainted(false);
+        btnAyuda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAyudaActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
-        jButton2.setText("Configuracion");
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setDefaultCapable(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
+        btnConfig.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
+        btnConfig.setText("Configuracion");
+        btnConfig.setBorderPainted(false);
+        btnConfig.setContentAreaFilled(false);
+        btnConfig.setDefaultCapable(false);
+        btnConfig.setFocusPainted(false);
+        btnConfig.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
 
         btnCalender.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         btnCalender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario.png"))); // NOI18N
@@ -132,11 +132,11 @@ public class DlgInventario extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCalender, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,9 +144,9 @@ public class DlgInventario extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(btnConfig)
                         .addComponent(btnCalender))
-                    .addComponent(jButton1))
+                    .addComponent(btnAyuda))
                 .addGap(3, 3, 3))
         );
 
@@ -288,7 +288,7 @@ public class DlgInventario extends javax.swing.JDialog {
         txtIdProductoP.setEditable(false);
 
         lblDecuent.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblDecuent.setText("Descuento de Producto :");
+        lblDecuent.setText("Descuento de Producto:");
 
         lblProdFragil.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblProdFragil.setText("Producto Fragil :");
@@ -342,6 +342,9 @@ public class DlgInventario extends javax.swing.JDialog {
         btnCategoria.setText("ID");
         btnCategoria.setToolTipText("");
 
+        spnDescProd.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        spnDescProd.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -352,8 +355,8 @@ public class DlgInventario extends javax.swing.JDialog {
                         .addGap(20, 20, 20)
                         .addComponent(lblnomProd, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(110, 110, 110)
-                        .addComponent(lblDecuent, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(130, 130, 130)
+                        .addComponent(lblDecuent)
+                        .addGap(70, 70, 70)
                         .addComponent(lblDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -366,15 +369,20 @@ public class DlgInventario extends javax.swing.JDialog {
                                 .addGap(10, 10, 10)
                                 .addComponent(rbdSIfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(rbdNOfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(110, 110, 110)
+                                .addComponent(rbdNOfragil, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescuentoProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUnidVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbUnidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCantStock, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidadStockP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(130, 130, 130)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(110, 110, 110)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUnidVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbUnidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCantStock, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCantidadStockP, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(130, 130, 130))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spnDescProd, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(183, 183, 183)))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -439,8 +447,9 @@ public class DlgInventario extends javax.swing.JDialog {
                             .addComponent(rbdSIfragil)
                             .addComponent(rbdNOfragil)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtDescuentoProductoP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addGap(6, 6, 6)
+                        .addComponent(spnDescProd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblUnidVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(cmbUnidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -520,9 +529,9 @@ public class DlgInventario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
@@ -572,9 +581,11 @@ public class DlgInventario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCalender;
+    private javax.swing.JButton btnAyuda;
+    private javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCategoria;
+    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardarProd;
@@ -583,8 +594,6 @@ public class DlgInventario extends javax.swing.JDialog {
     private javax.swing.JButton btnProveedor;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbUnidadVenta;
-    private javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
     public javax.swing.JMenu jMenu1;
     public javax.swing.JMenu jMenu2;
     public javax.swing.JMenu jMenu3;
@@ -622,10 +631,10 @@ public class DlgInventario extends javax.swing.JDialog {
     private javax.swing.JPanel pnlBase;
     private javax.swing.JRadioButton rbdNOfragil;
     private javax.swing.JRadioButton rbdSIfragil;
+    private javax.swing.JSpinner spnDescProd;
     private javax.swing.JTable tblInventario;
     private javax.swing.JTextField txtCantidadStockP;
     private javax.swing.JTextArea txtDescripProductoP;
-    private javax.swing.JTextField txtDescuentoProductoP;
     private javax.swing.JTextField txtIdCategoria;
     private javax.swing.JTextField txtIdProductoP;
     private javax.swing.JTextField txtIdProveedor;
@@ -761,14 +770,6 @@ public class DlgInventario extends javax.swing.JDialog {
         this.txtDescripProductoP = txtDescripProductoP;
     }
 
-    public javax.swing.JTextField getTxtDescuentoProductoP() {
-        return txtDescuentoProductoP;
-    }
-
-    public void setTxtDescuentoProductoP(javax.swing.JTextField txtDescuentoProductoP) {
-        this.txtDescuentoProductoP = txtDescuentoProductoP;
-    }
-
     public javax.swing.JTextField getTxtIdProductoP() {
         return txtIdProductoP;
     }
@@ -808,4 +809,9 @@ public class DlgInventario extends javax.swing.JDialog {
     public javax.swing.JTextField getTxtIdProveedor() {
         return txtIdProveedor;
     }
+
+    public javax.swing.JSpinner getSpnDescProd() {
+        return spnDescProd;
+    }
+    
 }

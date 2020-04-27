@@ -35,4 +35,28 @@ public class FacturaModelo {
         }
     }
 
+    /**
+     * Permite anular la factura indicada
+     *
+     * @param IdFactura
+     * @return
+     */
+    public boolean anularFactura(int IdFactura) {
+        Conexion con = new Conexion();
+
+        try {
+            con.conectar();
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_modificarEstadoFactura(?,?)}");
+            ps.setInt(1, IdFactura);
+            ps.registerOutParameter(2, java.sql.Types.BOOLEAN);
+            ps.executeUpdate();
+
+            return ps.getBoolean(2);
+
+        } catch (SQLException e) {
+            System.out.println("Error del mensaje: " + e.getMessage());
+            return false;
+        }
+    }
+
 }
