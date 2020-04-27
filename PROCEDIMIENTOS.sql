@@ -12,6 +12,37 @@
 -- --------------------------------------------------------------------------
 USE `Ferreteria-DVC`;
 
+COMMENT 'Procedimiento para buscar un producto por nombre o precio o descuento o id producto
+		 nombre de categoria o nombre del proveedor'
+DELIMITER $$
+CREATE DEFINER = `root`@`localhost` PROCEDURE pa_buscarProducto
+(IN $datos TEXT
+)
+BEGIN
+		SELECT p.idProducto, p.nombre, pr.nombre AS 'Proveedor', c.nombre AS 'Categoria', 
+					   p.precioProducto, p.descuentoProducto, p.unidadVenta,
+					   p.cantidadStock, p.prodFragil, p.descripcion
+		FROM Producto AS p
+			INNER JOIN Categoria As c ON c.idCategoria = p.idCategoria
+			INNER JOIN Proveedor AS pr ON p.idProveedor = pr.idProveedor
+		WHERE 
+			   p.idProducto LIKE CONCAT('%',$datos,'%')
+			OR p.nombre LIKE CONCAT('%',$datos,'%')
+            OR p.precioProducto LIKE CONCAT('%',$datos,'%')
+            OR p.descuentoProducto LIKE CONCAT('%',$datos,'%')
+            OR pr.nombre LIKE CONCAT('%',$datos,'%')
+            OR c.nombre LIKE CONCAT('%',$datos,'%');
+END $$
+DELIMITER ;
+
+CALL pa_buscarProducto("herramientas");
+
+SELECT p.idProducto, p.nombre, pr.nombre AS 'Proveedor', c.nombre AS 'Categoria', 
+					   p.precioProducto, p.descuentoProducto, p.unidadVenta,
+					   p.cantidadStock, p.prodFragil, p.descripcion
+				FROM Producto As p INNER JOIN Categoria As c ON c.idCategoria = p.idCategoria
+				INNER JOIN Proveedor AS pr ON p.idProveedor = pr.idProveedor;
+
 DELIMITER //
 CREATE DEFINER = `root`@`localhost` PROCEDURE `pa_verificarEliminar`(
 IN $caso INT,
@@ -188,7 +219,14 @@ BEGIN
         WHEN 2 THEN SELECT * FROM Categoria;
         WHEN 3 THEN SELECT * FROM Proveedor;
         WHEN 4 THEN SELECT * FROM Cliente;
-        WHEN 5 THEN SELECT * FROM Producto;
+        -- Inner Join para mostrar los datos de los productos
+        WHEN 5 THEN 
+				SELECT p.idProducto, p.nombre, pr.nombre AS 'Proveedor', c.nombre AS 'Categoria', 
+					   p.precioProducto, p.descuentoProducto, p.unidadVenta,
+					   p.cantidadStock, p.prodFragil, p.descripcion
+				FROM Producto As p INNER JOIN Categoria As c ON c.idCategoria = p.idCategoria
+				INNER JOIN Proveedor AS pr ON p.idProveedor = pr.idProveedor;
+                
         WHEN 6 THEN SELECT * FROM Factura;
         WHEN 7 THEN SELECT * FROM DetallesCompra;
      ELSE
@@ -197,6 +235,7 @@ BEGIN
 END $$
 DELIMITER ;
 
+CALL pa_mostrarTablas(5);
 
 COMMENT 'Procedimiento para registrar un trabajador'
 DELIMITER $$

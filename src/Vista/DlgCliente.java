@@ -53,20 +53,17 @@ public class DlgCliente extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro de Clientes");
 
-        pnlUno.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+        lblBuscarCli.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblBuscarCli.setText("Buscar:");
-        pnlUno.add(lblBuscarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-        pnlUno.add(txtBuscarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 330, 30));
 
+        btnInsertarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/insertaP.png"))); // NOI18N
         btnInsertarCli.setText("Insertar");
-        pnlUno.add(btnInsertarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 90, 40));
 
+        btnModificarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificarP.png"))); // NOI18N
         btnModificarCli.setText("Modificar");
-        pnlUno.add(btnModificarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 100, 40));
 
+        btnEliminarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminarP.png"))); // NOI18N
         btnEliminarCli.setText("Eliminar");
-        pnlUno.add(btnEliminarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 90, 40));
 
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,20 +75,81 @@ public class DlgCliente extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblCliente);
 
-        pnlUno.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 760, 250));
-
         pnlOpciones.setBackground(new java.awt.Color(0, 102, 102));
-        pnlOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlOpciones.add(lblRegistrosCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, -1));
 
         btnCancelar.setText("Cancelar");
-        pnlOpciones.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 160, 40));
 
         btnSleccinar.setText("Seleccionar");
-        pnlOpciones.add(btnSleccinar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 160, 40));
 
-        pnlUno.add(pnlOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 800, 60));
-        pnlUno.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 50, 40));
+        javax.swing.GroupLayout pnlOpcionesLayout = new javax.swing.GroupLayout(pnlOpciones);
+        pnlOpciones.setLayout(pnlOpcionesLayout);
+        pnlOpcionesLayout.setHorizontalGroup(
+            pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOpcionesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lblRegistrosCli, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOpcionesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSleccinar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlOpcionesLayout.setVerticalGroup(
+            pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOpcionesLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(lblRegistrosCli)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSleccinar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscarP.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlUnoLayout = new javax.swing.GroupLayout(pnlUno);
+        pnlUno.setLayout(pnlUnoLayout);
+        pnlUnoLayout.setHorizontalGroup(
+            pnlUnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUnoLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(lblBuscarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtBuscarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnInsertarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btnModificarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnEliminarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlUnoLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+                .addGap(50, 50, 50))
+            .addComponent(pnlOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlUnoLayout.setVerticalGroup(
+            pnlUnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlUnoLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnlUnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnInsertarCli)
+                    .addComponent(btnModificarCli)
+                    .addComponent(btnEliminarCli)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblBuscarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscarCli, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         panCliente.addTab("Principal", pnlUno);
 
@@ -139,14 +197,17 @@ public class DlgCliente extends javax.swing.JDialog {
 
         pnlDos.add(pnlCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 800, 50));
 
+        btnLimpiarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
         btnLimpiarCli.setText("Limpiar");
-        pnlDos.add(btnLimpiarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 90, 40));
+        pnlDos.add(btnLimpiarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 130, 50));
 
+        btnGuardarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarPe.png"))); // NOI18N
         btnGuardarCli.setText("Guardar");
-        pnlDos.add(btnGuardarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 90, 40));
+        pnlDos.add(btnGuardarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 120, 50));
 
+        btnCancelarCli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelarP.png"))); // NOI18N
         btnCancelarCli.setText("Cancelar");
-        pnlDos.add(btnCancelarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 100, 40));
+        pnlDos.add(btnCancelarCli, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 120, 50));
 
         panCliente.addTab("Registro", pnlDos);
 

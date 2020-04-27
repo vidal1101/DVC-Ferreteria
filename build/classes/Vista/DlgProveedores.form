@@ -69,14 +69,10 @@
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
-                                      <Component id="txtBuscar" min="-2" pref="290" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel1" min="-2" pref="60" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtBuscar" min="-2" pref="290" max="-2" attributes="0"/>
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Component id="btnBuscar" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
@@ -101,10 +97,12 @@
                       <Component id="jSeparator1" min="-2" pref="370" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtBuscar" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtBuscar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="btnBuscar" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -145,20 +143,34 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnEditar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/iconos/modificarP.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnEliminar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/iconos/eliminarP.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnInsertar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/iconos/insertaP.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Insertar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnBuscar">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/iconos/buscarP.png"/>
+                </Property>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblRegistros">
             </Component>
@@ -257,6 +269,9 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnCancelar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/iconos/cancelarP.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Cancelar"/>
                   </Properties>
                   <Constraints>
@@ -267,6 +282,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnLimpiar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/iconos/limpiar.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Limpiar "/>
                   </Properties>
                   <Constraints>
@@ -277,6 +295,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="btnGuardar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/iconos/guardarPe.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Guadar "/>
                   </Properties>
                   <Constraints>

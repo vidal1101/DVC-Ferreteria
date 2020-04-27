@@ -63,16 +63,20 @@ public class DlgFacturas extends javax.swing.JDialog {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 790, 250));
 
+        btnMasDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/insertaP.png"))); // NOI18N
         btnMasDetalles.setText("Más detalles");
         jPanel2.add(btnMasDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 160, 50));
 
+        btnAnulaFac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelarP.png"))); // NOI18N
         btnAnulaFac.setText("Anular factura");
-        jPanel2.add(btnAnulaFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 150, 50));
+        jPanel2.add(btnAnulaFac, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 170, 50));
         jPanel2.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 54, 290, 30));
 
         jLabel1.setText("Buscar:");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
-        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 50, 40));
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscarP.png"))); // NOI18N
+        jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 60, 40));
 
         tbpnPestanas.addTab("Principal", jPanel2);
 
@@ -120,8 +124,9 @@ public class DlgFacturas extends javax.swing.JDialog {
         txtTrabajador.setEditable(false);
         jPanel3.add(txtTrabajador, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 170, -1));
 
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salir.png"))); // NOI18N
         btnRegresar.setText("Regresar");
-        jPanel3.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 110, 40));
+        jPanel3.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 140, 50));
 
         tbpnPestanas.addTab("Más detalles", jPanel3);
 

@@ -198,7 +198,6 @@ END $$
 DELIMITER ;
 
 
-
 COMMENT 'Procedimiento para registrar un trabajador'
 DELIMITER $$
 CREATE DEFINER = `root`@`localhost` PROCEDURE pa_insertarTrabajador

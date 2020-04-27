@@ -271,34 +271,34 @@ public class DlgInventario extends javax.swing.JDialog {
 
         panInventario.addTab("Inventario", pnlBase);
 
-        lblProveedor.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblProveedor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblProveedor.setText("ID Proveedor:");
 
-        lblCateg.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblCateg.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblCateg.setText("ID Categoria:");
 
-        lblPrecProd.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblPrecProd.setText(" Precio Producto  :");
+        lblPrecProd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblPrecProd.setText(" Precio Producto :");
 
-        lblIdProduct.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblIdProduct.setText(" Id Producto :");
+        lblIdProduct.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblIdProduct.setText(" Id Producto:");
 
-        lblnomProd.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblnomProd.setText(" Nombre del Producto :");
+        lblnomProd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblnomProd.setText(" Nombre del Producto:");
 
         txtIdProductoP.setEditable(false);
 
-        lblDecuent.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDecuent.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblDecuent.setText("Descuento de Producto:");
 
-        lblProdFragil.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblProdFragil.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblProdFragil.setText("Producto Fragil :");
 
-        lblUnidVenta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblUnidVenta.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblUnidVenta.setText("Unidad de Venta ");
 
-        lblCantStock.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblCantStock.setText("Cantida de Stock :");
+        lblCantStock.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCantStock.setText("Cantida de Stock:");
 
         txtDescripProductoP.setColumns(20);
         txtDescripProductoP.setRows(5);
@@ -314,8 +314,8 @@ public class DlgInventario extends javax.swing.JDialog {
         rbdSIfragil.setText("Si");
         rbdSIfragil.setOpaque(false);
 
-        lblDescrip.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblDescrip.setText("Descrip de Producto :");
+        lblDescrip.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDescrip.setText("Descrip del Producto:");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -390,7 +390,7 @@ public class DlgInventario extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(spnDescProd, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(183, 183, 183)))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))

@@ -51,9 +51,7 @@ public class FrmVentas extends javax.swing.JDialog {
         txtFecha = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnAyuda = new javax.swing.JButton();
-        btnConfig = new javax.swing.JButton();
         btnCalender = new javax.swing.JButton();
-        btnImprimir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
         lblRegistrosDetalles = new javax.swing.JLabel();
@@ -126,12 +124,12 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Cedula Cliente :");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, 30));
+        jLabel5.setText("Cedula Cliente:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, 30));
 
         txtIdCliente.setEditable(false);
         txtIdCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 110, 30));
+        jPanel2.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 110, 30));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Dirección de entrega:");
@@ -145,38 +143,44 @@ public class FrmVentas extends javax.swing.JDialog {
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Cliente:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 60, 30));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 60, 30));
 
         txtNombreCliente.setEditable(false);
         txtNombreCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel2.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 130, 30));
+        jPanel2.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 120, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 440, 180));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 450, 180));
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCliente.setText("Selec. Cliente");
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/clienteCaja.png"))); // NOI18N
+        btnCliente.setText("Clientes");
         btnCliente.setToolTipText("");
-        jPanel4.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 140, 40));
+        jPanel4.add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, 40));
 
+        btnQuitarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelarP.png"))); // NOI18N
         btnQuitarPro.setText("Quitar Prod");
-        jPanel4.add(btnQuitarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, 40));
+        jPanel4.add(btnQuitarPro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 150, 40));
 
+        btnFacturar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cajaPe.png"))); // NOI18N
         btnFacturar.setText("Facturar");
-        jPanel4.add(btnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 140, 40));
+        jPanel4.add(btnFacturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 150, 40));
 
+        btnQuitarTodo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
         btnQuitarTodo.setText("Quitar Todo");
-        jPanel4.add(btnQuitarTodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 140, 40));
+        jPanel4.add(btnQuitarTodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 150, 40));
 
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salir.png"))); // NOI18N
         btnSalir.setText("Salir");
-        jPanel4.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 140, 40));
+        jPanel4.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 150, 40));
 
+        btnAnadirProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/insertaP.png"))); // NOI18N
         btnAnadirProd.setText("Añadir  Prod");
         btnAnadirProd.setToolTipText("");
-        jPanel4.add(btnAnadirProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 140, 40));
+        jPanel4.add(btnAnadirProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 150, 40));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 130, 160, 330));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 130, 170, 330));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Fecha:");
@@ -199,17 +203,7 @@ public class FrmVentas extends javax.swing.JDialog {
         btnAyuda.setDefaultCapable(false);
         btnAyuda.setFocusPainted(false);
         btnAyuda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
-        jPanel1.add(btnAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 150, 40));
-
-        btnConfig.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
-        btnConfig.setText("Configuracion");
-        btnConfig.setBorderPainted(false);
-        btnConfig.setContentAreaFilled(false);
-        btnConfig.setDefaultCapable(false);
-        btnConfig.setFocusPainted(false);
-        btnConfig.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
-        jPanel1.add(btnConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 40));
+        jPanel1.add(btnAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 150, 40));
 
         btnCalender.setBackground(new java.awt.Color(131, 182, 231));
         btnCalender.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -220,11 +214,7 @@ public class FrmVentas extends javax.swing.JDialog {
         btnCalender.setDefaultCapable(false);
         btnCalender.setFocusPainted(false);
         btnCalender.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario (1).png"))); // NOI18N
-        jPanel1.add(btnCalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 190, 40));
-
-        btnImprimir.setText("Imprimir");
-        btnImprimir.setFocusable(false);
-        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 140, 40));
+        jPanel1.add(btnCalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 1050, 60));
 
@@ -245,6 +235,7 @@ public class FrmVentas extends javax.swing.JDialog {
         lblNomTrab.setText("Nombre del cajero");
         getContentPane().add(lblNomTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 540, 40));
 
+        btnModificarDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificarP.png"))); // NOI18N
         btnModificarDatos.setText("Modificar");
         getContentPane().add(btnModificarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, 190, 40));
 
@@ -354,9 +345,7 @@ public class FrmVentas extends javax.swing.JDialog {
     private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCliente;
-    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnFacturar;
-    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnModificarDatos;
     private javax.swing.JButton btnQuitarPro;
     private javax.swing.JButton btnQuitarTodo;
@@ -419,10 +408,6 @@ public class FrmVentas extends javax.swing.JDialog {
 
     public javax.swing.JButton getBtnFacturar() {
         return btnFacturar;
-    }
-
-    public javax.swing.JButton getBtnImprimir() {
-        return btnImprimir;
     }
 
     public javax.swing.JButton getBtnQuitarPro() {

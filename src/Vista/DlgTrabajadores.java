@@ -79,35 +79,40 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 780, 250));
 
         lblBuscar.setText("Buscar:");
-        pnl1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-        pnl1.add(txtBuscarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 320, 30));
+        pnl1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        pnl1.add(txtBuscarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 290, 30));
 
+        btnInsertarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/insertaP.png"))); // NOI18N
         btnInsertarT.setText("Insertar");
-        pnl1.add(btnInsertarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 100, 40));
+        pnl1.add(btnInsertarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 120, 40));
 
+        btnModificarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificarP.png"))); // NOI18N
         btnModificarT.setText("Modificar");
-        pnl1.add(btnModificarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 100, 40));
+        pnl1.add(btnModificarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 130, 40));
 
+        btnEliminarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminarP.png"))); // NOI18N
         btnEliminarT.setText("Eliminar");
-        pnl1.add(btnEliminarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 100, 40));
+        pnl1.add(btnEliminarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 120, 40));
 
         lblTrabajador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trabajador.png"))); // NOI18N
-        pnl1.add(lblTrabajador, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 140, 140));
+        pnl1.add(lblTrabajador, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, 140, 140));
 
         pnl2.setBackground(new java.awt.Color(0, 153, 0));
         pnl2.setBorder(new javax.swing.border.MatteBorder(null));
         pnl2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnl2.add(lblRegistrosT, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 18, 302, -1));
 
-        pnl1.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 820, 50));
-        pnl1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 60, 40));
+        pnl1.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 860, 50));
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscarP.png"))); // NOI18N
+        pnl1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 60, 40));
 
         panTrabajador.addTab("Principal", pnl1);
 
         pnl3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTrabajador2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trabajador.png"))); // NOI18N
-        pnl3.add(lblTrabajador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, 140, -1));
+        pnl3.add(lblTrabajador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 140, -1));
 
         pnl4.setBackground(new java.awt.Color(0, 153, 0));
         pnl4.setBorder(new javax.swing.border.MatteBorder(null));
@@ -116,14 +121,14 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl4.setLayout(pnl4Layout);
         pnl4Layout.setHorizontalGroup(
             pnl4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 818, Short.MAX_VALUE)
+            .addGap(0, 858, Short.MAX_VALUE)
         );
         pnl4Layout.setVerticalGroup(
             pnl4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
         );
 
-        pnl3.add(pnl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 820, 50));
+        pnl3.add(pnl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 860, 50));
 
         pnl5.setBorder(new javax.swing.border.MatteBorder(null));
         pnl5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,14 +174,17 @@ public class DlgTrabajadores extends javax.swing.JDialog {
 
         pnl3.add(pnl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 750, 320));
 
+        btnLimpiarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
         btnLimpiarT.setText("Limpiar");
-        pnl3.add(btnLimpiarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 110, 40));
+        pnl3.add(btnLimpiarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 130, 40));
 
+        btnGuardarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarPe.png"))); // NOI18N
         btnGuardarT.setText("Guardar");
-        pnl3.add(btnGuardarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 110, 40));
+        pnl3.add(btnGuardarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 360, 140, 40));
 
+        btnCancelarT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelarP.png"))); // NOI18N
         btnCancelarT.setText("Cancelar");
-        pnl3.add(btnCancelarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 110, 40));
+        pnl3.add(btnCancelarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 130, 40));
 
         panTrabajador.addTab("Registro", pnl3);
 
