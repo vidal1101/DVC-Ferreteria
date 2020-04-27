@@ -12,6 +12,69 @@
 -- --------------------------------------------------------------------------
 USE `Ferreteria-DVC`;
 
+DELIMITER //
+CREATE DEFINER = `root`@`localhost` PROCEDURE `pa_verificarEliminar`(
+IN $caso INT,
+IN $idRevisar INT,
+OUT $resultado VARCHAR(45),
+OUT $recibido BOOLEAN)
+
+COMMENT 'Este procedimiento es para eliminar datos de la BD, la importancia que tiene es
+	que podemos verificar si el registro tiene otros registros que hacen referencia a este,
+    por lo que evitamos que haya un inconveniente al intentar eliminarlo teniéndolo 
+    controlado.'
+
+BEGIN
+    -- Al booleano le decimo que si hemos recibido la petición de eliminar un registro
+    -- Mas que todo para saber si se hizo la conexión o el procedimiento ha sido ejecutado
+    SET $recibido = 1;
+
+    CASE $caso
+		WHEN 1 THEN  -- Eliminar un trabajador que no tenga registros de facturas
+            IF EXISTS (SELECT * FROM Factura WHERE cedulaTrabajador = $idRevisar) THEN
+			    SET $resultado='CON REGISTROS';
+			ELSE
+               DELETE FROM Trabajador WHERE cedula = $idRevisar;
+			   SET $resultado = 'ELIMINADO';
+			END IF;
+            
+		WHEN 2 THEN -- Eliminar una categoría que no tenga registros de productos
+			IF EXISTS (select * from Producto where idCategoria = $idRevisar)then
+			    SET $resultado='CON REGISTROS';
+			ELSE
+               DELETE FROM Categoria WHERE idCategoria = $idRevisar;
+			   SET $resultado = 'ELIMINADO';
+			END IF;
+            
+		WHEN 3 THEN -- Eliminar un Proveedor que no tenga registros de productos
+			IF EXISTS (SELECT * FROM Producto WHERE idProveedor = $idRevisar) THEN
+			    SET $resultado='CON REGISTROS';
+			ELSE
+               DELETE FROM Proveedor WHERE idProveedor  = $idRevisar;
+			   SET $resultado = 'ELIMINADO';
+			END IF;
+            
+		WHEN 4 THEN  -- Eliminar un Cliente que no tenga registros de facturas
+			IF EXISTS (SELECT * FROM Factura WHERE cedulaCliente = $idRevisar) THEN
+				SET $resultado='CON REGISTROS';
+			ELSE
+				DELETE FROM Cliente WHERE cedula = $idRevisar;
+				SET $resultado = 'ELIMINADO';
+			END IF;
+            
+		WHEN 5 THEN  -- Eliminar un Producto que no tenga registros de DetallesCompra
+			IF EXISTS (SELECT * FROM DetallesCompra WHERE idProducto = $idRevisar) THEN
+				SET $resultado='CON REGISTROS';
+			ELSE
+				DELETE FROM Producto WHERE idProducto = $idRevisar;
+				SET $resultado = 'ELIMINADO';
+			END IF;
+		ELSE 
+			SELECT 'No hay ningún número de tabla que coincdia';
+		END CASE;
+END//
+DELIMITER ;
+
 DELIMITER $$
 CREATE DEFINER = `root`@`localhost` PROCEDURE pa_eliminarFactura
 (IN $idFactura INT, OUT $eliminado BOOLEAN)
@@ -59,7 +122,8 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_mostrarDatosProd`(
 IN $idProducto INT)
 BEGIN
-   SELECT idProducto,cantidadStock,descuentoProducto FROM Producto WHERE idProducto=$idProducto;
+   SELECT idProducto,cantidadStock,descuentoProducto FROM Producto
+   WHERE idProducto=$idProducto;
 END $$
 DELIMITER ;
 

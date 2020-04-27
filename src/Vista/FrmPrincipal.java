@@ -51,7 +51,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
 
-        jPanel1.setBackground(new java.awt.Color(131, 182, 231));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setToolTipText("");
 
@@ -87,7 +86,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(btnCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,67 +96,141 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(135, 185, 222));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         btnCaja.setBackground(new java.awt.Color(255, 255, 255));
         btnCaja.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/efectivo.png"))); // NOI18N
+        btnCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cajaPe.png"))); // NOI18N
         btnCaja.setText("Caja ");
+        btnCaja.setContentAreaFilled(false);
         btnCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
-        jPanel2.add(btnCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 310, 80));
+        btnCaja.setHideActionText(true);
+        btnCaja.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCaja.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/caja.png"))); // NOI18N
+        btnCaja.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnCaja.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         btnCategorias.setBackground(new java.awt.Color(255, 255, 255));
         btnCategorias.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/categoria.png"))); // NOI18N
+        btnCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/categoriaPe.png"))); // NOI18N
         btnCategorias.setText("Categorias");
+        btnCategorias.setContentAreaFilled(false);
         btnCategorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategorias.setDefaultCapable(false);
         btnCategorias.setFocusPainted(false);
-        jPanel2.add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 310, 80));
+        btnCategorias.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCategorias.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/categoria.png"))); // NOI18N
+        btnCategorias.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnCategorias.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoDvcdieño1.jpeg"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 80));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logitoO.png"))); // NOI18N
 
         btnInventario.setBackground(new java.awt.Color(255, 255, 255));
         btnInventario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedor.png"))); // NOI18N
+        btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/inventarioPe.png"))); // NOI18N
         btnInventario.setText("Inventario ");
+        btnInventario.setContentAreaFilled(false);
         btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInventario.setDefaultCapable(false);
         btnInventario.setFocusPainted(false);
-        jPanel2.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 320, 80));
+        btnInventario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnInventario.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/inventario.png"))); // NOI18N
+        btnInventario.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnInventario.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         btnTrabajadores.setBackground(new java.awt.Color(255, 255, 255));
         btnTrabajadores.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuenta.png"))); // NOI18N
+        btnTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trabajadorPe.png"))); // NOI18N
         btnTrabajadores.setText("Trabajadores");
+        btnTrabajadores.setContentAreaFilled(false);
         btnTrabajadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrabajadores.setDefaultCapable(false);
         btnTrabajadores.setFocusPainted(false);
-        jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 320, -1));
+        btnTrabajadores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTrabajadores.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trabajadoor.png"))); // NOI18N
+        btnTrabajadores.setVerifyInputWhenFocusTarget(false);
+        btnTrabajadores.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnTrabajadores.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         btnProveedores.setBackground(new java.awt.Color(255, 255, 255));
         btnProveedores.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/proveedorPe.png"))); // NOI18N
         btnProveedores.setText("Proveedores");
+        btnProveedores.setContentAreaFilled(false);
         btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 310, 70));
+        btnProveedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnProveedores.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/proveedor.png"))); // NOI18N
+        btnProveedores.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnProveedores.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         btnClientes.setBackground(new java.awt.Color(255, 255, 255));
         btnClientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/clienteCaja.png"))); // NOI18N
         btnClientes.setText("Clientes");
+        btnClientes.setContentAreaFilled(false);
         btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 320, 70));
+        btnClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClientes.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cliente.png"))); // NOI18N
+        btnClientes.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnClientes.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         btnFacturas.setBackground(new java.awt.Color(255, 255, 255));
         btnFacturas.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/facturaPe.png"))); // NOI18N
         btnFacturas.setText("Facturas");
+        btnFacturas.setContentAreaFilled(false);
         btnFacturas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(btnFacturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 300, 70));
+        btnFacturas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFacturas.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/facturas.png"))); // NOI18N
+        btnFacturas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnFacturas.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        mnbBarraPrincipal.setBackground(new java.awt.Color(131, 182, 231));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(550, Short.MAX_VALUE)
+                .addComponent(jLabel1))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCategorias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTrabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFacturas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProveedores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnFacturas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnTrabajadores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(130, 130, 130)
+                        .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
 
         mnTrabajadores.setText("Trabajadores");
 
@@ -213,8 +286,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();

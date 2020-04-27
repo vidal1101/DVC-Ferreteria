@@ -32,16 +32,17 @@ public class DlgInventario extends javax.swing.JDialog {
         btnAyuda = new javax.swing.JButton();
         btnConfig = new javax.swing.JButton();
         btnCalender = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstCategorias = new javax.swing.JList<>();
-        lblCategoria = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblInventario = new javax.swing.JTable();
         lblProductos = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        lblBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        lblRegistros = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblProveedor = new javax.swing.JLabel();
         lblCateg = new javax.swing.JLabel();
@@ -150,14 +151,6 @@ public class DlgInventario extends javax.swing.JDialog {
                 .addGap(3, 3, 3))
         );
 
-        lstCategorias.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 0, 14)); // NOI18N
-        lstCategorias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(lstCategorias);
-
-        lblCategoria.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
-        lblCategoria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCategoria.setText("Seleccione una Categoría");
-
         tblInventario.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
         tblInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,40 +174,61 @@ public class DlgInventario extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
+        btnEditar.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificarP.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificar.png"))); // NOI18N
+
+        btnNuevo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/insertaP.png"))); // NOI18N
+        btnNuevo.setText("Nuevo");
+        btnNuevo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/insertar.png"))); // NOI18N
+
         btnEliminar.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminarP.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnEditar.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
-        btnEditar.setText("Editar");
+        lblBuscar.setText("Buscar:");
 
-        btnNuevo.setFont(new java.awt.Font("DejaVu Math TeX Gyre", 1, 14)); // NOI18N
-        btnNuevo.setText("Nuevo");
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscarP.png"))); // NOI18N
+        btnBuscar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addComponent(lblBuscar))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -224,47 +238,34 @@ public class DlgInventario extends javax.swing.JDialog {
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addContainerGap()
                         .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlBaseLayout.createSequentialGroup()
-                                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                                        .addGap(91, 91, 91)
-                                        .addComponent(lblProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(374, 374, 374))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBaseLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(pnlBaseLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jScrollPane3)))
-                        .addGap(17, 17, 17))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(300, 300, 300)
+                                .addComponent(lblProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                                .addGap(374, 374, 374))
+                            .addComponent(jScrollPane3)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(pnlBaseLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lblRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
-                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addComponent(lblCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane1)
-                        .addGap(6, 6, 6))
-                    .addGroup(pnlBaseLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(lblProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(39, 39, 39)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(lblProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
+                .addComponent(lblRegistros)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,13 +320,19 @@ public class DlgInventario extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnGuardarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardarPe.png"))); // NOI18N
         btnGuardarProd.setText("Guardar");
+        btnGuardarProd.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
         jPanel4.add(btnGuardarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 220, 50));
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelarP.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelar.png"))); // NOI18N
         jPanel4.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 220, 50));
 
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiar.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiarG.png"))); // NOI18N
         jPanel4.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, 50));
 
         cmbUnidadVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Unidad", "Kilogramos", "Litros", "Metros ", "Docena" }));
@@ -582,6 +589,7 @@ public class DlgInventario extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCategoria;
@@ -610,12 +618,11 @@ public class DlgInventario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblBuscar;
     private javax.swing.JLabel lblCantStock;
     private javax.swing.JLabel lblCateg;
-    private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblDecuent;
     private javax.swing.JLabel lblDescrip;
     private javax.swing.JLabel lblIdProduct;
@@ -623,9 +630,9 @@ public class DlgInventario extends javax.swing.JDialog {
     private javax.swing.JLabel lblProdFragil;
     private javax.swing.JLabel lblProductos;
     private javax.swing.JLabel lblProveedor;
+    private javax.swing.JLabel lblRegistros;
     private javax.swing.JLabel lblUnidVenta;
     private javax.swing.JLabel lblnomProd;
-    private javax.swing.JList<String> lstCategorias;
     private javax.swing.JMenuBar mnbBarraPrinc;
     private javax.swing.JTabbedPane panInventario;
     private javax.swing.JPanel pnlBase;
@@ -633,6 +640,7 @@ public class DlgInventario extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbdSIfragil;
     private javax.swing.JSpinner spnDescProd;
     private javax.swing.JTable tblInventario;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCantidadStockP;
     private javax.swing.JTextArea txtDescripProductoP;
     private javax.swing.JTextField txtIdCategoria;
@@ -704,14 +712,6 @@ public class DlgInventario extends javax.swing.JDialog {
 
     public void setCmbUnidadVenta(javax.swing.JComboBox<String> cmbUnidadVenta) {
         this.cmbUnidadVenta = cmbUnidadVenta;
-    }
-
-    public javax.swing.JList<String> getLstCategorias() {
-        return lstCategorias;
-    }
-
-    public void setLstCategorias(javax.swing.JList<String> lstCategorias) {
-        this.lstCategorias = lstCategorias;
     }
 
     public javax.swing.JMenuBar getMnbBarraPrinc() {
@@ -812,6 +812,30 @@ public class DlgInventario extends javax.swing.JDialog {
 
     public javax.swing.JSpinner getSpnDescProd() {
         return spnDescProd;
+    }
+
+    public javax.swing.JButton getBtnBuscar() {
+        return btnBuscar;
+    }
+
+    public void setBtnBuscar(javax.swing.JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
+    public javax.swing.JTextField getTxtBuscar() {
+        return txtBuscar;
+    }
+
+    public void setTxtBuscar(javax.swing.JTextField txtBuscar) {
+        this.txtBuscar = txtBuscar;
+    }
+
+    public javax.swing.JLabel getLblRegistros() {
+        return lblRegistros;
+    }
+
+    public void setLblRegistros(javax.swing.JLabel lblRegistros) {
+        this.lblRegistros = lblRegistros;
     }
     
 }

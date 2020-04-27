@@ -13,6 +13,40 @@ import logicaClass.ClassProducto;
  */
 public class InventarioModelo {
 
+    
+    /**
+     * Permite buscar un producto por medio de nombre, id y precio del producto
+     *
+     * @param dato
+     * @return
+     */
+    public ResultSet BuscarProducto(String dato) {
+
+        Conexion con = new Conexion();
+        ResultSet s = null;
+
+        try {
+
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{call pa_buscarProducto(?)}");
+            cst.setString(1, dato);
+            s = cst.executeQuery();
+
+            return s;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error al intentar llamar procedimiento");
+            return s;
+        }
+    }
+    
+    /**
+     * Inserta un nuevo producto a la base de datos
+     *
+     * @param prod
+     * @return
+     */
     public boolean insertarProducto(ClassProducto prod) {
         Conexion con = new Conexion();
 
@@ -115,7 +149,6 @@ public class InventarioModelo {
 
     }
 
-    
     /**
      * NOTA: Revisar el número de tablas para referirse a cada tabla de la BD <br>
      * ******** <br>

@@ -35,11 +35,11 @@ public class ClienteControlador implements ActionListener, KeyListener {
     private int opc;
     private boolean selecciono;
 
-    public ClienteControlador(FrmPrincipal principal, DlgCliente dlgCli) {
+    public ClienteControlador(FrmPrincipal principal) {
 
         this.modelCli = new DefaultTableModel();
         this.principal = principal;
-        this.dlgCli = dlgCli;
+        this.dlgCli = new DlgCliente(principal, true);
         this.cliente = new ClassCliente();
         this.cliModelo = new ClienteModelo();
 
@@ -206,11 +206,12 @@ public class ClienteControlador implements ActionListener, KeyListener {
 
         } else if (e.getSource() == dlgCli.getBtnModificarCli()) {
 
+            int file = dlgCli.getTblCliente().getSelectedRow();
+            
             if (dlgCli.getTblCliente().getSelectedRow() != -1) {
 
                 this.dlgCli.getPanCliente().setSelectedIndex(1);
-                this.dlgCli.getPanCliente().setEnabledAt(0, false);
-                int file = dlgCli.getTblCliente().getSelectedRow();
+                this.dlgCli.getPanCliente().setEnabledAt(0, false);    
 
                 this.dlgCli.getTxtCedulaCli().setText(dlgCli.getTblCliente().getValueAt(file, 0).toString());
                 this.dlgCli.getTxtCedulaCli().setEditable(false);
@@ -223,7 +224,7 @@ public class ClienteControlador implements ActionListener, KeyListener {
                 this.dlgCli.getPanCliente().setEnabled(true);
 
             } else {
-                JOptionPane.showMessageDialog(dlgCli, "Debe Seleccionar Fila");
+                JOptionPane.showMessageDialog(dlgCli, "Por favor seleccione un cliente para modificar");
             }
 
         } else if (e.getSource() == dlgCli.getBtnCancelarCli()) {
@@ -300,12 +301,15 @@ public class ClienteControlador implements ActionListener, KeyListener {
             dlgCli.getTblCliente().setModel(modelCli);
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("--------------------------------------");
+            System.out.println("Error al intentar obtener datos de los clientes: " + e.getMessage());
         }
 
     }
 
+    /**
+     * Permite buscar a los clientes por medio de su cédula o nombre
+     *
+     */
     private void buscar() {
 
         try {
@@ -359,11 +363,6 @@ public class ClienteControlador implements ActionListener, KeyListener {
             }
 
             if (dlgCli.getTxtCedulaCli().getText().length() >= 9) {
-                e.consume();
-            }
-        } else if (e.getSource() == dlgCli.getTxtTelefonoCli()) {
-
-            if (dlgCli.getTxtTelefonoCli().getText().length() >= 8) {
                 e.consume();
             }
         }

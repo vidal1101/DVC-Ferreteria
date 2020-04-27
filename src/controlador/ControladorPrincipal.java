@@ -1,5 +1,6 @@
 package controlador;
 
+import DVC_Ferreteria.Ayuda;
 import Vista.DlgCategorias;
 import Vista.DlgCliente;
 import Vista.DlgFacturas;
@@ -8,6 +9,7 @@ import Vista.DlgProveedores;
 import Vista.FrmInicioSesion;
 import Vista.FrmPrincipal;
 import Vista.FrmVentas;
+import Vista.dlgAyuda;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.event.ActionEvent;
@@ -37,6 +39,8 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
     private DlgCliente dlgcli;
     private DlgFacturas dlgFact;
     private FrmVentas dlgVentas;
+    private Ayuda ayuda;
+    private dlgAyuda dlgAyuda;
 
     public ControladorPrincipal() {
 
@@ -50,9 +54,11 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
         this.dlgCateg = new DlgCategorias(framePrincipal, true);
         this.dlgprov = new DlgProveedores(framePrincipal, true);
         this.dlginve = new DlgInventario(framePrincipal, true);
-        this.dlgcli = new DlgCliente(frameSesion, true);
+        this.dlgcli = new DlgCliente(framePrincipal, true);
         this.dlgVentas = new FrmVentas(framePrincipal, true);
-        this.dlgFact = new DlgFacturas(frameSesion, true);
+        this.ayuda = new Ayuda();
+        this.dlgAyuda = new dlgAyuda(framePrincipal, true);
+        this.dlgFact = new DlgFacturas(framePrincipal, true);
 
         this.framePrincipal.getBtnAyuda().addActionListener(this);
         this.framePrincipal.getBtnCaja().addActionListener(this);
@@ -82,6 +88,11 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if (e.getSource() == framePrincipal.getBtnAyuda()) {
+            
+            ayuda.ventana();
+        }
+        
         if (e.getSource() == frameSesion.getBtnIngresar()) { //el inicio de sesion 
             TrabajadorControlador principalCon = new TrabajadorControlador(frameSesion);
 
@@ -96,24 +107,24 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
 
         if (e.getSource() == framePrincipal.getBtnCaja()) { // La cajaControlador 
 
-            CajaControlador cajaControl = new CajaControlador(this.framePrincipal, dlgVentas, trabajador, dlgcli);
+            CajaControlador cajaControl = new CajaControlador(this.framePrincipal, trabajador);
             System.out.println("Trabajador actual: " + trabajador.getNombreTrab());
             cajaControl.setTrabajador(trabajador);
             cajaControl.iniciarVista();
 
         } else if (e.getSource() == framePrincipal.getBtnCategorias()) { //las categorias
 
-            CategoriaControlador categControl = new CategoriaControlador(this.framePrincipal, dlgCateg);
+            CategoriaControlador categControl = new CategoriaControlador(this.framePrincipal);
             categControl.inciarVista("Categorias");
 
         } else if (e.getSource() == framePrincipal.getBtnClientes()) {//los clientes 
 
-            ClienteControlador cliControl = new ClienteControlador(this.framePrincipal, dlgcli);
+            ClienteControlador cliControl = new ClienteControlador(this.framePrincipal);
             cliControl.inciarVista("Clientes");
 
         } else if (e.getSource() == framePrincipal.getBtnProveedores()) { //los proveedores
 
-            ProveedoresControlador provCont = new ProveedoresControlador(this.framePrincipal, dlgprov);
+            ProveedoresControlador provCont = new ProveedoresControlador(this.framePrincipal);
             provCont.inciarVista("Proveedores");
 
         } else if (e.getSource() == framePrincipal.getBtnTrabajadores()) {//los trabajadores
@@ -123,7 +134,7 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
 
         } else if (e.getSource() == framePrincipal.getBtnInventario()) {
 
-            InventarioControlador inventControl = new InventarioControlador(this.framePrincipal, dlginve);
+            InventarioControlador inventControl = new InventarioControlador(this.framePrincipal);
             inventControl.inciarVista("Productos");
 
         } else if (e.getSource() == framePrincipal.getBtnFacturas()) {
@@ -154,11 +165,11 @@ public class ControladorPrincipal implements ActionListener, KeyListener {
             trabControl.inciarVista("Trabajadores");
 
         } else if (e.getSource() == framePrincipal.getMnIrCate()) {
-            CategoriaControlador cateCon = new CategoriaControlador(this.framePrincipal, dlgCateg);
+            CategoriaControlador cateCon = new CategoriaControlador(this.framePrincipal);
             cateCon.inciarVista("Categorias");
 
         } else if (e.getSource() == framePrincipal.getMnIrInven()) {
-            InventarioControlador inveCon = new InventarioControlador(this.framePrincipal, dlginve);
+            InventarioControlador inveCon = new InventarioControlador(this.framePrincipal);
             inveCon.inciarVista("Productos");
 
         } else if (e.getSource() == framePrincipal.getMnIrHisto()) {

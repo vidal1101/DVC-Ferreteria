@@ -40,6 +40,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         jLabel2.setText("Contraseña:");
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         txtContrasenia.setToolTipText("");
 

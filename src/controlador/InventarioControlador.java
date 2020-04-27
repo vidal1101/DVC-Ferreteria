@@ -33,11 +33,11 @@ public class InventarioControlador implements ActionListener, KeyListener {
     DefaultTableModel modeloInvent;
     private int opc;
 
-    public InventarioControlador(FrmPrincipal principal, DlgInventario dlginvent) {
+    public InventarioControlador(FrmPrincipal principal) {
         this.modeloInvent = new DefaultTableModel();
         this.mostrador = new DlgMostrador(principal, true);
         this.principal = principal;
-        this.dlgivent = dlginvent;
+        this.dlgivent = new DlgInventario(principal, true);
         this.prodModelo = new InventarioModelo();
         this.producto = new ClassProducto();
         this.opc = 0;
@@ -49,6 +49,7 @@ public class InventarioControlador implements ActionListener, KeyListener {
         this.dlgivent.getBtnEliminar().addActionListener(this);
         this.dlgivent.getBtnGuardarProd().addActionListener(this);
         this.dlgivent.getBtnLimpiar().addActionListener(this);
+        this.dlgivent.getBtnBuscar().addActionListener(this);
         this.dlgivent.getRbdNOfragil().addActionListener(this);
         this.dlgivent.getRbdSIfragil().addActionListener(this);
         this.dlgivent.getTxtNombProductoP().addKeyListener(this);
@@ -64,6 +65,7 @@ public class InventarioControlador implements ActionListener, KeyListener {
 
     /**
      * Limpia los datos del registro
+     *
      */
     public void clear() {
         dlgivent.getTxtCantidadStockP().setText("");
@@ -119,38 +121,48 @@ public class InventarioControlador implements ActionListener, KeyListener {
                 producto.setUnidadVenta(String.valueOf(dlgivent.getCmbUnidadVenta().getSelectedItem()));
 
                 if (opc == 1) {
-                    if (this.prodModelo.insertarProducto(producto)) {
+                    if (JOptionPane.YES_OPTION
+                            == JOptionPane.showConfirmDialog(dlgivent, "¿Desea guardar este producto?",
+                                    "Guardar Producto", JOptionPane.YES_NO_OPTION)) {
+                        if (this.prodModelo.insertarProducto(producto)) {
 
-                        JOptionPane.showMessageDialog(dlgivent, "Se inserto con Exito");
-                        this.clear();
-                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                        this.mostrartabla(this.prodModelo.mostrarProductos());
-                        this.dlgivent.getPanInventario().setSelectedIndex(0);
-                        this.dlgivent.getPanInventario().setEnabledAt(1, false);
+                            JOptionPane.showMessageDialog(dlgivent, "Producto Guardado");
+                            this.clear();
+                            // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                            this.mostrartabla(this.prodModelo.mostrarProductos());
+                            this.dlgivent.getPanInventario().setSelectedIndex(0);
+                            this.dlgivent.getPanInventario().setEnabledAt(1, false);
 
-                    } else {
-                        JOptionPane.showMessageDialog(dlgivent, "Usuario ya existente");
-                        this.clear();
+                        } else {
+                            JOptionPane.showMessageDialog(dlgivent, "Producto ya existente");
+                            this.clear();
+                        }
                     }
 
                 } else {
+                    if (JOptionPane.YES_OPTION
+                            == JOptionPane.showConfirmDialog(dlgivent, "¿Desea editar este producto?",
+                                    "Editar Producto", JOptionPane.YES_NO_OPTION)) {
+                        producto.setIdProducto(Integer.parseInt(dlgivent.getTxtIdProductoP().getText()));
 
-                    producto.setIdProducto(Integer.parseInt(dlgivent.getTxtIdProductoP().getText()));
+                        if (prodModelo.modificarProducto(producto)) {
+                            JOptionPane.showMessageDialog(dlgivent, "Producto Guardado");
+                            this.mostrartabla(this.prodModelo.mostrarProductos());
+                            this.dlgivent.getPanInventario().setSelectedIndex(0);
+                            this.dlgivent.getPanInventario().setEnabledAt(1, false);
+                            this.dlgivent.getPanInventario().setEnabledAt(0, true);
 
-                    if (prodModelo.modificarProducto(producto)) {
-                        JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
-                        this.mostrartabla(this.prodModelo.mostrarProductos());
-                        this.dlgivent.getPanInventario().setSelectedIndex(0);
-                        this.dlgivent.getPanInventario().setEnabledAt(1, false);
-                        this.dlgivent.getPanInventario().setEnabledAt(0, true);
-
-                    } else {
-                        JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
+                        } else {
+                            JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
+                        }
                     }
                 }
+            } else {
+                JOptionPane.showMessageDialog(dlgivent, "Rellene todos los campos para registrar");
             }
+
         } else if (e.getSource() == dlgivent.getBtnCancelar()) {
-            
+
             this.clear();
             this.dlgivent.getPanInventario().setEnabledAt(1, false);
             this.dlgivent.getPanInventario().setEnabledAt(0, true);
@@ -256,8 +268,53 @@ public class InventarioControlador implements ActionListener, KeyListener {
         } else if (e.getSource() == mostrador.getBtnCancelar()) {
             // Cancela la selección del proveedor o categoría
             mostrador.dispose();
+        } else if (e.getSource() == dlgivent.getBtnBuscar()) {
+            buscar();
+            dlgivent.getTxtBuscar().setText("");
         }
+    }
 
+    /**
+     * Permite buscar productos por medio del: <br>
+     * nombre del producto, precio, id de prodcuto <br>
+     * Por nombre del proveedor y nombre de categoria
+     * 
+     */
+    private void buscar() {
+
+        try {
+
+            DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                    return false;
+                }
+            };
+
+            String titulos[] = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
+                "Stock", "Frágil", "Descripción"};
+            modeloTabla.setColumnIdentifiers(titulos);
+
+            ResultSet rs = prodModelo.BuscarProducto(dlgivent.getTxtBuscar().getText());
+
+            while (rs.next()) {
+
+                Object nextElement[] = {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getFloat(5), rs.getInt(6), rs.getString(7),
+                    rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
+
+                modeloTabla.addRow(nextElement);
+            }
+
+            rs.close();
+            System.out.println("RS cerrado");
+            dlgivent.getTblInventario().setModel(modeloTabla);
+            dlgivent.getLblRegistros().setText("Total de productos: " + modeloTabla.getRowCount());
+
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
+        }
     }
 
     /**
@@ -266,13 +323,7 @@ public class InventarioControlador implements ActionListener, KeyListener {
      * @return
      */
     private boolean validacionIn() {
-        if (dlgivent.getTxtIdProveedor().getText().isEmpty()) {
-
-            dlgivent.getTxtIdProveedor().setBackground(Color.red);
-
-            return false;
-        } else if (dlgivent.getTxtIdCategoria().getText().isEmpty()) {
-
+        if (dlgivent.getTxtIdCategoria().getText().isEmpty()) {
             dlgivent.getTxtIdCategoria().setBackground(Color.red);
 
             return false;
@@ -350,6 +401,7 @@ public class InventarioControlador implements ActionListener, KeyListener {
         // Títulos
         String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
             "Stock", "Frágil", "Descripción"};
+
         modeloInvent = new DefaultTableModel(null, title) {
 
             @Override
@@ -363,7 +415,7 @@ public class InventarioControlador implements ActionListener, KeyListener {
             while (rs.next()) {
                 producto = new ClassProducto();
 
-                Object[] objeto = {rs.getInt(1), rs.getString(4), rs.getInt(2), rs.getInt(3),
+                Object[] objeto = {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
                     rs.getFloat(5), rs.getInt(6), rs.getString(7),
                     rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
 

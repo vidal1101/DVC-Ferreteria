@@ -122,6 +122,8 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
         dlgtrab.getTxtNombreT().setText("");
         dlgtrab.getTxtTelefono().setText("");
         dlgtrab.getCmbPuestoT().setSelectedIndex(0);
+        dlgtrab.getTxtContrsenia().setText("");
+        dlgtrab.getTxtContrsenia2().setText("");
     }
 
     /**
@@ -193,7 +195,7 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
                         //el metodo de modificar
                         if (this.trabModelo.modificarTrabajador(trabajador)) {
 
-                            JOptionPane.showMessageDialog(dlgtrab, "Se Modifico el trabajador");
+                            JOptionPane.showMessageDialog(dlgtrab, "Se Modificó el trabajador");
                             this.mostrartabla(this.trabModelo.mostrarTrabajadores());
                             this.dlgtrab.getPantrabajador().setSelectedIndex(0);
                             this.dlgtrab.getPantrabajador().setEnabled(true);
@@ -360,9 +362,9 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
             return false;
         } else if (dlgtrab.getTxtNombreT().getText().isEmpty()) {
             return false;
-        } else if (dlgtrab.getTxtContrsenia().getPassword().toString().isEmpty()) {
+        } else if (dlgtrab.getTxtContrsenia().getPassword().length < 4) {
             return false;
-        } else if (dlgtrab.getTxtContrsenia2().getPassword().toString().isEmpty()) {
+        } else if (dlgtrab.getTxtContrsenia2().getPassword().length < 4 ) {
             return false;
         } else if (dlgtrab.getCmbPuestoT().getSelectedIndex() == 0) {
             return false;

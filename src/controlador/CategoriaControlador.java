@@ -28,9 +28,9 @@ public class CategoriaControlador implements ActionListener, KeyListener {
     private DefaultTableModel tablaModelo;
     private FrmPrincipal principal;
 
-    public CategoriaControlador(FrmPrincipal principal, DlgCategorias dlgCate) {
+    public CategoriaControlador(FrmPrincipal principal) {
         this.principal = principal;
-        this.dlgCate = dlgCate;
+        this.dlgCate = new DlgCategorias(principal, true);
         this.categoria = new ClassCategoria();
         this.modeloCat = new CategoriaModelo();
         this.tablaModelo = new DefaultTableModel();
@@ -128,7 +128,7 @@ public class CategoriaControlador implements ActionListener, KeyListener {
                     if (dlgCate.getTbpnCategorias().getTitleAt(2).equals("Registrar")) {
 
                         if (modeloCat.insertarCategoria(categoria)) {
-                            JOptionPane.showMessageDialog(dlgCate, "Categoría insertada exitosamente");
+                            JOptionPane.showMessageDialog(dlgCate, "Categoría guardada exitosamente");
                             mostrarTablaCat(modeloCat.mostrarCategorias());
 
                             dlgCate.getTbpnCategorias().setSelectedIndex(0);
@@ -137,20 +137,25 @@ public class CategoriaControlador implements ActionListener, KeyListener {
                             clearReg();
 
                         } else {
-                            JOptionPane.showMessageDialog(dlgCate, "La categoría no ha sido insertada");
+                            JOptionPane.showMessageDialog(dlgCate, "Error al intentar guardar categoría",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
                         }
 
                     } else if (dlgCate.getTbpnCategorias().getTitleAt(2).equals("Modificar")) {
 
                         categoria.setIdCategoria(Integer.parseInt(dlgCate.getTxtidCatReg().getText()));
 
-                        modeloCat.modificarCategoria(categoria);
-                        mostrarTablaCat(modeloCat.mostrarCategorias());
-
-                        dlgCate.getTbpnCategorias().setSelectedIndex(0);
-                        dlgCate.getTbpnCategorias().setEnabledAt(0, true);
-                        dlgCate.getTbpnCategorias().setEnabledAt(2, false);
-                        clearReg();
+                        if (modeloCat.modificarCategoria(categoria)) {
+                            JOptionPane.showMessageDialog(dlgCate, "Categoría insertada exitosamente");
+                            mostrarTablaCat(modeloCat.mostrarCategorias());
+                            dlgCate.getTbpnCategorias().setSelectedIndex(0);
+                            dlgCate.getTbpnCategorias().setEnabledAt(0, true);
+                            dlgCate.getTbpnCategorias().setEnabledAt(2, false);
+                            clearReg();
+                        } else {
+                            JOptionPane.showMessageDialog(dlgCate, "Error al intentar editar categoría",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }

@@ -34,11 +34,11 @@ public class ProveedoresControlador implements ActionListener, KeyListener {
     DefaultTableModel modeloProv;
     private int opc;
 
-    public ProveedoresControlador(FrmPrincipal principal, DlgProveedores dlgprov) {
+    public ProveedoresControlador(FrmPrincipal principal) {
 
         this.modeloProv = new DefaultTableModel();
         this.principal = principal;
-        this.dlgprov = dlgprov;
+        this.dlgprov = new DlgProveedores(principal, true);
         this.proveedor = new ClassProveedor();
         this.provModelo = new ProveedorModelo();
         this.opc = 0;

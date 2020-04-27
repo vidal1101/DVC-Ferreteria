@@ -35,25 +35,24 @@ public class CajaControlador implements ActionListener {
     private DlgMostrador mostrador;
     private DlgModificarDatos dlgMofidicaCantidad;
     private DlgCliente dlgCli;
-    
+
     private CajaModelo cajaModelo;
     private ClassCliente cliente;
     private ClassTrabajador trabajador;
     private ClassProducto producto;
-    
+
     private java.util.Date fecha;
     private ArrayList<ClassProducto> arraysDetalles;
     private int cantidad;
 
-    public CajaControlador(FrmPrincipal principal, FrmVentas ventanaVentas,
-            ClassTrabajador trabajador, DlgCliente dlgCli) {
-        
-        this.dlgCli = dlgCli;
+    public CajaControlador(FrmPrincipal principal, ClassTrabajador trabajador) {
+
+        this.dlgCli = new DlgCliente(principal, true);
         this.principal = principal;
         this.producto = new ClassProducto();
         this.arraysDetalles = new ArrayList<>();
         this.mostrador = new DlgMostrador(this.principal, true);
-        this.ventanaVentas = ventanaVentas;
+        this.ventanaVentas = new FrmVentas(principal, true);
         this.cajaModelo = new CajaModelo();
         this.cantidad = 0;
         this.cliente = new ClassCliente();
@@ -126,7 +125,7 @@ public class CajaControlador implements ActionListener {
 
         } else if (e.getSource() == ventanaVentas.getBtnCliente()) {
 
-            ClienteControlador cliControl = new ClienteControlador(this.principal, dlgCli);
+            ClienteControlador cliControl = new ClienteControlador(this.principal);
             cliControl.inciarVista("Seleccionar Cliente");
 
             // Selecciona al cliente
@@ -189,7 +188,7 @@ public class CajaControlador implements ActionListener {
 
         } else if (e.getSource() == mostrador.getBtnCancelar()) {
 
-            System.out.println("Cancelar la selección de producto");
+            System.out.println("Cancelar la selección de producto o cliente");
             mostrador.dispose();
 
         } else if (e.getSource() == ventanaVentas.getBtnQuitarPro()) {
@@ -202,25 +201,32 @@ public class CajaControlador implements ActionListener {
                 int opcion = JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea quitar este producto de la compra?", "Quitar", JOptionPane.YES_NO_OPTION);
                 if (opcion == JOptionPane.YES_OPTION) {
                     this.quitarProducto(fila);
-                    JOptionPane.showMessageDialog(null, "Eliminado correctamente");
                 }
 
             } else {
-                JOptionPane.showMessageDialog(ventanaVentas, "Seleccione un producto");
+                JOptionPane.showMessageDialog(ventanaVentas, "Seleccione un producto para quitar de la compra");
             }
+            
         } else if (e.getSource() == ventanaVentas.getBtnSalir()) {
 
             System.out.println("Salir");
-            this.sumarAlStocks();
-            this.limpiartodo();
-            ventanaVentas.dispose();
-
+            if (JOptionPane.YES_OPTION
+                    == JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea salir? \n"
+                            + "Se perderán todos los datos.", "Salir", JOptionPane.YES_NO_OPTION)) {
+                this.sumarAlStocks();
+                this.limpiartodo();
+                ventanaVentas.dispose();
+            }
         } else if (e.getSource() == ventanaVentas.getBtnQuitarTodo()) {
 
             // Regresa los productos al stock
             System.out.println("Limpiar");
-            this.sumarAlStocks();
-            this.limpiartodo();
+            if (JOptionPane.YES_OPTION
+                    == JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea limpiar la ventana? \n"
+                            + "Se perderán todos los datos.")) {
+                this.sumarAlStocks();
+                this.limpiartodo();
+            }
         }
     }
 
@@ -493,7 +499,7 @@ public class CajaControlador implements ActionListener {
      * datos desde la base de datos
      */
     private void mostrarProductos() {
-        String[] title = {"ID", "Proveedor", "Categoria", "Nombre Prod ", "Precio", "Descuento", "Venta por",
+        String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
             "Stock", "Frágil", "Descripción"};
         DefaultTableModel tablaModelo = new DefaultTableModel(null, title) {
 
@@ -511,8 +517,8 @@ public class CajaControlador implements ActionListener {
 
             while (rs.next()) {
 
-                Object[] objeto = {rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                    rs.getDouble(5), rs.getInt(6), rs.getString(7),
+                Object[] objeto = {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getFloat(5), rs.getInt(6), rs.getString(7),
                     rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
 
                 tablaModelo.addRow(objeto);
@@ -533,7 +539,9 @@ public class CajaControlador implements ActionListener {
     private void facturar() {
 
         if (this.cliente.getCedulaCli() != 0 && !arraysDetalles.isEmpty()) {
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea factura?", "FACTURAR", JOptionPane.YES_NO_OPTION)) {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(ventanaVentas, "¿Desea factura?",
+                    "FACTURAR", JOptionPane.YES_NO_OPTION)) {
+
                 System.out.println("Acepta facturar");
                 java.sql.Date fechaSQL = new java.sql.Date(fecha.getTime());
 
@@ -548,6 +556,9 @@ public class CajaControlador implements ActionListener {
                     JOptionPane.showMessageDialog(ventanaVentas, "Facturado exitosamente");
                     this.limpiartodo();
 
+                } else {
+                    JOptionPane.showMessageDialog(ventanaVentas, "Error al intentar facturar.\n"
+                            + "Comuníquese con el administrador", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
