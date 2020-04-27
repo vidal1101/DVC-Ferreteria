@@ -5,7 +5,9 @@ import javax.swing.JTabbedPane;
 
 /**
  *
- * @author dixia
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class DlgTrabajadores extends javax.swing.JDialog {
 
@@ -50,11 +52,11 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         txtNombreT = new javax.swing.JTextField();
         txtCedulaT = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
         lblContrasenia = new javax.swing.JLabel();
         txtContrsenia = new javax.swing.JPasswordField();
         txtContrsenia2 = new javax.swing.JPasswordField();
         lblVeriContra = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JFormattedTextField();
         btnLimpiarT = new javax.swing.JButton();
         btnGuardarT = new javax.swing.JButton();
         btnCancelarT = new javax.swing.JButton();
@@ -78,7 +80,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
 
         lblBuscar.setText("Buscar:");
         pnl1.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-        pnl1.add(txtBuscarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 14, 320, 30));
+        pnl1.add(txtBuscarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 320, 30));
 
         btnInsertarT.setText("Insertar");
         pnl1.add(btnInsertarT, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 100, 40));
@@ -98,7 +100,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl2.add(lblRegistrosT, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 18, 302, -1));
 
         pnl1.add(pnl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 820, 50));
-        pnl1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 60, 40));
+        pnl1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 60, 40));
 
         panTrabajador.addTab("Principal", pnl1);
 
@@ -147,7 +149,6 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         pnl5.add(txtNombreT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 310, 30));
         pnl5.add(txtCedulaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 310, 30));
         pnl5.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 310, 30));
-        pnl5.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 310, 30));
 
         lblContrasenia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblContrasenia.setText("Contraseña:");
@@ -158,6 +159,13 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         lblVeriContra.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblVeriContra.setText("Re escriba la contraseña:");
         pnl5.add(lblVeriContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 200, 30));
+
+        try {
+            txtTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("+506-####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        pnl5.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 109, 310, 30));
 
         pnl3.add(pnl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 750, 320));
 
@@ -256,7 +264,7 @@ public class DlgTrabajadores extends javax.swing.JDialog {
     private javax.swing.JPasswordField txtContrsenia2;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombreT;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JFormattedTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JButton getBtnCancelarT() {
@@ -335,9 +343,6 @@ public class DlgTrabajadores extends javax.swing.JDialog {
         return txtTelefono;
     }
 
-    public void setTxtTelefono(javax.swing.JTextField txtEmailT) {
-        this.txtTelefono = txtEmailT;
-    }
 
     public javax.swing.JTextField getTxtNombreT() {
         return txtNombreT;

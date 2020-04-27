@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.CallableStatement;
@@ -12,7 +8,9 @@ import logicaClass.ClassProveedor;
 
 /**
  *
- * @author User
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class ProveedorModelo {
 
@@ -22,7 +20,7 @@ public class ProveedorModelo {
      * @param prov object tipo proveedor
      * @return si se inserto es true ., sino false
      */
-    public boolean insertarTrabajador(ClassProveedor prov) {
+    public boolean insertarProveedor(ClassProveedor prov) {
         Conexion con = new Conexion();
 
         try {

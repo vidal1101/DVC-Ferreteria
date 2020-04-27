@@ -3,7 +3,9 @@ package Vista;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class FrmPrincipal extends javax.swing.JFrame {
     
@@ -50,8 +52,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnAyuda.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         btnAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (2).png"))); // NOI18N
         btnAyuda.setText("Ayuda");
-        btnAyuda.setBorderPainted(false);
-        btnAyuda.setContentAreaFilled(false);
         btnAyuda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAyuda.setDefaultCapable(false);
         btnAyuda.setFocusPainted(false);
@@ -60,8 +60,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnConfiguracion.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         btnConfiguracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
         btnConfiguracion.setText("Configuracion");
-        btnConfiguracion.setBorderPainted(false);
-        btnConfiguracion.setContentAreaFilled(false);
         btnConfiguracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfiguracion.setDefaultCapable(false);
         btnConfiguracion.setFocusPainted(false);
@@ -70,8 +68,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCalendario.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
         btnCalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendario.png"))); // NOI18N
         btnCalendario.setText("Calendario");
-        btnCalendario.setBorderPainted(false);
-        btnCalendario.setContentAreaFilled(false);
         btnCalendario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCalendario.setDefaultCapable(false);
         btnCalendario.setFocusPainted(false);
@@ -102,8 +98,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCaja.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/efectivo.png"))); // NOI18N
         btnCaja.setText("Caja ");
-        btnCaja.setBorderPainted(false);
-        btnCaja.setContentAreaFilled(false);
         btnCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCaja.setDefaultCapable(false);
         btnCaja.setFocusPainted(false);
@@ -114,8 +108,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCategorias.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/categoria.png"))); // NOI18N
         btnCategorias.setText("Categorias");
-        btnCategorias.setBorderPainted(false);
-        btnCategorias.setContentAreaFilled(false);
         btnCategorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCategorias.setDefaultCapable(false);
         btnCategorias.setFocusPainted(false);
@@ -129,8 +121,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnInventario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedor.png"))); // NOI18N
         btnInventario.setText("Inventario ");
-        btnInventario.setBorderPainted(false);
-        btnInventario.setContentAreaFilled(false);
         btnInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnInventario.setDefaultCapable(false);
         btnInventario.setFocusPainted(false);
@@ -141,12 +131,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnTrabajadores.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuenta.png"))); // NOI18N
         btnTrabajadores.setText("Trabajadores");
-        btnTrabajadores.setBorderPainted(false);
-        btnTrabajadores.setContentAreaFilled(false);
         btnTrabajadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTrabajadores.setDefaultCapable(false);
         btnTrabajadores.setFocusPainted(false);
-        btnTrabajadores.setOpaque(true);
         jPanel2.add(btnTrabajadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 320, -1));
 
         btnProveedores.setBackground(new java.awt.Color(255, 255, 255));

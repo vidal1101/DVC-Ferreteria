@@ -1,20 +1,14 @@
 package Vista;
 
-import controlador.TrabajadorControlador;
-import logicaClass.ClassTrabajador;
-
 /**
  *
- * @author User
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class FrmInicioSesion extends javax.swing.JFrame {
-
-    private FrmPrincipal principal;
-    private ClassTrabajador trabajador;
     
-    /**
-     * Creates new form dlgInicio_Sesion
-     */
+   
     public FrmInicioSesion() {
         initComponents();
 
@@ -34,7 +28,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         txtContrasenia = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Iniciar Sesión");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
@@ -146,10 +140,6 @@ public class FrmInicioSesion extends javax.swing.JFrame {
 
     public javax.swing.JButton getBtnIngresar() {
         return btnIngresar;
-    }
-
-    public void setBtnIngresar(javax.swing.JButton btnIngresar) {
-        this.btnIngresar = btnIngresar;
     }
 
     public javax.swing.JPasswordField getTxtContrasenia() {

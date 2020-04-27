@@ -17,7 +17,9 @@ import modelo.TrabajadorModelo;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class TrabajadorControlador implements ActionListener, KeyListener {
 
@@ -46,24 +48,25 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
         this.dlgtrab.getBtnCancelarT().addActionListener(this);
         this.dlgtrab.getBtnBuscar().addActionListener(this);
 
+        this.dlgtrab.getTxtNombreT().addKeyListener(this);
         this.dlgtrab.getTxtCedulaT().addKeyListener(this);
         this.dlgtrab.getTxtTelefono().addKeyListener(this);
     }
-    
-    public TrabajadorControlador (FrmInicioSesion sesionVentana) {
-        
+
+    public TrabajadorControlador(FrmInicioSesion sesionVentana) {
+
         entradaLogin = sesionVentana;
         trabModelo = new TrabajadorModelo();
         trabajador = new ClassTrabajador();
     }
 
     /**
-     * Inicia sesión
+     * Iniciar sesión
      *
      * @return
      */
     public boolean iniciarSesion() {
-        
+
         try {
 
             int cedula = Integer.parseInt(entradaLogin.getTxtUsuario().getText());
@@ -79,8 +82,6 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
                         rs.getString(5), rs.getBoolean(6));
 
                 System.out.println("Sesion exitosa");
-                //principal.setTrabajador(trabajador);
-                //principal.setVisible(true);
                 rs.close();
 
                 return true;
@@ -300,7 +301,7 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
     }
 
     /**
-     * Recibe los datos desde la tabla y los imprime en la tabla
+     * Recibe los datos desde la tabla y los imprime en la tabla de la GUI
      *
      * @param rs
      */
@@ -318,13 +319,11 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
         try {
 
             while (rs.next()) {
-                this.trabajador = new ClassTrabajador(rs.getInt(1),
-                        rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getBoolean(6));
 
-                Object[] objeto = {trabajador.getCedulaTrab(), trabajador.getNombreTrab(),
-                    trabajador.getEmailTrab(), trabajador.getPuesto(), trabajador.getTelefonoTrab(),
-                    trabajador.getAbministrador()};
+                Object[] objeto = {rs.getInt(1), rs.getString(2),
+                                   rs.getString(3), rs.getString(4),
+                                   rs.getString(5), rs.getBoolean(6)};
+
                 modeloTrab.addRow(objeto);
             }
 
@@ -333,7 +332,8 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
             dlgtrab.getTblTrabajadores().setModel(modeloTrab);
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("No existen datos");
+            dlgtrab.getTblTrabajadores().setModel(modeloTrab);
             System.out.println("--------------------------------------");
         }
     }
@@ -365,7 +365,9 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
     }
 
     /**
-     * Método que permite buscar al trabajador por medio de su cédula y nombre
+     * Método que permite buscar al trabajador <br>
+     * por medio de su cédula y nombre
+     *
      */
     private void buscar() {
 
@@ -406,11 +408,20 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
 
-        if (e.getSource() == dlgtrab.getTxtCedulaT()) {
-            System.out.println("txt cédula");
+        if (e.getSource() == dlgtrab.getTxtNombreT()) {
+
+            char letra = e.getKeyChar();
+
+            if (Character.isDigit(letra)) {
+                e.consume();
+            }
+        } else if (e.getSource() == dlgtrab.getTxtCedulaT()) {
             char letra = e.getKeyChar();
 
             if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+            if (dlgtrab.getTxtCedulaT().getText().length() >= 9) {
                 e.consume();
             }
         }
@@ -424,6 +435,10 @@ public class TrabajadorControlador implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public ClassTrabajador getTrabajador() {
+        return trabajador;
     }
 
 }

@@ -1,12 +1,12 @@
-
-
 package Vista;
 
 import javax.swing.JFormattedTextField;
 
 /**
  *
- * @author Dixiana, Carlos, Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class DlgCliente extends javax.swing.JDialog {
 

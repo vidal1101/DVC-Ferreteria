@@ -7,7 +7,9 @@ import logicaClass.ClassCategoria;
 
 /**
  *
- * @author Dixiana Gómez, Rodrigo Vidal, Carlos Mairena
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class CategoriaModelo {
 
@@ -48,7 +50,6 @@ public class CategoriaModelo {
             con.conectar();
             CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarCategoria(?,?,?)}");
 
-            //cst.setInt(1, categoria.getIdCategoria());
             cst.setString(1, categoria.getNombreCateg());
             cst.setString(2, categoria.getDescripcionCateg());
 
@@ -109,7 +110,7 @@ public class CategoriaModelo {
         Conexion con = new Conexion();
 
         try {
-            
+
             con.conectar();
             CallableStatement ps = con.getCon().prepareCall("{CALL pa_eliminarCategoria(?,?)}");
             ps.setInt(1, id);
@@ -128,8 +129,9 @@ public class CategoriaModelo {
     }
 
     /**
-     * Mostramos los productos de la categoría
+     * Mostramos los productos de la categoría indicada por medio del parámetro
      *
+     * @param IDTabla
      * @return
      */
     public ResultSet mostrarProduCat(int IDTabla) {
@@ -150,7 +152,12 @@ public class CategoriaModelo {
         }
     }
 
-    
+    /**
+     * Permite buscar las categorías por medio del nombre y del ID.
+     *
+     * @param dato
+     * @return
+     */
     public ResultSet BuscarCategorias(String dato) {
 
         Conexion con = new Conexion();

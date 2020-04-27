@@ -1,6 +1,3 @@
-/**
- * FALTA COMPLETAR ESTA CLASE
- */
 package modelo;
 
 import java.sql.CallableStatement;
@@ -12,12 +9,14 @@ import logicaClass.ClassProducto;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class CajaModelo {
 
     /**
-     * metodo para modificar el stock
+     * Método que nos permite descontar o sumar el stock de un producto
      *
      * @param id el id del producto seleccionado
      * @param operacion la 1 suma , 2 resta
@@ -88,10 +87,13 @@ public class CajaModelo {
 
                 // Inserta detalles, si ocurrre un error entonces elimina la factura recién creada
                 if (!insertarDetalles(con, factura.getDetalleFactura(), idFac)) {
-
                     System.out.println("Error al intentar insertar los detalles de factura");
-                    if (eliminarFactura(idFac, con)) {
 
+                    /*
+                        Se empieza a eliminar los detalles de factura por el error al insertar 1 solo detalle,
+                        por lo tanto, la factura está incompleta y se debe eliminar.
+                     */
+                    if (eliminarFactura(idFac, con)) {
                         System.out.println("Factura eliminada de la base de datos");
 
                     } else {
@@ -103,7 +105,7 @@ public class CajaModelo {
                 } else {
                     return cst.getBoolean(8);
                 }
-                
+
             } else {
                 System.out.println("Error al intentar insertar la factura");
                 return cst.getBoolean(8);

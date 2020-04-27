@@ -6,7 +6,9 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class FacturaModelo {
 

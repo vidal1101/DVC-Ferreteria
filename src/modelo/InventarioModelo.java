@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.sql.CallableStatement;
@@ -12,7 +8,9 @@ import logicaClass.ClassProducto;
 
 /**
  *
- * @author Dixi Maria, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class InventarioModelo {
 
@@ -46,11 +44,10 @@ public class InventarioModelo {
         } finally {
             con.desconectar();
         }
-
     }
 
     /**
-     * *
+     *
      * metodo que devuelve el resultado de la consulta al mostrar tabla de productos
      *
      * @return
@@ -64,7 +61,7 @@ public class InventarioModelo {
             CallableStatement ps = con.getCon().prepareCall("{CALL pa_mostrarTablas(?)}");
             ps.setInt(1, 5);
             rs = ps.executeQuery();
-            
+
             //rs.first();
             return rs;
 
@@ -75,10 +72,10 @@ public class InventarioModelo {
     }
 
     /**
-     * *
-     * metodo para modificar un Proveedor
      *
-     * @param trab
+     * Modificar un Proveedor
+     *
+     * @param prod
      * @return
      */
     public boolean modificarProducto(ClassProducto prod) {
@@ -88,6 +85,8 @@ public class InventarioModelo {
             System.out.println("Abrriendo conexión");
             con.conectar();
             CallableStatement cst = con.getCon().prepareCall("{CALL pa_editarProducto(?,?,?,?,?,?,?,?,?,?,?)}");
+
+            System.out.println("ID recibido: " + prod.getIdProducto());
 
             cst.setInt(1, prod.getIdProducto());
             cst.setInt(2, prod.getIdProveedor());
@@ -99,17 +98,18 @@ public class InventarioModelo {
             cst.setInt(8, prod.getCantidad());
             cst.setBoolean(9, prod.getProdFragil());
             cst.setString(10, prod.getDescriProd());
-
             cst.registerOutParameter(11, java.sql.Types.BOOLEAN);
-            System.out.println("Modificando datos");
 
-            cst.execute();
+            System.out.println("Modificando datos \n");
+            cst.executeUpdate();
 
             return cst.getBoolean(11);
 
         } catch (SQLException e) {
+
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
             return false;
+
         } finally {
             con.desconectar();
         }
@@ -119,7 +119,7 @@ public class InventarioModelo {
     /**
      * Se le envía la cédula del trabajador a eliminar
      *
-     * @param cedula
+     * @param idpro
      * @return
      */
     public boolean eliminarProducto(int idpro) {

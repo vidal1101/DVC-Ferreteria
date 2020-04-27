@@ -4,7 +4,9 @@ import controlador.ControladorPrincipal;
 
 /**
  *
- * @author Dixiana, Vidal y Carlos
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class Arranque {
 

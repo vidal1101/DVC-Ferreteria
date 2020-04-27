@@ -6,7 +6,9 @@ import java.sql.Date;
 
 /**
  *
- * @author Dixiana Maria, Carlos Miguel y Vidal Canales
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class ClassFactura implements Serializable {
 

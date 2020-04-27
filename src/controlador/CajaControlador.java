@@ -24,7 +24,9 @@ import modelo.InventarioModelo;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class CajaControlador implements ActionListener {
 
@@ -586,6 +588,10 @@ public class CajaControlador implements ActionListener {
         }
 
         return false;
+    }
+
+    public void setTrabajador(ClassTrabajador trabajador) {
+        this.trabajador = trabajador;
     }
 
 }

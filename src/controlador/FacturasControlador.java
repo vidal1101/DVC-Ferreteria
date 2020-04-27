@@ -1,26 +1,29 @@
 package controlador;
 
 import Vista.DlgFacturas;
+import Vista.FrmPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import modelo.FacturaModelo;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class FacturasControlador implements ActionListener {
     
+    private FrmPrincipal principal;
     private DlgFacturas ventanaFacturas;
     private FacturaModelo modeloFactura;
     
-    public FacturasControlador() {
-        this.ventanaFacturas = new DlgFacturas(null, true);
+    public FacturasControlador(FrmPrincipal principal) {
+        this.principal = principal;
+        this.ventanaFacturas = new DlgFacturas(this.principal, true);
         this.modeloFactura = new FacturaModelo();
         
         this.ventanaFacturas.getBtnAnulaFac().addActionListener(this);
@@ -81,7 +84,5 @@ public class FacturasControlador implements ActionListener {
         } catch (SQLException ex) {
             
         }
-        
     }
-    
 }

@@ -16,6 +16,8 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import logicaClass.ClassCliente;
 import logicaClass.ClassProducto;
 import logicaClass.ClassProveedor;
@@ -27,9 +29,11 @@ import modelo.TrabajadorModelo;
 
 /**
  *
- * @author Dixi, Vidal y Canales
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
-public class ControladorPrincipal implements ActionListener {
+public class ControladorPrincipal implements ActionListener, KeyListener {
 
     //Instancias
     AudioClip sonido = Applet.newAudioClip(ClassLoader.getSystemResource("DVC_Ferreteria/prueba.wav"));
@@ -39,7 +43,7 @@ public class ControladorPrincipal implements ActionListener {
     private ClassTrabajador trabajador;
     private TrabajadorModelo trabModelo;
     private DlgTrabajadores dlgTrab;
-    
+
     private DlgCategorias dlgCateg;
 
     private ClassCliente cliente;
@@ -69,21 +73,21 @@ public class ControladorPrincipal implements ActionListener {
         this.trabModelo = new TrabajadorModelo();
         this.trabajador = new ClassTrabajador();
 
-        this.dlgTrab = new DlgTrabajadores(null, true);
-        this.dlgCateg = new DlgCategorias(null, true);
+        this.dlgTrab = new DlgTrabajadores(framePrincipal, true);
+        this.dlgCateg = new DlgCategorias(framePrincipal, true);
 
         this.cliModelo = new ClienteModelo();
         this.cliente = new ClassCliente();
 
         this.provModelo = new ProveedorModelo();
         this.proveedor = new ClassProveedor();
-        this.dlgprov = new DlgProveedores(null, true);
+        this.dlgprov = new DlgProveedores(framePrincipal, true);
 
         this.invenModelo = new InventarioModelo();
         this.producto = new ClassProducto();
-        this.dlginve = new DlgInventario(null, true);
+        this.dlginve = new DlgInventario(framePrincipal, true);
 
-        this.ventas = new FrmVentas(null, true);
+        this.ventas = new FrmVentas(framePrincipal, true);
         this.caja = new CajaControlador(ventas, trabajador);
 
         this.framePrincipal.getBtnAyuda().addActionListener(this);
@@ -96,12 +100,13 @@ public class ControladorPrincipal implements ActionListener {
         this.framePrincipal.getBtnInventario().addActionListener(this);
         this.framePrincipal.getBtnProveedores().addActionListener(this);
         this.framePrincipal.getBtnTrabajadores().addActionListener(this);
-        this.frameSesion.getBtnIngresar().addActionListener(this);
         this.framePrincipal.getMnTrabajadores().addActionListener(this);
         this.framePrincipal.getMnHistorial().addActionListener(this);
         this.framePrincipal.getMnInventario().addActionListener(this);
         this.framePrincipal.getMnCategorias().addActionListener(this);
-
+        
+        this.frameSesion.getBtnIngresar().addActionListener(this);
+        this.frameSesion.getTxtUsuario().addKeyListener(this);
     }
 
     @Override
@@ -111,31 +116,39 @@ public class ControladorPrincipal implements ActionListener {
             TrabajadorControlador principalCon = new TrabajadorControlador(frameSesion);
 
             if (principalCon.iniciarSesion()) {
-                framePrincipal = new FrmPrincipal();
+
+                this.trabajador = principalCon.getTrabajador();
                 this.frameSesion.dispose();
                 this.framePrincipal.setVisible(true);
-                this.sonidoInicio();
+                //this.sonidoInicio();
 
             }
-        } 
-        
+        }
+
         if (e.getSource() == framePrincipal.getBtnCaja()) { //breteo la caja 
+
             System.out.println("Trabajador: " + trabajador.getNombreTrab());
+            caja.setTrabajador(trabajador);
             caja.iniciarVista();
+
         } else if (e.getSource() == framePrincipal.getBtnCategorias()) { //las categorias
 
             CategoriaControlador categControl = new CategoriaControlador(dlgCateg);
             categControl.inciarVista("Categorias");
 
         } else if (e.getSource() == framePrincipal.getBtnClientes()) {//los clientes 
+
             ClienteControlador cliControl = new ClienteControlador(this.framePrincipal);
             cliControl.inciarVista("Clientes");
 
         } else if (e.getSource() == framePrincipal.getBtnProveedores()) { //los proveedores
+
             ProveedoresControlador provCont = new ProveedoresControlador(this.framePrincipal, dlgprov,
                     proveedor, provModelo);
             provCont.inciarVista("Proveedores");
+
         } else if (e.getSource() == framePrincipal.getBtnTrabajadores()) {//los trabajadores
+
             TrabajadorControlador trabControl = new TrabajadorControlador(framePrincipal);
             trabControl.inciarVista("Trabajadores");
 
@@ -149,6 +162,9 @@ public class ControladorPrincipal implements ActionListener {
             /**
              * aun falta aqui las facturas
              */
+            FacturasControlador facturaControl = new FacturasControlador(framePrincipal);
+            facturaControl.iniciarVista("Facturas");
+
         } else if (e.getSource() == framePrincipal.getBtnCalendario()) {
 
         } else if (e.getSource() == framePrincipal.getBtnConfiguracion()) {
@@ -166,11 +182,6 @@ public class ControladorPrincipal implements ActionListener {
     public void muestraVentanaPrincipal() {
 
         frameSesion.setVisible(true);
-
-//            this.frameSesion.dispose();
-//            this.framePrincipal.setVisible(true);
-//            this.sonidoInicio();
-
     }
 
     /**
@@ -179,6 +190,28 @@ public class ControladorPrincipal implements ActionListener {
      */
     public void sonidoInicio() {
         sonido.play();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+        if (e.getSource() == frameSesion.getTxtUsuario()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
 }

@@ -7,7 +7,9 @@ import logicaClass.ClassTrabajador;
 
 /**
  *
- * @author Maria, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class TrabajadorModelo {
 

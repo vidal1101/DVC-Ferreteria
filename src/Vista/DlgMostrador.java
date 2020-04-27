@@ -1,13 +1,13 @@
-
 package Vista;
 
 /**
  *
- * @author dreads
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class DlgMostrador extends javax.swing.JDialog {
 
-    
     public DlgMostrador(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

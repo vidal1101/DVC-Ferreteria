@@ -4,18 +4,18 @@ import Vista.DlgCategorias;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassCategoria;
-import logicaClass.ClassProducto;
 import modelo.CategoriaModelo;
 
 /**
  *
- * @author Dixiana Gómez, Rodrigo Vidal, Carlos Mairena
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class CategoriaControlador implements ActionListener {
 
@@ -39,18 +39,19 @@ public class CategoriaControlador implements ActionListener {
         this.dlgCate.getBtnModificarCateg().addActionListener(this);
         this.dlgCate.getBtnRegresar().addActionListener(this);
         this.dlgCate.getBtnBuscar().addActionListener(this);
+        this.dlgCate.getTxtidCatReg().setEditable(false);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource().equals(dlgCate.getBtnAnadirCateg())) {
-            // Añadir
 
+            // Añadir
             clearReg();
             dlgCate.getTbpnCategorias().setTitleAt(2, "Registrar");
             dlgCate.getTbpnCategorias().setSelectedIndex(2);
-            dlgCate.getTxtIdCategoria1().setEnabled(true);
             dlgCate.getTbpnCategorias().setEnabledAt(2, true);
             dlgCate.getTbpnCategorias().setEnabledAt(0, false);
 
@@ -89,7 +90,6 @@ public class CategoriaControlador implements ActionListener {
 
                 // Obtenemos los datos de la tabla
                 dlgCate.getTxtidCatReg().setText(dlgCate.getTblCategorias().getValueAt(fila, 0).toString());
-                dlgCate.getTxtidCatReg().setEnabled(false);
                 dlgCate.getTxtNombreCatReg().setText(dlgCate.getTblCategorias().getValueAt(fila, 1).toString());
                 dlgCate.getTxtDescripReg().setText(dlgCate.getTblCategorias().getValueAt(fila, 2).toString());
 
@@ -139,8 +139,7 @@ public class CategoriaControlador implements ActionListener {
                 }
             }
         } else if (e.getSource() == dlgCate.getBtnBuscar()) {
-            buscar();
-            dlgCate.getTxtFiltroCateg().setText("");
+            this.buscar();
 
         } else if (e.getSource().equals(dlgCate.getBtnCancelar())) {
             // Cancelar
@@ -168,7 +167,9 @@ public class CategoriaControlador implements ActionListener {
                 dlgCate.getTxtDescripcion1().setText(dlgCate.getTblCategorias().getValueAt(fila, 2).toString());
 
                 // Enviamos el ID de la categoría y traemos los productos con ese ID
-                mostrarTablaProd(modeloCat.mostrarProduCat((int) (dlgCate.getTblCategorias().getValueAt(fila, 0))));
+                ResultSet rs = null;
+                rs = modeloCat.mostrarProduCat((int) (dlgCate.getTblCategorias().getValueAt(fila, 0)));
+                mostrarTablaProd(rs);
 
                 dlgCate.getTbpnCategorias().setSelectedIndex(1);
                 dlgCate.getTbpnCategorias().setEnabledAt(1, true);
@@ -286,8 +287,8 @@ public class CategoriaControlador implements ActionListener {
         int fila = dlgCate.getTblCategorias().getSelectedRow();
         String categoria = dlgCate.getTblCategorias().getValueAt(fila, 1).toString();
 
-        String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por", "Stock",
-            "Frágil", "Descripción"};
+        String[] title = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por",
+            "Stock", "Frágil", "Descripción"};
         this.tablaModelo = new DefaultTableModel(null, title) {
 
             @Override
@@ -300,13 +301,9 @@ public class CategoriaControlador implements ActionListener {
 
             while (rs.next()) {
 
-                //int proveedor = rs.getInt(2);
-                ClassProducto producto = new ClassProducto(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                        rs.getFloat(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
-
-                Object[] objeto = {producto.getIdProducto(), producto.getNombreProd(), producto.getIdProveedor(),
-                    categoria, producto.getPrecioProd(), producto.getDescuentProd(), producto.getUnidadVenta(),
-                    producto.getCantidad(), producto.getProdFragil(), producto.getDescriProd()};
+                Object[] objeto = {rs.getInt(1), rs.getString(4), rs.getInt(2), categoria,
+                    rs.getFloat(5), rs.getInt(6), rs.getString(7),
+                    rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
 
                 tablaModelo.addRow(objeto);
             }
@@ -316,9 +313,8 @@ public class CategoriaControlador implements ActionListener {
             dlgCate.getTblProducCategorias().setModel(tablaModelo);
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("--------------------------------------");
-            e.printStackTrace();
+            System.out.println("Error: No hay datos. " + e.getMessage());
+            dlgCate.getTblProducCategorias().setModel(tablaModelo);
         }
     }
 
@@ -326,32 +322,28 @@ public class CategoriaControlador implements ActionListener {
 
         try {
 
-            DefaultTableModel modeloTabla = new DefaultTableModel() {
+            String[] title = {"ID", "Nombre", "Descripción"};
+            this.tablaModelo = new DefaultTableModel(null, title) {
 
                 @Override
-                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
                     return false;
                 }
             };
-
-            String titulos[] = {"ID", "Nombre", "Proveedor", "Categoría", "Precio", "Descuento", "Venta por", "Stock",
-                "Frágil", "Descripción"};
-            modeloTabla.setColumnIdentifiers(titulos);
-
             ResultSet rs = modeloCat.BuscarCategorias(dlgCate.getTxtFiltroCateg().getText());
 
             while (rs.next()) {
 
-                Object nextElement[] = {rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                    rs.getDouble(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
+                Object[] objeto = {rs.getInt(1),
+                    rs.getString(2), rs.getString(3)};
 
-                modeloTabla.addRow(nextElement);
+                tablaModelo.addRow(objeto);
             }
 
             rs.close();
             System.out.println("RS cerrado");
-            dlgCate.getTblCategorias().setModel(modeloTabla);
-            dlgCate.getLblRegistros().setText("Total de categorias " + modeloTabla.getRowCount());
+            dlgCate.getTblCategorias().setModel(tablaModelo);
+            dlgCate.getLblRegistros().setText("Total de categorias " + tablaModelo.getRowCount());
 
         } catch (SQLException ex) {
             System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());

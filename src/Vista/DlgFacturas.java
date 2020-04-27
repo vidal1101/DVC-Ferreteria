@@ -1,13 +1,13 @@
-
 package Vista;
 
 /**
  *
- * @author Dixiana, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class DlgFacturas extends javax.swing.JDialog {
 
-    
     public DlgFacturas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

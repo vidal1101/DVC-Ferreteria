@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import javax.swing.JButton;
 
 /**
  *
- * @author User
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class FrmVentas extends javax.swing.JDialog {
 
@@ -20,7 +17,6 @@ public class FrmVentas extends javax.swing.JDialog {
 
         super(frame, modal);
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -54,8 +50,8 @@ public class FrmVentas extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnAyuda = new javax.swing.JButton();
+        btnConfig = new javax.swing.JButton();
         btnCalender = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -195,25 +191,25 @@ public class FrmVentas extends javax.swing.JDialog {
         jPanel1.setToolTipText("");
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (2).png"))); // NOI18N
-        jButton7.setText("Ayuda");
-        jButton7.setBorderPainted(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setDefaultCapable(false);
-        jButton7.setFocusPainted(false);
-        jButton7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
-        jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 150, 40));
+        btnAyuda.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        btnAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (2).png"))); // NOI18N
+        btnAyuda.setText("Ayuda");
+        btnAyuda.setBorderPainted(false);
+        btnAyuda.setContentAreaFilled(false);
+        btnAyuda.setDefaultCapable(false);
+        btnAyuda.setFocusPainted(false);
+        btnAyuda.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/informacion (3).png"))); // NOI18N
+        jPanel1.add(btnAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 150, 40));
 
-        jButton8.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
-        jButton8.setText("Configuracion");
-        jButton8.setBorderPainted(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setDefaultCapable(false);
-        jButton8.setFocusPainted(false);
-        jButton8.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
-        jPanel1.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 40));
+        btnConfig.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
+        btnConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje.png"))); // NOI18N
+        btnConfig.setText("Configuracion");
+        btnConfig.setBorderPainted(false);
+        btnConfig.setContentAreaFilled(false);
+        btnConfig.setDefaultCapable(false);
+        btnConfig.setFocusPainted(false);
+        btnConfig.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/img/engranaje (1).png"))); // NOI18N
+        jPanel1.add(btnConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, 40));
 
         btnCalender.setBackground(new java.awt.Color(131, 182, 231));
         btnCalender.setFont(new java.awt.Font("Times New Roman", 2, 18)); // NOI18N
@@ -341,7 +337,7 @@ public class FrmVentas extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-               FrmVentas dialog = new FrmVentas(new javax.swing.JFrame(), true);
+                FrmVentas dialog = new FrmVentas(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -355,16 +351,16 @@ public class FrmVentas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadirProd;
-    public javax.swing.JButton btnCalender;
+    private javax.swing.JButton btnAyuda;
+    private javax.swing.JButton btnCalender;
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnConfig;
     private javax.swing.JButton btnFacturar;
-    public javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnModificarDatos;
     private javax.swing.JButton btnQuitarPro;
     private javax.swing.JButton btnQuitarTodo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton7;
-    public javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -484,9 +480,9 @@ public class FrmVentas extends javax.swing.JDialog {
     public javax.swing.JLabel getLblNomTrab() {
         return lblNomTrab;
     }
-    
+
     public JButton getBtnModificarDatos() {
         return btnModificarDatos;
     }
-    
+
 }

@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassCliente;
@@ -23,9 +21,11 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Dixiana, Carlos, Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
-public class ClienteControlador implements ActionListener, WindowListener, KeyListener {
+public class ClienteControlador implements ActionListener, KeyListener {
 
     private FrmPrincipal principal;
     private DlgCliente dlgCli;
@@ -54,6 +54,10 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
         this.dlgCli.getBtnBuscar().addActionListener(this);
         this.dlgCli.getBtnSleccinar().addActionListener(this);
         this.dlgCli.getBtnCancelar().addActionListener(this);
+
+        this.dlgCli.getTxtNombreCli().addKeyListener(this);
+        this.dlgCli.getTxtCedulaCli().addKeyListener(this);
+        this.dlgCli.getTxtTelefonoCli().addKeyListener(this);
     }
 
     /**
@@ -154,19 +158,18 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
                 } else {
                     //el metodo de modificar
                     if (this.cliModelo.modificarCliente(cliente)) {
-                        
+
                         JOptionPane.showMessageDialog(dlgCli, "Se Modifico el Cliente");
                         this.mostrartabla(this.cliModelo.mostrarClientes());
                         this.dlgCli.getPanCliente().setSelectedIndex(0);
                         this.dlgCli.getPanCliente().setEnabled(true);
-                        
+
                     } else {
                         JOptionPane.showMessageDialog(dlgCli, "Error al Modificar ");
                     }
                 }
             }
-        }
-        else if (e.getSource() == dlgCli.getBtnEliminarCli()) {
+        } else if (e.getSource() == dlgCli.getBtnEliminarCli()) {
 
             // Obtenemos la cédula del registro a eliminar
             int fila = dlgCli.getTblCliente().getSelectedRow();
@@ -327,43 +330,31 @@ public class ClienteControlador implements ActionListener, WindowListener, KeyLi
     }
 
     @Override
-    public void windowOpened(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
-
-    @Override
     public void keyTyped(KeyEvent e) {
+        
+        if (e.getSource() == dlgCli.getTxtNombreCli()) {
 
+            char letra = e.getKeyChar();
+
+            if (Character.isDigit(letra)) {
+                e.consume();
+            }
+        } else if (e.getSource() == dlgCli.getTxtCedulaCli()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+            
+            if (dlgCli.getTxtCedulaCli().getText().length() >= 9) {
+                e.consume();
+            }
+        } else if (e.getSource() == dlgCli.getTxtTelefonoCli()) {
+
+            if (dlgCli.getTxtTelefonoCli().getText().length() >= 8) {
+                e.consume();
+            }
+        }
     }
 
     @Override

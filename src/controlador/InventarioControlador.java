@@ -17,7 +17,9 @@ import modelo.ProveedorModelo;
 
 /**
  *
- * @author User
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class InventarioControlador implements ActionListener {
 
@@ -98,6 +100,8 @@ public class InventarioControlador implements ActionListener {
         } else if (e.getSource() == dlgivent.getBtnGuardarProd()) {
 
             if (validacionIn()) {
+
+                this.producto = new ClassProducto();
                 producto.setCantidad(Integer.parseInt(dlgivent.getTxtCantidadStockP().getText()));
                 producto.setIdCategoria(Integer.parseInt(dlgivent.getTxtIdCategoria().getText()));
                 producto.setDescriProd(dlgivent.getTxtDescripProductoP().getText());
@@ -106,6 +110,7 @@ public class InventarioControlador implements ActionListener {
                 producto.setPrecioProd(Float.parseFloat(dlgivent.getTxtPrecProductoP().getText()));
                 producto.setProdFragil(dlgivent.getRbdNOfragil().isSelected()
                         || dlgivent.getRbdSIfragil().isSelected());
+
                 producto.setIdProveedor(Integer.parseInt(dlgivent.getTxtIdProveedor().getText()));
                 producto.setUnidadVenta(String.valueOf(dlgivent.getCmbUnidadVenta().getSelectedItem()));
 
@@ -124,15 +129,19 @@ public class InventarioControlador implements ActionListener {
                         this.clear();
                     }
 
-                } else if (this.prodModelo.modificarProducto(producto)) {
-                    JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
-                    this.mostrartabla(this.prodModelo.mostrarProductos());
-                    this.dlgivent.getPanInventario().setSelectedIndex(0);
-                    this.dlgivent.getPanInventario().setEnabledAt(1, false);
-                    this.dlgivent.getPanInventario().setEnabledAt(0, true);
-
                 } else {
-                    JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
+                    
+                    producto.setIdProducto(Integer.parseInt(dlgivent.getTxtIdProductoP().getText()));
+                    if (prodModelo.modificarProducto(producto)) {
+                        JOptionPane.showMessageDialog(dlgivent, "Se Modifico el Producto");
+                        this.mostrartabla(this.prodModelo.mostrarProductos());
+                        this.dlgivent.getPanInventario().setSelectedIndex(0);
+                        this.dlgivent.getPanInventario().setEnabledAt(1, false);
+                        this.dlgivent.getPanInventario().setEnabledAt(0, true);
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgivent, "Error al Modificar ");
+                    }
                 }
             }
         } else if (e.getSource() == dlgivent.getBtnCancelar()) {
@@ -150,9 +159,10 @@ public class InventarioControlador implements ActionListener {
                 int file = dlgivent.getTblInventario().getSelectedRow();
 
                 this.dlgivent.getTxtIdProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 0).toString());
-                this.dlgivent.getTxtIdCategoria().setText(dlgivent.getTblInventario().getValueAt(file, 1).toString());
+                this.dlgivent.getTxtIdCategoria().setText(dlgivent.getTblInventario().getValueAt(file, 3).toString());
                 this.dlgivent.getTxtIdProveedor().setText(dlgivent.getTblInventario().getValueAt(file, 2).toString());
-                this.dlgivent.getTxtNombProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 3).toString());
+
+                this.dlgivent.getTxtNombProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 1).toString());
                 this.dlgivent.getTxtPrecProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 4).toString());
                 this.dlgivent.getTxtDescuentoProductoP().setText(dlgivent.getTblInventario().getValueAt(file, 5).toString());
                 this.dlgivent.getCmbUnidadVenta().setSelectedItem(dlgivent.getTblInventario().getValueAt(file, 6).toString());
@@ -337,13 +347,10 @@ public class InventarioControlador implements ActionListener {
             while (rs.next()) {
                 producto = new ClassProducto();
 
-                this.producto = new ClassProducto(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4),
-                        rs.getFloat(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getBoolean(9), rs.getString(10));
 
-                Object[] objeto = {producto.getIdProducto(), producto.getIdProveedor(), producto.getIdCategoria(),
-                    producto.getNombreProd(), producto.getPrecioProd(), producto.getDescuentProd(),
-                    producto.getUnidadVenta(), producto.getCantidad(), producto.getProdFragil(),
-                    producto.getDescriProd()};
+                Object[] objeto = {rs.getInt(1), rs.getString(4), rs.getInt(2), rs.getInt(3),
+                    rs.getFloat(5), rs.getInt(6), rs.getString(7),
+                    rs.getInt(8), rs.getBoolean(9), rs.getString(10)};
 
                 modeloInvent.addRow(objeto);
             }

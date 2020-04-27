@@ -12,8 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -23,9 +21,11 @@ import modelo.ProveedorModelo;
 
 /**
  *
- * @author Dixi, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
-public class ProveedoresControlador implements ActionListener {
+public class ProveedoresControlador implements ActionListener, KeyListener {
 
     private FrmPrincipal principal;
     private DlgProveedores dlgprov;
@@ -51,6 +51,10 @@ public class ProveedoresControlador implements ActionListener {
         this.dlgprov.getBtnLimpiar().addActionListener(this);
         this.dlgprov.getBtnCancelar().addActionListener(this);
         this.dlgprov.getBtnBuscar().addActionListener(this);
+
+        this.dlgprov.getTxtNombre().addKeyListener(this);
+        this.dlgprov.getTxtCedula().addKeyListener(this);
+        this.dlgprov.getTxtTelefono().addKeyListener(this);
     }
 
     /**
@@ -97,15 +101,16 @@ public class ProveedoresControlador implements ActionListener {
         } else if (e.getSource() == dlgprov.getBtnGuardar()) {
 
             if (validacionPro()) {
+
                 proveedor.setIdProvedor(Integer.parseInt(dlgprov.getTxtCedula().getText()));
                 proveedor.setNombreProv(dlgprov.getTxtNombre().getText());
                 proveedor.setTelefonoProv(dlgprov.getTxtTelefono().getText());
                 proveedor.setEmailProv(dlgprov.getTxtEmail().getText());
                 proveedor.setDireccionProv(dlgprov.getTxtDireccion().getText());
 
-                if (opc == 1) {//insertar un nuevo Proveedor 
+                if (opc == 1) { //insertar un nuevo Proveedor 
 
-                    if (provModelo.insertarTrabajador(proveedor)) {
+                    if (provModelo.insertarProveedor(proveedor)) {
                         JOptionPane.showMessageDialog(dlgprov, "Se inserto con Exito");
                         this.clear();
                         // No se va a caer, porque todo está medido, hasta el mínimo detalle.
@@ -134,6 +139,7 @@ public class ProveedoresControlador implements ActionListener {
             }
 
         } else if (e.getSource() == dlgprov.getBtnCancelar()) {
+
             this.clear();
             this.dlgprov.getPanProveedores().setEnabledAt(1, false);
             this.dlgprov.getPanProveedores().setEnabledAt(0, true);
@@ -158,7 +164,7 @@ public class ProveedoresControlador implements ActionListener {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(dlgprov, "Selecciones un Proveedor para eliminar");
+                JOptionPane.showMessageDialog(dlgprov, "Seleccione un Proveedor para eliminar");
             }
 
         } else if (e.getSource() == dlgprov.getBtnEditar()) {
@@ -186,7 +192,6 @@ public class ProveedoresControlador implements ActionListener {
 
         } else {
             buscar();
-            dlgprov.getTxtBuscar().setText("");
         }
 
     }
@@ -290,6 +295,40 @@ public class ProveedoresControlador implements ActionListener {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+            
+        if (e.getSource() == dlgprov.getTxtNombre()) {
+
+            char letra = e.getKeyChar();
+
+            if (Character.isDigit(letra)) {
+                e.consume();
+            }
+            
+        } else if (e.getSource() == dlgprov.getTxtCedula()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+            
+            if (dlgprov.getTxtCedula().getText().length() >= 9) {
+                e.consume();
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
 }

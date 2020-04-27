@@ -5,7 +5,9 @@ import java.io.Serializable;
 
 /**
  *
- * @author Dixiana Maria, Carlos Miguel y Vidal Canales
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class ClassProveedor implements Serializable {
 
