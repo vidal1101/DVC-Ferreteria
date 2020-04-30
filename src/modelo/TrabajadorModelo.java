@@ -7,7 +7,9 @@ import logicaClass.ClassTrabajador;
 
 /**
  *
- * @author Maria, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class TrabajadorModelo {
 
@@ -18,29 +20,29 @@ public class TrabajadorModelo {
      * @param contrasenia
      * @return true Si los datos son correctos
      */
-    public boolean iniciarSesion(int usuario, String contrasenia) {
+    public ResultSet iniciarSesion(int usuario, String contrasenia) {
 
         Conexion con = new Conexion();
+        ResultSet rs = null;
 
         try {
 
             System.out.println("Abrriendo conexión");
             con.conectar();
 
-            CallableStatement cst = con.getCon().prepareCall("{CALL pa_sesionTrabajador(?,?,?)}");
+            CallableStatement cst = con.getCon().prepareCall("{CALL pa_sesionTrabajador(?,?)}");
             cst.setInt(1, usuario);
             cst.setString(2, contrasenia);
-            cst.registerOutParameter(3, java.sql.Types.BOOLEAN);
-            cst.execute();
-            
-            return cst.getBoolean(3);
+
+            rs = cst.executeQuery();
+            rs.first();
+
+            return rs;
+
         } catch (SQLException e) {
 
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
-            return false;
-
-        } finally {
-            con.desconectar();
+            return rs;
         }
 
     }
@@ -56,7 +58,7 @@ public class TrabajadorModelo {
         Conexion con = new Conexion();
 
         try {
-            
+
             System.out.println("Abrriendo conexión");
             con.conectar();
             CallableStatement cst = con.getCon().prepareCall("{CALL pa_insertarTrabajador(?,?,?,?,?,?,?,?)}");
@@ -66,14 +68,14 @@ public class TrabajadorModelo {
             cst.setString(3, trab.getPuesto());
             cst.setString(4, trab.getTelefonoTrab());
             cst.setString(5, trab.getEmailTrab());
-            cst.setString(6, trab.getContrasenia());
-            cst.setBoolean(7, trab.getAbministrador());
+            cst.setBoolean(6, trab.getAbministrador());
+            cst.setString(7, trab.getContrasenia());
 
             cst.registerOutParameter(8, java.sql.Types.BOOLEAN);
             System.out.println("Insertando datos");
             cst.executeUpdate();
 
-            return cst.getBoolean(7);
+            return cst.getBoolean(8);
 
         } catch (SQLException e) {
             System.out.println("Error al intentar enviar los datos: " + e.getMessage());
@@ -146,29 +148,76 @@ public class TrabajadorModelo {
     }
 
     /**
-     * Se le envía la cédula del trabajador a eliminar
+     * NOTA: Revisar el número de tablas para referirse a cada tabla de la BD <br>
+     * ******** <br>
+     * Se envia el numero de la caso a evaluar para ELIMINAR <br>
+     * 1 = relacion entre Trabajador y Factura <br>
+     * 2 = relacion entre Categoria y Producto <br>
+     * 3 = relacion entre Proveedor y Producto <br>
+     * 4 = relacion entre Cliente y Factura <br>
+     * 5 = relacion entre Producto y DetallesCompra
      *
-     * @param cedula
-     * @return
+     * @param casoEvaluar 1 , 2 , 3, 4, 5
+     * @param id id del caso a evaluar
+     * @return verdadero si existe relacion , false si se elimino
      */
-    public boolean eliminarTrabajadores(int cedula) {
+    public String eliminarTrabajador(int casoEvaluar, int id) {
+
         Conexion con = new Conexion();
 
         try {
+
             con.conectar();
-            CallableStatement ps = con.getCon().prepareCall("{CALL pa_eliminarTrabajador(?,?)}");
-            ps.setInt(1, cedula);
-            ps.registerOutParameter(2, java.sql.Types.BOOLEAN);
+            CallableStatement ps = con.getCon().prepareCall("{CALL pa_verificarEliminar(?,?,?,?)}");
+            ps.setInt(1, casoEvaluar);
+            ps.setInt(2, id);
+
+            ps.registerOutParameter(3, java.sql.Types.VARCHAR);
+            ps.registerOutParameter(4, java.sql.Types.BOOLEAN);
+            System.out.println("comprobando eliminacion categoría");
             ps.executeUpdate();
 
-            System.out.println("Usuario eliminado");
-            return ps.getBoolean(2);
-
+            if (ps.getBoolean(4)) {
+                System.out.println("Resultado: " + ps.getString(3));
+                return ps.getString(3);
+            } else {
+                return "SIN EJECUTAR";
+            }
+            //return ps.getBoolean(3);
         } catch (SQLException e) {
+
             System.out.println("Error del mensaje: " + e.getMessage());
-            return false;
+            return "Sin conexión";
+
         } finally {
             con.desconectar();
+        }
+    }
+
+    /**
+     * Permite buscar al trabajador por medio del nombre o cédula
+     *
+     * @param dato
+     * @return
+     */
+    public ResultSet BuscarTrabajador(String dato) {
+
+        Conexion con = new Conexion();
+        ResultSet s = null;
+
+        try {
+
+            con.conectar();
+            CallableStatement cst = con.getCon().prepareCall("{call pa_buscarTrabajador(?)}");
+            cst.setString(1, dato);
+            s = cst.executeQuery();
+
+            return s;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Error al intentar llamar procedimiento");
+            return s;
         }
     }
 

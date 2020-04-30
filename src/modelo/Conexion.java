@@ -9,7 +9,9 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Maria, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class Conexion {
 
@@ -49,10 +51,11 @@ public class Conexion {
         try {
             this.con = (Connection) DriverManager.getConnection(this.url, this.user, this.password);
             this.sql = this.con.createStatement();
-            System.out.println("conexion exitosa: "+sql.toString());
+            System.out.println("conexion exitosa: " + con.getCatalog()+
+                    "\n----------------------");
             return true;
         } catch (SQLException ex) {
-            System.out.println("Error al intentar conectarse a la base de datos: "+ex.getMessage());
+            System.out.println("Error al intentar conectarse a la base de datos: " + ex.getMessage());
             return false;
         }
     }
@@ -67,5 +70,4 @@ public class Conexion {
             System.out.println("Error al desconectar: " + e.getMessage());
         }
     }
-
 }
