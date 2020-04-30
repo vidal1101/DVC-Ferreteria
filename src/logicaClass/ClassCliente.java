@@ -5,7 +5,9 @@ import java.io.Serializable;
 
 /**
  *
- * @author Dixiana Maria, Carlos Miguel y Vidal Canales
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
 public class ClassCliente implements Serializable {
 
@@ -58,7 +60,6 @@ public class ClassCliente implements Serializable {
      * @param nombreCli
      * @param telefonoCli
      * @param emailCli
-     * @param direccionCli
      */
     public ClassCliente(int cedulaCli, String nombreCli, String telefonoCli, 
             String emailCli) {
@@ -75,9 +76,9 @@ public class ClassCliente implements Serializable {
      */
     public ClassCliente() {
         this.cedulaCli = 0;
-        this.nombreCli = "";
-        this.telefonoCli = "";
-        this.emailCli = "";
+        this.nombreCli = "Sin nombre";
+        this.telefonoCli = "+506-000'-0000";
+        this.emailCli = "Sin email";
     }
 
 }

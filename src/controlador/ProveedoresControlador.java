@@ -6,49 +6,54 @@
 package controlador;
 
 import Vista.FrmPrincipal;
-import Vista.dlgProveedores;
+import Vista.DlgProveedores;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logicaClass.ClassProveedor;
-import modelo.proveedorModelo;
+import modelo.ProveedorModelo;
 
 /**
  *
- * @author Dixi, Carlos y Vidal
+ * @author Dixiana Gómez
+ * @author Rodrigo Vidal
+ * @author Carlos Mairena
  */
-public class ProveedoresControlador implements ActionListener, WindowListener, KeyListener {
+public class ProveedoresControlador implements ActionListener, KeyListener {
 
     private FrmPrincipal principal;
-    private dlgProveedores dlgprov;
+    private DlgProveedores dlgprov;
     private ClassProveedor proveedor;
-    private proveedorModelo provModelo;
+    private ProveedorModelo provModelo;
     DefaultTableModel modeloProv;
     private int opc;
 
-    public ProveedoresControlador(FrmPrincipal principal, dlgProveedores dlgprov, ClassProveedor proveedor,
-            proveedorModelo provModelo) {
+    public ProveedoresControlador(FrmPrincipal principal) {
 
         this.modeloProv = new DefaultTableModel();
         this.principal = principal;
-        this.dlgprov = dlgprov;
-        this.proveedor = proveedor;
-        this.provModelo = provModelo;
+        this.dlgprov = new DlgProveedores(principal, true);
+        this.proveedor = new ClassProveedor();
+        this.provModelo = new ProveedorModelo();
         this.opc = 0;
-       // this.principal.getBtnProveedores().addActionListener(this);
+        // this.principal.getBtnProveedores().addActionListener(this);
         this.dlgprov.getBtnGuardar().addActionListener(this);
         this.dlgprov.getBtnInsertar().addActionListener(this);
         this.dlgprov.getBtnEditar().addActionListener(this);
         this.dlgprov.getBtnEliminar().addActionListener(this);
         this.dlgprov.getBtnLimpiar().addActionListener(this);
         this.dlgprov.getBtnCancelar().addActionListener(this);
+        this.dlgprov.getBtnBuscar().addActionListener(this);
+
+        this.dlgprov.getTxtNombre().addKeyListener(this);
+        this.dlgprov.getTxtCedula().addKeyListener(this);
+        this.dlgprov.getTxtTelefono().addKeyListener(this);
     }
 
     /**
@@ -91,46 +96,49 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
 
         } else if (e.getSource() == dlgprov.getBtnLimpiar()) {
             this.clear();
-            
+
         } else if (e.getSource() == dlgprov.getBtnGuardar()) {
 
-            proveedor.setIdProvedor(Integer.parseInt(dlgprov.getTxtCedula().getText()));
-            proveedor.setNombreProv(dlgprov.getTxtNombre().getText());
-            proveedor.setTelefonoProv(dlgprov.getTxtTelefono().getText());
-            proveedor.setEmailProv(dlgprov.getTxtEmail().getText());
-            proveedor.setDireccionProv(dlgprov.getTxtDireccion().getText());
+            if (validacionPro()) {
 
-            if (opc == 1) {//insertar un nuevo Proveedor 
+                proveedor.setIdProvedor(Integer.parseInt(dlgprov.getTxtCedula().getText()));
+                proveedor.setNombreProv(dlgprov.getTxtNombre().getText());
+                proveedor.setTelefonoProv(dlgprov.getTxtTelefono().getText());
+                proveedor.setEmailProv(dlgprov.getTxtEmail().getText());
+                proveedor.setDireccionProv(dlgprov.getTxtDireccion().getText());
 
-                if (provModelo.insertarTrabajador(proveedor)) {
-                    JOptionPane.showMessageDialog(dlgprov, "Se inserto con Exito");
-                    this.clear();
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    this.mostrartabla(this.provModelo.mostrarProveedores());
-                    this.dlgprov.getPanProveedores().setSelectedIndex(0);
-                    this.dlgprov.getPanProveedores().setEnabledAt(1, false);
+                if (opc == 1) { //insertar un nuevo Proveedor 
 
-                } else {
-                    JOptionPane.showMessageDialog(dlgprov, "Usuario ya existente");
-                    this.clear();
+                    if (provModelo.insertarProveedor(proveedor)) {
+                        JOptionPane.showMessageDialog(dlgprov, "Se inserto con Exito");
+                        this.clear();
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        this.mostrartabla(this.provModelo.mostrarProveedores());
+                        this.dlgprov.getPanProveedores().setSelectedIndex(0);
+                        this.dlgprov.getPanProveedores().setEnabledAt(1, false);
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgprov, "Usuario ya existente");
+                        this.clear();
+                    }
+
+                } else {//modificar un proveedor 
+
+                    if (this.provModelo.modificarProveedor(proveedor)) {
+                        JOptionPane.showMessageDialog(dlgprov, "Se Modifico el trabajador");
+                        this.mostrartabla(this.provModelo.mostrarProveedores());
+                        this.dlgprov.getPanProveedores().setSelectedIndex(0);
+                        this.dlgprov.getPanProveedores().setEnabledAt(1, false);
+                        this.dlgprov.getPanProveedores().setEnabledAt(0, true);
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgprov, "Error al Modificar ");
+                    }
                 }
-
-            } else {//modificar un proveedor 
-
-                if (this.provModelo.modificarProveedor(proveedor)) {
-                    JOptionPane.showMessageDialog(dlgprov, "Se Modifico el trabajador");
-                    this.mostrartabla(this.provModelo.mostrarProveedores());
-                    this.dlgprov.getPanProveedores().setSelectedIndex(0);
-                    this.dlgprov.getPanProveedores().setEnabledAt(1, false);
-                    this.dlgprov.getPanProveedores().setEnabledAt(0, true);
-
-                } else {
-                    JOptionPane.showMessageDialog(dlgprov, "Error al Modificar ");
-                }
-
             }
 
         } else if (e.getSource() == dlgprov.getBtnCancelar()) {
+
             this.clear();
             this.dlgprov.getPanProveedores().setEnabledAt(1, false);
             this.dlgprov.getPanProveedores().setEnabledAt(0, true);
@@ -148,14 +156,27 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
 
                 // Si la opción de eliminar fue SI, eliminamos
                 if (opcion == JOptionPane.YES_OPTION) {
-                    provModelo.eliminarProveedores(idProv);
-                    // No se va a caer, porque todo está medido, hasta el mínimo detalle.
-                    JOptionPane.showMessageDialog(dlgprov, "Eliminado");
-                    this.mostrartabla(this.provModelo.mostrarProveedores());
+                    //provModelo.eliminarProveedores(idProv);
+
+                    String respuesta = provModelo.eliminarProveedor(3, idProv);
+
+                    if (respuesta.equals("ELIMINADO")) {
+                        // No se va a caer, porque todo está medido, hasta el mínimo detalle.
+                        JOptionPane.showMessageDialog(dlgprov, "Eliminado");
+                        this.mostrartabla(this.provModelo.mostrarProveedores());
+                    } else if (respuesta.equals("CON REGISTROS")) {
+
+                        JOptionPane.showMessageDialog(dlgprov, "No se puede eliminar este proveedor. \n"
+                                + "Hay produtos enlazados a este proveedor");
+
+                    } else {
+                        JOptionPane.showMessageDialog(dlgprov, "Ha habido un error al intentar eliminarse.");
+                    }
+
                 }
 
             } else {
-                JOptionPane.showMessageDialog(dlgprov, "Selecciones un Proveedor para eliminar");
+                JOptionPane.showMessageDialog(dlgprov, "Seleccione un Proveedor para eliminar");
             }
 
         } else if (e.getSource() == dlgprov.getBtnEditar()) {
@@ -181,13 +202,14 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
                 JOptionPane.showMessageDialog(dlgprov, "Debe Seleccionar Fila");
             }
 
+        } else {
+            buscar();
         }
 
     }
 
     /**
-     * Recibe los datos desde la tabla y los imprime en la tabla de los
-     * proveedores
+     * Recibe los datos desde la tabla y los imprime en la tabla de los proveedores
      *
      * @param rs
      */
@@ -218,54 +240,107 @@ public class ProveedoresControlador implements ActionListener, WindowListener, K
         }
     }
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void buscar() {
+
+        try {
+
+            DefaultTableModel modeloTabla = new DefaultTableModel() {
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int columnIndez) {
+                    return false;
+                }
+            };
+
+            String titulos[] = {"Cedula", "Nombre", "Telefono", "Email", "Direccion"};
+            modeloTabla.setColumnIdentifiers(titulos);
+
+            ResultSet rs = provModelo.BuscarProveedor(dlgprov.getTxtBuscar().getText());
+
+            while (rs.next()) {
+
+                Object nextElement[] = {rs.getInt(1),
+                    rs.getString(2), rs.getString(3), rs.getString(4),
+                    rs.getString(5)};
+
+                modeloTabla.addRow(nextElement);
+            }
+
+            rs.close();
+            System.out.println("RS cerrado");
+            dlgprov.getTblProveedores().setModel(modeloTabla);
+            dlgprov.getLblRegistros().setText("Total de proveedores: " + modeloTabla.getRowCount());
+
+        } catch (SQLException ex) {
+            System.out.println("Error al intentar obtener los datos del RS: " + ex.getMessage());
+        }
     }
 
-    @Override
-    public void windowClosing(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    /**
+     * Valida los campos del registro
+     *
+     * @return
+     */
+    private boolean validacionPro() {
+        if (dlgprov.getTxtCedula().getText().isEmpty()) {
 
-    @Override
-    public void windowClosed(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            dlgprov.getTxtCedula().setBackground(Color.red);
 
-    @Override
-    public void windowIconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            return false;
+        } else if (dlgprov.getTxtNombre().getText().isEmpty()) {
 
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            dlgprov.getTxtNombre().setBackground(Color.red);
 
-    @Override
-    public void windowActivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+            return false;
+        } else if (dlgprov.getTxtTelefono().getText().isEmpty()) {
+            dlgprov.getTxtTelefono().setBackground(Color.red);
 
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return false;
+
+        } else if (dlgprov.getTxtEmail().getText().isEmpty()) {
+            dlgprov.getTxtEmail().setBackground(Color.red);
+
+            return false;
+
+        } else if (dlgprov.getTxtDireccion().getText().isEmpty()) {
+            dlgprov.getTxtDireccion().setBackground(Color.red);
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        if (e.getSource() == dlgprov.getTxtNombre()) {
+
+            char letra = e.getKeyChar();
+
+            if (Character.isDigit(letra)) {
+                e.consume();
+            }
+
+        } else if (e.getSource() == dlgprov.getTxtCedula()) {
+            char letra = e.getKeyChar();
+
+            if (!Character.isDigit(letra)) {
+                e.consume();
+            }
+
+            if (dlgprov.getTxtCedula().getText().length() >= 9) {
+                e.consume();
+            }
+        }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
 }
